@@ -1,4 +1,4 @@
-package com.adventure.paths;
+package com.adventure.nodes;
 
 public class Action
 {

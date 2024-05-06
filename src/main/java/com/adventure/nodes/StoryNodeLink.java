@@ -1,8 +1,8 @@
-package com.adventure.paths;
+package com.adventure.nodes;
 
 import org.jgrapht.graph.DefaultEdge;
 
-public class StateLink extends DefaultEdge
+public class StoryNodeLink extends DefaultEdge
 {
     public void setAction(Action switchAction)
     {

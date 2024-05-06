@@ -1,13 +1,23 @@
 package com.adventure;
 
-import com.adventure.paths.StartState;
+import com.adventure.interfaces.ApplicationContext;
+import com.adventure.nodes.StartNode;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-import java.lang.reflect.InvocationTargetException;
+public class Main extends Application
+{
+    @Override
+    public void start(Stage stage) throws Exception
+    {
+        ApplicationContext context = ApplicationContextProvider.getInstance();
+        stage.setTitle("App Title");
 
-public class Main {
-    public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        ApplicationContext applicationContext = DefaultApplicationContext.getInstance();
-        applicationContext.load(StartState.class);
-        applicationContext.nextNode();
+        context.setStage(stage);
+        context.load(StartNode.class).activate();
+
+        stage.show();
     }
+
+    public static void main(String[] args) { launch(); }
 }
