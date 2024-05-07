@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Button?>
+<?import java.net.URL?>
+
+
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.adventure.controllers.AppController" styleClass="menu-container">
+
+  <stylesheets>
+    <URL value="@menu.css" />
+  </stylesheets>
+
+  <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+  </padding>
+
+  <Label fx:id="welcomeText" styleClass="menu-label"/>
+  <Button text="PLAY" onAction="#onHelloButtonClick" styleClass="menu-button" />
+  <Button text="CREDITS" onAction="#onHelloButtonClick" styleClass="menu-button" />
+  <Button text="QUIT" onAction="#onHelloButtonClick" styleClass="menu-button"/>
+  <Button text="SAVE" onAction="#onHelloButtonClick" styleClass="menu-button"/>
+
+</VBox>

@@ -1,0 +1,30 @@
+.menu-container
+{
+    -fx-background-image: url('assets/background.png');
+    -fx-background-size: cover;
+    -fx-font-family: 'ARCADECLASSIC';
+    -fx-font-size: 18px;
+}
+
+.menu-button
+{
+    -fx-background-color: transparent;
+
+    -fx-min-width: 200;
+    -fx-min-height: 35;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-color: transparent;
+    -fx-border-radius: 5px;
+}
+
+.menu-label
+{
+    -fx-text-fill: white;
+}
+
+.menu-button:focused
+{
+    -fx-background-color: #1A1A3C;
+    -fx-border-color: #1a293c;
+}
