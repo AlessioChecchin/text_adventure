@@ -18,6 +18,17 @@
     -fx-border-radius: 5px;
 }
 
+.back-button
+{
+    -fx-min-width: 200;
+    -fx-min-height: 35;
+    -fx-text-fill: #d82e2e;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+}
+
+
+
 .menu-label
 {
     -fx-text-fill: white;

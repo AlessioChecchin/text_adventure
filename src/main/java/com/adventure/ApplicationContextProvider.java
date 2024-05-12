@@ -1,25 +1,46 @@
 package com.adventure;
 
 import com.adventure.interfaces.ApplicationContext;
+import com.adventure.models.Game;
+import com.adventure.models.Item;
+import com.adventure.models.Player;
+import com.adventure.nodes.Action;
+import com.adventure.nodes.Room;
 import com.adventure.nodes.StoryNodeLink;
 import com.adventure.nodes.StoryNode;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultDirectedGraph;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 
 public class ApplicationContextProvider implements ApplicationContext
 {
     /**
+     * Context singleton.
+     */
+    private static ApplicationContextProvider instance;
+
+
+    /**
+     * Current game instance.
+     */
+    private Game game;
+
+    /**
      * Private singleton constructor.
      */
     private ApplicationContextProvider()
-    {
-        this.g = new DefaultDirectedGraph<>(StoryNodeLink.class);
-        this.lookupNodes = new HashMap<>();
-    }
+    {}
 
     /**
      * Singleton getter.
@@ -31,71 +52,87 @@ public class ApplicationContextProvider implements ApplicationContext
         return instance;
     }
 
-    /**
-     * Loads application state.
-     * @param stateNode State of the application.
-     * @throws NoSuchMethodException Reflection exception.
-     * @throws InvocationTargetException Reflection exception.
-     * @throws InstantiationException Reflection exception.
-     * @throws IllegalAccessException Reflection exception.
-     */
-    public ApplicationContext load(Class<? extends StoryNode> stateNode) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException
+    @Override
+    public void load(String json, Stage stage)
     {
-        StoryNode node = this.lookupNodes.get(stateNode);
+        /*
+        TODO: Implement graph serialization.
 
-        if(node == null)
+        try
         {
-            node = stateNode.getDeclaredConstructor().newInstance();
+            // Mapper object used for deserialization.
+            ObjectMapper mapper = new ObjectMapper();
+
+            // Deserializes json game.
+            this.game = mapper.readValue(json, Game.class);
         }
+        catch(Exception e)
+        {
+        }*/
 
-        // We loaded the node, but now we also need to load all the adjacent nodes.
+        // TODO: We expect whit method to populate the graph.
+        // For now let's ignore this part and load by hand the graph.
 
-        this.currentNode = node;
+        this.game = new Game();
+        this.game.setStage(stage);
 
-        return this;
+        // First room
+        Room room = new Room("First room", "First room description");
+        room.setTargetView("views/room.fxml");
+        Item sword = new Item(0, "Sword description");
+        Item healthPotion = new Item(1, "Health Potion description");
+
+        // First room items.
+        List<Item> items = new ArrayList<Item>();
+        items.add(sword);
+        items.add(healthPotion);
+        room.setItems(items);
+
+        // Action to reach left room or right room.
+        Action actionLeftRoom = new Action("Left room");
+        Action actionRightRoom = new Action("Right room");
+
+        StoryNodeLink leftLink = new StoryNodeLink();
+        leftLink.setAction(actionLeftRoom);
+
+        StoryNodeLink rightLink = new StoryNodeLink();
+        rightLink.setAction(actionRightRoom);
+
+
+        Room leftRoom = new Room("Left room", "Left room description");
+        leftRoom.setTargetView("views/room.fxml");
+        Item food = new Item(2, "Food description");
+        List<Item> leftItems = new ArrayList<Item>();
+        leftItems.add(food);
+        leftRoom.setItems(leftItems);
+
+        Room rightRoom = new Room("Right room", "Right room description");
+        rightRoom.setTargetView("views/room.fxml");
+        Item bow = new Item(3, "Food description");
+        List<Item> rightItems = new ArrayList<Item>();
+        rightItems.add(bow);
+        rightRoom.setItems(rightItems);
+
+        Graph<StoryNode, StoryNodeLink> g = game.getGameGraph();
+        g.addVertex(room);
+        g.addVertex(leftRoom);
+        g.addVertex(rightRoom);
+        g.addEdge(room, leftRoom, leftLink);
+        g.addEdge(room, rightRoom, rightLink);
+
+        game.setCurrentNode(room);
     }
 
 
     @Override
-    public void setStage(Stage stage)
+    public void load(Game game, Stage stage)
     {
-        this.stage = stage;
+        this.game = game;
     }
 
     @Override
-    public Stage getStage() {
-        return this.stage;
+    public Game getGame()
+    {
+        return this.game;
     }
-
-    public void activate() throws Exception {
-        if(this.currentNode != null)
-        {
-            this.currentNode.run(this);
-        }
-    }
-
-
-    /**
-     * Context singleton.
-     */
-    private static ApplicationContextProvider instance;
-
-    /**
-     * This represents a decision graph that is incrementally loaded as the application flow proceeds.
-     */
-    private Graph<StoryNode, StoryNodeLink> g;
-
-    /**
-     * This table contains all the state nodes that are already loaded.
-     * This is done to maintain the state of the nodes even if the node is not active.
-     * This also allows to save the state of the whole application and not only the single active node.
-     */
-    private final HashMap<Class<? extends StoryNode>, StoryNode> lookupNodes;
-
-    /**
-     * Currently active node.
-     */
-    private StoryNode currentNode;
-
-    private Stage stage;
 }
