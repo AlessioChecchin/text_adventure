@@ -1,8 +1,8 @@
 .menu-container
 {
-    -fx-background-image: url('assets/background.png');
+    -fx-background-image: url('../assets/background.png');
     -fx-background-size: cover;
-    -fx-font-family: 'ARCADECLASSIC';
+    -fx-font-family: 'ubuntu';
     -fx-font-size: 18px;
 }
 

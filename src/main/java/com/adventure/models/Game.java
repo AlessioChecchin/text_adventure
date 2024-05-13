@@ -61,7 +61,7 @@ public class Game
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(currentNode.getTargetView()));
 
             // Sets game font.
-            Font.loadFont(Objects.requireNonNull(Main.class.getResource("views/assets/ARCADECLASSIC.TTF")).toExternalForm(), -1);
+            Font.loadFont(Objects.requireNonNull(Main.class.getResource("assets/ubuntu.ttf")).toExternalForm(), -1);
 
             // Creates scene.
             Scene currentScene = this.stage.getScene();
@@ -80,7 +80,7 @@ public class Game
         }
         catch(Exception e)
         {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
     }

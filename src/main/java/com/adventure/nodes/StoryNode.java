@@ -11,8 +11,7 @@ public abstract class StoryNode
         this.targetView = targetView;
     }
 
-    public String getTargetView()
-    {
+    public String getTargetView() {
         return this.targetView;
     }
 

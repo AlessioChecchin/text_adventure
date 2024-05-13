@@ -120,6 +120,7 @@ public class ApplicationContextProvider implements ApplicationContext
         g.addEdge(room, leftRoom, leftLink);
         g.addEdge(room, rightRoom, rightLink);
 
+
         game.setCurrentNode(room);
     }
 

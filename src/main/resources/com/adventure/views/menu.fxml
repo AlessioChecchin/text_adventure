@@ -11,7 +11,7 @@
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.adventure.controllers.AppController" styleClass="menu-container">
 
   <stylesheets>
-    <URL value="@menu.css" />
+    <URL value="@../styles/menu.css" />
   </stylesheets>
 
   <padding>

@@ -1,0 +1,12 @@
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml">
+    <stylesheets>
+        <URL value="@console_wrapper.css" />
+    </stylesheets>
+
+    <TextField fx:id="consolePrompt" styleClass="console-prompt"/>
+</fx:root>

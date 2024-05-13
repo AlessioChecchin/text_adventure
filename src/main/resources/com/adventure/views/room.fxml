@@ -6,14 +6,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.scene.text.Text?>
-
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import com.adventure.components.ConsoleWrapper?>
+
 <VBox fx:id="box" alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.adventure.controllers.RoomController" styleClass="menu-container">
 
     <stylesheets>
-        <URL value="@menu.css" />
+        <URL value="@../styles/menu.css" />
     </stylesheets>
 
     <padding>
@@ -23,5 +23,7 @@
     <Button fx:id="backButton" text="BACK" onAction="#back" styleClass="back-button" />
 
     <Label fx:id="currentRoom" styleClass="menu-label"/>
+
+    <ConsoleWrapper text=""/>
 
 </VBox>
