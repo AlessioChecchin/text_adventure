@@ -64,10 +64,17 @@ public class Game
             Font.loadFont(Objects.requireNonNull(Main.class.getResource("views/assets/ARCADECLASSIC.TTF")).toExternalForm(), -1);
 
             // Creates scene.
-            Scene scene = new Scene(fxmlLoader.load(), 900, 400);
+            Scene currentScene = this.stage.getScene();
 
-            // Loads new scene.
-            this.stage.setScene(scene);
+            if(currentScene != null)
+            {
+                currentScene.setRoot(fxmlLoader.load());
+            }
+            else
+            {
+                Scene scene = new Scene(fxmlLoader.load(), 900, 400);
+                this.stage.setScene(scene);
+            }
         }
         catch(Exception e)
         {
