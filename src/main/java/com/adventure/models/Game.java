@@ -66,10 +66,12 @@ public class Game
             // Creates scene.
             Scene currentScene = this.stage.getScene();
 
+            // If a scene already exists its reused.
             if(currentScene != null)
             {
                 currentScene.setRoot(fxmlLoader.load());
             }
+            // If there's no scene, a new one is created.
             else
             {
                 Scene scene = new Scene(fxmlLoader.load(), 900, 400);
