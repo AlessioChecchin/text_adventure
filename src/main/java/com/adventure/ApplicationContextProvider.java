@@ -3,25 +3,17 @@ package com.adventure;
 import com.adventure.interfaces.ApplicationContext;
 import com.adventure.models.Game;
 import com.adventure.models.Item;
-import com.adventure.models.Player;
 import com.adventure.nodes.Action;
 import com.adventure.nodes.Room;
 import com.adventure.nodes.StoryNodeLink;
 import com.adventure.nodes.StoryNode;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.jgrapht.Graph;
-import org.jgrapht.graph.DefaultDirectedGraph;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
 
 public class ApplicationContextProvider implements ApplicationContext
 {
@@ -30,6 +22,10 @@ public class ApplicationContextProvider implements ApplicationContext
      */
     private static ApplicationContextProvider instance;
 
+    /**
+     * Application properties.
+     */
+    private final Properties properties;
 
     /**
      * Current game instance.
@@ -40,7 +36,17 @@ public class ApplicationContextProvider implements ApplicationContext
      * Private singleton constructor.
      */
     private ApplicationContextProvider()
-    {}
+    {
+        this.properties = new Properties();
+        try (InputStream fis = Main.class.getClassLoader().getResourceAsStream("application.conf"))
+        {
+            this.properties.load(fis);
+        }
+        catch (IOException ignored)
+        {
+            ignored.printStackTrace();
+        }
+    }
 
     /**
      * Singleton getter.
@@ -73,7 +79,10 @@ public class ApplicationContextProvider implements ApplicationContext
         // TODO: We expect whit method to populate the graph.
         // For now let's ignore this part and load by hand the graph.
 
-        this.game = new Game();
+        // Window not resizable
+        stage.setResizable(false);
+
+        this.game = new Game(this.properties);
         this.game.setStage(stage);
 
         // First room
@@ -135,5 +144,10 @@ public class ApplicationContextProvider implements ApplicationContext
     public Game getGame()
     {
         return this.game;
+    }
+
+    @Override
+    public Properties getProperties() {
+        return this.properties;
     }
 }

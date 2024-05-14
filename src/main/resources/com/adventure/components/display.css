@@ -1,0 +1,15 @@
+.graphics
+{
+    -fx-min-height: 300;
+    -fx-background-image: url('../assets/background.png');
+    -fx-background-size: cover;
+}
+
+
+.console-prompt
+{
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-min-height: 100;
+}
+

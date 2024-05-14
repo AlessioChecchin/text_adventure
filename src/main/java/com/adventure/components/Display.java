@@ -8,13 +8,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
-public class ConsoleWrapper extends VBox
+public class Display extends VBox
 {
-    @FXML private TextField consolePrompt;
+    @FXML
+    private TextField consolePrompt;
 
-    public ConsoleWrapper()
+    @FXML
+    private VBox graphics;
+
+    public Display()
     {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("console_wrapper.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("display.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
@@ -41,5 +45,10 @@ public class ConsoleWrapper extends VBox
     public StringProperty textProperty()
     {
         return consolePrompt.textProperty();
+    }
+
+    public VBox getGraphics()
+    {
+        return this.graphics;
     }
 }

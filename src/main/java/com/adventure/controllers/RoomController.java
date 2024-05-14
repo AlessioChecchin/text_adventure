@@ -14,7 +14,7 @@ import org.jgrapht.Graph;
 
 public class RoomController
 {
-    @FXML
+    /*@FXML
     private Label currentRoom;
 
     @FXML
@@ -60,6 +60,7 @@ public class RoomController
         {
             this.backButton.setDisable(true);
         }
+
     }
 
     @FXML
@@ -67,5 +68,5 @@ public class RoomController
     {
         // Can't be fired if the button is disabled.
         this.context.getGame().setCurrentNode(this.context.getGame().getPreviousNode());
-    }
+    }*/
 }

@@ -10,8 +10,8 @@ import javafx.stage.Stage;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultDirectedGraph;
 
-import java.util.HashMap;
 import java.util.Objects;
+import java.util.Properties;
 
 public class Game
 {
@@ -35,9 +35,12 @@ public class Game
      */
     private Stage stage;
 
+    private Properties properties;
 
-    public Game()
+
+    public Game(Properties properties)
     {
+        this.properties = properties;
         this.gameGraph = new DefaultDirectedGraph<>(StoryNodeLink.class);
     }
 
@@ -74,7 +77,11 @@ public class Game
             // If there's no scene, a new one is created.
             else
             {
-                Scene scene = new Scene(fxmlLoader.load(), 900, 400);
+                Scene scene = new Scene(
+                        fxmlLoader.load(),
+                        Integer.parseInt(this.properties.getProperty("display.width")),
+                        Integer.parseInt(this.properties.getProperty("display.height"))
+                );
                 this.stage.setScene(scene);
             }
         }

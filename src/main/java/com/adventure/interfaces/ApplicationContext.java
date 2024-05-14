@@ -5,10 +5,12 @@ import com.adventure.nodes.StoryNode;
 import javafx.stage.Stage;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Properties;
 
 public interface ApplicationContext
 {
     void load(String json, Stage stage);
     void load(Game game, Stage stage);
     public Game getGame();
+    public Properties getProperties();
 }

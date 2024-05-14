@@ -5,8 +5,11 @@
 <?import java.net.URL?>
 <fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml">
     <stylesheets>
-        <URL value="@console_wrapper.css" />
+        <URL value="@display.css" />
     </stylesheets>
+
+    <VBox fx:id="graphics" styleClass="graphics">
+    </VBox>
 
     <TextField fx:id="consolePrompt" styleClass="console-prompt"/>
 </fx:root>
