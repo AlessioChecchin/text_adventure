@@ -11,5 +11,7 @@
     <VBox fx:id="graphics" styleClass="graphics">
     </VBox>
 
+    <Label fx:id="consoleOutput" />
+
     <TextField fx:id="consolePrompt" styleClass="console-prompt"/>
 </fx:root>
