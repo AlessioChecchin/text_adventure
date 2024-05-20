@@ -2,7 +2,7 @@ package com.adventure;
 
 import com.adventure.interfaces.ApplicationContext;
 import com.adventure.models.Game;
-import com.adventure.models.Item;
+import com.adventure.models.items.Item;
 import com.adventure.nodes.Action;
 import com.adventure.nodes.Room;
 import com.adventure.nodes.StoryNodeLink;
@@ -10,7 +10,6 @@ import com.adventure.nodes.StoryNode;
 import javafx.stage.Stage;
 import org.jgrapht.Graph;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
@@ -88,8 +87,8 @@ public class ApplicationContextProvider implements ApplicationContext
         // First room
         Room room = new Room("First room", "First room description");
         room.setTargetView("views/room.fxml");
-        Item sword = new Item(0, "Sword description");
-        Item healthPotion = new Item(1, "Health Potion description");
+        Item sword = new Item("Sword", 10);
+        Item healthPotion = new Item("Potion", 3);
 
         // First room items.
         List<Item> items = new ArrayList<Item>();
@@ -110,14 +109,14 @@ public class ApplicationContextProvider implements ApplicationContext
 
         Room leftRoom = new Room("Left room", "Left room description");
         leftRoom.setTargetView("views/room.fxml");
-        Item food = new Item(2, "Food description");
+        Item food = new Item("Food", 2);
         List<Item> leftItems = new ArrayList<>();
         leftItems.add(food);
         leftRoom.setItems(leftItems);
 
         Room rightRoom = new Room("Right room", "Right room description");
         rightRoom.setTargetView("views/room.fxml");
-        Item bow = new Item(3, "Food description");
+        Item bow = new Item("Bow", 8);
         List<Item> rightItems = new ArrayList<Item>();
         rightItems.add(bow);
         rightRoom.setItems(rightItems);
