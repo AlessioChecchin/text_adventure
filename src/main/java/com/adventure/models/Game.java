@@ -1,6 +1,7 @@
 package com.adventure.models;
 
 import com.adventure.Main;
+import com.adventure.controllers.BaseController;
 import com.adventure.nodes.StoryNode;
 import com.adventure.nodes.StoryNodeLink;
 import javafx.fxml.FXMLLoader;
@@ -84,6 +85,10 @@ public class Game
                 );
                 this.stage.setScene(scene);
             }
+
+            BaseController controller = fxmlLoader.getController();
+            stage.setOnHidden(e -> controller.shutdown());
+
         }
         catch(Exception e)
         {

@@ -13,5 +13,5 @@
 
     <Label fx:id="consoleOutput" />
 
-    <TextField fx:id="consolePrompt" styleClass="console-prompt"/>
+    <TextField fx:id="consolePrompt" onKeyPressed="#onKeyPressed" styleClass="console-prompt"/>
 </fx:root>

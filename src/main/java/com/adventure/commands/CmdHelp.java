@@ -2,18 +2,23 @@ package com.adventure.commands;
 
 import com.adventure.interfaces.ApplicationContext;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
+import java.util.Scanner;
 
 public class CmdHelp extends AbstractCommand
 {
     @Override
-    public void execute()
-    {
-        this.out.println("Command 1");
-        this.out.println("Command 2");
-        this.out.println("Command 3");
-        this.out.println("Command 4");
-        this.out.println("Command 5");
-        this.out.println("Command 6");
+    public void execute() throws InterruptedException {
+        writer.println("Command 1");
+
+        String str = this.safeReadNext();
+
+        writer.println("You entered " + str);
+        writer.println("Command 3");
+        writer.println("Command 4");
+        writer.println("Command 5");
+        writer.println("Command 6");
     }
 }

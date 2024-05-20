@@ -3,7 +3,8 @@ package com.adventure.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class AppController {
+public class AppController implements BaseController
+{
     @FXML
     private Label welcomeText;
 
@@ -11,5 +12,10 @@ public class AppController {
     protected void onHelloButtonClick()
     {
         welcomeText.setText("Welcome to JavaFX Application!");
+    }
+
+    public void shutdown()
+    {
+
     }
 }

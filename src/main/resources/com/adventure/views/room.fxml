@@ -20,6 +20,6 @@
 
     <Label fx:id="currentRoom" styleClass="menu-label"/>-->
 
-    <Display text=""/>
+    <Display fx:id="display" text=""/>
 
 </VBox>

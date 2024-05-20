@@ -1,21 +1,23 @@
 package com.adventure.components;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
-
 import com.adventure.CommandParser;
+import com.adventure.LabelWriter;
 import com.adventure.commands.Command;
+import com.adventure.controllers.BaseController;
+import javafx.application.Platform;
 import javafx.beans.property.StringProperty;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 
-public class Display extends VBox
+public class Display extends VBox implements BaseController
 {
     @FXML
     private Label consoleOutput;
@@ -25,6 +27,10 @@ public class Display extends VBox
 
     @FXML
     private VBox graphics;
+
+    private Command currentCommand;
+    private Task<Void> task;
+    private PipedOutputStream cmdInput;
 
     public Display()
     {
@@ -45,41 +51,100 @@ public class Display extends VBox
     @FXML
     public void initialize()
     {
-        this.consolePrompt.setOnKeyPressed( event -> {
-            if( event.getCode() == KeyCode.ENTER )
-            {
-                String command = consolePrompt.getText();
-                consolePrompt.clear();
+        this.currentCommand = null;
+        this.cmdInput = null;
+    }
 
+
+    /**
+     * Handles console input
+     * @param event Input event.
+     * @throws IOException
+     */
+    public void onKeyPressed(KeyEvent event) throws IOException {
+
+        // Checks if the command is complete.
+        if( event.getCode() == KeyCode.ENTER )
+        {
+
+            String command = consolePrompt.getText();
+
+            // If there aren't command currently executing, then a new command is spawned.
+            if(this.currentCommand == null)
+            {
+
+                // The command is parsed.
                 CommandParser parser = CommandParser.getInstance();
                 Command cmd = parser.parseCommand(command);
 
+                // cmd is null then it's an unknown command.
                 if(cmd == null)
                 {
                     this.consoleOutput.setText("Unknown command");
                 }
                 else
                 {
-                    final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    final String utf8 = StandardCharsets.UTF_8.name();
+                    // Generating streams.
+                    PrintWriter writer = new PrintWriter(new LabelWriter(this.consoleOutput));
+                    cmd.setWriter(writer);
+                    this.currentCommand = cmd;
 
-                    try (PrintStream ps = new PrintStream(baos, true, utf8))
-                    {
-                        cmd.setOutputPipe(ps);
-                        cmd.execute();
+                    this.cmdInput = new PipedOutputStream();
+                    PipedInputStream input = new PipedInputStream();
+                    input.connect(this.cmdInput);
 
-                        String data = baos.toString(utf8);
+                    cmd.setInputStream(input);
 
-                        this.consoleOutput.setText(data);
-                    }
-                    catch(Exception e)
-                    {
-                        this.consoleOutput.setText("Oops an error occurred: " + e.getMessage());
-                        e.printStackTrace();
-                    }
+                    this.cmdInput.write("".getBytes(StandardCharsets.UTF_8));
+                    this.cmdInput.flush();
+
+                    createTask(cmd);
+
+                    Thread t = new Thread(task);
+                    t.setDaemon(false);
+                    t.start();
                 }
             }
-        } );
+            else
+            {
+                this.cmdInput.write((command + "\n").getBytes(StandardCharsets.UTF_8));
+                this.cmdInput.flush();
+            }
+
+            consolePrompt.clear();
+        }
+    }
+
+    /**
+     * Runs the command in a separated task (thread).
+     * @param cmd Command to execute.
+     */
+    private void createTask(Command cmd) {
+        this.task = new Task<>() {
+            @Override
+            protected Void call()
+            {
+                try
+                {
+                    cmd.execute();
+                }
+                catch (Exception exception)
+                {
+                    exception.printStackTrace();
+                }
+                return null;
+            }
+        };
+
+        this.task.setOnSucceeded(workerStateEvent -> {
+            this.currentCommand = null;
+            this.task = null;
+            this.cmdInput = null;
+        });
+
+        this.task.setOnCancelled(evtCancelled -> {
+            this.currentCommand.kill();
+        });
     }
 
     public String getText()
@@ -101,5 +166,12 @@ public class Display extends VBox
     {
         return this.graphics;
     }
-
+    
+    public void shutdown()
+    {
+        if(this.task != null && this.task.isRunning())
+        {
+            this.task.cancel();
+        }
+    }
 }
