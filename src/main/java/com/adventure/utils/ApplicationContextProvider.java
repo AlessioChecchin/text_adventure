@@ -1,5 +1,6 @@
-package com.adventure;
+package com.adventure.utils;
 
+import com.adventure.Main;
 import com.adventure.interfaces.ApplicationContext;
 import com.adventure.models.Game;
 import com.adventure.models.Item;
@@ -10,7 +11,6 @@ import com.adventure.nodes.StoryNode;
 import javafx.stage.Stage;
 import org.jgrapht.Graph;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;

@@ -2,11 +2,10 @@ package com.adventure.components;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import com.adventure.CommandParser;
-import com.adventure.StringPropertyWriter;
+import com.adventure.utils.CommandParser;
+import com.adventure.utils.StringPropertyWriter;
 import com.adventure.commands.Command;
 import com.adventure.controllers.BaseController;
-import javafx.application.Platform;
 import javafx.beans.property.StringProperty;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
