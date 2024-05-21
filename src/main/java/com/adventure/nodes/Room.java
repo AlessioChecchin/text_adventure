@@ -12,6 +12,7 @@ public class Room extends StoryNode
 
     public Room(String name, String description)
     {
+        super("views/room.fxml");
         this.name = name;
         this.description = description;
     }
@@ -52,7 +53,7 @@ public class Room extends StoryNode
         if (room.getClass() != this.getClass()) return false;
 
         Room room1 = (Room) room;
-        return (room1.getName().equals(this.name) && (room1.getDescription().equals(this.description)) && (room1.getItems().equals(this.items)));
+        return (room1.getName().equals(this.name) && (room1.getDescription().equals(this.description))) /*&& (room1.getItems().equals(this.items)))*/;
     }
 
 }
