@@ -10,6 +10,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultDirectedGraph;
+import org.jgrapht.graph.DirectedPseudograph;
 
 import java.util.Objects;
 import java.util.Properties;
@@ -39,10 +40,11 @@ public class Game
     private Properties properties;
 
 
-    public Game(Properties properties)
+    public Game(Properties properties, Stage stage)
     {
         this.properties = properties;
-        this.gameGraph = new DefaultDirectedGraph<>(StoryNodeLink.class);
+        this.gameGraph = new DirectedPseudograph<>(StoryNodeLink.class);
+        this.stage = stage;
     }
 
     public Graph<StoryNode, StoryNodeLink> getGameGraph()
