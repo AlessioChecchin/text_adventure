@@ -5,6 +5,7 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import com.adventure.components.Display ?>
 
 <?import java.net.URL?>
 <GridPane fx:id="box" xmlns:fx="http://javafx.com/fxml" fx:controller="com.adventure.controllers.RoomController">
