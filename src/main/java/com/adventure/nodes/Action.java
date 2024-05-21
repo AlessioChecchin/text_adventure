@@ -12,5 +12,17 @@ public class Action
         return this.actionName;
     }
 
+    @Override
+    public boolean equals(Object action) {
+        if (action == this) {
+            return true;
+        }
+
+        if (action.getClass() != this.getClass()) return false;
+
+        Action act = (Action) action;
+        return this.getActionName().equals(act.getActionName());
+    }
+
     private final String actionName;
 }
