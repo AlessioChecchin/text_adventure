@@ -2,7 +2,9 @@ package com.adventure.nodes;
 
 import com.adventure.models.Item;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Room extends StoryNode
 {
@@ -15,6 +17,7 @@ public class Room extends StoryNode
         super("views/room.fxml");
         this.name = name;
         this.description = description;
+        this.items = new ArrayList<Item>();
     }
 
     public String getName() {
@@ -41,6 +44,7 @@ public class Room extends StoryNode
 
     public void setItems(List<Item> items)
     {
+        Objects.requireNonNull(items, "items cannot be null");
         this.items = items;
     }
 
@@ -56,4 +60,13 @@ public class Room extends StoryNode
         return (room1.getName().equals(this.name) && (room1.getDescription().equals(this.description))) /*&& (room1.getItems().equals(this.items)))*/;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 17;
+        hash = hash * 31 + name.hashCode();
+        hash = hash * 31 + description.hashCode();
+        hash = hash * 31 + items.hashCode();
+
+        return hash;
+    }
 }

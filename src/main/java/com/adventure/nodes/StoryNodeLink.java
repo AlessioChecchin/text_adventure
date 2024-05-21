@@ -27,4 +27,9 @@ public class StoryNodeLink extends DefaultEdge
         StoryNodeLink link = (StoryNodeLink) edge;
         return (this.getSource().equals(link.getSource()) && (this.getTarget().equals(link.getTarget())) && (this.getAction().equals(link.getAction())));
     }
+
+    @Override
+    public int hashCode() {
+        return action.hashCode();
+    }
 }

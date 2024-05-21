@@ -24,5 +24,10 @@ public class Action
         return this.getActionName().equals(act.getActionName());
     }
 
+    @Override
+    public int hashCode() {
+        return this.actionName.hashCode();
+    }
+
     private final String actionName;
 }
