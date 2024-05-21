@@ -107,7 +107,7 @@ public class Display extends VBox implements BaseController
             }
             else
             {
-                this.cmdInput.write((command + "\n").getBytes(StandardCharsets.UTF_8));
+                this.cmdInput.write((command + System.lineSeparator()).getBytes(StandardCharsets.UTF_8));
                 this.cmdInput.flush();
             }
 
