@@ -3,13 +3,13 @@
 <?import javafx.scene.layout.*?>
 
 <?import java.net.URL?>
-<fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml">
+<fx:root type="javafx.scene.layout.GridPane" xmlns:fx="http://javafx.com/fxml">
     <stylesheets>
-        <URL value="@display.css" />
+        <URL value="@../styles/display.css" />
     </stylesheets>
 
-    <VBox fx:id="graphics" styleClass="graphics">
+    <VBox GridPane.rowIndex="0" fx:id="graphics" styleClass="graphics">
     </VBox>
 
-    <TextField fx:id="consolePrompt" styleClass="console-prompt"/>
+    <TextField GridPane.rowIndex="1" fx:id="consolePrompt" styleClass="console-prompt"/>
 </fx:root>

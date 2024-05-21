@@ -6,9 +6,10 @@ import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
-public class Display extends VBox
+public class Display extends GridPane
 {
     @FXML
     private TextField consolePrompt;

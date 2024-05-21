@@ -1,9 +1,21 @@
-.menu-container
+.stage
 {
     -fx-background-image: url('../assets/background.png');
     -fx-background-size: cover;
     -fx-font-family: 'ubuntu';
-    -fx-font-size: 18px;
+    -fx-font-size: 15px;
+    -fx-grid-lines-visible: true;
+    -fx-fill-width: true;
+}
+
+
+
+
+.menu-container
+{
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+    -fx-padding: 20, 20, 20, 20;
 }
 
 .menu-button
@@ -26,8 +38,6 @@
     -fx-font-weight: bold;
     -fx-border-radius: 5px;
 }
-
-
 
 .menu-label
 {

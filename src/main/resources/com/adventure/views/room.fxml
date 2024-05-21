@@ -7,19 +7,14 @@
 <?import javafx.scene.layout.*?>
 
 <?import java.net.URL?>
-<?import javafx.geometry.Insets?>
-<?import com.adventure.components.Display?>
 
-<VBox fx:id="box" xmlns:fx="http://javafx.com/fxml" fx:controller="com.adventure.controllers.RoomController" styleClass="menu-container">
-
+<GridPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.adventure.controllers.RoomController">
     <stylesheets>
-        <URL value="@../styles/menu.css" />
+        <URL value="@../styles/display.css" />
     </stylesheets>
 
-    <!--<Button fx:id="backButton" text="BACK" onAction="#back" styleClass="back-button" />
+    <VBox GridPane.rowIndex="0" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS" fx:id="graphics" styleClass="graphics">
+    </VBox>
 
-    <Label fx:id="currentRoom" styleClass="menu-label"/>-->
-
-    <Display text=""/>
-
-</VBox>
+    <TextField GridPane.rowIndex="1" fx:id="consolePrompt" styleClass="console-prompt"/>
+</GridPane>

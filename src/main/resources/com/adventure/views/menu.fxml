@@ -7,21 +7,22 @@
 <?import javafx.scene.control.Button?>
 <?import java.net.URL?>
 
+<?import javafx.scene.layout.GridPane?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.adventure.controllers.AppController" styleClass="menu-container">
+<?import javafx.scene.layout.HBox?>
 
+<GridPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.adventure.controllers.AppController" styleClass="stage">
   <stylesheets>
     <URL value="@../styles/menu.css" />
   </stylesheets>
 
-  <padding>
-    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-  </padding>
+  <VBox GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" styleClass="menu-container">
 
-  <Label fx:id="welcomeText" styleClass="menu-label"/>
-  <Button text="PLAY" onAction="#onHelloButtonClick" styleClass="menu-button" />
-  <Button text="CREDITS" onAction="#onHelloButtonClick" styleClass="menu-button" />
-  <Button text="QUIT" onAction="#onHelloButtonClick" styleClass="menu-button"/>
-  <Button text="SAVE" onAction="#onHelloButtonClick" styleClass="menu-button"/>
+    <Label fx:id="welcomeText" styleClass="menu-label"/>
+    <Button text="PLAY" onAction="#onHelloButtonClick" styleClass="menu-button" />
+    <Button text="CREDITS" onAction="#onHelloButtonClick" styleClass="menu-button" />
+    <Button text="QUIT" onAction="#onHelloButtonClick" styleClass="menu-button"/>
+    <Button text="SAVE" onAction="#onHelloButtonClick" styleClass="menu-button"/>
 
-</VBox>
+  </VBox>
+</GridPane>
