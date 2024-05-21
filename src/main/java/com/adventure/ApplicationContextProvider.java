@@ -87,7 +87,6 @@ public class ApplicationContextProvider implements ApplicationContext
 
         // First room
         Room room = new Room("First room", "First room description");
-        room.setTargetView("views/room.fxml");
         Item sword = new Item(0, "Sword description");
         Item healthPotion = new Item(1, "Health Potion description");
 
@@ -109,14 +108,12 @@ public class ApplicationContextProvider implements ApplicationContext
 
 
         Room leftRoom = new Room("Left room", "Left room description");
-        leftRoom.setTargetView("views/room.fxml");
         Item food = new Item(2, "Food description");
         List<Item> leftItems = new ArrayList<>();
         leftItems.add(food);
         leftRoom.setItems(leftItems);
 
         Room rightRoom = new Room("Right room", "Right room description");
-        rightRoom.setTargetView("views/room.fxml");
         Item bow = new Item(3, "Food description");
         List<Item> rightItems = new ArrayList<Item>();
         rightItems.add(bow);
