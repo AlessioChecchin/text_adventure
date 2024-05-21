@@ -15,4 +15,16 @@ public class StoryNodeLink extends DefaultEdge
     }
 
     private Action action;
+
+    @Override
+    public boolean equals(Object edge){
+        if (edge == this) {
+            return true;
+        }
+
+        if (edge.getClass() != this.getClass()) return false;
+
+        StoryNodeLink link = (StoryNodeLink) edge;
+        return (this.getSource().equals(link.getSource()) && (this.getTarget().equals(link.getTarget())) && (this.getAction().equals(link.getAction())));
+    }
 }
