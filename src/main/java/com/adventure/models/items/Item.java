@@ -1,37 +1,47 @@
 package com.adventure.models.items;
 
-public class Item
+public abstract class Item
 {
 
-    public Item(String name, int weight)
+    /**
+     * Default constructor
+     * <ul>
+     *     <li>weight: 0</li>
+     * </ul>
+     * @param name Name of the item
+     */
+    public Item(String name)
     {
-        this(name, weight, "");
-    }
-
-    public Item(String name, int weight, String description)
-    {
-        this.weight = weight;
         this.name = name;
-        this.description = description;
+        this.weight = 0;
     }
 
-    public String getName()
-    {
-        return this.name;
-    }
+    //
+    //  SETTERS
+    //
 
-    public int getWeight()
-    {
-        return this.weight;
-    }
+    /**
+     * Set the weight of the item
+     * @param weight weight of the item
+     */
+    public void setWeight(int weight) { this.weight = weight; }
 
-    public String getDescription()
-    {
-        return this.description;
-    }
+    //
+    //  GETTERS
+    //
+
+    /**
+     * Get the name of the item
+     * @return name of the item
+     */
+    public String getName() { return this.name; }
+    /**
+     * Get the weight of the item
+     * @return weight of the item
+     */
+    public int getWeight() { return this.weight; }
 
 
-    private final int weight;
-    private final String name;
-    private final String description;
+    protected String name;
+    protected int weight;
 }
