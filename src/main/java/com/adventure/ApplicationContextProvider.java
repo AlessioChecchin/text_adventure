@@ -82,7 +82,7 @@ public class ApplicationContextProvider implements ApplicationContext
         // Window not resizable
         stage.setResizable(false);
 
-        this.game = new Game(this.properties);
+        this.game = new Game(this.properties, stage);
         this.game.setStage(stage);
 
         // First room
