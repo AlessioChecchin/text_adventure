@@ -111,7 +111,7 @@ public class ApplicationContextProvider implements ApplicationContext
         Room leftRoom = new Room("Left room", "Left room description");
         leftRoom.setTargetView("views/room.fxml");
         Item food = new Item(2, "Food description");
-        List<Item> leftItems = new ArrayList<Item>();
+        List<Item> leftItems = new ArrayList<>();
         leftItems.add(food);
         leftRoom.setItems(leftItems);
 

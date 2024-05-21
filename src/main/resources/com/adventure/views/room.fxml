@@ -7,14 +7,16 @@
 <?import javafx.scene.layout.*?>
 
 <?import java.net.URL?>
-
-<GridPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.adventure.controllers.RoomController">
+<GridPane fx:id="box" xmlns:fx="http://javafx.com/fxml" fx:controller="com.adventure.controllers.RoomController">
     <stylesheets>
         <URL value="@../styles/display.css" />
     </stylesheets>
 
-    <VBox GridPane.rowIndex="0" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS" fx:id="graphics" styleClass="graphics">
-    </VBox>
+    <!--<Button fx:id="backButton" text="BACK" onAction="#back" styleClass="back-button" />
+
+    <Label fx:id="currentRoom" styleClass="menu-label"/>-->
+
+    <Display fx:id="display" text=""/>
 
     <TextField GridPane.rowIndex="1" fx:id="consolePrompt" styleClass="console-prompt"/>
 </GridPane>

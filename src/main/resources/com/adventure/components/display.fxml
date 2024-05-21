@@ -11,5 +11,7 @@
     <VBox GridPane.rowIndex="0" fx:id="graphics" styleClass="graphics">
     </VBox>
 
-    <TextField GridPane.rowIndex="1" fx:id="consolePrompt" styleClass="console-prompt"/>
+    <Label fx:id="consoleOutput" />
+
+    <TextField fx:id="consolePrompt" onKeyPressed="#onKeyPressed" styleClass="console-prompt"/>
 </fx:root>

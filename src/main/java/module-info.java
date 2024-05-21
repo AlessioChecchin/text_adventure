@@ -14,4 +14,6 @@ module com.adventure {
     exports com.adventure.models;
     opens com.adventure.controllers to javafx.fxml;
     opens com.adventure.components to javafx.fxml;
+    exports com.adventure.commands;
+    opens com.adventure.commands to javafx.fxml;
 }

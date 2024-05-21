@@ -1,6 +1,7 @@
 package com.adventure.controllers;
 
 import com.adventure.ApplicationContextProvider;
+import com.adventure.components.Display;
 import com.adventure.interfaces.ApplicationContext;
 import com.adventure.nodes.Room;
 import com.adventure.nodes.StoryNode;
@@ -12,8 +13,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import org.jgrapht.Graph;
 
-public class RoomController
+public class RoomController implements BaseController
 {
+    @FXML
+    private Display display;
+
     /*@FXML
     private Label currentRoom;
 
@@ -69,4 +73,10 @@ public class RoomController
         // Can't be fired if the button is disabled.
         this.context.getGame().setCurrentNode(this.context.getGame().getPreviousNode());
     }*/
+
+    public void shutdown()
+    {
+        display.shutdown();
+    }
+
 }
