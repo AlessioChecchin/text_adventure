@@ -2,17 +2,17 @@ package com.adventure;
 
 
 import javafx.application.Platform;
-import javafx.scene.control.Label;
+import javafx.beans.property.StringProperty;
 
 import java.io.*;
 
-public class LabelWriter extends StringWriter
+public class StringPropertyWriter extends StringWriter
 {
-    private final Label label;
+    private final StringProperty prop;
 
-    public LabelWriter(Label label)
+    public StringPropertyWriter(StringProperty prop)
     {
-        this.label = label;
+        this.prop = prop;
     }
 
     public void write(int c) {
@@ -57,6 +57,6 @@ public class LabelWriter extends StringWriter
 
     @Override
     public void flush() {
-        Platform.runLater(() -> label.setText(this.toString()));
+        Platform.runLater(() -> prop.set(this.toString()));
     }
 }

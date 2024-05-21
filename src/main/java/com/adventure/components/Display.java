@@ -3,7 +3,7 @@ package com.adventure.components;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import com.adventure.CommandParser;
-import com.adventure.LabelWriter;
+import com.adventure.StringPropertyWriter;
 import com.adventure.commands.Command;
 import com.adventure.controllers.BaseController;
 import javafx.application.Platform;
@@ -66,7 +66,6 @@ public class Display extends VBox implements BaseController
         // Checks if the command is complete.
         if( event.getCode() == KeyCode.ENTER )
         {
-
             String command = consolePrompt.getText();
 
             // If there aren't command currently executing, then a new command is spawned.
@@ -85,7 +84,7 @@ public class Display extends VBox implements BaseController
                 else
                 {
                     // Generating streams.
-                    PrintWriter writer = new PrintWriter(new LabelWriter(this.consoleOutput));
+                    PrintWriter writer = new PrintWriter(new StringPropertyWriter(this.consoleOutput.textProperty()));
                     cmd.setWriter(writer);
                     this.currentCommand = cmd;
 
