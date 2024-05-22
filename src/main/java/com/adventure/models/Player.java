@@ -1,5 +1,7 @@
 package com.adventure.models;
 
+import com.adventure.models.items.Item;
+
 import java.util.List;
 import java.util.Objects;
 
