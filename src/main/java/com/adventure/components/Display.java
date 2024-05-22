@@ -2,6 +2,8 @@ package com.adventure.components;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Stack;
+
 import com.adventure.CommandParser;
 import com.adventure.StringPropertyWriter;
 import com.adventure.commands.Command;
@@ -16,7 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 
 public class Display extends GridPane implements BaseController
 {
@@ -27,7 +29,7 @@ public class Display extends GridPane implements BaseController
     private TextField consolePrompt;
 
     @FXML
-    private VBox graphics;
+    private HBox graphics;
 
     private Command currentCommand;
     private Task<Void> task;
@@ -162,7 +164,7 @@ public class Display extends GridPane implements BaseController
         return consolePrompt.textProperty();
     }
 
-    public VBox getGraphics()
+    public HBox getGraphics()
     {
         return this.graphics;
     }

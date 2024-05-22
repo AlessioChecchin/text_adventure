@@ -1,17 +1,37 @@
-<?import javafx.scene.*?>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import java.net.URL?>
-<fx:root type="javafx.scene.layout.GridPane" xmlns:fx="http://javafx.com/fxml">
+<?import javafx.scene.text.Text?>
+<fx:root alignment="CENTER" gridLinesVisible="true" styleClass="room_display" type="javafx.scene.layout.GridPane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
-        <URL value="@../styles/display.css" />
+        <URL value="@display.css" />
     </stylesheets>
 
-    <VBox GridPane.rowIndex="0" fx:id="graphics" styleClass="graphics">
+
+    <HBox fx:id="graphics" prefHeight="400" prefWidth="711" styleClass="graphics" GridPane.fillHeight="true" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS" />
+
+    <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+        <ScrollPane>
+            <Label fx:id="consoleOutput" />
+        </ScrollPane>
+    </HBox>
+
+    <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" styleClass="console-prompt">
+        <TextField fx:id="consolePrompt" promptText=">>" onKeyPressed="#onKeyPressed" styleClass="console-prompt"/>
     </VBox>
 
-    <Label fx:id="consoleOutput" />
+    <rowConstraints>
+        <RowConstraints percentHeight="60" />
+        <RowConstraints percentHeight="30" />
+        <RowConstraints percentHeight="10" />
+    </rowConstraints>
 
-    <TextField fx:id="consolePrompt" onKeyPressed="#onKeyPressed" styleClass="console-prompt"/>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+
 </fx:root>

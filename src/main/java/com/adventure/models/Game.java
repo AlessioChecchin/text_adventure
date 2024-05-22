@@ -79,9 +79,7 @@ public class Game
             else
             {
                 Scene scene = new Scene(
-                        fxmlLoader.load(),
-                        Integer.parseInt(this.properties.getProperty("display.width")),
-                        Integer.parseInt(this.properties.getProperty("display.height"))
+                        fxmlLoader.load()
                 );
                 this.stage.setScene(scene);
             }

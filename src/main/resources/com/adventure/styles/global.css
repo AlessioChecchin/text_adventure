@@ -1,0 +1,7 @@
+.pstage
+{
+    -fx-background-image: url('../assets/background.png');
+    -fx-background-size: 100% 100%;
+    -fx-alignment: center;
+    -fx-padding: 25px, 25px, 25px, 25px;
+}

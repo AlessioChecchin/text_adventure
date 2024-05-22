@@ -6,18 +6,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import com.adventure.components.Display ?>
-
 <?import java.net.URL?>
-<GridPane fx:id="box" xmlns:fx="http://javafx.com/fxml" fx:controller="com.adventure.controllers.RoomController">
+
+<?import javafx.geometry.Insets?>
+<StackPane fx:id="box" xmlns:fx="http://javafx.com/fxml" fx:controller="com.adventure.controllers.RoomController" styleClass="pstage">
     <stylesheets>
-        <URL value="@../styles/display.css" />
+        <URL value="@../styles/global.css" />
     </stylesheets>
 
-    <!--<Button fx:id="backButton" text="BACK" onAction="#back" styleClass="back-button" />
+    <Display fx:id="display"/>
 
-    <Label fx:id="currentRoom" styleClass="menu-label"/>-->
-
-    <Display fx:id="display" text=""/>
-
-    <TextField GridPane.rowIndex="1" fx:id="consolePrompt" styleClass="console-prompt"/>
-</GridPane>
+</StackPane>

@@ -1,0 +1,22 @@
+.room_display
+{
+    -fx-background-color: white;
+    -fx-alignment: center;
+    -fx-grid-lines-visible: true;
+}
+
+.graphics
+{
+    /*-fx-background-image: url('../assets/castle.png');*/
+    /*-fx-alignment: center;*/
+    /*-fx-background-repeat: false;*/
+    /*-fx-background-size: 100%;*/
+}
+
+
+.console-prompt
+{
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-font-size: 30;
+}
