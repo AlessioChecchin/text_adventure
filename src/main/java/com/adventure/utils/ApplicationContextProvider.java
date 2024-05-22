@@ -3,7 +3,9 @@ package com.adventure.utils;
 import com.adventure.Main;
 import com.adventure.interfaces.ApplicationContext;
 import com.adventure.models.Game;
+import com.adventure.models.items.AttackItem;
 import com.adventure.models.items.Item;
+import com.adventure.models.items.UsableItem;
 import com.adventure.nodes.Action;
 import com.adventure.nodes.Room;
 import com.adventure.nodes.StoryNodeLink;
@@ -88,11 +90,16 @@ public class ApplicationContextProvider implements ApplicationContext
         // First room
         Room room = new Room("First room", "First room description");
         room.setTargetView("views/room.fxml");
-        Item sword = new Item("Sword", 10);
-        Item healthPotion = new Item("Potion", 3);
+        AttackItem sword = new AttackItem("Sword");
+        sword.setAdder(3);
+        sword.setMultiplier(1.2);
+        sword.setWeight(4);
+        UsableItem healthPotion = new UsableItem("Potion");
+        healthPotion.setAdditionalHp(10);
+        healthPotion.setWeight(3);
 
         // First room items.
-        List<Item> items = new ArrayList<Item>();
+        List<Item> items = new ArrayList<>();
         items.add(sword);
         items.add(healthPotion);
         room.setItems(items);
@@ -110,15 +117,19 @@ public class ApplicationContextProvider implements ApplicationContext
 
         Room leftRoom = new Room("Left room", "Left room description");
         leftRoom.setTargetView("views/room.fxml");
-        Item food = new Item("Food", 2);
+        UsableItem food = new UsableItem("Food");
+        food.setWeight(3);
         List<Item> leftItems = new ArrayList<>();
         leftItems.add(food);
         leftRoom.setItems(leftItems);
 
         Room rightRoom = new Room("Right room", "Right room description");
         rightRoom.setTargetView("views/room.fxml");
-        Item bow = new Item("Bow", 8);
-        List<Item> rightItems = new ArrayList<Item>();
+        AttackItem bow = new AttackItem("Bow");
+        bow.setAdder(3);
+        bow.setMultiplier(1);
+        bow.setWeight(2);
+        List<Item> rightItems = new ArrayList<>();
         rightItems.add(bow);
         rightRoom.setItems(rightItems);
 
