@@ -10,16 +10,6 @@
 <?import javafx.geometry.Insets?>
 <?import com.adventure.components.Display?>
 
-<VBox fx:id="box" xmlns:fx="http://javafx.com/fxml" fx:controller="com.adventure.controllers.RoomController" styleClass="menu-container">
-
-    <stylesheets>
-        <URL value="@../styles/menu.css" />
-    </stylesheets>
-
-    <!--<Button fx:id="backButton" text="BACK" onAction="#back" styleClass="back-button" />
-
-    <Label fx:id="currentRoom" styleClass="menu-label"/>-->
-
-    <Display fx:id="display" text=""/>
-
-</VBox>
+<GridPane fx:id="box" xmlns:fx="http://javafx.com/fxml" fx:controller="com.adventure.controllers.RoomController" maxWidth="Infinity" maxHeight="Infinity">
+    <Display fx:id="display" text="" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS"/>
+</GridPane>

@@ -82,7 +82,7 @@ public class ApplicationContextProvider implements ApplicationContext
         // For now let's ignore this part and load by hand the graph.
 
         // Window not resizable
-        stage.setResizable(false);
+        //stage.setResizable(false);
 
         this.game = new Game(this.properties);
         this.game.setStage(stage);

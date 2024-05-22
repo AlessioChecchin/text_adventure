@@ -3,15 +3,37 @@
 <?import javafx.scene.layout.*?>
 
 <?import java.net.URL?>
-<fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml">
+<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.text.Text?>
+<fx:root type="javafx.scene.layout.GridPane" xmlns:fx="http://javafx.com/fxml" styleClass="display-wrapper"
+         GridPane.hgrow="always" GridPane.vgrow="always">
     <stylesheets>
-        <URL value="@display.css" />
+        <URL value="@display.css"/>
     </stylesheets>
 
-    <VBox fx:id="graphics" styleClass="graphics">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="100.0" prefWidth="100.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" percentHeight="70"  prefHeight="100" vgrow="ALWAYS"/>
+        <RowConstraints minHeight="10.0" percentHeight="22"  prefHeight="100" vgrow="ALWAYS"/>
+        <RowConstraints minHeight="5" percentHeight="8" prefHeight="100" vgrow="ALWAYS"/>
+    </rowConstraints>
+
+
+    <VBox fx:id="graphics" styleClass="graphics" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+
+
+    <VBox GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <VBox styleClass="separator"></VBox>
+        <ScrollPane styleClass="console-output-wrapper">
+            <Label fx:id="consoleOutput" text="dadawda" styleClass="console-output"/>
+        </ScrollPane>
     </VBox>
 
-    <Label fx:id="consoleOutput" />
+    <GridPane GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" styleClass="console-input-wrapper">
+        <Label text=">>" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="console-input-prefix"/>
+        <TextField fx:id="consolePrompt" onKeyPressed="#onKeyPressed" styleClass="console-input" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    </GridPane>
 
-    <TextField fx:id="consolePrompt" onKeyPressed="#onKeyPressed" styleClass="console-prompt"/>
 </fx:root>
