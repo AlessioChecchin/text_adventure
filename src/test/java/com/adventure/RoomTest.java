@@ -1,6 +1,5 @@
 package com.adventure;
 
-import com.adventure.models.Item;
 import com.adventure.nodes.Room;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
