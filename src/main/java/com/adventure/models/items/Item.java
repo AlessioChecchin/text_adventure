@@ -1,5 +1,16 @@
 package com.adventure.models.items;
 
+
+import com.adventure.nodes.Room;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = AttackItem.class, name = "AttackItem"),
+        @JsonSubTypes.Type(value = DefenceItem.class, name = "DefenceItem"),
+        @JsonSubTypes.Type(value = UsableItem.class, name = "UsableItem")
+})
 public abstract class Item
 {
 

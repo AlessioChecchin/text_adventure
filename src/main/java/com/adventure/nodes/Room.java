@@ -1,6 +1,8 @@
 package com.adventure.nodes;
 
 import com.adventure.models.items.Item;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
@@ -10,7 +12,8 @@ public class Room extends StoryNode
     private String description;
     private List<Item> items;
 
-    public Room(String name, String description)
+    @JsonCreator
+    public Room(@JsonProperty("name") String name,@JsonProperty("description") String description)
     {
         this.name = name;
         this.description = description;
@@ -41,6 +44,19 @@ public class Room extends StoryNode
     public void setItems(List<Item> items)
     {
         this.items = items;
+    }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder result = new StringBuilder();
+        result.append("Name     \t").append(name).append("\n");
+        result.append("Description \t").append(description).append("\n");
+        result.append("Items\n");
+        for (Item item : items) {
+            result.append(item.toString()).append("\n");
+        }
+        return result.toString();
     }
 
 }

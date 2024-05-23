@@ -1,6 +1,8 @@
 package com.adventure.models.items;
 
 import com.adventure.interfaces.Equipable;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AttackItem extends Item implements Equipable
 {
@@ -13,7 +15,7 @@ public class AttackItem extends Item implements Equipable
      * </ul>
      * @param name Name of the item
      */
-    public AttackItem(String name)
+    public AttackItem(@JsonProperty("name") String name)
     {
         super(name);
         this.attackMultiplier = 1;
@@ -31,9 +33,24 @@ public class AttackItem extends Item implements Equipable
     //  GETTERS
     //
 
+    @JsonProperty("additionalAttack")
     public int getAdder() { return this.additionalAttack; }
+    @JsonProperty("attackMultiplier")
     public double getMultiplier() { return this.attackMultiplier; }
 
+    //
+    //  OTHER
+    //
+
+    @Override
+    public String toString()
+    {
+        StringBuilder result = new StringBuilder();
+        result.append("name \t").append(name).append("\n");
+        result.append("adder\t").append(additionalAttack).append("\n");
+        result.append("multi\t").append(attackMultiplier).append("\n");
+        return result.toString();
+    }
 
     private int additionalAttack;
     private double attackMultiplier;

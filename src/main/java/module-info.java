@@ -4,8 +4,10 @@ module com.adventure {
     requires org.jgrapht.core;
     requires com.fasterxml.jackson.databind;
 
-
-    opens com.adventure to javafx.fxml;
+    // Opening to com.fasterxml.jackson.databind necessary for serialization
+    opens com.adventure to javafx.fxml, com.fasterxml.jackson.databind;
+    opens com.adventure.models to com.fasterxml.jackson.databind;
+    opens com.adventure.models.items to com.fasterxml.jackson.databind;
     exports com.adventure;
     exports com.adventure.nodes;
     exports com.adventure.interfaces;

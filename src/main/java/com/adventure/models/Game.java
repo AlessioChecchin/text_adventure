@@ -4,6 +4,9 @@ import com.adventure.Main;
 import com.adventure.controllers.BaseController;
 import com.adventure.nodes.StoryNode;
 import com.adventure.nodes.StoryNodeLink;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
@@ -38,8 +41,7 @@ public class Game
 
     private Properties properties;
 
-
-    public Game(Properties properties)
+    public Game(@JsonProperty("properties") Properties properties)
     {
         this.properties = properties;
         this.gameGraph = new DefaultDirectedGraph<>(StoryNodeLink.class);
@@ -68,7 +70,11 @@ public class Game
             Font.loadFont(Objects.requireNonNull(Main.class.getResource("assets/ubuntu.ttf")).toExternalForm(), -1);
 
             // Creates scene.
-            Scene currentScene = this.stage.getScene();
+            Scene currentScene = null;
+            if(this.stage != null)
+                currentScene = this.stage.getScene();
+
+
 
             // If a scene already exists its reused.
             if(currentScene != null)
@@ -102,6 +108,7 @@ public class Game
         this.stage = stage;
     }
 
+    @JsonIgnore
     public Stage getStage()
     {
         return this.stage;
