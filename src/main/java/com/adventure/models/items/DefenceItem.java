@@ -34,6 +34,19 @@ public class DefenceItem extends Item implements Equipable
     public int getAdder() { return this.additionalDefence; }
     public double getMultiplier() { return this.defenceMultiplier; }
 
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+
+        DefenceItem def = (DefenceItem) obj;
+        return ((additionalDefence == def.getAdder()) && (defenceMultiplier == def.getMultiplier() && (super.equals(def))));
+    }
+
 
     private int additionalDefence;
     private double defenceMultiplier;

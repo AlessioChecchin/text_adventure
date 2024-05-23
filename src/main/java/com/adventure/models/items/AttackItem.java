@@ -34,6 +34,19 @@ public class AttackItem extends Item implements Equipable
     public int getAdder() { return this.additionalAttack; }
     public double getMultiplier() { return this.attackMultiplier; }
 
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+
+        AttackItem att = (AttackItem) obj;
+        return ((additionalAttack == att.getAdder()) && (attackMultiplier == att.getMultiplier() && (super.equals(att))));
+    }
+
 
     private int additionalAttack;
     private double attackMultiplier;

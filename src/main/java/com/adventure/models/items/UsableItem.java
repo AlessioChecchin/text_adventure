@@ -36,6 +36,19 @@ public class UsableItem extends Item implements Usable
     public int getDefence() { return this.def; }
     public int getHp() { return this.hp; }
 
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+
+        UsableItem usa = (UsableItem) obj;
+        return ((atk == usa.getAttack()) && (def == usa.getDefence()) && (hp == usa.getHp()) && super.equals(usa));
+    }
+
 
     private int atk, def, hp;
 }

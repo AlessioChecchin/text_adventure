@@ -41,6 +41,18 @@ public abstract class Item
      */
     public int getWeight() { return this.weight; }
 
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Item a = (Item) o;
+        return ((name.equals(a.getName())) && weight == a.getWeight());
+    }
+
 
     protected String name;
     protected int weight;
