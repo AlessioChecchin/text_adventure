@@ -1,25 +1,29 @@
 package com.adventure.models;
 
+import com.adventure.models.items.Item;
+
 import java.util.List;
+import java.util.Objects;
 
-public class Player {
+public class Player extends Entity
+{
     private String name;
-    private List<Item> inventory;
 
-    public void setName(String name) {
+    public Player(String name, Inventory inventory, Stats stats)
+    {
+        super(inventory, stats);
+
+        this.setName(name);
+    }
+
+    public void setName(String name)
+    {
+        Objects.requireNonNull(name, "Can't set a null name");
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public List<Item> getInventory() {
-        return inventory;
-    }
-
-    public void setInventory(List<Item> inventory)
+    public String getName()
     {
-        this.inventory = inventory;
+        return name;
     }
 }

@@ -1,6 +1,6 @@
 package com.adventure.nodes;
 
-import com.adventure.models.Item;
+import com.adventure.models.items.Item;
 
 import java.util.ArrayList;
 import java.util.List;

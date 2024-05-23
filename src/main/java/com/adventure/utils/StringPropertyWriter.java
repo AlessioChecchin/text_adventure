@@ -1,4 +1,4 @@
-package com.adventure;
+package com.adventure.utils;
 
 
 import javafx.application.Platform;

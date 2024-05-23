@@ -3,6 +3,8 @@ package com.adventure;
 import com.adventure.commands.CmdClear;
 import com.adventure.commands.CmdHelp;
 import com.adventure.interfaces.ApplicationContext;
+import com.adventure.utils.ApplicationContextProvider;
+import com.adventure.utils.CommandParser;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

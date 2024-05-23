@@ -13,12 +13,25 @@ public class CmdHelp extends AbstractCommand
     public void execute() throws InterruptedException {
         writer.println("Command 1");
 
-        String str = this.safeReadNext();
+        //String str = this.safeReadNext();
 
-        writer.println("You entered " + str);
+        //writer.println("You entered " + str);
         writer.println("Command 3");
         writer.println("Command 4");
         writer.println("Command 5");
         writer.println("Command 6");
+        writer.println("Command 6");
+        writer.println("Command 6");
+        writer.println("Command 6");
+        writer.println("Command 6");
+        writer.println("Command 6");
+        writer.println("Command 6");
+        writer.println("Command 6");
+        writer.println("Command 6");
+        writer.println("Command 6");
+        writer.println("Command 6");
+        writer.println("Command 6");
+        writer.println("Command 6");
+
     }
 }

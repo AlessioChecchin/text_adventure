@@ -1,4 +1,4 @@
-package com.adventure;
+package com.adventure.utils;
 
 import com.adventure.interfaces.ApplicationContext;
 import com.adventure.commands.Command;

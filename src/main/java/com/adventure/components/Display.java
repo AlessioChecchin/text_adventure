@@ -2,11 +2,10 @@ package com.adventure.components;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import com.adventure.CommandParser;
-import com.adventure.StringPropertyWriter;
+import com.adventure.utils.CommandParser;
+import com.adventure.utils.StringPropertyWriter;
 import com.adventure.commands.Command;
 import com.adventure.controllers.BaseController;
-import javafx.application.Platform;
 import javafx.beans.property.StringProperty;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -15,9 +14,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
-public class Display extends VBox implements BaseController
+public class Display extends GridPane implements BaseController
 {
     @FXML
     private Label consoleOutput;

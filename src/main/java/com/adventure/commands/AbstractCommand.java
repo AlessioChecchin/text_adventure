@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public abstract class AbstractCommand implements Command
+public abstract class   AbstractCommand implements Command
 {
     protected PrintWriter writer;
 

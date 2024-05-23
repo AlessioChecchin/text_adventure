@@ -1,8 +1,11 @@
-package com.adventure;
+package com.adventure.utils;
 
+import com.adventure.Main;
 import com.adventure.interfaces.ApplicationContext;
 import com.adventure.models.Game;
-import com.adventure.models.Item;
+import com.adventure.models.items.AttackItem;
+import com.adventure.models.items.Item;
+import com.adventure.models.items.UsableItem;
 import com.adventure.nodes.Action;
 import com.adventure.nodes.Room;
 import com.adventure.nodes.StoryNodeLink;
@@ -10,7 +13,6 @@ import com.adventure.nodes.StoryNode;
 import javafx.stage.Stage;
 import org.jgrapht.Graph;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
@@ -80,18 +82,24 @@ public class ApplicationContextProvider implements ApplicationContext
         // For now let's ignore this part and load by hand the graph.
 
         // Window not resizable
-        stage.setResizable(false);
+        //stage.setResizable(false);
 
-        this.game = new Game(this.properties, stage);
+        this.game = new Game(this.properties);
         this.game.setStage(stage);
 
         // First room
         Room room = new Room("First room", "First room description");
-        Item sword = new Item(0, "Sword description");
-        Item healthPotion = new Item(1, "Health Potion description");
+        room.setTargetView("views/room.fxml");
+        AttackItem sword = new AttackItem("Sword");
+        sword.setAdder(3);
+        sword.setMultiplier(1.2);
+        sword.setWeight(4);
+        UsableItem healthPotion = new UsableItem("Potion");
+        healthPotion.setAdditionalHp(10);
+        healthPotion.setWeight(3);
 
         // First room items.
-        List<Item> items = new ArrayList<Item>();
+        List<Item> items = new ArrayList<>();
         items.add(sword);
         items.add(healthPotion);
         room.setItems(items);
@@ -108,14 +116,20 @@ public class ApplicationContextProvider implements ApplicationContext
 
 
         Room leftRoom = new Room("Left room", "Left room description");
-        Item food = new Item(2, "Food description");
+        leftRoom.setTargetView("views/room.fxml");
+        UsableItem food = new UsableItem("Food");
+        food.setWeight(3);
         List<Item> leftItems = new ArrayList<>();
         leftItems.add(food);
         leftRoom.setItems(leftItems);
 
         Room rightRoom = new Room("Right room", "Right room description");
-        Item bow = new Item(3, "Food description");
-        List<Item> rightItems = new ArrayList<Item>();
+        rightRoom.setTargetView("views/room.fxml");
+        AttackItem bow = new AttackItem("Bow");
+        bow.setAdder(3);
+        bow.setMultiplier(1);
+        bow.setWeight(2);
+        List<Item> rightItems = new ArrayList<>();
         rightItems.add(bow);
         rightRoom.setItems(rightItems);
 
