@@ -37,6 +37,9 @@ public class Game
      */
     private Stage stage;
 
+    /**
+     * Game properties.
+     */
     private Properties properties;
 
 

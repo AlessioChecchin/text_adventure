@@ -89,7 +89,6 @@ public class ApplicationContextProvider implements ApplicationContext
 
         // First room
         Room room = new Room("First room", "First room description");
-        room.setTargetView("views/room.fxml");
         AttackItem sword = new AttackItem("Sword");
         sword.setAdder(3);
         sword.setMultiplier(1.2);
@@ -116,7 +115,6 @@ public class ApplicationContextProvider implements ApplicationContext
 
 
         Room leftRoom = new Room("Left room", "Left room description");
-        leftRoom.setTargetView("views/room.fxml");
         UsableItem food = new UsableItem("Food");
         food.setWeight(3);
         List<Item> leftItems = new ArrayList<>();
@@ -124,7 +122,6 @@ public class ApplicationContextProvider implements ApplicationContext
         leftRoom.setItems(leftItems);
 
         Room rightRoom = new Room("Right room", "Right room description");
-        rightRoom.setTargetView("views/room.fxml");
         AttackItem bow = new AttackItem("Bow");
         bow.setAdder(3);
         bow.setMultiplier(1);
@@ -139,7 +136,6 @@ public class ApplicationContextProvider implements ApplicationContext
         g.addVertex(rightRoom);
         g.addEdge(room, leftRoom, leftLink);
         g.addEdge(room, rightRoom, rightLink);
-
 
         game.setCurrentNode(room);
     }
