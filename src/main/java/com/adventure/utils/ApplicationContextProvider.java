@@ -26,20 +26,6 @@ import java.util.*;
 
 public class ApplicationContextProvider implements ApplicationContext
 {
-    /**
-     * Context singleton.
-     */
-    private static ApplicationContextProvider instance;
-
-    /**
-     * Application properties.
-     */
-    private final Properties properties;
-
-    /**
-     * Current game instance.
-     */
-    private Game game;
 
     /**
      * Private singleton constructor.
@@ -57,6 +43,22 @@ public class ApplicationContextProvider implements ApplicationContext
         }
     }
 
+
+
+    //
+    //  GETTERS
+    //
+
+    /**
+     * Game getter
+     * @return Game current game
+     */
+    @Override
+    public Game getGame()
+    {
+        return this.game;
+    }
+
     /**
      * Singleton getter.
      * @return Singleton instance.
@@ -67,6 +69,34 @@ public class ApplicationContextProvider implements ApplicationContext
         return instance;
     }
 
+    /**
+     * Properties getter
+     * @return Properties of the game
+     */
+    @Override
+    public Properties getProperties() {
+        return this.properties;
+    }
+
+    /**
+     * Stage getter
+     * @return Stage current stage
+     */
+    public Stage getStage() {
+        return this.stage;
+    }
+
+
+
+    //
+    //  LOADER
+    //
+
+    /**
+     * Load a game from a json
+     * @param json Game to load
+     * @param stage Stage to use
+     */
     @Override
     public void load(String json, Stage stage)
     {
@@ -149,40 +179,33 @@ public class ApplicationContextProvider implements ApplicationContext
         g.addEdge(room, leftRoom, leftLink);
         g.addEdge(room, rightRoom, rightLink);
 
-        for (StoryNode myroom : g.vertexSet())
-        {
-            if(myroom instanceof Room)
-                System.out.println(((Room)myroom).getName());
-        }
 
 
         game.setCurrentNode(room);
         this.save();
-        this.loadSavedGame();
+//        this.loadSavedGame();
     }
 
-
+    /**
+     * Load a game object
+     * @param game Game to load
+     * @param stage Stage to use
+     */
     @Override
     public void load(Game game, Stage stage)
     {
         this.game = game;
     }
 
-    @Override
-    public Game getGame()
-    {
-        return this.game;
-    }
 
-    @Override
-    public Properties getProperties() {
-        return this.properties;
-    }
 
-    public Stage getStage() {
-        return this.stage;
-    }
+    //
+    //  SERIALIZER and DESERIALIZER
+    //
 
+    /**
+     * Serializer
+     */
     public void save()
     {
         ObjectMapper mapper = new ObjectMapper();
@@ -193,7 +216,6 @@ public class ApplicationContextProvider implements ApplicationContext
         //  Set custom serializers
         SimpleModule module = new SimpleModule();
         module.addSerializer(Graph.class, new GraphSerializer());
-        module.addSerializer(Stage.class, new StageSerializer());
         mapper.registerModule(module);
         try {
             json.append(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(this.game));
@@ -204,6 +226,9 @@ public class ApplicationContextProvider implements ApplicationContext
         System.out.println(json.toString());
     }
 
+    /**
+     * Deserializer
+     */
     public void loadSavedGame()
     {
 
@@ -223,11 +248,33 @@ public class ApplicationContextProvider implements ApplicationContext
         {
             e.printStackTrace();
         }
-
-
     }
 
+
+
+    //
+    //  VARIABLES
+    //
+
+    /**
+     * Context singleton.
+     */
+    private static ApplicationContextProvider instance;
+    /**
+     * Application properties.
+     */
+    private final Properties properties;
+    /**
+     * Current game instance.
+     */
+    private Game game;
+    /**
+     * Final json
+     */
     private StringBuilder json = new StringBuilder();
+    /**
+     * Game current stage (passed from ApplicationContextProvider)
+     */
     private Stage stage;
 
 }

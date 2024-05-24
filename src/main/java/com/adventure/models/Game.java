@@ -6,7 +6,7 @@ import com.adventure.nodes.StoryNode;
 import com.adventure.nodes.StoryNodeLink;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
@@ -17,46 +17,65 @@ import org.jgrapht.graph.DefaultDirectedGraph;
 import java.util.Objects;
 import java.util.Properties;
 
+
 public class Game
 {
-    /**
-     * This represents a decision graph that is incrementally loaded as the application flow proceeds.
-     */
-    private Graph<StoryNode, StoryNodeLink> gameGraph;
+
+    //
+    //  CONSTRUCTOR
+    //
 
     /**
-     * Currently active node.
+     * Default constructor
+     * @param properties Properties to use for this game
      */
-    private StoryNode currentNode;
-
-    /**
-     * Previous node, is null if there is no previous node.
-     */
-    private StoryNode previousNode;
-
-    /**
-     * Fxml stage.
-     */
-    private Stage stage;
-
-    private Properties properties;
-
     public Game(@JsonProperty("properties") Properties properties)
     {
         this.properties = properties;
         this.gameGraph = new DefaultDirectedGraph<>(StoryNodeLink.class);
     }
 
-    public Graph<StoryNode, StoryNodeLink> getGameGraph()
-    {
-        return this.gameGraph;
-    }
 
-    public StoryNode getCurrentNode()
-    {
-        return this.currentNode;
-    }
 
+    //
+    //  GETTERS
+    //
+
+    /**
+     * Graph getter
+     * @return Graph used in the game
+     */
+    public Graph<StoryNode, StoryNodeLink> getGameGraph() { return this.gameGraph; }
+
+    /**
+     * Current node getter
+     * @return StoryNode current node in the game
+     */
+    public StoryNode getCurrentNode() { return this.currentNode; }
+
+    /**
+     * Stage getter
+     * @return Stage current stage in the game
+     */
+    @JsonIgnore
+    public Stage getStage() { return this.stage; }
+
+    /**
+     * Previous node getter
+     * @return StoryNode previous node
+     */
+    public StoryNode getPreviousNode() { return this.previousNode; }
+
+
+
+    //
+    //  SETTERS
+    //
+
+    /**
+     * Current node setter
+     * @param currentNode the current node to set
+     */
     public void setCurrentNode(StoryNode currentNode)
     {
         this.previousNode = this.currentNode;
@@ -103,29 +122,60 @@ public class Game
 
     }
 
-    public void setStage(Stage stage)
-    {
-        this.stage = stage;
-    }
+    /**
+     * Stage setter
+     * @param stage Stage to be set
+     */
+    public void setStage(Stage stage) { this.stage = stage; }
 
+
+
+    //
+    //  OTHERS
+    //
+
+    /**
+     * Check it there's a valid previous node
+     * @return True if previousNode != null, False otherwise
+     */
+    public boolean hasPreviousNode() { return this.previousNode != null; }
+
+    /**
+     * Set previousNode to "null"
+     */
+    public void invalidatePreviousNode() { this.previousNode = null; }
+
+
+
+    //
+    //  VARIABLES
+    //
+
+    /**
+     * A decision graph that is incrementally loaded as the application flow proceeds.
+     */
+    private Graph<StoryNode, StoryNodeLink> gameGraph;
+
+    /**
+     * Currently active node.
+     */
+    private StoryNode currentNode;
+
+    /**
+     * Previous node, null if there is no previous node.
+     */
+    private StoryNode previousNode;
+
+    /**
+     * Properties of the game
+     */
     @JsonIgnore
-    public Stage getStage()
-    {
-        return this.stage;
-    }
+    private Properties properties;
 
-    public boolean hasPreviousNode()
-    {
-        return this.previousNode != null;
-    }
+    /**
+     * Fxml stage.
+     */
+    private Stage stage;
 
-    public void invalidatePreviousNode()
-    {
-        this.previousNode = null;
-    }
 
-    public StoryNode getPreviousNode()
-    {
-        return this.previousNode;
-    }
 }

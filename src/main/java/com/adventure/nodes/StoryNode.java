@@ -1,6 +1,5 @@
 package com.adventure.nodes;
 
-import com.adventure.interfaces.ApplicationContext;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
@@ -10,15 +9,42 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 })
 public abstract class StoryNode
 {
+    //
+    //  GETTERS
+    //
+
+    /**
+     * Get the ID of the object
+     * @return String ID of the object
+     */
+    public String getID() { return ""+System.identityHashCode(this); }
+
+    /**
+     * Get the current view
+     * @return String current view
+     */
+    public String getTargetView() { return this.targetView; }
+
+
+
+    //
+    //  SETTERS
+    //
+
+    /**
+     * Set the current view
+     * @param targetView current view
+     */
+    public void setTargetView(String targetView) { this.targetView = targetView; }
+
+
+
+    //
+    //  VARIABLES
+    //
+
+    /**
+     * Represents the view to be used
+     */
     private String targetView;
-
-    public void setTargetView(String targetView)
-    {
-        this.targetView = targetView;
-    }
-
-    public String getTargetView() {
-        return this.targetView;
-    }
-
 }
