@@ -50,9 +50,7 @@ public abstract class StoryNode
      */
     public void setTargetView(String targetView) { this.targetView = targetView; }
 
-    public void setTargetView(String targetView) { this.targetView = targetView; }
 
-    public String getTargetView() { return this.targetView; }
 
     //
     //  VARIABLES
