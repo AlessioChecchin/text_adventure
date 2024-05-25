@@ -83,6 +83,7 @@ class GameTest {
         Room room3 = new Room("Test","Test");
         Room room4 = new Room("Test","Test");
 
+        //test room equals
         assertEquals(room3, room4, "Rooms not matching");
 
         game.getGameGraph().addVertex(room3);
@@ -94,8 +95,6 @@ class GameTest {
         StoryNodeLink link2 = new StoryNodeLink();
         link2.setAction(new Action("Ciao"));
 
-        //assertEquals(link1, link2, "Links not matching");
-
         testGraph.addEdge(room1, room2, link1);
         game.getGameGraph().addEdge(room3, room4, link2);
 
@@ -105,11 +104,14 @@ class GameTest {
         Set<Room> b = new HashSet<>();
         b.add(room2);
 
-        assertEquals(testGraph.vertexSet(), game.getGameGraph().vertexSet(), "negro");
+        //test hashcode room
+        assertEquals(testGraph.vertexSet(), game.getGameGraph().vertexSet(), "problems with equals or hash code for rooms");
 
-        //assertEquals(link1, link2, "Links not matching");
-        //test
-        //assertEquals(testGraph, game.getGameGraph(), "Problems with equals method");
+        //test hashcode and equals for edges
+        assertEquals(link1, link2, "Links not matching");
+
+        //test equals for Graphs
+        assertEquals(testGraph, game.getGameGraph(), "Problems with equals method");
     }
 
 
