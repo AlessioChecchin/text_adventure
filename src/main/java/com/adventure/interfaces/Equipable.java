@@ -25,4 +25,5 @@ public interface Equipable
      * @param multiplier additional attack or defence multiplier
      */
     void setMultiplier(double multiplier);
+
 }

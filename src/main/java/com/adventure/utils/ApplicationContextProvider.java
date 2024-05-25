@@ -10,6 +10,13 @@ import com.adventure.nodes.Action;
 import com.adventure.nodes.Room;
 import com.adventure.nodes.StoryNodeLink;
 import com.adventure.nodes.StoryNode;
+import com.adventure.serializers.*;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.DeserializationConfig;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectReader;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import javafx.stage.Stage;
 import org.jgrapht.Graph;
 
@@ -19,20 +26,6 @@ import java.util.*;
 
 public class ApplicationContextProvider implements ApplicationContext
 {
-    /**
-     * Context singleton.
-     */
-    private static ApplicationContextProvider instance;
-
-    /**
-     * Application properties.
-     */
-    private final Properties properties;
-
-    /**
-     * Current game instance.
-     */
-    private Game game;
 
     /**
      * Private singleton constructor.
@@ -50,6 +43,22 @@ public class ApplicationContextProvider implements ApplicationContext
         }
     }
 
+
+
+    //
+    //  GETTERS
+    //
+
+    /**
+     * Game getter
+     * @return Game current game
+     */
+    @Override
+    public Game getGame()
+    {
+        return this.game;
+    }
+
     /**
      * Singleton getter.
      * @return Singleton instance.
@@ -60,9 +69,39 @@ public class ApplicationContextProvider implements ApplicationContext
         return instance;
     }
 
+    /**
+     * Properties getter
+     * @return Properties of the game
+     */
+    @Override
+    public Properties getProperties() {
+        return this.properties;
+    }
+
+    /**
+     * Stage getter
+     * @return Stage current stage
+     */
+    public Stage getStage() {
+        return this.stage;
+    }
+
+
+
+    //
+    //  LOADER
+    //
+
+    /**
+     * Load a game from a json
+     * @param json Game to load
+     * @param stage Stage to use
+     */
     @Override
     public void load(String json, Stage stage)
     {
+
+        this.stage = stage;
         /*
         TODO: Implement graph serialization.
 
@@ -137,24 +176,102 @@ public class ApplicationContextProvider implements ApplicationContext
         g.addEdge(room, leftRoom, leftLink);
         g.addEdge(room, rightRoom, rightLink);
 
+
+
         game.setCurrentNode(room);
+        this.save();
+//        this.loadSavedGame();
     }
 
-
+    /**
+     * Load a game object
+     * @param game Game to load
+     * @param stage Stage to use
+     */
     @Override
     public void load(Game game, Stage stage)
     {
         this.game = game;
     }
 
-    @Override
-    public Game getGame()
+
+
+    //
+    //  SERIALIZER and DESERIALIZER
+    //
+
+    /**
+     * Serializer
+     */
+    public void save()
     {
-        return this.game;
+        ObjectMapper mapper = new ObjectMapper();
+
+        //   Make all member fields serializable without further annotations, instead of just public fields (default setting)
+        mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+
+        //  Set custom serializers
+        SimpleModule module = new SimpleModule();
+        module.addSerializer(Graph.class, new GraphSerializer());
+        mapper.registerModule(module);
+        try {
+            json.append(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(this.game));
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        System.out.println(json.toString());
     }
 
-    @Override
-    public Properties getProperties() {
-        return this.properties;
+    /**
+     * Deserializer
+     */
+    public void loadSavedGame()
+    {
+
+        String test = "HELLO";
+        ObjectMapper mapper = new ObjectMapper();
+
+        mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(Graph.class, new GraphDeserializer());
+        module.addDeserializer(Game.class, new GameDeserializer());
+        mapper.registerModule(module);
+
+        try
+        {
+            Game newGame = mapper.readValue(json.toString(), Game.class);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
+
+
+
+    //
+    //  VARIABLES
+    //
+
+    /**
+     * Context singleton.
+     */
+    private static ApplicationContextProvider instance;
+    /**
+     * Application properties.
+     */
+    private final Properties properties;
+    /**
+     * Current game instance.
+     */
+    private Game game;
+    /**
+     * Final json
+     */
+    private StringBuilder json = new StringBuilder();
+    /**
+     * Game current stage (passed from ApplicationContextProvider)
+     */
+    private Stage stage;
+
 }

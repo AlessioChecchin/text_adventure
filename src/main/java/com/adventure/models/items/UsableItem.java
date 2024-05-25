@@ -1,6 +1,7 @@
 package com.adventure.models.items;
 
 import com.adventure.interfaces.Usable;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UsableItem extends Item implements Usable
 {
@@ -12,7 +13,7 @@ public class UsableItem extends Item implements Usable
      *     <li>hp: 0</li>
      * @param name Name of the item
      */
-    public UsableItem(String name)
+    public UsableItem(@JsonProperty("name") String name)
     {
         super(name);
         this.atk = 0;
@@ -24,17 +25,38 @@ public class UsableItem extends Item implements Usable
     //  SETTERS
     //
 
+    @JsonProperty("atk")
     public void setAdditionalAttack(int atk) { this.atk = atk; }
+    @JsonProperty("def")
     public void setAdditionalDefence(int def) { this.def = def; }
+    @JsonProperty("hp")
     public void setAdditionalHp(int hp) { this.hp = hp; }
 
     //
     //  GETTERS
     //
 
+    @JsonProperty("atk")
     public int getAttack() { return  this.atk; }
+    @JsonProperty("def")
     public int getDefence() { return this.def; }
+    @JsonProperty("hp")
     public int getHp() { return this.hp; }
+
+    //
+    //  OTHER
+    //
+
+    @Override
+    public String toString()
+    {
+        StringBuilder result = new StringBuilder();
+        result.append("name \t").append(name).append("\n");
+        result.append("atk  \t").append(atk).append("\n");
+        result.append("def  \t").append(def).append("\n");
+        result.append("hp   \t").append(hp).append("\n");
+        return result.toString();
+    }
 
     @Override
     public boolean equals(Object obj){
