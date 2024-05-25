@@ -1,6 +1,7 @@
 package com.adventure.models.items;
 
 import com.adventure.interfaces.Equipable;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class DefenceItem extends Item implements Equipable
 {
@@ -13,7 +14,7 @@ public class DefenceItem extends Item implements Equipable
      * </ul>
      * @param name Name of the item
      */
-    public DefenceItem(String name)
+    public DefenceItem(@JsonProperty("name") String name)
     {
         super(name);
         this.additionalDefence = 0;
@@ -31,20 +32,35 @@ public class DefenceItem extends Item implements Equipable
     //  GETTERS
     //
 
+    @JsonProperty("additionalDefence")
     public int getAdder() { return this.additionalDefence; }
+    @JsonProperty("defenceMultiplier")
     public double getMultiplier() { return this.defenceMultiplier; }
 
+
+
+    //
+    //  OTHER
+    //
+
     @Override
-    public boolean equals(Object obj){
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || this.getClass() != obj.getClass()) {
-            return false;
-        }
+    public boolean equals(Object obj)
+    {
+        if (this == obj) { return true; }
+        if (obj == null || this.getClass() != obj.getClass()) { return false; }
 
         DefenceItem def = (DefenceItem) obj;
         return ((additionalDefence == def.getAdder()) && (defenceMultiplier == def.getMultiplier() && (super.equals(def))));
+    }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder result = new StringBuilder();
+        result.append("name \t").append(name).append("\n");
+        result.append("adder\t").append(additionalDefence).append("\n");
+        result.append("multi\t").append(defenceMultiplier).append("\n");
+        return result.toString();
     }
 
 
