@@ -59,4 +59,13 @@ public class StringPropertyWriter extends StringWriter
     public void flush() {
         Platform.runLater(() -> prop.set(this.toString()));
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj) { return true; }
+        if (obj == null || this.getClass() != obj.getClass()) { return false; }
+
+        StringPropertyWriter str = (StringPropertyWriter) obj;
+        return(str.toString().equals(this.toString()));
+    }
 }

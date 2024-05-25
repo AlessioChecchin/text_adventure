@@ -111,14 +111,8 @@ public class Room extends StoryNode
     }
 
     @Override
-    public int hashCode()
-    {
-        int hash = 17;
-        hash = hash * 31 + name.hashCode();
-        hash = hash * 31 + description.hashCode();
-        hash = hash * 31 + items.hashCode();
-
-        return hash;
+    public int hashCode() {
+        return Objects.hash(name, description, items);
     }
 
     /**

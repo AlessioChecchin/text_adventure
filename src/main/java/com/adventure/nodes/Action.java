@@ -3,6 +3,8 @@ package com.adventure.nodes;
 import com.adventure.serializers.ActionSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import java.util.Objects;
+
 @JsonSerialize(using = ActionSerializer.class)
 public class Action
 {
@@ -49,12 +51,10 @@ public class Action
 
     @Override
     public int hashCode() {
-        return this.actionName.hashCode();
+        return Objects.hash(actionName);
     }
 
-
-
-    //
+//
     //  VARIABLES
     //
 
