@@ -1,4 +1,4 @@
-package com.adventure.nodes;
+package com.adventure.models.nodes;
 
 import com.adventure.serializers.ActionSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

@@ -8,3 +8,41 @@
 
 In project resources copy "copy_application.conf" in "application.conf" and then populate AWS keys, secret and region.
 "copy_application.conf" is just a template.
+
+
+# S3 configuration
+
+## Create Policy with minimal privileges
+
+<pre>
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ListObjectsInBucket",
+            "Effect": "Allow",
+            "Action": ["s3:ListBucket"],
+            "Resource": ["arn:aws:s3:::edidstextgame"]
+        },
+        {
+            "Sid": "AllObjectActions",
+            "Effect": "Allow",
+            "Action": "s3:*Object",
+            "Resource": ["arn:aws:s3:::edidstextgame/*"]
+        }
+    ]
+}
+</pre>
+
+## Create group
+
+Create a group and assign the created policy to the group
+
+## Create a user
+
+Create a user and assign the user to the group
+The user will inherit group permissions.
+
+## Generate credentials
+
+Generate credentials and copy secret id and value in application.conf

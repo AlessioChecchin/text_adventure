@@ -1,4 +1,4 @@
-package com.adventure.nodes;
+package com.adventure.models.nodes;
 
 import com.adventure.models.items.Item;
 import com.fasterxml.jackson.annotation.JsonCreator;

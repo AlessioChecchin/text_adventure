@@ -1,6 +1,6 @@
 package com.adventure.models;
 
-import com.adventure.interfaces.Equipable;
+import com.adventure.models.items.Equipable;
 import com.adventure.models.items.*;
 import com.adventure.exceptions.TooMuchWeightException;
 import java.util.ArrayList;

@@ -2,16 +2,13 @@ package com.adventure.controllers;
 
 import com.adventure.Resources;
 import com.adventure.components.Display;
-import com.adventure.utils.CommandParser;
+import com.adventure.commands.CommandParser;
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
-import java.util.Enumeration;
 
 public class GameLoaderController implements BaseController
 {
@@ -35,6 +32,11 @@ public class GameLoaderController implements BaseController
         parser.enable("loadGame");
         parser.enable("help");
         parser.enable("clear");
+
+        Label instructions = new Label();
+        instructions.setText("Type help to view possible actions");
+
+        //this.display.getGraphics().getChildren()
     }
 
     @Override

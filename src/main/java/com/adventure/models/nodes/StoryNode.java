@@ -1,4 +1,4 @@
-package com.adventure.nodes;
+package com.adventure.models.nodes;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

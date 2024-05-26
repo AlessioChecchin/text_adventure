@@ -1,7 +1,5 @@
 package com.adventure.models.items;
 
-import com.adventure.interfaces.Equipable;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AttackItem extends Item implements Equipable

@@ -1,7 +1,8 @@
 package com.adventure.commands;
 
 import com.adventure.models.Game;
-import com.adventure.storage.StorageService;
+import com.adventure.services.StorageService;
+import com.adventure.utils.ApplicationContextProvider;
 
 public class CmdSaveGame extends AbstractCommand
 {
@@ -9,7 +10,7 @@ public class CmdSaveGame extends AbstractCommand
     public void execute() throws InterruptedException
     {
         Game currentGame = this.context.getGame();
-        StorageService storageService = this.context.getStorageService();
+
 
         if(currentGame.getId() == null)
         {
@@ -19,6 +20,8 @@ public class CmdSaveGame extends AbstractCommand
 
             currentGame.setId(id);
         }
+
+        StorageService storageService = this.context.getStorageService();
 
         try
         {

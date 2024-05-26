@@ -1,11 +1,8 @@
-package com.adventure.interfaces;
+package com.adventure.utils;
 
 import com.adventure.models.Game;
-import com.adventure.nodes.StoryNode;
-import com.adventure.storage.StorageService;
-import javafx.stage.Stage;
+import com.adventure.services.StorageService;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
 public interface ApplicationContext

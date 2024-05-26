@@ -1,14 +1,23 @@
-package com.adventure.storage;
+package com.adventure.services;
 
 
+import com.adventure.exceptions.GameStorageException;
 import com.adventure.models.Game;
 import com.adventure.models.items.AttackItem;
 import com.adventure.models.items.Item;
 import com.adventure.models.items.UsableItem;
-import com.adventure.nodes.Action;
-import com.adventure.nodes.Room;
-import com.adventure.nodes.StoryNode;
-import com.adventure.nodes.StoryNodeLink;
+import com.adventure.models.nodes.Action;
+import com.adventure.models.nodes.Room;
+import com.adventure.models.nodes.StoryNode;
+import com.adventure.models.nodes.StoryNodeLink;
+import com.adventure.serializers.GameDeserializer;
+import com.adventure.serializers.GraphDeserializer;
+import com.adventure.serializers.GraphSerializer;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.jgrapht.Graph;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
@@ -24,15 +33,9 @@ import java.util.Properties;
 public class BucketStorageService implements StorageService
 {
     /**
-     * Application properties.
+     * Constructor
+     * @param properties Application properties.
      */
-    private final Properties properties;
-
-    /**
-     * Client instance.
-     */
-    private final S3Client s3;
-
     public BucketStorageService(Properties properties)
     {
         this.properties = properties;
@@ -77,17 +80,53 @@ public class BucketStorageService implements StorageService
     }
 
     @Override
-    public void saveGame(Game game) {
+    public void saveGame(Game game) throws GameStorageException
+    {
+        ObjectMapper mapper = new ObjectMapper();
 
+        // Make all member fields serializable without further annotations, instead of just public fields (default setting)
+        mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+
+        // Set custom serializers
+        SimpleModule module = new SimpleModule();
+        module.addSerializer(Graph.class, new GraphSerializer());
+        mapper.registerModule(module);
+
+        try
+        {
+            String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(game);
+            System.out.println(json);
+        }
+        catch (JsonProcessingException e)
+        {
+            throw new GameStorageException(e.getMessage());
+        }
     }
 
     @Override
-    public Game loadGame(String gameId) {
-        return null;
+    public Game loadGame(String gameId) throws GameStorageException
+    {
+        String json = "<load from bucket>";
+        ObjectMapper mapper = new ObjectMapper();
+
+        mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(Graph.class, new GraphDeserializer());
+        module.addDeserializer(Game.class, new GameDeserializer());
+        mapper.registerModule(module);
+
+        try
+        {
+            return mapper.readValue(json, Game.class);
+        } catch (JsonProcessingException e)
+        {
+            throw new GameStorageException(e.getMessage());
+        }
     }
 
     @Override
-    public void deleteGame(String gameId) {
+    public void deleteGame(String gameId)
+    {
 
     }
 
@@ -95,8 +134,7 @@ public class BucketStorageService implements StorageService
     public Game newGame()
     {
         Game game = new Game(this.properties);
-
-        // First room
+        
         Room room = new Room("First room", "First room description");
         room.setBackgroundPath("assets/castle.png");
         AttackItem sword = new AttackItem("Sword");
@@ -151,4 +189,14 @@ public class BucketStorageService implements StorageService
 
         return game;
     }
+
+    /**
+     * Application properties.
+     */
+    private final Properties properties;
+
+    /**
+     * Client instance.
+     */
+    private final S3Client s3;
 }

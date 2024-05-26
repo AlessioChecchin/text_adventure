@@ -2,8 +2,8 @@ package com.adventure.models;
 
 import com.adventure.Main;
 import com.adventure.controllers.BaseController;
-import com.adventure.nodes.StoryNode;
-import com.adventure.nodes.StoryNodeLink;
+import com.adventure.models.nodes.StoryNode;
+import com.adventure.models.nodes.StoryNodeLink;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

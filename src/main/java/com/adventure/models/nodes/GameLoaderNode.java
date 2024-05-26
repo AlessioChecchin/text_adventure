@@ -1,4 +1,4 @@
-package com.adventure.nodes;
+package com.adventure.models.nodes;
 
 public class GameLoaderNode extends StoryNode
 {

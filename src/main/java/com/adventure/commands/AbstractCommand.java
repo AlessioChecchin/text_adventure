@@ -1,9 +1,8 @@
 package com.adventure.commands;
 
-import com.adventure.interfaces.ApplicationContext;
+import com.adventure.utils.ApplicationContext;
 
 import java.io.InputStream;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.ArrayList;

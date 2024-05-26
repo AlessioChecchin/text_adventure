@@ -2,15 +2,12 @@ package com.adventure;
 
 import com.adventure.commands.*;
 import com.adventure.models.Game;
-import com.adventure.nodes.GameLoaderNode;
-import com.adventure.storage.BucketStorageService;
-import com.adventure.storage.StorageService;
+import com.adventure.models.nodes.GameLoaderNode;
 import com.adventure.utils.ApplicationContextProvider;
-import com.adventure.interfaces.ApplicationContext;
-import com.adventure.utils.CommandParser;
+import com.adventure.utils.ApplicationContext;
+import com.adventure.commands.CommandParser;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import software.amazon.awssdk.services.ec2.model.Storage;
 
 public class Main extends Application
 {

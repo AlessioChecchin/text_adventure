@@ -1,7 +1,6 @@
 package com.adventure.models.items;
 
 
-import com.adventure.nodes.Room;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 

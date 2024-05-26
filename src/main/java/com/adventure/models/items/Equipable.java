@@ -1,4 +1,4 @@
-package com.adventure.interfaces;
+package com.adventure.models.items;
 
 public interface Equipable
 {

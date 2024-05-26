@@ -2,7 +2,7 @@ package com.adventure.components;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import com.adventure.utils.CommandParser;
+import com.adventure.commands.CommandParser;
 import com.adventure.utils.StringPropertyWriter;
 import com.adventure.commands.Command;
 import com.adventure.controllers.BaseController;

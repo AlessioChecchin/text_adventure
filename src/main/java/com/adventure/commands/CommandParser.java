@@ -1,7 +1,6 @@
-package com.adventure.utils;
+package com.adventure.commands;
 
-import com.adventure.interfaces.ApplicationContext;
-import com.adventure.commands.Command;
+import com.adventure.utils.ApplicationContext;
 
 import java.util.*;
 
