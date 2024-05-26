@@ -11,6 +11,7 @@ public class Room extends StoryNode
     private String name;
     private String description;
     private List<Item> items;
+    private String backgroundPath;
 
     public Room(String name, String description)
     {
@@ -18,6 +19,7 @@ public class Room extends StoryNode
         this.name = name;
         this.description = description;
         this.items = new ArrayList<Item>();
+        this.backgroundPath = "";
     }
 
     public String getName() {
@@ -58,6 +60,17 @@ public class Room extends StoryNode
 
         Room room1 = (Room) room;
         return (room1.getName().equals(this.name) && (room1.getDescription().equals(this.description))) /*&& (room1.getItems().equals(this.items)))*/;
+    }
+
+    public void setBackgroundPath(String backgroundPath)
+    {
+        Objects.requireNonNull(backgroundPath, "backgroundPath cannot be null");
+        this.backgroundPath = backgroundPath;
+    }
+
+    public String getBackgroundPath()
+    {
+        return this.backgroundPath;
     }
 
     @Override

@@ -1,7 +1,5 @@
 .graphics
 {
-    -fx-background-image: url('../assets/castle.png');
-    -fx-background-size: cover;
     -fx-font-family: 'ubuntu';
 }
 
@@ -35,7 +33,7 @@
 .console-output
 {
     -fx-font-family: 'ubuntu';
-    -fx-background-color: orange;
+    -fx-text-fill: white;
     -fx-font-size: 16;
 }
 

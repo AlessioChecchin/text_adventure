@@ -27,7 +27,7 @@
     <VBox GridPane.columnIndex="0" GridPane.rowIndex="1">
         <VBox styleClass="separator"></VBox>
         <ScrollPane styleClass="console-output-wrapper">
-            <Label fx:id="consoleOutput" text="dadawda" styleClass="console-output"/>
+            <Label fx:id="consoleOutput" text="" styleClass="console-output"/>
         </ScrollPane>
     </VBox>
 

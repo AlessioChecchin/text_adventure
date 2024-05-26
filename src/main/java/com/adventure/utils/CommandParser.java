@@ -3,10 +3,7 @@ package com.adventure.utils;
 import com.adventure.interfaces.ApplicationContext;
 import com.adventure.commands.Command;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class CommandParser
 {
@@ -14,11 +11,14 @@ public class CommandParser
 
     private ApplicationContext context;
 
-    private HashMap<String, Class<? extends Command>> lookupTable;
+    private final HashMap<String, CommandMetadata> lookupTable;
+
+    private Set<String> enabledCommands;
 
     private CommandParser()
     {
         this.lookupTable = new HashMap<>();
+        this.enabledCommands = new HashSet<>();
     }
 
     /**
@@ -40,7 +40,8 @@ public class CommandParser
      * @param command Command to parse.
      * @return The instance of the correct command, null otherwise.
      */
-    public Command parseCommand(String command) {
+    public Command parseCommand(String command)
+    {
         // Scanner for input string.
         Scanner scanner = new Scanner(command);
 
@@ -60,12 +61,14 @@ public class CommandParser
         String key = tokens.get(0);
 
         // Searching class in the lookup table.
-        Class<? extends Command> commandClass = lookupTable.get(key);
+        CommandMetadata commandMetadata = lookupTable.get(key);
 
-        if(commandClass == null)
+        if(commandMetadata == null || !this.enabledCommands.contains(key))
         {
             return null;
         }
+
+        Class<? extends Command> commandClass = commandMetadata.getCommandClass();
 
         try
         {
@@ -93,7 +96,19 @@ public class CommandParser
      */
     public void registerCommand(String key, Class<? extends Command> commandClass)
     {
-        this.lookupTable.put(key, commandClass);
+        this.lookupTable.put(key, new CommandMetadata(commandClass));
+    }
+
+    /**
+     * Registers a new command.
+     * @param key Command name. If a command with the same name is already registered, then is replaced.
+     * @param commandClass Command class used to instantiate the concrete object.
+     * @param description Command description.
+     */
+    public void registerCommand(String key, Class<? extends Command> commandClass, String description)
+    {
+        Objects.requireNonNull(description, "Description cannot be null");
+        this.lookupTable.put(key, new CommandMetadata(commandClass, description));
     }
 
     /**
@@ -103,7 +118,9 @@ public class CommandParser
      */
     public Class<? extends Command> unregisterCommand(String key)
     {
-        return this.lookupTable.remove(key);
+        CommandMetadata metadata = this.lookupTable.remove(key);
+        if(metadata == null) return null;
+        return metadata.getCommandClass();
     }
 
     /**
@@ -116,11 +133,110 @@ public class CommandParser
     }
 
     /**
+     * Enables all commands.
+     */
+    public void enableAll()
+    {
+        this.enabledCommands = new HashSet<>(this.lookupTable.keySet());
+    }
+
+    /**
+     * Disables all commands.
+     */
+    public void disableAll()
+    {
+        this.enabledCommands.clear();
+    }
+
+    /**
+     * Enables command.
+     * @param key Command to enable.
+     */
+    public void enable(String key)
+    {
+        if(this.lookupTable.containsKey(key))
+        {
+            this.enabledCommands.add(key);
+        }
+    }
+
+    /**
+     * Disable command.
+     * @param key Command to disable.
+     */
+    public void disable(String key)
+    {
+        this.enabledCommands.remove(key);
+    }
+
+    /**
      * Obtains current context.
      * @return Current context.
      */
     public ApplicationContext getContext()
     {
         return this.context;
+    }
+
+    /**
+     * Returns available commands.
+     * @return Command keys list.
+     */
+    public List<String> getCommands()
+    {
+        List<String> commands = new ArrayList<>();
+
+        for(String key: this.lookupTable.keySet())
+        {
+            if(this.enabledCommands.contains(key))
+            {
+                commands.add(key);
+            }
+        }
+
+        return commands;
+    }
+
+    /**
+     * Returns command description.
+     * @param key Command name.
+     * @return Command description.
+     */
+    public String getCommandDescription(String key)
+    {
+        CommandMetadata metadata = this.lookupTable.get(key);
+        if(metadata == null || !this.enabledCommands.contains(key)) return null;
+        return metadata.getDescription();
+    }
+
+    /**
+     * Contains command information.
+     */
+    protected static class CommandMetadata
+    {
+        private final Class<? extends Command> commandClass;
+        private final String description;
+
+        public CommandMetadata(Class<? extends Command> commandClass, String description)
+        {
+            this.commandClass = commandClass;
+            this.description = description;
+        }
+
+        public CommandMetadata(Class<? extends Command> commandClass)
+        {
+            this.commandClass = commandClass;
+            this.description = "";
+        }
+
+        public Class<? extends Command> getCommandClass()
+        {
+            return this.commandClass;
+        }
+
+        public String getDescription()
+        {
+            return this.description;
+        }
     }
 }

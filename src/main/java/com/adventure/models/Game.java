@@ -42,12 +42,21 @@ public class Game
      */
     private Properties properties;
 
+    /**
+     * Game identifier.
+     */
+    private String id;
 
     public Game(Properties properties, Stage stage)
     {
         this.properties = properties;
         this.gameGraph = new DirectedPseudograph<>(StoryNodeLink.class);
         this.stage = stage;
+    }
+
+    public Game(Properties properties)
+    {
+        this(properties, null);
     }
 
     public Graph<StoryNode, StoryNodeLink> getGameGraph()
@@ -62,9 +71,13 @@ public class Game
 
     public void setCurrentNode(StoryNode currentNode)
     {
+        Objects.requireNonNull(currentNode);
         this.previousNode = this.currentNode;
         this.currentNode = currentNode;
+    }
 
+    public void load()
+    {
         try {
             // Loads view.
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(currentNode.getTargetView()));
@@ -99,8 +112,8 @@ public class Game
         {
             e.printStackTrace();
         }
-
     }
+
 
     public void setStage(Stage stage)
     {
@@ -125,5 +138,15 @@ public class Game
     public StoryNode getPreviousNode()
     {
         return this.previousNode;
+    }
+
+    public void setId(String id)
+    {
+        this.id = id;
+    }
+
+    public String getId()
+    {
+        return this.id;
     }
 }
