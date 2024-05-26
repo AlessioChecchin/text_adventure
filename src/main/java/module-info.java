@@ -3,6 +3,10 @@ module com.adventure {
     requires javafx.fxml;
     requires org.jgrapht.core;
     requires com.fasterxml.jackson.databind;
+    requires software.amazon.awssdk.auth;
+    requires software.amazon.awssdk.regions;
+    requires software.amazon.awssdk.services.s3;
+    requires software.amazon.awssdk.services.ec2;
 
     // Opening to com.fasterxml.jackson.databind necessary for serialization
     opens com.adventure to javafx.fxml, com.fasterxml.jackson.databind;
@@ -11,6 +15,7 @@ module com.adventure {
     opens com.adventure.nodes to com.fasterxml.jackson.databind;
     exports com.adventure.serializers to com.fasterxml.jackson.databind;
 
+    opens com.adventure to javafx.fxml;
     exports com.adventure;
     exports com.adventure.nodes;
     exports com.adventure.interfaces;
@@ -24,4 +29,6 @@ module com.adventure {
     exports com.adventure.utils;
     opens com.adventure.utils to javafx.fxml;
     exports com.adventure.models.items;
+    exports com.adventure.storage;
+    opens com.adventure.storage to javafx.fxml;
 }

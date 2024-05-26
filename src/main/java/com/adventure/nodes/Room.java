@@ -11,19 +11,19 @@ import java.util.Objects;
 
 public class Room extends StoryNode
 {
-
     /**
-     * Default constructor
+     * Constructor
      * @param name Name of the room
      * @param description Description of the room
      */
     @JsonCreator
-    public Room(@JsonProperty("name") String name,@JsonProperty("description") String description)
+    public Room(@JsonProperty("name")  String name, @JsonProperty("description") String description)
     {
         super("views/room.fxml");
         this.name = name;
         this.description = description;
-        this.items = new ArrayList<Item>();
+        this.items = new ArrayList<>();
+        this.backgroundPath = "";
     }
 
     /**
@@ -32,13 +32,17 @@ public class Room extends StoryNode
      */
     @Override
     @JsonIgnore
-    public String getID() { return "room_"+System.identityHashCode(this); }
+    public String getID()
+    {
+        return "room_" + System.identityHashCode(this);
+    }
 
     /**
      * Name getter
      * @return String name of the room
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -87,6 +91,30 @@ public class Room extends StoryNode
     }
 
     /**
+     * Background path setter.
+     * @param backgroundPath Background path relative to resources.com.adventure.
+     */
+    public void setBackgroundPath(String backgroundPath)
+    {
+        Objects.requireNonNull(backgroundPath, "backgroundPath cannot be null");
+        this.backgroundPath = backgroundPath;
+    }
+
+    /**
+     * Background path getter.
+     * @return Background path relative to resources.com.adventure.
+     */
+    public String getBackgroundPath()
+    {
+        return this.backgroundPath;
+    }
+
+
+    //
+    // OBJECT OVERRIDE
+    //
+
+    /**
      * To string method
      * @return name, description, number of items
      */
@@ -96,10 +124,8 @@ public class Room extends StoryNode
         return name + ", " + description + ", " + items.size();
     }
 
-
     @Override
-    public boolean equals(Object room)
-    {
+    public boolean equals(Object room){
         if (room == this) {
             return true;
         }
@@ -125,13 +151,19 @@ public class Room extends StoryNode
      * Name of the room
      */
     private String name;
+
     /**
      * Description of the room
      */
     private String description;
+
     /**
      * List of items in the room
      */
     private List<Item> items;
 
+    /**
+     * Default background image path relative to resources.com.adventure.
+     */
+    private String backgroundPath;
 }

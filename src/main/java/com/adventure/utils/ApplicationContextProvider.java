@@ -20,6 +20,9 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import javafx.stage.Stage;
 import org.jgrapht.Graph;
 
+import com.adventure.storage.BucketStorageService;
+import com.adventure.storage.StorageService;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
@@ -41,22 +44,8 @@ public class ApplicationContextProvider implements ApplicationContext
         {
             ignored.printStackTrace();
         }
-    }
 
-
-
-    //
-    //  GETTERS
-    //
-
-    /**
-     * Game getter
-     * @return Game current game
-     */
-    @Override
-    public Game getGame()
-    {
-        return this.game;
+        this.storageService = new BucketStorageService(this.properties);
     }
 
     /**
@@ -69,132 +58,27 @@ public class ApplicationContextProvider implements ApplicationContext
         return instance;
     }
 
-    /**
-     * Properties getter
-     * @return Properties of the game
-     */
+    public void setGame(Game game)
+    {
+        Objects.requireNonNull(game, "game cannot be null");
+        this.game = game;
+    }
+
+    @Override
+    public Game getGame()
+    {
+        return this.game;
+    }
+
     @Override
     public Properties getProperties() {
         return this.properties;
     }
 
-    /**
-     * Stage getter
-     * @return Stage current stage
-     */
-    public Stage getStage() {
-        return this.stage;
-    }
-
-
-
-    //
-    //  LOADER
-    //
-
-    /**
-     * Load a game from a json
-     * @param json Game to load
-     * @param stage Stage to use
-     */
-    @Override
-    public void load(String json, Stage stage)
+    public StorageService getStorageService()
     {
-
-        this.stage = stage;
-        /*
-        TODO: Implement graph serialization.
-
-        try
-        {
-            // Mapper object used for deserialization.
-            ObjectMapper mapper = new ObjectMapper();
-
-            // Deserializes json game.
-            this.game = mapper.readValue(json, Game.class);
-        }
-        catch(Exception e)
-        {
-        }*/
-
-        // TODO: We expect whit method to populate the graph.
-        // For now let's ignore this part and load by hand the graph.
-
-        // Window not resizable
-        //stage.setResizable(false);
-
-        this.game = new Game(this.properties, stage);
-        this.game.setStage(stage);
-
-        // First room
-        Room room = new Room("First room", "First room description");
-        AttackItem sword = new AttackItem("Sword");
-        sword.setAdder(3);
-        sword.setMultiplier(1.2);
-        sword.setWeight(4);
-        UsableItem healthPotion = new UsableItem("Potion");
-        healthPotion.setAdditionalHp(10);
-        healthPotion.setWeight(3);
-
-        // First room items.
-        List<Item> items = new ArrayList<>();
-        items.add(sword);
-        items.add(healthPotion);
-        room.setItems(items);
-
-        // Action to reach left room or right room.
-        Action actionLeftRoom = new Action("Left room");
-        Action actionRightRoom = new Action("Right room");
-
-        StoryNodeLink leftLink = new StoryNodeLink();
-        leftLink.setAction(actionLeftRoom);
-
-        StoryNodeLink rightLink = new StoryNodeLink();
-        rightLink.setAction(actionRightRoom);
-
-
-        Room leftRoom = new Room("Left room", "Left room description");
-        UsableItem food = new UsableItem("Food");
-        food.setWeight(3);
-        List<Item> leftItems = new ArrayList<>();
-        leftItems.add(food);
-        leftRoom.setItems(leftItems);
-
-        Room rightRoom = new Room("Right room", "Right room description");
-        AttackItem bow = new AttackItem("Bow");
-        bow.setAdder(3);
-        bow.setMultiplier(1);
-        bow.setWeight(2);
-        List<Item> rightItems = new ArrayList<>();
-        rightItems.add(bow);
-        rightRoom.setItems(rightItems);
-
-        Graph<StoryNode, StoryNodeLink> g = game.getGameGraph();
-        g.addVertex(room);
-        g.addVertex(leftRoom);
-        g.addVertex(rightRoom);
-        g.addEdge(room, leftRoom, leftLink);
-        g.addEdge(room, rightRoom, rightLink);
-
-
-
-        game.setCurrentNode(room);
-        this.save();
-//        this.loadSavedGame();
+        return this.storageService;
     }
-
-    /**
-     * Load a game object
-     * @param game Game to load
-     * @param stage Stage to use
-     */
-    @Override
-    public void load(Game game, Stage stage)
-    {
-        this.game = game;
-    }
-
-
 
     //
     //  SERIALIZER and DESERIALIZER
@@ -249,6 +133,7 @@ public class ApplicationContextProvider implements ApplicationContext
 
 
 
+
     //
     //  VARIABLES
     //
@@ -274,4 +159,8 @@ public class ApplicationContextProvider implements ApplicationContext
      */
     private Stage stage;
 
+    /**
+     * Storage service.
+     */
+    private StorageService storageService;
 }
