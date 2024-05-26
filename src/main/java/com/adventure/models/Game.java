@@ -189,7 +189,7 @@ public class Game
     /**
      * A decision graph that is incrementally loaded as the application flow proceeds.
      */
-    private Graph<StoryNode, StoryNodeLink> gameGraph;
+    private final Graph<StoryNode, StoryNodeLink> gameGraph;
 
     /**
      * Currently active node.
@@ -205,7 +205,7 @@ public class Game
      * Properties of the game
      */
     @JsonIgnore
-    private Properties properties;
+    private final Properties properties;
 
     /**
      * Fxml stage.

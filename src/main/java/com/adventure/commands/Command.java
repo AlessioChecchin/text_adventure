@@ -9,22 +9,16 @@ import java.util.List;
 public interface Command
 {
     /**
-     * Sets command arguments.
-     * @param args Arguments.
-     */
-    void setArgs(List<String> args);
-
-    /**
      * Gets a copy of the argument list.
      * @return A copy of the argument list.
      */
     List<String> getArgs();
 
     /**
-     * Sets command context.
-     * @param context Application context.
+     * Sets command arguments.
+     * @param args Arguments.
      */
-    void setContext(ApplicationContext context);
+    void setArgs(List<String> args);
 
     /**
      * Gets command context.
@@ -33,10 +27,22 @@ public interface Command
     ApplicationContext getContext();
 
     /**
-     * Executes the command.
-     * @throws InterruptedException Thrown if the command is interrupted (eg. when kill is well implemented).
+     * Gets current stdout writer.
+     * @return Stdout writer.
      */
-    void execute() throws InterruptedException;
+    Writer getWriter();
+
+    /**
+     * Returns command stdin.
+     * @return Input stream.
+     */
+    InputStream getInputStream();
+
+    /**
+     * Sets command context.
+     * @param context Application context.
+     */
+    void setContext(ApplicationContext context);
 
     /**
      * Sets stdout writer for command.
@@ -45,22 +51,16 @@ public interface Command
     void setWriter(Writer out);
 
     /**
-     * Gets current stdout writer.
-     * @return Stdout writer.
-     */
-    Writer getWriter();
-
-    /**
      * Sets command stdin.
      * @param inputStream Input stream.
      */
     void setInputStream(InputStream inputStream);
 
     /**
-     * Returns command stdin.
-     * @return Input stream.
+     * Executes the command.
+     * @throws InterruptedException Thrown if the command is interrupted (e.g. when kill is well implemented).
      */
-    InputStream getInputStream();
+    void execute() throws InterruptedException;
 
     /**
      * Requests command termination. This ONLY asks the command to terminate, but

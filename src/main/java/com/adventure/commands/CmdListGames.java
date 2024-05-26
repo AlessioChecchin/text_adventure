@@ -1,6 +1,5 @@
 package com.adventure.commands;
 
-
 public class CmdListGames extends AbstractCommand
 {
     @Override

@@ -17,7 +17,7 @@ public class RoomController implements BaseController
     private Display display;
 
     @FXML
-    public void initialize() throws URISyntaxException {
+    public void initialize() {
 
         ApplicationContext context = ApplicationContextProvider.getInstance();
 

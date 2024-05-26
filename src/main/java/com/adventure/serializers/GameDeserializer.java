@@ -33,9 +33,6 @@ public class GameDeserializer extends StdDeserializer<Game>
         // Create Game with Properties
         Game game = new Game(ApplicationContextProvider.getInstance().getProperties());
 
-        // Set stage
-        game.setStage(ApplicationContextProvider.getInstance().getStage());
-
         // Get game graph
         Graph<StoryNode, StoryNodeLink> gameGraph = game.getGameGraph();
 

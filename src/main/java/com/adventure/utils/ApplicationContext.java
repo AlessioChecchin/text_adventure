@@ -7,8 +7,27 @@ import java.util.Properties;
 
 public interface ApplicationContext
 {
-    public void setGame(Game game);
-    public Game getGame();
-    public Properties getProperties();
-    public StorageService getStorageService();
+    /**
+     * Game setter.
+     * @param game Game.
+     */
+    void setGame(Game game);
+
+    /**
+     * Game getter.
+     * @return Game
+     */
+    Game getGame();
+
+    /**
+     * Application properties getter.
+     * @return Application properties.
+     */
+    Properties getProperties();
+
+    /**
+     * Storage service getter.
+     * @return Storage service.
+     */
+    StorageService getStorageService();
 }

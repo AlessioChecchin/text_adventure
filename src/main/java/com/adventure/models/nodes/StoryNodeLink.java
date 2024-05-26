@@ -23,7 +23,6 @@ public class StoryNodeLink extends DefaultEdge
      */
     public Action getAction() { return this.action; }
 
-
     //
     //  SETTERS
     //
@@ -33,8 +32,6 @@ public class StoryNodeLink extends DefaultEdge
      * @param switchAction new action to link to the edge
      */
     public void setAction(Action switchAction) { this.action = switchAction; }
-
-
 
     //
     //  VARIABLES

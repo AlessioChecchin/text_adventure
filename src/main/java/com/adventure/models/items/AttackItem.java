@@ -25,6 +25,7 @@ public class AttackItem extends Item implements Equipable
     //
 
     public void setAdder(int adder) { this.additionalAttack = adder; }
+
     public void setMultiplier(double multiplier) { this.attackMultiplier = multiplier; }
 
     //
@@ -33,10 +34,9 @@ public class AttackItem extends Item implements Equipable
 
     @JsonProperty("additionalAttack")
     public int getAdder() { return this.additionalAttack; }
+
     @JsonProperty("attackMultiplier")
     public double getMultiplier() { return this.attackMultiplier; }
-
-
 
     //
     //  OTHER

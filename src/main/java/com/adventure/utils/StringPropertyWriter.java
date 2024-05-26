@@ -20,8 +20,8 @@ public class StringPropertyWriter extends StringWriter
         this.out();
     }
 
-    public void write(char[] cbuf, int off, int len) {
-        super.write(cbuf, off, len);
+    public void write(char[] buf, int off, int len) {
+        super.write(buf, off, len);
         this.out();
     }
 

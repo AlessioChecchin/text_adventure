@@ -59,7 +59,7 @@ public class Display extends GridPane implements BaseController
     /**
      * Handles console input
      * @param event Input event.
-     * @throws IOException
+     * @throws IOException IOException
      */
     public void onKeyPressed(KeyEvent event) throws IOException {
 
@@ -141,9 +141,7 @@ public class Display extends GridPane implements BaseController
             this.cmdInput = null;
         });
 
-        this.task.setOnCancelled(evtCancelled -> {
-            this.currentCommand.kill();
-        });
+        this.task.setOnCancelled(evtCancelled -> this.currentCommand.kill());
     }
 
     public String getText()
