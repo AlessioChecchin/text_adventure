@@ -1,10 +1,9 @@
 package com.adventure.serializers;
 
-import com.adventure.interfaces.ApplicationContext;
 import com.adventure.models.Game;
-import com.adventure.nodes.Room;
-import com.adventure.nodes.StoryNode;
-import com.adventure.nodes.StoryNodeLink;
+import com.adventure.models.nodes.Room;
+import com.adventure.models.nodes.StoryNode;
+import com.adventure.models.nodes.StoryNodeLink;
 import com.adventure.utils.ApplicationContextProvider;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -12,12 +11,9 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import javafx.stage.Stage;
 import org.jgrapht.Graph;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Properties;
 
 public class GameDeserializer extends StdDeserializer<Game>
 {
@@ -36,9 +32,6 @@ public class GameDeserializer extends StdDeserializer<Game>
 
         // Create Game with Properties
         Game game = new Game(ApplicationContextProvider.getInstance().getProperties());
-
-        // Set stage
-        game.setStage(ApplicationContextProvider.getInstance().getStage());
 
         // Get game graph
         Graph<StoryNode, StoryNodeLink> gameGraph = game.getGameGraph();

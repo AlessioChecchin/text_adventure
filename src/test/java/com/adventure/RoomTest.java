@@ -1,12 +1,10 @@
 package com.adventure;
 
-import com.adventure.nodes.Room;
-import org.junit.jupiter.api.BeforeAll;
+import com.adventure.models.nodes.Room;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 

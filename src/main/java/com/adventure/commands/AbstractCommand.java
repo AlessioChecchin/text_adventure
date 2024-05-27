@@ -1,16 +1,15 @@
 package com.adventure.commands;
 
-import com.adventure.interfaces.ApplicationContext;
+import com.adventure.utils.ApplicationContext;
 
 import java.io.InputStream;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public abstract class   AbstractCommand implements Command
+public abstract class AbstractCommand implements Command
 {
     protected PrintWriter writer;
 
@@ -28,7 +27,6 @@ public abstract class   AbstractCommand implements Command
     {
         this.writer = new PrintWriter(System.out);
         this.inputStream = System.in;
-
         this.shouldTerminate = false;
     }
 
@@ -97,7 +95,6 @@ public abstract class   AbstractCommand implements Command
         return scanner.next();
     }
 
-
     protected String safeReadNextLine() throws InterruptedException
     {
         Scanner scanner = new Scanner(this.inputStream);
@@ -110,5 +107,33 @@ public abstract class   AbstractCommand implements Command
         return scanner.nextLine();
     }
 
+    protected boolean askConfirmation() throws InterruptedException
+    {
+        boolean decided = true;
 
+        do {
+            String response = this.safeReadNextLine().toLowerCase();
+
+            if(response.equals("yes"))
+            {
+                return true;
+            }
+            else if(response.equals("no"))
+            {
+                return false;
+            }
+            else
+            {
+                decided = false;
+            }
+
+            if(!decided)
+            {
+                this.writer.println("Please, answer yes/no");
+            }
+
+        } while(!decided);
+
+        return false;
+    }
 }

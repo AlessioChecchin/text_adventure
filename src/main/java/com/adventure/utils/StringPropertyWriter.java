@@ -17,55 +17,55 @@ public class StringPropertyWriter extends StringWriter
 
     public void write(int c) {
         super.write(c);
-        this.flush();
+        this.out();
     }
 
-    public void write(char[] cbuf, int off, int len) {
-        super.write(cbuf, off, len);
-        this.flush();
+    public void write(char[] buf, int off, int len) {
+        super.write(buf, off, len);
+        this.out();
     }
 
     public void write(String str)
     {
         super.write(str);
-        this.flush();
+        this.out();
     }
 
     public void write(String str, int off, int len)
     {
         super.write(str, off, len);
-        this.flush();
+        this.out();
     }
 
     public StringWriter append(CharSequence csq) {
         StringWriter sw = super.append(csq);
-        this.flush();
+        this.out();
         return sw;
     }
 
     public StringWriter append(CharSequence csq, int start, int end) {
         StringWriter sw = super.append(csq, start, end);
-        this.flush();
+        this.out();
         return sw;
     }
 
     public StringWriter append(char c) {
         StringWriter sw = super.append(c);
-        this.flush();
+        this.out();
         return sw;
     }
 
-    @Override
-    public void flush() {
+    protected void out()
+    {
         Platform.runLater(() -> prop.set(this.toString()));
     }
 
+    /**
+     * Resets the stream.
+     */
     @Override
-    public boolean equals(Object obj){
-        if (this == obj) { return true; }
-        if (obj == null || this.getClass() != obj.getClass()) { return false; }
-
-        StringPropertyWriter str = (StringPropertyWriter) obj;
-        return(str.toString().equals(this.toString()));
+    public void flush() {
+        this.out();
+        this.getBuffer().setLength(0);
     }
 }

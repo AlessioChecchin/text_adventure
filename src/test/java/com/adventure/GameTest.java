@@ -1,15 +1,12 @@
 package com.adventure;
 
 import com.adventure.models.Game;
-import com.adventure.nodes.Action;
-import com.adventure.nodes.Room;
-import com.adventure.nodes.StoryNode;
-import com.adventure.nodes.StoryNodeLink;
-import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
+import com.adventure.models.nodes.Action;
+import com.adventure.models.nodes.Room;
+import com.adventure.models.nodes.StoryNode;
+import com.adventure.models.nodes.StoryNodeLink;
 import javafx.stage.Stage;
 import org.jgrapht.Graph;
-import org.jgrapht.graph.DirectedAcyclicGraph;
 import org.jgrapht.graph.DirectedPseudograph;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +14,6 @@ import org.junit.jupiter.api.Test;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
-import java.util.TreeSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 

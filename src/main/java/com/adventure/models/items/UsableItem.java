@@ -1,6 +1,5 @@
 package com.adventure.models.items;
 
-import com.adventure.interfaces.Usable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UsableItem extends Item implements Usable

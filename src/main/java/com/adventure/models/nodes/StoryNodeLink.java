@@ -1,4 +1,4 @@
-package com.adventure.nodes;
+package com.adventure.models.nodes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.jgrapht.graph.DefaultEdge;
@@ -25,7 +25,6 @@ public class StoryNodeLink extends DefaultEdge
      */
     public Action getAction() { return this.action; }
 
-
     //
     //  SETTERS
     //
@@ -35,8 +34,6 @@ public class StoryNodeLink extends DefaultEdge
      * @param switchAction new action to link to the edge
      */
     public void setAction(Action switchAction) { this.action = switchAction; }
-
-
 
     //
     //  VARIABLES

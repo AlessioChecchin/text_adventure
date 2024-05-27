@@ -2,22 +2,18 @@ package com.adventure.models;
 
 import com.adventure.Main;
 import com.adventure.controllers.BaseController;
-import com.adventure.nodes.StoryNode;
-import com.adventure.nodes.StoryNodeLink;
+import com.adventure.models.nodes.StoryNode;
+import com.adventure.models.nodes.StoryNodeLink;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.jgrapht.Graph;
-import org.jgrapht.graph.DefaultDirectedGraph;
 import org.jgrapht.graph.DirectedPseudograph;
 
 import java.util.Objects;
 import java.util.Properties;
-
 
 public class Game
 {
@@ -27,8 +23,18 @@ public class Game
     //
 
     /**
-     * Default constructor
+     * Constructor.
+     * @param properties Application properties.
+     */
+    public Game(Properties properties)
+    {
+        this(properties, null);
+    }
+
+    /**
+     * Constructor
      * @param properties Properties to use for this game
+     * @param stage Game stage.
      */
     public Game(Properties properties, Stage stage)
     {
@@ -36,8 +42,6 @@ public class Game
         this.gameGraph = new DirectedPseudograph<>(StoryNodeLink.class);
         this.stage = stage;
     }
-
-
 
     //
     //  GETTERS
@@ -47,28 +51,47 @@ public class Game
      * Graph getter
      * @return Graph used in the game
      */
-    public Graph<StoryNode, StoryNodeLink> getGameGraph() { return this.gameGraph; }
+    public Graph<StoryNode, StoryNodeLink> getGameGraph()
+    {
+        return this.gameGraph;
+    }
 
     /**
      * Current node getter
      * @return StoryNode current node in the game
      */
-    public StoryNode getCurrentNode() { return this.currentNode; }
+    public StoryNode getCurrentNode()
+    {
+        return this.currentNode;
+    }
 
     /**
      * Stage getter
      * @return Stage current stage in the game
      */
     @JsonIgnore
-    public Stage getStage() { return this.stage; }
+    public Stage getStage()
+    {
+        return this.stage;
+    }
 
     /**
      * Previous node getter
      * @return StoryNode previous node
      */
-    public StoryNode getPreviousNode() { return this.previousNode; }
+    public StoryNode getPreviousNode()
+    {
+        return this.previousNode;
+    }
 
-
+    /**
+     * Game id getter.
+     * @return Game id.
+     */
+    public String getId()
+    {
+        return this.id;
+    }
 
     //
     //  SETTERS
@@ -80,9 +103,49 @@ public class Game
      */
     public void setCurrentNode(StoryNode currentNode)
     {
+        Objects.requireNonNull(currentNode);
         this.previousNode = this.currentNode;
         this.currentNode = currentNode;
+    }
 
+    /**
+     * Game di setter.
+     * @param id Unique game id.
+     */
+    public void setId(String id)
+    {
+        this.id = id;
+    }
+
+    /**
+     * Stage setter
+     * @param stage Stage to be set
+     */
+    public void setStage(Stage stage)
+    {
+        this.stage = stage;
+    }
+
+    //
+    //  OTHERS
+    //
+
+    public boolean hasPreviousNode()
+    {
+        return this.previousNode != null;
+    }
+
+    public void invalidatePreviousNode()
+    {
+        this.previousNode = null;
+    }
+
+    /**
+     * Loads current game.
+     */
+    public void load()
+    {
+        Objects.requireNonNull(this.stage, "stage cannot be null");
         try {
             // Loads view.
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(currentNode.getTargetView()));
@@ -91,11 +154,7 @@ public class Game
             Font.loadFont(Objects.requireNonNull(Main.class.getResource("assets/ubuntu.ttf")).toExternalForm(), -1);
 
             // Creates scene.
-            Scene currentScene = null;
-            if(this.stage != null)
-                currentScene = this.stage.getScene();
-
-
+            Scene currentScene = this.stage.getScene();
 
             // If a scene already exists its reused.
             if(currentScene != null)
@@ -121,33 +180,7 @@ public class Game
         {
             e.printStackTrace();
         }
-
     }
-
-    /**
-     * Stage setter
-     * @param stage Stage to be set
-     */
-    public void setStage(Stage stage) { this.stage = stage; }
-
-
-
-    //
-    //  OTHERS
-    //
-
-    /**
-     * Check it there's a valid previous node
-     * @return True if previousNode != null, False otherwise
-     */
-    public boolean hasPreviousNode() { return this.previousNode != null; }
-
-    /**
-     * Set previousNode to "null"
-     */
-    public void invalidatePreviousNode() { this.previousNode = null; }
-
-
 
     //
     //  VARIABLES
@@ -156,7 +189,7 @@ public class Game
     /**
      * A decision graph that is incrementally loaded as the application flow proceeds.
      */
-    private Graph<StoryNode, StoryNodeLink> gameGraph;
+    private final Graph<StoryNode, StoryNodeLink> gameGraph;
 
     /**
      * Currently active node.
@@ -172,12 +205,15 @@ public class Game
      * Properties of the game
      */
     @JsonIgnore
-    private Properties properties;
+    private final Properties properties;
 
     /**
      * Fxml stage.
      */
     private Stage stage;
 
-
+    /**
+     * Game identifier.
+     */
+    private String id;
 }

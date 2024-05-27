@@ -1,18 +1,15 @@
 package com.adventure.serializers;
 
-import com.adventure.nodes.StoryNodeLink;
+import com.adventure.models.nodes.StoryNodeLink;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultDirectedGraph;
 
 import java.io.IOException;
-import java.util.Properties;
 
 public class GraphDeserializer extends StdDeserializer<Graph>
 {

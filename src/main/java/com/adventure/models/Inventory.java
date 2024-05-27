@@ -1,6 +1,6 @@
 package com.adventure.models;
 
-import com.adventure.interfaces.Equipable;
+import com.adventure.models.items.Equipable;
 import com.adventure.models.items.*;
 import com.adventure.exceptions.TooMuchWeightException;
 import java.util.ArrayList;
@@ -58,26 +58,26 @@ public class Inventory
     //
 
     /**
-     * Get the equiped attack item
-     * @return AttakItem equiped
+     * Get the equipped attack item
+     * @return AttakItem equipped
      */
     public AttackItem getEquipedAttackItem() { return this.attackItem; }
 
     /**
-     * Get the equiped defence item
-     * @return DefenceItem equiped
+     * Get the equipped defence item
+     * @return DefenceItem equipped
      */
     public DefenceItem getEquipedDefenceItem() { return this.defenceItem; }
 
     /**
      * Get the value of max weight the inventory can handle
-     * @return int maxweight of the inventory
+     * @return max weight of the inventory
      */
     public int getMaxWeight()  { return this.maxWeight; }
 
     /**
      * Get the value of the current weight in the inventory
-     * @return int current weight in the inventory
+     * @return current weight in the inventory
      */
     public int getCurrentWeight() { return this.currentWeight; }
 
