@@ -93,9 +93,21 @@ public class Game
         return this.id;
     }
 
+    /**
+     * Player getter
+     * @return Player
+     */
+    public Player getPlayer() { return this.player; }
+
     //
     //  SETTERS
     //
+
+    /**
+     * Player setter
+     * @param player player
+     */
+    public void setPlayer(Player player) { this.player = player; }
 
     /**
      * Current node setter
@@ -109,7 +121,7 @@ public class Game
     }
 
     /**
-     * Game di setter.
+     * Game id setter.
      * @param id Unique game id.
      */
     public void setId(String id)
@@ -216,4 +228,10 @@ public class Game
      * Game identifier.
      */
     private String id;
+
+    /**
+     * Player in the game
+     */
+    Player player;
+
 }

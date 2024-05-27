@@ -3,6 +3,8 @@ package com.adventure.models;
 import com.adventure.models.items.Equipable;
 import com.adventure.models.items.*;
 import com.adventure.exceptions.TooMuchWeightException;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
@@ -95,7 +97,7 @@ public class Inventory
      * Equip an equipable item
      * @param equipable Item to equip
      */
-    void equipItem(Equipable equipable)
+    public void equipItem(Equipable equipable)
     {
         if(equipable instanceof AttackItem)
             this.attackItem = (AttackItem) equipable;
@@ -107,7 +109,7 @@ public class Inventory
      * Unequip an attack or defense item
      * @param type Type of the item to unequip (ATTACK or DEFENSE)
      */
-    void unequipItem(equipType type)
+    public void unequipItem(equipType type)
     {
         if(type == equipType.ATTACK)
             this.attackItem = this.defaultAtkItem;
@@ -145,14 +147,18 @@ public class Inventory
      * @param item Item to be checked
      * @return True if item can be added. False otherwise
      */
-    public boolean canAdd(Item item)
+    private boolean canAdd(Item item)
     {
         return this.currentWeight + item.getWeight() <= this.maxWeight;
     }
 
+    @JsonIgnore
     private AttackItem attackItem;
+    @JsonIgnore
     private final AttackItem defaultAtkItem;
+    @JsonIgnore
     private DefenceItem defenceItem;
+    @JsonIgnore
     private final DefenceItem defaultDefItem;
     private ArrayList<Item> items;
     private int maxWeight;

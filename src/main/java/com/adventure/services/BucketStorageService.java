@@ -3,9 +3,9 @@ package com.adventure.services;
 
 import com.adventure.exceptions.GameStorageException;
 import com.adventure.models.Game;
-import com.adventure.models.items.AttackItem;
-import com.adventure.models.items.Item;
-import com.adventure.models.items.UsableItem;
+import com.adventure.models.Inventory;
+import com.adventure.models.Player;
+import com.adventure.models.items.*;
 import com.adventure.models.nodes.Action;
 import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
@@ -13,6 +13,7 @@ import com.adventure.models.nodes.StoryNodeLink;
 import com.adventure.serializers.GameDeserializer;
 import com.adventure.serializers.GraphDeserializer;
 import com.adventure.serializers.GraphSerializer;
+import com.adventure.models.Stats;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -26,6 +27,7 @@ import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.*;
 import software.amazon.awssdk.services.s3.paginators.ListObjectsV2Iterable;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -186,6 +188,29 @@ public class BucketStorageService implements StorageService
         g.addEdge(room, rightRoom, rightLink);
 
         game.setCurrentNode(room);
+
+        Inventory inventory = new Inventory(100);
+        ArrayList<Item> inventoryItems = new ArrayList<>();
+        inventoryItems.add(new AttackItem("Sword"));
+        inventoryItems.add(new UsableItem("Potion"));
+        inventoryItems.add(new DefenceItem("Armor"));
+        inventoryItems.add(new UsableItem("Food"));
+        inventory.setItems(inventoryItems);
+
+        for(Item item : inventory.getItems())
+            if( item instanceof Equipable )
+                inventory.equipItem((Equipable) item);
+
+
+        Stats stats = new Stats();
+        stats.setBaseAttack(30);
+        stats.setBaseDefense(40);
+        stats.setMaxHp(100);
+        stats.setHp(100);
+
+        Player player = new Player("Windows11",inventory, stats);
+
+        game.setPlayer(player);
 
         return game;
     }
