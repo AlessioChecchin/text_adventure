@@ -7,6 +7,7 @@ module com.adventure {
     requires software.amazon.awssdk.regions;
     requires software.amazon.awssdk.services.s3;
     requires software.amazon.awssdk.services.ec2;
+    requires javafx.media;
 
     // Opening to com.fasterxml.jackson.databind necessary for serialization
     opens com.adventure to javafx.fxml, com.fasterxml.jackson.databind;
