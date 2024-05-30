@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaErrorEvent;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 
@@ -19,8 +20,7 @@ public class GameLoaderController implements BaseController
     private Display display;
 
     @FXML
-    public void initialize()
-    {
+    public void initialize() {
         URL videoUrl = Resources.class.getResource("assets/presentation.mp4");
 
         if(videoUrl != null)
@@ -29,17 +29,22 @@ public class GameLoaderController implements BaseController
             MediaPlayer mediaPlayer = new MediaPlayer(media);
 
             mediaPlayer.setOnReady(() -> {
+                System.out.println("Ready");
                 MediaView mediaView = new MediaView(mediaPlayer);
-
                 mediaView.fitWidthProperty().bind(this.display.getGraphics().widthProperty());
                 mediaView.fitHeightProperty().bind(this.display.getGraphics().heightProperty());
                 this.display.getGraphics().setAlignment(Pos.CENTER);
-
                 this.display.getGraphics().getChildren().add(mediaView);
 
                 mediaPlayer.setAutoPlay(true);
                 mediaPlayer.play();
             });
+
+            mediaPlayer.setOnError(() -> {
+                mediaPlayer.getError().printStackTrace();
+            });
+
+
         }
 
 
