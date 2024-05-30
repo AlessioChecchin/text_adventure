@@ -9,6 +9,8 @@ import com.adventure.commands.CommandParser;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.util.Properties;
+
 public class Main extends Application
 {
     @Override
@@ -26,13 +28,16 @@ public class Main extends Application
         commandParser.registerCommand("newGame", CmdNewGame.class, "Creates a new game.");
         commandParser.registerCommand("loadGame", CmdLoadGame.class, "Loads a game.");
 
+        Properties props = context.getProperties();
+
         // Generating dummy game to host the proper game loader.
-        Game dummyGame = new Game(context.getProperties(), stage);
+        Game dummyGame = new Game(props, stage);
         context.setGame(dummyGame);
 
         dummyGame.setCurrentNode(new GameLoaderNode());
         dummyGame.load();
 
+        stage.setResizable(Boolean.parseBoolean(props.getProperty("resizable", "false")));
         stage.show();
     }
 
