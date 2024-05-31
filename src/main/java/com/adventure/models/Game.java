@@ -1,14 +1,18 @@
 package com.adventure.models;
 
 import com.adventure.Main;
+import com.adventure.Resources;
 import com.adventure.controllers.BaseController;
 import com.adventure.models.nodes.StoryNode;
 import com.adventure.models.nodes.StoryNodeLink;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DirectedPseudograph;
 
@@ -165,26 +169,30 @@ public class Game
         Objects.requireNonNull(this.stage, "stage cannot be null");
         try {
             // Loads view.
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(currentNode.getTargetView()));
-
+            FXMLLoader fxmlLoader = new FXMLLoader(Resources.class.getResource(currentNode.getTargetView()));
             // Sets game font.
-            Font.loadFont(Objects.requireNonNull(Main.class.getResource("assets/ubuntu.ttf")).toExternalForm(), -1);
+            Font.loadFont(Objects.requireNonNull(Resources.class.getResource("assets/ubuntu.ttf")).toExternalForm(), -1);
+
+            Parent root = fxmlLoader.load();
 
             // Creates scene.
             Scene currentScene = this.stage.getScene();
 
-            player = new Player("Player",new Inventory(10), new Stats());
+            if(this.currentController != null)
+            {
+                this.currentController.shutdown();
+            }
 
             // If a scene already exists its reused.
             if(currentScene != null)
             {
-                currentScene.setRoot(fxmlLoader.load());
+                currentScene.setRoot(root);
             }
             // If there's no scene, a new one is created.
             else
             {
                 Scene scene = new Scene(
-                        fxmlLoader.load(),
+                        root,
                         Integer.parseInt(this.properties.getProperty("display.width")),
                         Integer.parseInt(this.properties.getProperty("display.height"))
                 );
@@ -192,12 +200,25 @@ public class Game
             }
 
             BaseController controller = fxmlLoader.getController();
+            this.currentController = controller;
+
             stage.setOnHidden(e -> controller.shutdown());
 
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            logger.fatal("Error loading game", e);
+        }
+    }
+
+    /**
+     * Method that should be called when unloading a game.
+     */
+    public void shutdown()
+    {
+        if(this.currentController != null)
+        {
+            this.currentController.shutdown();
         }
     }
 
@@ -227,6 +248,12 @@ public class Game
     private final Properties properties;
 
     /**
+     * Current node controller.
+     */
+    @JsonIgnore
+    private BaseController currentController;
+
+    /**
      * Fxml stage.
      */
     private Stage stage;
@@ -240,4 +267,11 @@ public class Game
      * Fxml stage.
      */
     private Player player;
+
+    /**
+     * Logger.
+     */
+    @JsonIgnore
+    protected static final Logger logger = LogManager.getLogger();
+
 }

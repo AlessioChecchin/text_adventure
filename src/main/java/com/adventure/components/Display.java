@@ -56,6 +56,11 @@ public class Display extends GridPane implements BaseController
     }
 
 
+    public void onPromptClick()
+    {
+        this.consolePrompt.requestFocus();
+    }
+
     /**
      * Handles console input
      * @param event Input event.
