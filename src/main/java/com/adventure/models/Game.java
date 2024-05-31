@@ -66,6 +66,15 @@ public class Game
     }
 
     /**
+     * Player getter
+     * @return Player in the game
+     */
+    public Player getPlayer() {
+        return player;
+    }
+
+
+    /**
      * Stage getter
      * @return Stage current stage in the game
      */
@@ -126,6 +135,14 @@ public class Game
         this.stage = stage;
     }
 
+    /**
+     * Player setter
+     * @param player Player to be set
+     */
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
     //
     //  OTHERS
     //
@@ -155,6 +172,8 @@ public class Game
 
             // Creates scene.
             Scene currentScene = this.stage.getScene();
+
+            player = new Player("Player",new Inventory(10), new Stats());
 
             // If a scene already exists its reused.
             if(currentScene != null)
@@ -216,4 +235,9 @@ public class Game
      * Game identifier.
      */
     private String id;
+
+    /**
+     * Fxml stage.
+     */
+    private Player player;
 }

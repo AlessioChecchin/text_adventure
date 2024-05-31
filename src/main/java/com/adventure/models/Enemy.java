@@ -1,6 +1,6 @@
 package com.adventure.models;
 
-public class Enemy extends Entity{
+public class Enemy extends NPC{
 
     /**
      * Entity constructor.

@@ -3,6 +3,7 @@ package com.adventure;
 import com.adventure.commands.*;
 import com.adventure.models.Game;
 import com.adventure.models.nodes.GameLoaderNode;
+import com.adventure.models.nodes.Room;
 import com.adventure.utils.ApplicationContextProvider;
 import com.adventure.utils.ApplicationContext;
 import com.adventure.commands.CommandParser;
@@ -28,7 +29,6 @@ public class Main extends Application
         commandParser.registerCommand("newGame", CmdNewGame.class, "Creates a new game.");
         commandParser.registerCommand("fight", CmdFight.class, "Attack the monster");
 
-
         Properties props = context.getProperties();
 
         // Generating dummy game to host the proper game loader.
@@ -36,6 +36,7 @@ public class Main extends Application
         context.setGame(dummyGame);
 
         dummyGame.setCurrentNode(new GameLoaderNode());
+        dummyGame.setCurrentNode(new Room("Test", "Test"));
         dummyGame.load();
 
         stage.setResizable(Boolean.parseBoolean(props.getProperty("resizable", "false")));
