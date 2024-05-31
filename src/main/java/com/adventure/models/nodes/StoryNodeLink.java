@@ -3,6 +3,8 @@ package com.adventure.models.nodes;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.jgrapht.graph.DefaultEdge;
 
+import java.util.Objects;
+
 public class StoryNodeLink extends DefaultEdge
 {
 
@@ -56,6 +58,6 @@ public class StoryNodeLink extends DefaultEdge
 
     @Override
     public int hashCode() {
-        return action.hashCode();
+        return Objects.hash(action);
     }
 }
