@@ -5,6 +5,8 @@ import com.adventure.models.Game;
 
 import com.adventure.services.BucketStorageService;
 import com.adventure.services.StorageService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,7 +30,7 @@ public class ApplicationContextProvider implements ApplicationContext
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            logger.fatal("Error loading application.conf", e);
         }
 
         this.storageService = new BucketStorageService(this.properties);
@@ -89,6 +91,12 @@ public class ApplicationContextProvider implements ApplicationContext
     public void setGame(Game game)
     {
         Objects.requireNonNull(game, "game cannot be null");
+
+        if(this.game != null)
+        {
+            this.game.shutdown();
+        }
+
         this.game = game;
     }
 
@@ -115,4 +123,10 @@ public class ApplicationContextProvider implements ApplicationContext
      * Storage service.
      */
     private final StorageService storageService;
+
+    /**
+     * Logger.
+     */
+    protected static final Logger logger = LogManager.getLogger();
+
 }
