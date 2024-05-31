@@ -24,7 +24,7 @@
     <VBox fx:id="graphics" styleClass="graphics" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 
 
-    <VBox GridPane.columnIndex="0" GridPane.rowIndex="1">
+    <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" onMouseClicked="#onPromptClick">
         <VBox styleClass="separator"></VBox>
         <ScrollPane styleClass="console-output-wrapper">
             <Label fx:id="consoleOutput" text="" styleClass="console-output"/>

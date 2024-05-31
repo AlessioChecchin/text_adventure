@@ -1,6 +1,8 @@
 package com.adventure.commands;
 
 import com.adventure.utils.ApplicationContext;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -22,6 +24,8 @@ public abstract class AbstractCommand implements Command
     protected boolean shouldTerminate;
 
     public static final int BUSY_WAITING_QUANTUM = 10;
+
+    protected static final Logger logger = LogManager.getLogger();
 
     public AbstractCommand()
     {
