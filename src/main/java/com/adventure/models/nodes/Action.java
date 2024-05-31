@@ -29,6 +29,8 @@ public class Action
      */
     public String getActionName() { return this.actionName; }
 
+
+
     //
     //  OTHERS
     //
@@ -49,6 +51,8 @@ public class Action
     public int hashCode() {
         return this.actionName.hashCode();
     }
+
+
 
     //
     //  VARIABLES
