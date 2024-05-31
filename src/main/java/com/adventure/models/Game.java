@@ -178,6 +178,8 @@ public class Game
             // Creates scene.
             Scene currentScene = this.stage.getScene();
 
+            player = new Player("Player", new Inventory(10), new Stats());
+
             if(this.currentController != null)
             {
                 this.currentController.shutdown();
