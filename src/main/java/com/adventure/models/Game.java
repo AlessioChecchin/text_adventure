@@ -154,7 +154,7 @@ public class Game
             // Loads view.
             FXMLLoader fxmlLoader = new FXMLLoader(Resources.class.getResource(currentNode.getTargetView()));
             // Sets game font.
-            Font.loadFont(Objects.requireNonNull(Resources.class.getResource("assets/ubuntu.ttf")).toExternalForm(), -1);
+            Font.loadFont(Objects.requireNonNull(Resources.class.getResource("assets/retro_gaming.ttf")).toExternalForm(), -1);
 
             Parent root = fxmlLoader.load();
 
