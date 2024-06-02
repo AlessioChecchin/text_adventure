@@ -7,6 +7,7 @@ abstract public class Entity
     protected Inventory inventory;
     protected boolean alive;
     protected Stats stats;
+    private int dodge;
 
     /**
      * Entity constructor.
@@ -18,6 +19,7 @@ abstract public class Entity
         this.setInventory(inventory);
         this.alive = true;
         this.setStats(stats);
+        this.dodge = 3;
     }
 
     public void setInventory(Inventory inventory)
@@ -38,7 +40,7 @@ abstract public class Entity
 
     public boolean getAlive()
     {
-        return this.alive;
+        return (stats.getHp() > 0);
     }
 
     public void setStats(Stats stats)
@@ -50,6 +52,16 @@ abstract public class Entity
     public Stats getStats()
     {
         return this.stats;
+    }
+
+    public boolean useDodge() {
+        if(dodge == 0) return false;
+        dodge--;
+        return true;
+    }
+
+    public void resetDodge() {
+        this.dodge = 3;
     }
 
     public void heal(int points)

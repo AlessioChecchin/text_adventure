@@ -44,7 +44,10 @@ public class Main extends Application
         commandParser.registerCommand("listGames", CmdListGames.class, "Lists all available games.");
         commandParser.registerCommand("save", CmdSaveGame.class, "Saves the current game.");
         commandParser.registerCommand("newGame", CmdNewGame.class, "Creates a new game.");
-        commandParser.registerCommand("fight", CmdFight.class, "Attack the monster");
+        commandParser.registerCommand("fight", CmdFight.class, "Start a fight");
+        commandParser.registerCommand("attack", CmdAttack.class, "Attack the monster");
+        commandParser.registerCommand("dodge", CmdDodge.class, "Dodge the monster's attack");
+        commandParser.registerCommand("use", CmdUse.class, "Use an Item");
 
         Properties props = context.getProperties();
 
@@ -53,7 +56,7 @@ public class Main extends Application
         context.setGame(dummyGame);
 
         dummyGame.setCurrentNode(new GameLoaderNode());
-        dummyGame.setCurrentNode(new Room("Test", "Test"));
+        //dummyGame.setCurrentNode(new Room("Test", "Test"));
         dummyGame.load();
 
         stage.setResizable(Boolean.parseBoolean(props.getProperty("resizable", "false")));

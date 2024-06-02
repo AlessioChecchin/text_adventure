@@ -40,6 +40,7 @@ public class CmdNewGame extends AbstractCommand
 
             this.context.setGame(game);
             game.load();
+            game.getPlayer().setName(username);
         });
 
     }

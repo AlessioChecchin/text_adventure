@@ -1,84 +1,71 @@
 package com.adventure.commands;
 
 import com.adventure.models.Enemy;
+import com.adventure.models.Inventory;
 import com.adventure.models.Player;
-import com.adventure.models.RandomCollection;
+import com.adventure.models.items.UsableItem;
 import com.adventure.models.nodes.*;
 import com.adventure.utils.ApplicationContextProvider;
 
-import java.util.Objects;
 
 public class CmdFight extends AbstractCommand {
+
+    private Command command;
 
     @Override
     public void execute() throws InterruptedException {
         CommandParser commandParser = CommandParser.getInstance();
         ApplicationContextProvider applicationContextProvider = ApplicationContextProvider.getInstance();
+        commandParser.disableAll();
+        commandParser.enable("attack");
+        commandParser.enable("dodge");
+        commandParser.enable("use");
+        commandParser.enable("help");
+        commandParser.enable("clear");
 
         player = applicationContextProvider.getGame().getPlayer();
         Room room = (Room) applicationContextProvider.getGame().getCurrentNode();
         monster = room.getMonster();
+        UsableItem apple = new UsableItem("apple");
+        apple.setAdditionalHp(10);
+        player.setInventory(new Inventory(100));
+        player.getInventory().addItem(apple);
+        while ((player.getAlive()) || (monster.getAlive())) {
 
-        while ((player.getAlive()) && (monster.getAlive())) {
-
-            //Monster set moves
-            RandomCollection<Object> decision = new RandomCollection<>()
-                    .add(85, CmdFight.Move.ATTACK).add(15, CmdFight.Move.DODGE);
-            CmdFight.Move choice = (CmdFight.Move) decision.next();
-
-            //manage case if choice is Dodge
-            if (choice == CmdFight.Move.DODGE) {
-                if (monsterDodge == 0) {
-                    choice = CmdFight.Move.ATTACK;
-                } else monsterDodge--;
+            //player have to digit a command
+            String s =this.safeReadNextLine();
+            try{
+            this.command = commandParser.parseCommand(s);
+            this.command.setInputStream(this.getInputStream());
+            this.command.setWriter(this.getWriter());
+            this.command.execute();
+            }
+            catch(Exception e){
+                this.writer.println("Wrong command, try again");
             }
 
-            //Player choose what he wants to do
+        }
+        this.writer.println("End fight");
+        commandParser.disableAll();
+        commandParser.enable("newGame");
+        commandParser.enable("listGames");
+        commandParser.enable("loadGame");
+        commandParser.enable("help");
+        commandParser.enable("clear");
+        commandParser.enable("fight");
+        commandParser.enable("use");
+    }
 
-            //check command
-
-            boolean correctCommand = true;
-            while(correctCommand){
-                String playerChoice = this.safeReadNext();
-
-                if(playerChoice.equals("attack")){
-                    correctCommand = false;
-                    attack(choice);
-                }
-
-                if(playerChoice.equals("dodge")){
-                    correctCommand = false;
-                    //if he can't dodge change choice
-                    if(!dodge(choice)) correctCommand = true;
-                }
-            }
+    public void kill(){
+        super.kill();
+        if(this.command != null){
+            this.kill();
         }
     }
 
-    public void attack(Move monsterChoice){
-        player.hit(monster.getStats().getBaseAttack());
-
-        //if monster dodge he doesn't get damage
-        if(monsterChoice != Move.DODGE){
-            monster.hit(player.getStats().getBaseAttack());
-        }
-    }
-
-    public boolean dodge(Move monsterChoice){
-        if(playerDodge == 0) return false;
-        if(monsterChoice == Move.ATTACK){
-            monster.hit(player.getStats().getBaseAttack());
-        }
-        return true;
-    }
 
     private Player player;
     private Enemy monster;
-    private int turns;
-    private int playerDodge;
-    private int monsterDodge;
-    private static final int MAXDODGE = 3;
-
     public enum Move {
         ATTACK,
         DODGE

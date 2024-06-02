@@ -29,6 +29,7 @@ public class Inventory
 
         this.attackItem = this.defaultAtkItem;
         this.defenceItem = this.defaultDefItem;
+        this.items = new ArrayList<>(100);
     }
 
     //
