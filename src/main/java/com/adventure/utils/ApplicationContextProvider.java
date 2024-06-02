@@ -4,6 +4,7 @@ import com.adventure.Main;
 import com.adventure.models.Game;
 
 import com.adventure.services.BucketStorageService;
+import com.adventure.services.FileSystemStorageService;
 import com.adventure.services.StorageService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,7 +34,8 @@ public class ApplicationContextProvider implements ApplicationContext
             logger.fatal("Error loading application.conf", e);
         }
 
-        this.storageService = new BucketStorageService(this.properties);
+        //this.storageService = new BucketStorageService(this.properties);
+        this.storageService = new FileSystemStorageService(this.properties);
     }
 
     /**

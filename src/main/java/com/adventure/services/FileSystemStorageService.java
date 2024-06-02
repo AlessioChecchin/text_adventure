@@ -1,6 +1,5 @@
 package com.adventure.services;
 
-
 import com.adventure.Resources;
 import com.adventure.exceptions.GameStorageException;
 import com.adventure.models.Game;
@@ -15,8 +14,6 @@ import com.adventure.models.nodes.Action;
 import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
 import com.adventure.models.nodes.StoryNodeLink;
-import com.adventure.serializers.GameDeserializer;
-import com.adventure.serializers.GraphDeserializer;
 import com.adventure.serializers.GraphSerializer;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -24,65 +21,30 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.jgrapht.Graph;
-import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
-import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
-import software.amazon.awssdk.regions.Region;
-import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.*;
-import software.amazon.awssdk.services.s3.paginators.ListObjectsV2Iterable;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Properties;
 
-public class BucketStorageService implements StorageService
+public class FileSystemStorageService implements StorageService
 {
-    /**
-     * Constructor
-     * @param properties Application properties.
-     */
-    public BucketStorageService(Properties properties)
+    public FileSystemStorageService(Properties properties)
     {
         this.properties = properties;
-
-        String key = properties.getProperty("storage.aws.key");
-        String secret = properties.getProperty("storage.aws.secret");
-        Region region = Region.of(properties.getProperty("storage.aws.region"));
-
-        AwsBasicCredentials credentials = AwsBasicCredentials.create(key, secret);
-
-        StaticCredentialsProvider credentialsProvider = StaticCredentialsProvider.create(credentials);
-
-        this.s3 = S3Client.builder()
-                .region(region)
-                .credentialsProvider(credentialsProvider)
-                .build();
     }
 
     @Override
     public List<String> listGames()
     {
-        String bucketName = this.properties.getProperty("storage.aws.bucket.name");
+        ArrayList<String> result = new ArrayList<>();
 
-        ListObjectsV2Request request = ListObjectsV2Request
-                .builder()
-                .bucket(bucketName)
-                .build();
-
-        ListObjectsV2Iterable response = this.s3.listObjectsV2Paginator(request);
-
-        List<String> result = new ArrayList<>();
-
-        for (ListObjectsV2Response page : response)
-        {
-            for (S3Object object : page.contents())
-            {
-                result.add(object.key());
-            }
-        }
+        File directory = new File(Resources.getAssetsPath() + "saves");
+        for (File file : directory.listFiles())
+            result.add(file.getName().replace(".json", ""));
 
         return result;
     }
@@ -108,14 +70,17 @@ public class BucketStorageService implements StorageService
 
             //  Get json file path
             String saveName = game.getId() + ".json";
-            String savePath = Resources.getAssetsPath() + saveName;
+            String savePath = Resources.getAssetsPath() + "saves";
+
+            //  Create 'saves' directory
+            new File(savePath).mkdirs();
 
             //  Create json file and write the json string into it
-            File file = new File(savePath);
+            File file = new File(savePath + "/" + saveName);
             if(file.createNewFile())
                 System.out.println("Saved " + saveName);
             else
-                System.out.println(saveName + " already exists");
+                System.out.println(saveName + " overwritten");
             FileWriter write = new FileWriter(file);
             write.write(json);
             write.close();
@@ -133,28 +98,17 @@ public class BucketStorageService implements StorageService
     @Override
     public Game loadGame(String gameId) throws GameStorageException
     {
-        String json = "<load from bucket>";
-        ObjectMapper mapper = new ObjectMapper();
-
-        mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-        SimpleModule module = new SimpleModule();
-        module.addDeserializer(Graph.class, new GraphDeserializer());
-        module.addDeserializer(Game.class, new GameDeserializer());
-        mapper.registerModule(module);
-
-        try
-        {
-            return mapper.readValue(json, Game.class);
-        } catch (JsonProcessingException e)
-        {
-            throw new GameStorageException(e.getMessage());
-        }
+        return null;
     }
 
     @Override
     public void deleteGame(String gameId)
     {
-
+        File game = new File(Resources.getAssetsPath() + "saves/" + gameId + ".json");
+        if(game.delete())
+            System.out.println("Deleted " + game.getName().replace(".json", ""));
+        else
+            throw new NoSuchElementException("No such game");
     }
 
     @Override
@@ -240,8 +194,4 @@ public class BucketStorageService implements StorageService
      */
     private final Properties properties;
 
-    /**
-     * Client instance.
-     */
-    private final S3Client s3;
 }

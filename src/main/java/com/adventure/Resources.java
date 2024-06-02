@@ -27,7 +27,7 @@ public class Resources
     }
 
     // TODO : può lanciare NullPointerException
-    public static String getSavesPath()
+    public static String getAssetsPath()
     {
         return Resources.class.getResource("assets").getPath();
     }

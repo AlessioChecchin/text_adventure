@@ -10,7 +10,6 @@ public class CmdSaveGame extends AbstractCommand
     {
         Game currentGame = this.context.getGame();
 
-
         if(currentGame.getId() == null)
         {
             writer.print("Enter game name: ");

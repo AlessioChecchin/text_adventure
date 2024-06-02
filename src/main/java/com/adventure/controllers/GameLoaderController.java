@@ -37,6 +37,7 @@ public class GameLoaderController implements BaseController
         parser.enable("loadGame");
         parser.enable("help");
         parser.enable("clear");
+        parser.enable("delete");
 
         Label instructions = new Label();
         instructions.setText("Type help to view possible actions");

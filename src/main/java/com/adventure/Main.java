@@ -44,6 +44,8 @@ public class Main extends Application
         commandParser.registerCommand("save", CmdSaveGame.class, "Saves the current game.");
         commandParser.registerCommand("newGame", CmdNewGame.class, "Creates a new game.");
         commandParser.registerCommand("loadGame", CmdLoadGame.class, "Loads a game.");
+        commandParser.registerCommand("delete", CmdDeleteGame.class, "Remove the specified game.");
+
 
         Properties props = context.getProperties();
 
