@@ -24,6 +24,7 @@ public class Room extends StoryNode
         this.description = description;
         this.items = new ArrayList<>();
         this.backgroundPath = "";
+        this.completed = false;
     }
 
     /**
@@ -111,6 +112,24 @@ public class Room extends StoryNode
     }
 
 
+    /**
+     * Completed setter.
+     * @param completed Sets if the room is completed.
+     */
+    public void setCompleted(boolean completed)
+    {
+        this.completed = completed;
+    }
+
+    /**
+     * Completed getter.
+     * @return If the room is completed.
+     */
+    public boolean getCompleted()
+    {
+        return this.completed;
+    }
+
     //
     // OBJECT OVERRIDE
     //
@@ -138,7 +157,8 @@ public class Room extends StoryNode
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return Objects.hash(name, description, items);
     }
 
@@ -161,4 +181,9 @@ public class Room extends StoryNode
      * Default background image path relative to resources.com.adventure.
      */
     private String backgroundPath;
+
+    /**
+     * Flag if the room is completed.
+     */
+    private boolean completed;
 }

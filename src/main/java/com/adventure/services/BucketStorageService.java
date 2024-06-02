@@ -1,16 +1,12 @@
 package com.adventure.services;
 
 
-import com.adventure.Resources;
 import com.adventure.exceptions.GameStorageException;
 import com.adventure.models.Game;
 import com.adventure.models.Inventory;
 import com.adventure.models.Player;
 import com.adventure.models.Stats;
-import com.adventure.models.items.AttackItem;
-import com.adventure.models.items.DefenceItem;
-import com.adventure.models.items.Item;
-import com.adventure.models.items.UsableItem;
+import com.adventure.models.items.*;
 import com.adventure.models.nodes.Action;
 import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
@@ -28,12 +24,11 @@ import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.*;
+import software.amazon.awssdk.services.s3.model.ListObjectsV2Request;
+import software.amazon.awssdk.services.s3.model.ListObjectsV2Response;
+import software.amazon.awssdk.services.s3.model.S3Object;
 import software.amazon.awssdk.services.s3.paginators.ListObjectsV2Iterable;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -102,31 +97,12 @@ public class BucketStorageService implements StorageService
 
         try
         {
-            //  Create the json string
             String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(game);
             System.out.println(json);
-
-            //  Get json file path
-            String saveName = game.getId() + ".json";
-            String savePath = Resources.getAssetsPath() + saveName;
-
-            //  Create json file and write the json string into it
-            File file = new File(savePath);
-            if(file.createNewFile())
-                System.out.println("Saved " + saveName);
-            else
-                System.out.println(saveName + " already exists");
-            FileWriter write = new FileWriter(file);
-            write.write(json);
-            write.close();
         }
         catch (JsonProcessingException e)
         {
             throw new GameStorageException(e.getMessage());
-        }
-        catch(IOException e)
-        {
-            System.err.println(e.getMessage());
         }
     }
 
@@ -158,27 +134,46 @@ public class BucketStorageService implements StorageService
     }
 
     @Override
-    public Game newGame(String playerName)
+    public Game newGame()
     {
         Game game = new Game(this.properties);
+
+        Inventory playerInventory = new Inventory(100);
+
+        playerInventory.addItem(new Sword());
+
         Stats stats = new Stats();
         stats.setMaxHp(100);
-        stats.setBaseDefense(99);
-        stats.setBaseAttack(88);
         stats.setHp(100);
+        stats.setBaseAttack(1);
+        stats.setBaseDefense(1);
 
-        Inventory inventory = new Inventory(100);
-        UsableItem item1 = new UsableItem("Potion");
-        AttackItem item2 = new AttackItem("Spada");
-        DefenceItem item3 = new DefenceItem("Scudo");
-        //inventory.addItem(item1);
-        //inventory.addItem(item2);
-        //inventory.addItem(item3);
-        //inventory.equipItem(item3);
+        game.setPlayer(new Player("default", playerInventory, stats));
 
-        Player player = new Player(playerName, inventory, stats);
+        String firstFightRoomKey = "Level 1";
 
-        Room room = new Room("First room", "First room description");
+        Room startingRoom = new Room("Introduction room", "Welcome to the first room, take the key and go on an adventure!");
+        startingRoom.setBackgroundPath("assets/castle.png");
+        startingRoom.getItems().add(new Key(firstFightRoomKey));
+
+        game.setCurrentNode(startingRoom);
+
+        Room firstFightRoom = new Room("First fight room", "Oh no, a goblin! Fight him and take the loot that drops");
+        firstFightRoom.setBackgroundPath("assets/castle.png");
+
+        // Populating the game graph.
+        Graph<StoryNode, StoryNodeLink> g = game.getGameGraph();
+        g.addVertex(startingRoom);
+        g.addVertex(firstFightRoom);
+
+        StoryNodeLink toFirstFightRoom = new StoryNodeLink();
+        toFirstFightRoom.setLocked(true);
+        toFirstFightRoom.setKey(firstFightRoomKey);
+
+        g.addEdge(startingRoom, firstFightRoom, toFirstFightRoom);
+
+
+        /*Room room = new Room("First room", "First room description");
         room.setBackgroundPath("assets/castle.png");
         AttackItem sword = new AttackItem("Sword");
         sword.setAdder(3);
@@ -227,8 +222,6 @@ public class BucketStorageService implements StorageService
         g.addVertex(rightRoom);
         g.addEdge(room, leftRoom, leftLink);
         g.addEdge(room, rightRoom, rightLink);
-
-        game.setPlayer(player);
 
         game.setCurrentNode(room);
 

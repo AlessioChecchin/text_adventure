@@ -164,6 +164,16 @@ public class Display extends GridPane implements BaseController
         return consolePrompt.textProperty();
     }
 
+    public String getStdOut()
+    {
+        return this.consoleOutput.getText();
+    }
+
+    public void setStdOut(String value)
+    {
+        this.consoleOutput.setText(value);
+    }
+
     public VBox getGraphics()
     {
         return this.graphics;
