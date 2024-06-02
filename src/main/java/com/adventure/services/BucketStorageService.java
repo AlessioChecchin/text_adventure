@@ -134,8 +134,7 @@ public class BucketStorageService implements StorageService
     }
 
     @Override
-    public Game newGame()
-    {
+    public Game newGame(String name) {
         Game game = new Game(this.properties);
 
         Inventory playerInventory = new Inventory(100);
@@ -171,6 +170,7 @@ public class BucketStorageService implements StorageService
         toFirstFightRoom.setKey(firstFightRoomKey);
 
         g.addEdge(startingRoom, firstFightRoom, toFirstFightRoom);
+        return game;
 
 
         /*Room room = new Room("First room", "First room description");
@@ -226,15 +226,16 @@ public class BucketStorageService implements StorageService
         game.setCurrentNode(room);
 
         return game;
+    }*/
+    }
+        /**
+         * Application properties.
+         */
+        private final Properties properties;
+
+        /**
+         * Client instance.
+         */
+        private final S3Client s3;
     }
 
-    /**
-     * Application properties.
-     */
-    private final Properties properties;
-
-    /**
-     * Client instance.
-     */
-    private final S3Client s3;
-}
