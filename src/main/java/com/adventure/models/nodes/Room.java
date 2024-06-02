@@ -1,5 +1,9 @@
 package com.adventure.models.nodes;
 
+import com.adventure.models.Enemy;
+import com.adventure.models.Inventory;
+import com.adventure.models.NPC;
+import com.adventure.models.Stats;
 import com.adventure.models.items.Item;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,6 +28,7 @@ public class Room extends StoryNode
         this.description = description;
         this.items = new ArrayList<>();
         this.backgroundPath = "";
+        this.monster = new Enemy(new Inventory(10), new Stats());
         this.completed = false;
     }
 
@@ -111,6 +116,13 @@ public class Room extends StoryNode
         return this.backgroundPath;
     }
 
+    public Enemy getMonster() {
+        return monster;
+    }
+
+    public void setMonster(Enemy monster) {
+        this.monster = monster;
+    }
 
     /**
      * Completed setter.
@@ -176,6 +188,8 @@ public class Room extends StoryNode
      * List of items in the room
      */
     private List<Item> items;
+
+    private Enemy monster;
 
     /**
      * Default background image path relative to resources.com.adventure.

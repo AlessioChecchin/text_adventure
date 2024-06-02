@@ -5,6 +5,6 @@ public class CmdClear extends AbstractCommand
     @Override
     public void execute()
     {
-        writer.write("");
+        writer.flush();
     }
 }

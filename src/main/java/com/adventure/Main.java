@@ -43,6 +43,10 @@ public class Main extends Application
         commandParser.registerCommand("listGames", CmdListGames.class, "Lists all available games.");
         commandParser.registerCommand("save", CmdSaveGame.class, "Saves the current game.");
         commandParser.registerCommand("newGame", CmdNewGame.class, "Creates a new game.");
+        commandParser.registerCommand("fight", CmdFight.class, "Start a fight");
+        commandParser.registerCommand("attack", CmdAttack.class, "Attack the monster");
+        commandParser.registerCommand("dodge", CmdDodge.class, "Dodge the monster's attack");
+        commandParser.registerCommand("use", CmdUse.class, "Use an Item");
         commandParser.registerCommand("loadGame", CmdLoadGame.class, "Loads a game.");
         commandParser.registerCommand("delete", CmdDeleteGame.class, "Remove the specified game.");
         commandParser.registerCommand("show", CmdShow.class, "Shows inventory or stats, usage: show [inventory/stats]");
