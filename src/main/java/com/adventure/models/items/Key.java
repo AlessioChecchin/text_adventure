@@ -14,7 +14,7 @@ public class Key extends Item
         this.value = key;
     }
 
-    public String getKey()
+    public String getValue()
     {
         return this.value;
     }
