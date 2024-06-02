@@ -1,81 +1,68 @@
 package com.adventure.controllers;
 
-import com.adventure.ApplicationContextProvider;
+import com.adventure.Resources;
 import com.adventure.components.Display;
-import com.adventure.interfaces.ApplicationContext;
-import com.adventure.nodes.Room;
-import com.adventure.nodes.StoryNode;
-import com.adventure.nodes.StoryNodeLink;
-import javafx.event.ActionEvent;
+import com.adventure.utils.ApplicationContext;
+import com.adventure.models.nodes.Room;
+import com.adventure.utils.ApplicationContextProvider;
+import com.adventure.commands.CommandParser;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
-import org.jgrapht.Graph;
+import javafx.scene.layout.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.net.URISyntaxException;
 
 public class RoomController implements BaseController
 {
     @FXML
     private Display display;
 
-    /*@FXML
-    private Label currentRoom;
+    protected static final Logger logger = LogManager.getLogger();
 
     @FXML
-    private Button backButton;
+    public void initialize() {
 
-    @FXML
-    private VBox box;
+        logger.debug("Initializing RoomController...");
 
-    private ApplicationContext context;
+        ApplicationContext context = ApplicationContextProvider.getInstance();
 
-    @FXML
-    public void initialize()
-    {
-        // Obtaining useful nodes and models.
-        this.context = ApplicationContextProvider.getInstance();
+        // Enabling all commands.
+        CommandParser commandParser = CommandParser.getInstance();
+        commandParser.enableAll();
+        // TODO Check enable and disable for the rooms
+//        commandParser.enable("newGame");
+//        commandParser.enable("listGames");
+//        commandParser.enable("loadGame");
+//        commandParser.enable("help");
+//        commandParser.enable("clear");
+//        commandParser.enable("fight");
+//        commandParser.enable("use");
+//        commandParser.enable("loadGame");
+//        commandParser.enable("delete");
+//        commandParser.enable("");
+
+
         Room room = (Room) context.getGame().getCurrentNode();
-        Graph<StoryNode, StoryNodeLink> graph = this.context.getGame().getGameGraph();
 
-        // Printing current room.
-        currentRoom.setText("YOU'RE IN  " + room.getName());
+        BackgroundImage backgroundImage = Resources.getBackground(room.getBackgroundPath());
 
-        // Dynamically generating button.
-        for (StoryNodeLink edge: graph.outgoingEdgesOf(room))
+        if (backgroundImage != null)
         {
-            StoryNode targetNode = graph.getEdgeTarget(edge);
-            Button btnChangeRoom = new Button();
-            btnChangeRoom.setText(">>" + edge.getAction().getActionName());
-            btnChangeRoom.getStyleClass().add("menu-button");
-
-            // Lambda function is capturing targetNode.
-            btnChangeRoom.setOnAction((ActionEvent event) -> {
-                this.context.getGame().setCurrentNode(targetNode);
-            });
-
-            this.box.getChildren().add(btnChangeRoom);
+            this.display.getGraphics().setBackground(new Background(backgroundImage));
+        }
+        else
+        {
+            logger.warn("{} not found.", room.getBackgroundPath());
         }
 
-        // NOTE: in this case we are only checking if there was a previous node rendered.
-        // We don't check for the graph structure and if there are back edged.
-        // For this reason hasPreviousNode may not be sufficient to establish if a back command
-        // could be invoked.
-        if(!this.context.getGame().hasPreviousNode())
-        {
-            this.backButton.setDisable(true);
-        }
-
+        this.display.setStdOut(room.getDescription());
     }
 
-    @FXML
-    public void back()
-    {
-        // Can't be fired if the button is disabled.
-        this.context.getGame().setCurrentNode(this.context.getGame().getPreviousNode());
-    }*/
 
     public void shutdown()
     {
+        logger.debug("Shutting down RoomController...");
         display.shutdown();
     }
 

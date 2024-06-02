@@ -1,37 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.net.*?>
-<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import java.net.URL?>
+<?import javafx.scene.text.TextFlow?>
 <?import javafx.scene.text.Text?>
-<fx:root alignment="CENTER" gridLinesVisible="true" styleClass="room_display" type="javafx.scene.layout.GridPane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="javafx.scene.layout.GridPane" xmlns:fx="http://javafx.com/fxml" styleClass="display-wrapper"
+         GridPane.hgrow="always" GridPane.vgrow="always">
     <stylesheets>
-        <URL value="@display.css" />
+        <URL value="@display.css"/>
     </stylesheets>
 
-
-    <HBox fx:id="graphics" prefHeight="400" prefWidth="711" styleClass="graphics" GridPane.fillHeight="true" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS" />
-
-    <HBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
-        <ScrollPane>
-            <Label fx:id="consoleOutput" />
-        </ScrollPane>
-    </HBox>
-
-    <VBox GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" styleClass="console-prompt">
-        <TextField fx:id="consolePrompt" promptText=">>" onKeyPressed="#onKeyPressed" styleClass="console-prompt"/>
-    </VBox>
-
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="100.0" prefWidth="100.0"/>
+    </columnConstraints>
     <rowConstraints>
-        <RowConstraints percentHeight="60" />
-        <RowConstraints percentHeight="30" />
-        <RowConstraints percentHeight="10" />
+        <RowConstraints minHeight="10.0" percentHeight="70"  prefHeight="100" vgrow="ALWAYS"/>
+        <RowConstraints minHeight="10.0" percentHeight="22"  prefHeight="100" vgrow="ALWAYS"/>
+        <RowConstraints minHeight="5" percentHeight="8" prefHeight="100" vgrow="ALWAYS"/>
     </rowConstraints>
 
-   <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-   </padding>
+
+    <VBox fx:id="graphics" styleClass="graphics" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+
+
+    <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" onMouseClicked="#onPromptClick">
+        <VBox styleClass="separator"></VBox>
+        <ScrollPane styleClass="console-output-wrapper">
+            <Label fx:id="consoleOutput" text="" styleClass="console-output"/>
+        </ScrollPane>
+    </VBox>
+
+    <GridPane GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" styleClass="console-input-wrapper">
+        <Label text=">>" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="console-input-prefix"/>
+        <TextField fx:id="consolePrompt" onKeyPressed="#onKeyPressed" styleClass="console-input" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    </GridPane>
 
 </fx:root>

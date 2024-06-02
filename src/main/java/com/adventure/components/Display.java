@@ -2,23 +2,20 @@ package com.adventure.components;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.Stack;
-
-import com.adventure.CommandParser;
-import com.adventure.StringPropertyWriter;
+import com.adventure.commands.CommandParser;
+import com.adventure.utils.StringPropertyWriter;
 import com.adventure.commands.Command;
 import com.adventure.controllers.BaseController;
-import javafx.application.Platform;
 import javafx.beans.property.StringProperty;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 public class Display extends GridPane implements BaseController
 {
@@ -29,7 +26,7 @@ public class Display extends GridPane implements BaseController
     private TextField consolePrompt;
 
     @FXML
-    private HBox graphics;
+    private VBox graphics;
 
     private Command currentCommand;
     private Task<Void> task;
@@ -59,10 +56,15 @@ public class Display extends GridPane implements BaseController
     }
 
 
+    public void onPromptClick()
+    {
+        this.consolePrompt.requestFocus();
+    }
+
     /**
      * Handles console input
      * @param event Input event.
-     * @throws IOException
+     * @throws IOException IOException
      */
     public void onKeyPressed(KeyEvent event) throws IOException {
 
@@ -144,9 +146,7 @@ public class Display extends GridPane implements BaseController
             this.cmdInput = null;
         });
 
-        this.task.setOnCancelled(evtCancelled -> {
-            this.currentCommand.kill();
-        });
+        this.task.setOnCancelled(evtCancelled -> this.currentCommand.kill());
     }
 
     public String getText()
@@ -164,11 +164,21 @@ public class Display extends GridPane implements BaseController
         return consolePrompt.textProperty();
     }
 
-    public HBox getGraphics()
+    public String getStdOut()
+    {
+        return this.consoleOutput.getText();
+    }
+
+    public void setStdOut(String value)
+    {
+        this.consoleOutput.setText(value);
+    }
+
+    public VBox getGraphics()
     {
         return this.graphics;
     }
-
+    
     public void shutdown()
     {
         if(this.task != null && this.task.isRunning())
