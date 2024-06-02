@@ -8,6 +8,8 @@ import com.adventure.utils.ApplicationContextProvider;
 import com.adventure.commands.CommandParser;
 import javafx.fxml.FXML;
 import javafx.scene.layout.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.net.URISyntaxException;
 
@@ -16,8 +18,12 @@ public class RoomController implements BaseController
     @FXML
     private Display display;
 
+    protected static final Logger logger = LogManager.getLogger();
+
     @FXML
     public void initialize() {
+
+        logger.debug("Initializing RoomController...");
 
         ApplicationContext context = ApplicationContextProvider.getInstance();
 
@@ -33,11 +39,16 @@ public class RoomController implements BaseController
         {
             this.display.getGraphics().setBackground(new Background(backgroundImage));
         }
+        else
+        {
+            logger.warn("{} not found.", room.getBackgroundPath());
+        }
     }
 
 
     public void shutdown()
     {
+        logger.debug("Shutting down RoomController...");
         display.shutdown();
     }
 
