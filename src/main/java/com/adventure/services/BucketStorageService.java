@@ -1,11 +1,16 @@
 package com.adventure.services;
 
 
+import com.adventure.Resources;
 import com.adventure.exceptions.GameStorageException;
 import com.adventure.models.Game;
 import com.adventure.models.Inventory;
 import com.adventure.models.Player;
-import com.adventure.models.items.*;
+import com.adventure.models.Stats;
+import com.adventure.models.items.AttackItem;
+import com.adventure.models.items.DefenceItem;
+import com.adventure.models.items.Item;
+import com.adventure.models.items.UsableItem;
 import com.adventure.models.nodes.Action;
 import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
@@ -13,7 +18,6 @@ import com.adventure.models.nodes.StoryNodeLink;
 import com.adventure.serializers.GameDeserializer;
 import com.adventure.serializers.GraphDeserializer;
 import com.adventure.serializers.GraphSerializer;
-import com.adventure.models.Stats;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -27,7 +31,9 @@ import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.*;
 import software.amazon.awssdk.services.s3.paginators.ListObjectsV2Iterable;
 
-import java.lang.reflect.Array;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -96,12 +102,31 @@ public class BucketStorageService implements StorageService
 
         try
         {
+            //  Create the json string
             String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(game);
             System.out.println(json);
+
+            //  Get json file path
+            String saveName = game.getId() + ".json";
+            String savePath = Resources.getSavesPath() + saveName;
+
+            //  Create json file and write the json string into it
+            File file = new File(savePath);
+            if(file.createNewFile())
+                System.out.println("Saved " + saveName);
+            else
+                System.out.println(saveName + " already exists");
+            FileWriter write = new FileWriter(file);
+            write.write(json);
+            write.close();
         }
         catch (JsonProcessingException e)
         {
             throw new GameStorageException(e.getMessage());
+        }
+        catch(IOException e)
+        {
+            System.err.println(e.getMessage());
         }
     }
 
@@ -133,10 +158,26 @@ public class BucketStorageService implements StorageService
     }
 
     @Override
-    public Game newGame()
+    public Game newGame(String playerName)
     {
         Game game = new Game(this.properties);
-        
+        Stats stats = new Stats();
+        stats.setMaxHp(100);
+        stats.setBaseDefense(99);
+        stats.setBaseAttack(88);
+        stats.setHp(100);
+
+        Inventory inventory = new Inventory(100);
+        UsableItem item1 = new UsableItem("Potion");
+        AttackItem item2 = new AttackItem("Spada");
+        DefenceItem item3 = new DefenceItem("Scudo");
+        //inventory.addItem(item1);
+        //inventory.addItem(item2);
+        //inventory.addItem(item3);
+        //inventory.equipItem(item3);
+
+        Player player = new Player(playerName, inventory, stats);
+
         Room room = new Room("First room", "First room description");
         room.setBackgroundPath("assets/castle.png");
         AttackItem sword = new AttackItem("Sword");
@@ -187,30 +228,9 @@ public class BucketStorageService implements StorageService
         g.addEdge(room, leftRoom, leftLink);
         g.addEdge(room, rightRoom, rightLink);
 
-        game.setCurrentNode(room);
-
-        Inventory inventory = new Inventory(100);
-        ArrayList<Item> inventoryItems = new ArrayList<>();
-        inventoryItems.add(new AttackItem("Sword"));
-        inventoryItems.add(new UsableItem("Potion"));
-        inventoryItems.add(new DefenceItem("Armor"));
-        inventoryItems.add(new UsableItem("Food"));
-        inventory.setItems(inventoryItems);
-
-        for(Item item : inventory.getItems())
-            if( item instanceof Equipable )
-                inventory.equipItem((Equipable) item);
-
-
-        Stats stats = new Stats();
-        stats.setBaseAttack(30);
-        stats.setBaseDefense(40);
-        stats.setMaxHp(100);
-        stats.setHp(100);
-
-        Player player = new Player("Windows11",inventory, stats);
-
         game.setPlayer(player);
+
+        game.setCurrentNode(room);
 
         return game;
     }

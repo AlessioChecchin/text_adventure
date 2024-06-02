@@ -1,5 +1,7 @@
 package com.adventure.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Objects;
 
 abstract public class Entity

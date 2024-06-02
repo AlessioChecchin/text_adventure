@@ -12,5 +12,5 @@ public interface StorageService
     public void saveGame(Game game) throws GameStorageException;
     public Game loadGame(String gameId) throws GameStorageException;
     public void deleteGame(String gameId);
-    public Game newGame();
+    public Game newGame(String playerName);
 }

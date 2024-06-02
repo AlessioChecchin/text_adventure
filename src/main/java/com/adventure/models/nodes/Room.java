@@ -104,6 +104,7 @@ public class Room extends StoryNode
      * Background path getter.
      * @return Background path relative to resources.com.adventure.
      */
+    @JsonIgnore
     public String getBackgroundPath()
     {
         return this.backgroundPath;

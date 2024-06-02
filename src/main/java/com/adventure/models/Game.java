@@ -97,9 +97,21 @@ public class Game
         return this.id;
     }
 
+    /**
+     * Player getter
+     * @return Player playing
+     */
+    public Player getPlayer() { return player; }
+
     //
     //  SETTERS
     //
+
+    /**
+     * Current player setter
+     * @param player current player
+     */
+    public void setPlayer(Player player) { this.player = player; }
 
     /**
      * Current node setter
@@ -186,6 +198,7 @@ public class Game
             this.currentController = controller;
 
             stage.setOnHidden(e -> controller.shutdown());
+
         }
         catch(Exception e)
         {
@@ -207,6 +220,8 @@ public class Game
     //
     //  VARIABLES
     //
+
+    private Player player;
 
     /**
      * A decision graph that is incrementally loaded as the application flow proceeds.

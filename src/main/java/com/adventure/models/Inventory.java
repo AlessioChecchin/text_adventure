@@ -3,12 +3,13 @@ package com.adventure.models;
 import com.adventure.models.items.Equipable;
 import com.adventure.models.items.*;
 import com.adventure.exceptions.TooMuchWeightException;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.adventure.serializers.InventorySerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-
+@JsonSerialize(using = InventorySerializer.class)
 public class Inventory
 {
     /**
@@ -22,6 +23,8 @@ public class Inventory
      */
     public Inventory(int maxWeight)
     {
+        this.items = new ArrayList<>();
+
         this.maxWeight = maxWeight;
         this.currentWeight = 0;
 
@@ -87,7 +90,8 @@ public class Inventory
      * Get a copy of the ArrayList containing all the items
      * @return ArrayList with all items of the inventory
      */
-    public ArrayList<Item> getItems() { return new ArrayList<>(this.items); }
+    public ArrayList<Item> getItems() { return this.items; }
+            //new ArrayList<>(this.items); }
 
     //
     //  METHODS
@@ -99,6 +103,8 @@ public class Inventory
      */
     public void equipItem(Equipable equipable)
     {
+        if( !items.contains((Item) equipable) )
+            throw new NoSuchElementException();
         if(equipable instanceof AttackItem)
             this.attackItem = (AttackItem) equipable;
         if(equipable instanceof DefenceItem)
@@ -152,13 +158,9 @@ public class Inventory
         return this.currentWeight + item.getWeight() <= this.maxWeight;
     }
 
-    @JsonIgnore
     private AttackItem attackItem;
-    @JsonIgnore
     private final AttackItem defaultAtkItem;
-    @JsonIgnore
     private DefenceItem defenceItem;
-    @JsonIgnore
     private final DefenceItem defaultDefItem;
     private ArrayList<Item> items;
     private int maxWeight;

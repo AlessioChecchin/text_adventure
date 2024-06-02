@@ -1,6 +1,7 @@
 package com.adventure.models;
 
 import com.adventure.models.items.Item;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
 import java.util.Objects;
