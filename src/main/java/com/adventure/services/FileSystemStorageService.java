@@ -6,10 +6,7 @@ import com.adventure.models.Game;
 import com.adventure.models.Inventory;
 import com.adventure.models.Player;
 import com.adventure.models.Stats;
-import com.adventure.models.items.AttackItem;
-import com.adventure.models.items.DefenceItem;
-import com.adventure.models.items.Item;
-import com.adventure.models.items.UsableItem;
+import com.adventure.models.items.*;
 import com.adventure.models.nodes.Action;
 import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
@@ -115,76 +112,40 @@ public class FileSystemStorageService implements StorageService
     public Game newGame(String playerName)
     {
         Game game = new Game(this.properties);
+
+        Inventory playerInventory = new Inventory(100);
+
+        playerInventory.addItem(new Sword());
+
         Stats stats = new Stats();
         stats.setMaxHp(100);
-        stats.setBaseDefense(99);
-        stats.setBaseAttack(88);
         stats.setHp(100);
+        stats.setBaseAttack(1);
+        stats.setBaseDefense(1);
 
-        Inventory inventory = new Inventory(100);
-        UsableItem item1 = new UsableItem("Potion");
-        AttackItem item2 = new AttackItem("Spada");
-        DefenceItem item3 = new DefenceItem("Scudo");
-        //inventory.addItem(item1);
-        //inventory.addItem(item2);
-        //inventory.addItem(item3);
-        //inventory.equipItem(item3);
+        game.setPlayer(new Player(playerName, playerInventory, stats));
 
-        Player player = new Player(playerName, inventory, stats);
+        String firstFightRoomKey = "Level 1";
 
-        Room room = new Room("First room", "First room description");
-        room.setBackgroundPath("assets/castle.png");
-        AttackItem sword = new AttackItem("Sword");
-        sword.setAdder(3);
-        sword.setMultiplier(1.2);
-        sword.setWeight(4);
-        UsableItem healthPotion = new UsableItem("Potion");
-        healthPotion.setAdditionalHp(10);
-        healthPotion.setWeight(3);
+        Room startingRoom = new Room("Introduction room", "Welcome to the first room, take the key and go on an adventure!");
+        startingRoom.setBackgroundPath("assets/castle.png");
+        startingRoom.getItems().add(new Key(firstFightRoomKey));
 
-        // First room items.
-        List<Item> items = new ArrayList<>();
-        items.add(sword);
-        items.add(healthPotion);
-        room.setItems(items);
+        game.setCurrentNode(startingRoom);
 
-        // Action to reach left room or right room.
-        Action actionLeftRoom = new Action("Left room");
-        Action actionRightRoom = new Action("Right room");
+        Room firstFightRoom = new Room("First fight room", "Oh no, a goblin! Fight him and take the loot that drops");
+        firstFightRoom.setBackgroundPath("assets/castle.png");
 
-        StoryNodeLink leftLink = new StoryNodeLink();
-        leftLink.setAction(actionLeftRoom);
-
-        StoryNodeLink rightLink = new StoryNodeLink();
-        rightLink.setAction(actionRightRoom);
-
-
-        Room leftRoom = new Room("Left room", "Left room description");
-        UsableItem food = new UsableItem("Food");
-        food.setWeight(3);
-        List<Item> leftItems = new ArrayList<>();
-        leftItems.add(food);
-        leftRoom.setItems(leftItems);
-
-        Room rightRoom = new Room("Right room", "Right room description");
-        AttackItem bow = new AttackItem("Bow");
-        bow.setAdder(3);
-        bow.setMultiplier(1);
-        bow.setWeight(2);
-        List<Item> rightItems = new ArrayList<>();
-        rightItems.add(bow);
-        rightRoom.setItems(rightItems);
-
+        // Populating the game graph.
         Graph<StoryNode, StoryNodeLink> g = game.getGameGraph();
-        g.addVertex(room);
-        g.addVertex(leftRoom);
-        g.addVertex(rightRoom);
-        g.addEdge(room, leftRoom, leftLink);
-        g.addEdge(room, rightRoom, rightLink);
+        g.addVertex(startingRoom);
+        g.addVertex(firstFightRoom);
 
-        game.setPlayer(player);
+        StoryNodeLink toFirstFightRoom = new StoryNodeLink();
+        toFirstFightRoom.setLocked(true);
+        toFirstFightRoom.setKey(firstFightRoomKey);
 
-        game.setCurrentNode(room);
+        g.addEdge(startingRoom, firstFightRoom, toFirstFightRoom);
 
         return game;
     }
