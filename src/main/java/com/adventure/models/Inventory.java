@@ -5,6 +5,7 @@ import com.adventure.models.items.*;
 import com.adventure.exceptions.TooMuchWeightException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 
 public class Inventory
@@ -29,6 +30,7 @@ public class Inventory
 
         this.attackItem = this.defaultAtkItem;
         this.defenceItem = this.defaultDefItem;
+        this.items = new ArrayList<>();
     }
 
     //
@@ -50,8 +52,19 @@ public class Inventory
     /**
      * Set all items in the inventory
      * @param items ArrayList containing all the items
+     * @throws TooMuchWeightException If the weight is over maxWeight
      */
-    public void setItems(ArrayList<Item> items) { this.items = items; }
+    public void setItems(ArrayList<Item> items) throws TooMuchWeightException
+    {
+        Objects.requireNonNull(items, "items cannot be null");
+
+        this.items = new ArrayList<>();
+
+        for(Item itm: items)
+        {
+            this.addItem(itm);
+        }
+    }
 
     //
     //  GETTERS

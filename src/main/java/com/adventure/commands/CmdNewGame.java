@@ -33,6 +33,7 @@ public class CmdNewGame extends AbstractCommand
         logger.debug("Switching game...");
 
         Game game = this.context.getStorageService().newGame();
+        game.getPlayer().setName(username);
 
         Platform.runLater(() -> {
             // Forwards the stage to the new game.

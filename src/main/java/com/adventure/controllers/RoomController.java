@@ -43,6 +43,8 @@ public class RoomController implements BaseController
         {
             logger.warn("{} not found.", room.getBackgroundPath());
         }
+
+        this.display.setStdOut(room.getDescription());
     }
 
 

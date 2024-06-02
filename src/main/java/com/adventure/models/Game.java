@@ -97,6 +97,11 @@ public class Game
         return this.id;
     }
 
+    public Player getPlayer()
+    {
+        return this.player;
+    }
+
     //
     //  SETTERS
     //
@@ -128,6 +133,15 @@ public class Game
     public void setStage(Stage stage)
     {
         this.stage = stage;
+    }
+
+    /**
+     * Player setter.
+     * @param player Player.
+     */
+    public void setPlayer(Player player)
+    {
+        this.player = player;
     }
 
     //
@@ -244,6 +258,11 @@ public class Game
      * Game identifier.
      */
     private String id;
+
+    /**
+     * Player.
+     */
+    private Player player;
 
     /**
      * Logger.

@@ -43,6 +43,8 @@ public class Main extends Application
         commandParser.registerCommand("listGames", CmdListGames.class, "Lists all available games.");
         commandParser.registerCommand("save", CmdSaveGame.class, "Saves the current game.");
         commandParser.registerCommand("newGame", CmdNewGame.class, "Creates a new game.");
+        commandParser.registerCommand("show", CmdShow.class, "Shows inventory or stats, usage: show [inventory/stats]");
+        commandParser.registerCommand("look", CmdLook.class, "Inspects the current room.");
 
         Properties props = context.getProperties();
 

@@ -3,9 +3,10 @@ package com.adventure.services;
 
 import com.adventure.exceptions.GameStorageException;
 import com.adventure.models.Game;
-import com.adventure.models.items.AttackItem;
-import com.adventure.models.items.Item;
-import com.adventure.models.items.UsableItem;
+import com.adventure.models.Inventory;
+import com.adventure.models.Player;
+import com.adventure.models.Stats;
+import com.adventure.models.items.*;
 import com.adventure.models.nodes.Action;
 import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
@@ -23,7 +24,9 @@ import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.*;
+import software.amazon.awssdk.services.s3.model.ListObjectsV2Request;
+import software.amazon.awssdk.services.s3.model.ListObjectsV2Response;
+import software.amazon.awssdk.services.s3.model.S3Object;
 import software.amazon.awssdk.services.s3.paginators.ListObjectsV2Iterable;
 
 import java.util.ArrayList;
@@ -134,8 +137,43 @@ public class BucketStorageService implements StorageService
     public Game newGame()
     {
         Game game = new Game(this.properties);
-        
-        Room room = new Room("First room", "First room description");
+
+        Inventory playerInventory = new Inventory(100);
+
+        playerInventory.addItem(new Sword());
+
+        Stats stats = new Stats();
+        stats.setMaxHp(100);
+        stats.setHp(100);
+        stats.setBaseAttack(1);
+        stats.setBaseDefense(1);
+
+        game.setPlayer(new Player("default", playerInventory, stats));
+
+        String firstFightRoomKey = "Level 1";
+
+        Room startingRoom = new Room("Introduction room", "Welcome to the first room, take the key and go on an adventure!");
+        startingRoom.setBackgroundPath("assets/castle.png");
+        startingRoom.getItems().add(new Key(firstFightRoomKey));
+
+        game.setCurrentNode(startingRoom);
+
+        Room firstFightRoom = new Room("First fight room", "Oh no, a goblin! Fight him and take the loot that drops");
+        firstFightRoom.setBackgroundPath("assets/castle.png");
+
+        // Populating the game graph.
+        Graph<StoryNode, StoryNodeLink> g = game.getGameGraph();
+        g.addVertex(startingRoom);
+        g.addVertex(firstFightRoom);
+
+        StoryNodeLink toFirstFightRoom = new StoryNodeLink();
+        toFirstFightRoom.setLocked(true);
+        toFirstFightRoom.setKey(firstFightRoomKey);
+
+        g.addEdge(startingRoom, firstFightRoom, toFirstFightRoom);
+
+
+        /*Room room = new Room("First room", "First room description");
         room.setBackgroundPath("assets/castle.png");
         AttackItem sword = new AttackItem("Sword");
         sword.setAdder(3);
@@ -185,7 +223,7 @@ public class BucketStorageService implements StorageService
         g.addEdge(room, leftRoom, leftLink);
         g.addEdge(room, rightRoom, rightLink);
 
-        game.setCurrentNode(room);
+        game.setCurrentNode(room);*/
 
         return game;
     }

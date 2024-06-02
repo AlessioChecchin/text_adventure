@@ -9,34 +9,30 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public abstract class AbstractCommand implements Command
 {
-    protected PrintWriter writer;
-
-    protected InputStream inputStream;
-
-    protected List<String> args;
-
-    protected ApplicationContext context;
-
-    protected boolean shouldTerminate;
-
-    public static final int BUSY_WAITING_QUANTUM = 10;
-
-    protected static final Logger logger = LogManager.getLogger();
-
+    /**
+     * Default constructor.
+     */
     public AbstractCommand()
     {
+        this.args = new ArrayList<>();
         this.writer = new PrintWriter(System.out);
         this.inputStream = System.in;
         this.shouldTerminate = false;
     }
 
+    /**
+     * Writer setter.
+     * @param out Output writer.
+     */
     @Override
     public void setWriter(Writer out)
     {
+        Objects.requireNonNull(out, "Writer cannot be null");
         this.writer = new PrintWriter(out);
     }
 
@@ -49,6 +45,7 @@ public abstract class AbstractCommand implements Command
     @Override
     public void setInputStream(InputStream inputStream)
     {
+        Objects.requireNonNull(inputStream, "InputStream cannot be null");
         this.inputStream = inputStream;
     }
 
@@ -61,6 +58,7 @@ public abstract class AbstractCommand implements Command
     @Override
     public void setArgs(List<String> args)
     {
+        Objects.requireNonNull(args, "args cannot be null");
         this.args = new ArrayList<>(args);
     }
 
@@ -73,6 +71,7 @@ public abstract class AbstractCommand implements Command
     @Override
     public void setContext(ApplicationContext context)
     {
+        Objects.requireNonNull(context, "context cannot be null");
         this.context = context;
     }
 
@@ -140,4 +139,19 @@ public abstract class AbstractCommand implements Command
 
         return false;
     }
+
+
+    protected PrintWriter writer;
+
+    protected InputStream inputStream;
+
+    protected List<String> args;
+
+    protected ApplicationContext context;
+
+    protected boolean shouldTerminate;
+
+    public static final int BUSY_WAITING_QUANTUM = 10;
+
+    protected static final Logger logger = LogManager.getLogger();
 }
