@@ -140,6 +140,27 @@ public abstract class AbstractCommand implements Command
         return false;
     }
 
+    /**
+     * Checks whether the number of arguments is correct or not
+     * @param argumentsNumber number of arguments expected
+     * @return True if the number of arguments is correct, False otherwise
+     */
+    protected boolean correctArgumentsNumber(int argumentsNumber)
+    {
+        if(this.getArgs().size() < argumentsNumber)
+        {
+            writer.println("Too few arguments for command this command");
+            return false;
+        }
+        else if(this.getArgs().size() > argumentsNumber) {
+            writer.println("Too many arguments for command this command");
+            return false;
+        }
+        return true;
+    }
+
+
+
 
     protected PrintWriter writer;
 

@@ -1,5 +1,6 @@
 package com.adventure.models.nodes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
@@ -19,6 +20,7 @@ public abstract class StoryNode
      * Constructor.
      * @param targetView Node target view.
      */
+    @JsonIgnore
     public StoryNode(String targetView)
     {
         Objects.requireNonNull(targetView, "targetView can't be null");
@@ -33,6 +35,7 @@ public abstract class StoryNode
      * Get the current view
      * @return String current view
      */
+    @JsonIgnore
     public String getTargetView() { return this.targetView; }
 
     /**
@@ -60,6 +63,7 @@ public abstract class StoryNode
     /**
      * Represents the view to be used
      */
+    @JsonIgnore
     private String targetView;
 
 }

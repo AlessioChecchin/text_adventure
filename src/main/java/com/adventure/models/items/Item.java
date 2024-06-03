@@ -10,7 +10,8 @@ import java.util.Objects;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = AttackItem.class, name = "AttackItem"),
         @JsonSubTypes.Type(value = DefenceItem.class, name = "DefenceItem"),
-        @JsonSubTypes.Type(value = UsableItem.class, name = "UsableItem")
+        @JsonSubTypes.Type(value = UsableItem.class, name = "UsableItem"),
+        @JsonSubTypes.Type(value = Key.class, name = "KeyItem")
 })
 public abstract class Item
 {

@@ -7,12 +7,11 @@ import com.adventure.models.Inventory;
 import com.adventure.models.Player;
 import com.adventure.models.Stats;
 import com.adventure.models.items.*;
-import com.adventure.models.nodes.Action;
 import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
 import com.adventure.models.nodes.StoryNodeLink;
-import com.adventure.serializers.GameDeserializer;
-import com.adventure.serializers.GraphDeserializer;
+import com.adventure.deserializers.GameDeserializer;
+import com.adventure.deserializers.GraphDeserializer;
 import com.adventure.serializers.GraphSerializer;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -139,7 +138,7 @@ public class BucketStorageService implements StorageService
 
         Inventory playerInventory = new Inventory(100);
 
-        playerInventory.addItem(new Sword());
+        playerInventory.addItem(new AttackItem("Sword"));
 
         Stats stats = new Stats();
         stats.setMaxHp(100);

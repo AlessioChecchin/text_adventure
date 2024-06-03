@@ -110,16 +110,23 @@ public class Room extends StoryNode
      * Background path getter.
      * @return Background path relative to resources.com.adventure.
      */
-    @JsonIgnore
     public String getBackgroundPath()
     {
         return this.backgroundPath;
     }
 
+    /**
+     * Monster getter
+     * @return Monster inside the room
+     */
     public Enemy getMonster() {
         return monster;
     }
 
+    /**
+     * Monster setter
+     * @param monster Monster to set
+     */
     public void setMonster(Enemy monster) {
         this.monster = monster;
     }
@@ -189,6 +196,9 @@ public class Room extends StoryNode
      */
     private List<Item> items;
 
+    /**
+     * Monster entity inside the room
+     */
     private Enemy monster;
 
     /**

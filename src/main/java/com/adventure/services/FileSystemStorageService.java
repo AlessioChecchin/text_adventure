@@ -1,13 +1,14 @@
 package com.adventure.services;
 
 import com.adventure.Resources;
+import com.adventure.deserializers.GameDeserializer;
+import com.adventure.deserializers.GraphDeserializer;
 import com.adventure.exceptions.GameStorageException;
 import com.adventure.models.Game;
 import com.adventure.models.Inventory;
 import com.adventure.models.Player;
 import com.adventure.models.Stats;
 import com.adventure.models.items.*;
-import com.adventure.models.nodes.Action;
 import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
 import com.adventure.models.nodes.StoryNodeLink;
@@ -31,6 +32,9 @@ public class FileSystemStorageService implements StorageService
 {
     public FileSystemStorageService(Properties properties)
     {
+        //  Create or ensure the existence of the 'saves' folder
+        ensureSaveFolder();
+        this.savePath = Resources.getAssetsPath() + "saves/";
         this.properties = properties;
     }
 
@@ -38,8 +42,7 @@ public class FileSystemStorageService implements StorageService
     public List<String> listGames()
     {
         ArrayList<String> result = new ArrayList<>();
-
-        File directory = new File(Resources.getAssetsPath() + "saves");
+        File directory = new File(this.savePath);
         for (File file : directory.listFiles())
             result.add(file.getName().replace(".json", ""));
 
@@ -67,13 +70,9 @@ public class FileSystemStorageService implements StorageService
 
             //  Get json file path
             String saveName = game.getId() + ".json";
-            String savePath = Resources.getAssetsPath() + "saves";
-
-            //  Create 'saves' directory
-            new File(savePath).mkdirs();
 
             //  Create json file and write the json string into it
-            File file = new File(savePath + "/" + saveName);
+            File file = new File(this.savePath + saveName);
             if(file.createNewFile())
                 System.out.println("Saved " + saveName);
             else
@@ -93,9 +92,28 @@ public class FileSystemStorageService implements StorageService
     }
 
     @Override
-    public Game loadGame(String gameId) throws GameStorageException
+    public Game loadGame(String gameId) throws NoSuchElementException, GameStorageException
     {
-        return null;
+        File json = new File(this.savePath + gameId + ".json");
+        if(! json.exists())
+            throw new NoSuchElementException("Game with id " + gameId + " does not exist");
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        //TODO Controlla se queste righe si possono togliere e non danno problemi
+        //TODO Notare che l'utilizzo di GameDeserializer è impostato direttamente sulla classe Game
+        //mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+        //SimpleModule module = new SimpleModule();
+        //module.addDeserializer(Game.class, new GameDeserializer());
+        //mapper.registerModule(module);
+
+        try {
+            return mapper.readValue(json, Game.class);
+        } catch (JsonProcessingException e) {
+            throw new GameStorageException(e.getMessage());
+        } catch (IOException e) {
+            throw new GameStorageException(e.getMessage());
+        }
     }
 
     @Override
@@ -115,7 +133,7 @@ public class FileSystemStorageService implements StorageService
 
         Inventory playerInventory = new Inventory(100);
 
-        playerInventory.addItem(new Sword());
+        playerInventory.addItem(new AttackItem("Sword"));
 
         Stats stats = new Stats();
         stats.setMaxHp(100);
@@ -149,6 +167,23 @@ public class FileSystemStorageService implements StorageService
 
         return game;
     }
+
+    /**
+     * Checks whether the 'saves' folder exist.
+     * If not it creates it inside
+     *      target > classes > com > adventure > assets
+     */
+    private void ensureSaveFolder()
+    {
+        String savePath = Resources.getAssetsPath() + "saves";
+        if(!new File(savePath).exists())
+            new File(savePath).mkdirs();
+    }
+
+    /**
+     * Save folder path
+     */
+    private final String savePath;
 
     /**
      * Application properties.

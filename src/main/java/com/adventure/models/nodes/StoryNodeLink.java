@@ -1,6 +1,7 @@
 package com.adventure.models.nodes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jgrapht.graph.DefaultEdge;
 
 import java.util.Objects;
@@ -26,6 +27,7 @@ public class StoryNodeLink extends DefaultEdge
      * Locked getter.
      * @return Locked flag.
      */
+    @JsonProperty("locked")
     public boolean getLocked()
     {
         return this.locked;
@@ -35,6 +37,7 @@ public class StoryNodeLink extends DefaultEdge
      * Key getter.
      * @return Key.
      */
+    @JsonProperty("key")
     public String getKey()
     {
         return this.key;
