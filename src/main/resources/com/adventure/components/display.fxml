@@ -25,13 +25,23 @@
 
 
     <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" onMouseClicked="#onPromptClick">
-        <VBox styleClass="separator"></VBox>
+        <VBox styleClass="separator" />
         <ScrollPane styleClass="console-output-wrapper">
             <Label fx:id="consoleOutput" text="" styleClass="console-output"/>
         </ScrollPane>
     </VBox>
 
     <GridPane GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" styleClass="console-input-wrapper">
+
+        <rowConstraints>
+            <RowConstraints vgrow="SOMETIMES" minHeight="10.0" percentHeight="100.0" prefHeight="100.0"/>
+        </rowConstraints>
+        <columnConstraints>
+            <ColumnConstraints minWidth="10.0" percentWidth="2"  prefWidth="100" hgrow="ALWAYS"/>
+            <ColumnConstraints minWidth="10.0" percentWidth="98"  prefWidth="100" hgrow="ALWAYS"/>
+        </columnConstraints>
+
+
         <Label text=">>" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="console-input-prefix"/>
         <TextField fx:id="consolePrompt" onKeyPressed="#onKeyPressed" styleClass="console-input" GridPane.columnIndex="1" GridPane.rowIndex="0" />
     </GridPane>
