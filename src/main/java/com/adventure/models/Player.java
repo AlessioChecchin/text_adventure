@@ -35,9 +35,24 @@ public class Player extends Entity
         return name;
     }
 
-    public void use(Item item){
+    public String use(Item item){
         UsableItem usableItem = (UsableItem) item;
-        this.heal(usableItem.getHp());
+        String result = "";
+        if(usableItem.getHp() != 0){
+            this.heal(usableItem.getHp());
+            result += usableItem.getHp() + " HP ";
+        }
+        if(usableItem.getAttack() != 0){
+            int newAttack = usableItem.getAttack() + this.getStats().getBaseAttack();
+            this.getStats().setBaseAttack(newAttack);
+            result += usableItem.getAttack() + " ATK ";
+        }
+        if(usableItem.getDefence() != 0){
+            int newDefence = usableItem.getDefence() + this.getStats().getBaseDefense();
+            this.getStats().setBaseDefense(newDefence);
+            result += usableItem.getDefence() + " DEF ";
+        }
         this.getInventory().getItems().remove(item);
+        return result;
     }
 }
