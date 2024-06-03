@@ -37,7 +37,6 @@ public class Room extends StoryNode
      * @return String current id of the room
      */
     @Override
-    @JsonIgnore
     public String getID()
     {
         return "room_" + System.identityHashCode(this);

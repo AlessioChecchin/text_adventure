@@ -17,7 +17,6 @@ public abstract class NPC extends Entity {
         return defaultDialog;
     }
 
-    @JsonProperty("defaultDialog")
     public void setDefaultDialog(String defaultDialog) {
         this.defaultDialog = defaultDialog;
     }

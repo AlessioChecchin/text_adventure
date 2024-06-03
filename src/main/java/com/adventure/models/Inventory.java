@@ -49,14 +49,12 @@ public class Inventory
      * Set max weight the inventory can hold
      * @param maxWeight value of max weight
      */
-    @JsonProperty("maxWeight")
     public void setMaxWeight(int maxWeight) { this.maxWeight = maxWeight; }
 
     /**
      * Set the current weight in the inventory
      * @param currentWeight value of the current weight
      */
-    @JsonProperty("currentWeight")
     public void setCurrentWeight(int currentWeight) { this.currentWeight = currentWeight; }
 
     /**
@@ -64,7 +62,6 @@ public class Inventory
      * @param items ArrayList containing all the items
      * @throws TooMuchWeightException If the weight is over maxWeight
      */
-    @JsonProperty("items")
     public void setItems(ArrayList<Item> items) throws TooMuchWeightException
     {
         Objects.requireNonNull(items, "items cannot be null");

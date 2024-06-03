@@ -17,7 +17,6 @@ public class StoryNodeLink extends DefaultEdge
      * ID getter
      * @return String ID of the edge
      */
-    @JsonIgnore
     public String getID()
     {
         return "edge_" + System.identityHashCode(this);
@@ -27,7 +26,6 @@ public class StoryNodeLink extends DefaultEdge
      * Locked getter.
      * @return Locked flag.
      */
-    @JsonProperty("locked")
     public boolean getLocked()
     {
         return this.locked;
@@ -37,7 +35,6 @@ public class StoryNodeLink extends DefaultEdge
      * Key getter.
      * @return Key.
      */
-    @JsonProperty("key")
     public String getKey()
     {
         return this.key;
