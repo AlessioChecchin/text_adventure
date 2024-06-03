@@ -3,9 +3,12 @@ package com.adventure.models;
 import com.adventure.Main;
 import com.adventure.Resources;
 import com.adventure.controllers.BaseController;
+import com.adventure.deserializers.GameDeserializer;
 import com.adventure.models.nodes.StoryNode;
 import com.adventure.models.nodes.StoryNodeLink;
+import com.adventure.serializers.InventorySerializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,6 +22,7 @@ import org.jgrapht.graph.DirectedPseudograph;
 import java.util.Objects;
 import java.util.Properties;
 
+@JsonDeserialize(using = GameDeserializer.class)
 public class Game
 {
 
@@ -97,6 +101,15 @@ public class Game
         return this.id;
     }
 
+    /**
+     * Player getter
+     * @return Player playing
+     */
+    public Player getPlayer()
+    {
+        return this.player;
+    }
+
     //
     //  SETTERS
     //
@@ -130,6 +143,15 @@ public class Game
         this.stage = stage;
     }
 
+    /**
+     * Player setter.
+     * @param player Player.
+     */
+    public void setPlayer(Player player)
+    {
+        this.player = player;
+    }
+
     //
     //  OTHERS
     //
@@ -154,7 +176,7 @@ public class Game
             // Loads view.
             FXMLLoader fxmlLoader = new FXMLLoader(Resources.class.getResource(currentNode.getTargetView()));
             // Sets game font.
-            Font.loadFont(Objects.requireNonNull(Resources.class.getResource("assets/ubuntu.ttf")).toExternalForm(), -1);
+            Font.loadFont(Objects.requireNonNull(Resources.class.getResource("assets/retro_gaming.ttf")).toExternalForm(), -1);
 
             Parent root = fxmlLoader.load();
 
@@ -244,6 +266,11 @@ public class Game
      * Game identifier.
      */
     private String id;
+
+    /**
+     * Player.
+     */
+    private Player player;
 
     /**
      * Logger.

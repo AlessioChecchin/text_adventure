@@ -1,5 +1,9 @@
 package com.adventure.models.nodes;
 
+import com.adventure.models.Enemy;
+import com.adventure.models.Inventory;
+import com.adventure.models.NPC;
+import com.adventure.models.Stats;
 import com.adventure.models.items.Item;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,6 +28,8 @@ public class Room extends StoryNode
         this.description = description;
         this.items = new ArrayList<>();
         this.backgroundPath = "";
+        this.monster = new Enemy(new Inventory(10), new Stats());
+        this.completed = false;
     }
 
     /**
@@ -31,7 +37,6 @@ public class Room extends StoryNode
      * @return String current id of the room
      */
     @Override
-    @JsonIgnore
     public String getID()
     {
         return "room_" + System.identityHashCode(this);
@@ -109,6 +114,39 @@ public class Room extends StoryNode
         return this.backgroundPath;
     }
 
+    /**
+     * Monster getter
+     * @return Monster inside the room
+     */
+    public Enemy getMonster() {
+        return monster;
+    }
+
+    /**
+     * Monster setter
+     * @param monster Monster to set
+     */
+    public void setMonster(Enemy monster) {
+        this.monster = monster;
+    }
+
+    /**
+     * Completed setter.
+     * @param completed Sets if the room is completed.
+     */
+    public void setCompleted(boolean completed)
+    {
+        this.completed = completed;
+    }
+
+    /**
+     * Completed getter.
+     * @return If the room is completed.
+     */
+    public boolean getCompleted()
+    {
+        return this.completed;
+    }
 
     //
     // OBJECT OVERRIDE
@@ -137,7 +175,8 @@ public class Room extends StoryNode
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return Objects.hash(name, description, items);
     }
 
@@ -157,7 +196,17 @@ public class Room extends StoryNode
     private List<Item> items;
 
     /**
+     * Monster entity inside the room
+     */
+    private Enemy monster;
+
+    /**
      * Default background image path relative to resources.com.adventure.
      */
     private String backgroundPath;
+
+    /**
+     * Flag if the room is completed.
+     */
+    private boolean completed;
 }

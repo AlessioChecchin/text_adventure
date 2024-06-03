@@ -1,6 +1,7 @@
 package com.adventure.models.nodes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jgrapht.graph.DefaultEdge;
 
 import java.util.Objects;
@@ -16,8 +17,45 @@ public class StoryNodeLink extends DefaultEdge
      * ID getter
      * @return String ID of the edge
      */
-    @JsonIgnore
-    public String getID() { return "edge_" + System.identityHashCode(this); }
+    public String getID()
+    {
+        return "edge_" + System.identityHashCode(this);
+    }
+
+    /**
+     * Locked getter.
+     * @return Locked flag.
+     */
+    public boolean getLocked()
+    {
+        return this.locked;
+    }
+
+    /**
+     * Key getter.
+     * @return Key.
+     */
+    public String getKey()
+    {
+        return this.key;
+    }
+
+    /**
+     * Tries to unlock the link.
+     * @param key Key used to unlock.
+     * @return True if the link was unlocked successfully, false otherwise.
+     */
+    public boolean tryUnlock(String key)
+    {
+        if(key == null) return false;
+        if(key.equals(this.key))
+        {
+            this.locked = false;
+            return true;
+        }
+
+        return false;
+    }
 
     /**
      * Action getter
@@ -35,18 +73,33 @@ public class StoryNodeLink extends DefaultEdge
      */
     public void setAction(Action switchAction) { this.action = switchAction; }
 
-    //
-    //  VARIABLES
-    //
+    /**
+     * Sets flag locked.
+     * @param locked Flag value.
+     */
+    public void setLocked(boolean locked)
+    {
+        this.locked = locked;
+    }
 
     /**
-     * Action linked to this edge
+     * Key setter.
+     * @param key key.
      */
-    private Action action;
+    public void setKey(String key)
+    {
+        this.key = key;
+    }
+
+    //
+    // DEFAULT OVERRIDES.
+    //
 
     @Override
-    public boolean equals(Object edge){
-        if (edge == this) {
+    public boolean equals(Object edge)
+    {
+        if (edge == this)
+        {
             return true;
         }
 
@@ -57,7 +110,27 @@ public class StoryNodeLink extends DefaultEdge
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return Objects.hash(action);
     }
+
+    //
+    //  VARIABLES
+    //
+
+    /**
+     * Action linked to this edge
+     */
+    private Action action;
+
+    /**
+     * Link locked flag.
+     */
+    private boolean locked;
+
+    /**
+     * Key value to unlock the link.
+     */
+    private String key;
 }

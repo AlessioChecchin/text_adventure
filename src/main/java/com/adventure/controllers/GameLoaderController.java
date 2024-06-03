@@ -37,6 +37,9 @@ public class GameLoaderController implements BaseController
         parser.enable("loadGame");
         parser.enable("help");
         parser.enable("clear");
+        parser.enable("delete");
+        parser.enable("fight");
+        parser.enable("use");
 
         Label instructions = new Label();
         instructions.setText("Type help to view possible actions");
@@ -65,9 +68,13 @@ public class GameLoaderController implements BaseController
                 this.player.play();
             });
 
+            // We noticed that on some windows versions loading the video results in an unknown error.
+            // In these cases the system fallbacks into a textual visualization.
             this.player.setOnError(() -> {
                 logger.error("Error loading presentation video");
                 logger.debug("Falling back to textual view...");
+
+                this.loadFallback();
             });
         }
         else
@@ -76,13 +83,33 @@ public class GameLoaderController implements BaseController
         }
     }
 
+    private void loadFallback()
+    {
+        this.display.getGraphics().setAlignment(Pos.CENTER);
+
+        Label welcome = new Label();
+        welcome.setText("Welcome to Text Adventure");
+        welcome.setStyle("-fx-text-fill: white; -fx-font-size: 30px;");
+
+        Label instructions = new Label();
+        instructions.setText("Type 'help' to view possible actions!");
+        instructions.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 30px;");
+
+
+        this.display.getGraphics().getChildren().add(welcome);
+        this.display.getGraphics().getChildren().add(instructions);
+    }
 
     @Override
     public void shutdown()
     {
         logger.debug("Shutting down GameLoader...");
 
-        this.player.stop();
+        if(this.player != null)
+        {
+            this.player.stop();
+        }
+
         this.display.shutdown();
     }
 }

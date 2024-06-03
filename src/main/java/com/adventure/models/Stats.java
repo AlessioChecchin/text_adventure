@@ -7,6 +7,13 @@ public class Stats
     private int baseAttack;
     private int baseDefense;
 
+    public Stats(){
+        this.hp = 10;
+        this.maxHp = 20;
+        this.baseAttack = 2;
+        this.baseDefense = 0;
+    }
+
     /**
      * Hp setter.
      * @param hp Hp.

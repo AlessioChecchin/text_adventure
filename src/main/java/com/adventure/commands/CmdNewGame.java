@@ -32,7 +32,7 @@ public class CmdNewGame extends AbstractCommand
 
         logger.debug("Switching game...");
 
-        Game game = this.context.getStorageService().newGame();
+        Game game = this.context.getStorageService().newGame(username);
 
         Platform.runLater(() -> {
             // Forwards the stage to the new game.
@@ -40,6 +40,7 @@ public class CmdNewGame extends AbstractCommand
 
             this.context.setGame(game);
             game.load();
+            game.getPlayer().setName(username);
         });
 
     }

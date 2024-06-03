@@ -1,6 +1,6 @@
 .graphics
 {
-    -fx-font-family: 'ubuntu';
+    -fx-font-family: 'Retro Gaming';
 }
 
 .display-wrapper
@@ -32,9 +32,9 @@
 
 .console-output
 {
-    -fx-font-family: 'ubuntu';
+    -fx-font-family: 'Retro Gaming';
     -fx-text-fill: white;
-    -fx-font-size: 16;
+    -fx-font-size: 14;
 }
 
 .console-input-wrapper
@@ -52,7 +52,7 @@
 {
     -fx-background-color: transparent;
     -fx-text-fill: white;
-    -fx-font-family: 'ubuntu';
+    -fx-font-family: 'Retro Gaming';
     -fx-font-size: 16;
 }
 
@@ -64,10 +64,10 @@
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track
 {
-    -fx-background-color :transparent;
-    -fx-border-color :transparent;
+    -fx-background-color :black;
+    -fx-border-color : transparent;
     -fx-background-radius : 0.0em;
-    -fx-border-radius :2.0em;
+    -fx-border-radius :2.0em
 }
 
 .scroll-bar:horizontal .increment-button ,
@@ -100,14 +100,14 @@
 
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {
-    -fx-background-color :derive(black,90.0%);
+    -fx-background-color : #252525;
     -fx-background-insets : 2.0, 0.0, 0.0;
     -fx-background-radius : 2.0em;
 }
 
 .scroll-bar:horizontal .thumb:hover,
 .scroll-bar:vertical .thumb:hover {
-    -fx-background-color :derive(#4D4C4F,10.0%);
+    -fx-background-color : #333333;
     -fx-background-insets : 2.0, 0.0, 0.0;
     -fx-background-radius : 2.0em;
 }

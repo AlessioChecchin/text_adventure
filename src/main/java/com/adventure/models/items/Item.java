@@ -4,11 +4,14 @@ package com.adventure.models.items;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import java.util.Objects;
+
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = AttackItem.class, name = "AttackItem"),
         @JsonSubTypes.Type(value = DefenceItem.class, name = "DefenceItem"),
-        @JsonSubTypes.Type(value = UsableItem.class, name = "UsableItem")
+        @JsonSubTypes.Type(value = UsableItem.class, name = "UsableItem"),
+        @JsonSubTypes.Type(value = Key.class, name = "KeyItem")
 })
 public abstract class Item
 {
@@ -22,6 +25,7 @@ public abstract class Item
      */
     public Item(String name)
     {
+        Objects.requireNonNull(name, "name cannot be null");
         this.name = name;
         this.weight = 0;
     }
@@ -61,6 +65,11 @@ public abstract class Item
 
         Item a = (Item) o;
         return ((name.equals(a.getName())) && weight == a.getWeight());
+    }
+
+    public String toString()
+    {
+        return this.name;
     }
 
 

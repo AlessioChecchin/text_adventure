@@ -3,9 +3,7 @@ package com.adventure;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Paths;
 
 public class Resources
 {
@@ -26,6 +24,12 @@ public class Resources
         }
 
         return null;
+    }
+
+    // TODO : può lanciare NullPointerException
+    public static String getAssetsPath()
+    {
+        return Resources.class.getResource("assets").getPath();
     }
 
 }
