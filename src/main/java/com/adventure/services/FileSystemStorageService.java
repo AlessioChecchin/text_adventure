@@ -1,8 +1,6 @@
 package com.adventure.services;
 
 import com.adventure.Resources;
-import com.adventure.deserializers.GameDeserializer;
-import com.adventure.deserializers.GraphDeserializer;
 import com.adventure.exceptions.GameStorageException;
 import com.adventure.models.Game;
 import com.adventure.models.Inventory;
@@ -92,18 +90,16 @@ public class FileSystemStorageService implements StorageService
     }
 
     @Override
-    public Game loadGame(String gameId) throws NoSuchElementException, GameStorageException
+    public Game loadGame(String gameId) throws GameStorageException
     {
         File json = new File(this.savePath + gameId + ".json");
         if(! json.exists())
-            throw new NoSuchElementException("Game with id " + gameId + " does not exist");
+            throw new GameStorageException("Game with id " + gameId + " does not exist");
 
         //  Creates game from json
         ObjectMapper mapper = new ObjectMapper();
         try {
             return mapper.readValue(json, Game.class);
-        } catch (JsonProcessingException e) {
-            throw new GameStorageException(e.getMessage());
         } catch (IOException e) {
             throw new GameStorageException(e.getMessage());
         }
