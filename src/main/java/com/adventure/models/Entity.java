@@ -78,6 +78,5 @@ abstract public class Entity
     }
 
     //  Necessary for deserialization of entities
-    @JsonProperty("dodge")
     private void setDodge(int dodges) { this.dodge = dodges; }
 }

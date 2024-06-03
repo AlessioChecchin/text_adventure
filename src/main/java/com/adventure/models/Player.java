@@ -23,7 +23,6 @@ public class Player extends Entity
         this.setName(name);
     }
 
-    @JsonIgnore
     public void setName(String name)
     {
         Objects.requireNonNull(name, "Can't set a null name");

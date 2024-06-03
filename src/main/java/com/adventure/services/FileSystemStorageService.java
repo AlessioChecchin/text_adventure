@@ -98,15 +98,8 @@ public class FileSystemStorageService implements StorageService
         if(! json.exists())
             throw new NoSuchElementException("Game with id " + gameId + " does not exist");
 
+        //  Creates game from json
         ObjectMapper mapper = new ObjectMapper();
-
-        //TODO Controlla se queste righe si possono togliere e non danno problemi
-        //TODO Notare che l'utilizzo di GameDeserializer è impostato direttamente sulla classe Game
-        //mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-        //SimpleModule module = new SimpleModule();
-        //module.addDeserializer(Game.class, new GameDeserializer());
-        //mapper.registerModule(module);
-
         try {
             return mapper.readValue(json, Game.class);
         } catch (JsonProcessingException e) {
