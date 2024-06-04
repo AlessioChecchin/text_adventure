@@ -1,5 +1,8 @@
 package com.adventure.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Enemy extends NPC{
 
     /**
@@ -8,7 +11,9 @@ public class Enemy extends NPC{
      * @param inventory Enemy inventory.
      * @param stats     Enemy stats.
      */
-    public Enemy(Inventory inventory, Stats stats) {
+    @JsonCreator
+    public Enemy(@JsonProperty("inventory") Inventory inventory, @JsonProperty("stats") Stats stats)
+    {
         super(inventory, stats);
     }
 }

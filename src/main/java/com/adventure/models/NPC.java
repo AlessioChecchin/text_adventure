@@ -1,5 +1,7 @@
 package com.adventure.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public abstract class NPC extends Entity {
     /**
      * Entity constructor.

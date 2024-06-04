@@ -1,5 +1,6 @@
 package com.adventure.models.nodes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
@@ -33,6 +34,7 @@ public abstract class StoryNode
      * Get the current view
      * @return String current view
      */
+   // @JsonIgnore
     public String getTargetView() { return this.targetView; }
 
     /**

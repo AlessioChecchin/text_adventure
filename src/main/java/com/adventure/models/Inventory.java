@@ -4,6 +4,9 @@ import com.adventure.models.items.Equipable;
 import com.adventure.models.items.*;
 import com.adventure.exceptions.TooMuchWeightException;
 import com.adventure.serializers.InventorySerializer;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.util.ArrayList;
@@ -22,7 +25,8 @@ public class Inventory
      * </ul>
      * @param maxWeight Max weight the inventory can have
      */
-    public Inventory(int maxWeight)
+    @JsonCreator
+    public Inventory(@JsonProperty("maxWeight") int maxWeight)
     {
         this.items = new ArrayList<>();
 
@@ -123,6 +127,12 @@ public class Inventory
             this.defenceItem = (DefenceItem) equipable;
     }
 
+    //  Added those methods in order to make Deserialization easier
+    @JsonProperty("equippedAttackItem")
+    private void setAttackItem(AttackItem equipable) { this.attackItem = equipable; }
+    @JsonProperty("equippedDefenceItem")
+    private void setDefenceItem(DefenceItem equipable) { this.defenceItem = equipable; }
+
     /**
      * Unequip an attack or defense item
      * @param type Type of the item to unequip (ATTACK or DEFENSE)
@@ -171,8 +181,10 @@ public class Inventory
     }
 
     private AttackItem attackItem;
+    @JsonIgnore
     private final AttackItem defaultAtkItem;
     private DefenceItem defenceItem;
+    @JsonIgnore
     private final DefenceItem defaultDefItem;
     private ArrayList<Item> items;
     private int maxWeight;

@@ -69,8 +69,15 @@ public class GraphSerializer extends StdSerializer<Graph>
             jsonGenerator.writeFieldName("to");
             jsonGenerator.writeString(((Room)graph.getEdgeTarget(edge)).getID());
 
-            jsonGenerator.writeFieldName("data");
+            jsonGenerator.writeFieldName("action");
             jsonGenerator.writeObject(((StoryNodeLink)edge).getAction());
+
+            jsonGenerator.writeFieldName("locked");
+            jsonGenerator.writeBoolean(((StoryNodeLink)edge).getLocked());
+
+            jsonGenerator.writeFieldName("key");
+            jsonGenerator.writeString(((StoryNodeLink)edge).getKey());
+
 
             jsonGenerator.writeEndObject();
 

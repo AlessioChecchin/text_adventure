@@ -1,6 +1,7 @@
 package com.adventure.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
@@ -75,4 +76,7 @@ abstract public class Entity
     {
         this.stats.setHp(this.stats.getHp() - damage);
     }
+
+    //  Necessary for deserialization of entities
+    private void setDodge(int dodges) { this.dodge = dodges; }
 }

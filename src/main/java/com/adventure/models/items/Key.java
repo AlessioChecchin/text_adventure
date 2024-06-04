@@ -1,20 +1,25 @@
 package com.adventure.models.items;
 
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 public class Key extends Item
 {
+    @JsonIgnore
     private final String value;
 
-    public Key(String key)
+    public Key(@JsonProperty("value") String key)
     {
         super("key");
         Objects.requireNonNull(key, "key cannot be null");
         this.value = key;
     }
 
-    public String getKey()
+    public String getValue()
     {
         return this.value;
     }

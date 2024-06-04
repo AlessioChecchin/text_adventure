@@ -1,6 +1,7 @@
 package com.adventure.models.nodes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jgrapht.graph.DefaultEdge;
 
 import java.util.Objects;
@@ -16,7 +17,6 @@ public class StoryNodeLink extends DefaultEdge
      * ID getter
      * @return String ID of the edge
      */
-    @JsonIgnore
     public String getID()
     {
         return "edge_" + System.identityHashCode(this);
