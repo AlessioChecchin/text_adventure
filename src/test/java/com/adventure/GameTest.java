@@ -1,15 +1,12 @@
 package com.adventure;
 
 import com.adventure.models.Game;
-import com.adventure.nodes.Action;
-import com.adventure.nodes.Room;
-import com.adventure.nodes.StoryNode;
-import com.adventure.nodes.StoryNodeLink;
-import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
+import com.adventure.models.nodes.Action;
+import com.adventure.models.nodes.Room;
+import com.adventure.models.nodes.StoryNode;
+import com.adventure.models.nodes.StoryNodeLink;
 import javafx.stage.Stage;
 import org.jgrapht.Graph;
-import org.jgrapht.graph.DirectedAcyclicGraph;
 import org.jgrapht.graph.DirectedPseudograph;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +14,6 @@ import org.junit.jupiter.api.Test;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
-import java.util.TreeSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -83,6 +79,7 @@ class GameTest {
         Room room3 = new Room("Test","Test");
         Room room4 = new Room("Test","Test");
 
+        //test room equals
         assertEquals(room3, room4, "Rooms not matching");
 
         game.getGameGraph().addVertex(room3);
@@ -94,8 +91,6 @@ class GameTest {
         StoryNodeLink link2 = new StoryNodeLink();
         link2.setAction(new Action("Ciao"));
 
-        //assertEquals(link1, link2, "Links not matching");
-
         testGraph.addEdge(room1, room2, link1);
         game.getGameGraph().addEdge(room3, room4, link2);
 
@@ -105,11 +100,14 @@ class GameTest {
         Set<Room> b = new HashSet<>();
         b.add(room2);
 
-        assertEquals(testGraph.vertexSet(), game.getGameGraph().vertexSet(), "negro");
+        //test hashcode room
+        assertEquals(testGraph.vertexSet(), game.getGameGraph().vertexSet(), "problems with equals or hash code for rooms");
 
-        //assertEquals(link1, link2, "Links not matching");
-        //test
-        //assertEquals(testGraph, game.getGameGraph(), "Problems with equals method");
+        //test hashcode and equals for edges
+        assertEquals(link1, link2, "Links not matching");
+
+        //test equals for Graphs
+        assertEquals(testGraph, game.getGameGraph(), "Problems with equals method");
     }
 
 

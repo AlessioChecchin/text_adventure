@@ -1,12 +1,19 @@
 package com.adventure.models;
 
-import com.adventure.interfaces.Equipable;
+import com.adventure.models.items.Equipable;
 import com.adventure.models.items.*;
 import com.adventure.exceptions.TooMuchWeightException;
+import com.adventure.serializers.InventorySerializer;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
-
+@JsonSerialize(using = InventorySerializer.class)
 public class Inventory
 {
     /**
@@ -18,8 +25,11 @@ public class Inventory
      * </ul>
      * @param maxWeight Max weight the inventory can have
      */
-    public Inventory(int maxWeight)
+    @JsonCreator
+    public Inventory(@JsonProperty("maxWeight") int maxWeight)
     {
+        this.items = new ArrayList<>();
+
         this.maxWeight = maxWeight;
         this.currentWeight = 0;
 
@@ -50,34 +60,45 @@ public class Inventory
     /**
      * Set all items in the inventory
      * @param items ArrayList containing all the items
+     * @throws TooMuchWeightException If the weight is over maxWeight
      */
-    public void setItems(ArrayList<Item> items) { this.items = items; }
+    public void setItems(ArrayList<Item> items) throws TooMuchWeightException
+    {
+        Objects.requireNonNull(items, "items cannot be null");
+
+        this.items = new ArrayList<>();
+
+        for(Item itm: items)
+        {
+            this.addItem(itm);
+        }
+    }
 
     //
     //  GETTERS
     //
 
     /**
-     * Get the equiped attack item
-     * @return AttakItem equiped
+     * Get the equipped attack item
+     * @return AttakItem equipped
      */
     public AttackItem getEquipedAttackItem() { return this.attackItem; }
 
     /**
-     * Get the equiped defence item
-     * @return DefenceItem equiped
+     * Get the equipped defence item
+     * @return DefenceItem equipped
      */
     public DefenceItem getEquipedDefenceItem() { return this.defenceItem; }
 
     /**
      * Get the value of max weight the inventory can handle
-     * @return int maxweight of the inventory
+     * @return max weight of the inventory
      */
     public int getMaxWeight()  { return this.maxWeight; }
 
     /**
      * Get the value of the current weight in the inventory
-     * @return int current weight in the inventory
+     * @return current weight in the inventory
      */
     public int getCurrentWeight() { return this.currentWeight; }
 
@@ -85,7 +106,8 @@ public class Inventory
      * Get a copy of the ArrayList containing all the items
      * @return ArrayList with all items of the inventory
      */
-    public ArrayList<Item> getItems() { return new ArrayList<>(this.items); }
+    public ArrayList<Item> getItems() { return this.items; }
+            //new ArrayList<>(this.items); }
 
     //
     //  METHODS
@@ -95,19 +117,27 @@ public class Inventory
      * Equip an equipable item
      * @param equipable Item to equip
      */
-    void equipItem(Equipable equipable)
+    public void equipItem(Equipable equipable)
     {
+        if( !items.contains((Item) equipable) )
+            throw new NoSuchElementException();
         if(equipable instanceof AttackItem)
             this.attackItem = (AttackItem) equipable;
         if(equipable instanceof DefenceItem)
             this.defenceItem = (DefenceItem) equipable;
     }
 
+    //  Added those methods in order to make Deserialization easier
+    @JsonProperty("equippedAttackItem")
+    private void setAttackItem(AttackItem equipable) { this.attackItem = equipable; }
+    @JsonProperty("equippedDefenceItem")
+    private void setDefenceItem(DefenceItem equipable) { this.defenceItem = equipable; }
+
     /**
      * Unequip an attack or defense item
      * @param type Type of the item to unequip (ATTACK or DEFENSE)
      */
-    void unequipItem(equipType type)
+    public void unequipItem(equipType type)
     {
         if(type == equipType.ATTACK)
             this.attackItem = this.defaultAtkItem;
@@ -145,14 +175,16 @@ public class Inventory
      * @param item Item to be checked
      * @return True if item can be added. False otherwise
      */
-    public boolean canAdd(Item item)
+    private boolean canAdd(Item item)
     {
         return this.currentWeight + item.getWeight() <= this.maxWeight;
     }
 
     private AttackItem attackItem;
+    @JsonIgnore
     private final AttackItem defaultAtkItem;
     private DefenceItem defenceItem;
+    @JsonIgnore
     private final DefenceItem defaultDefItem;
     private ArrayList<Item> items;
     private int maxWeight;

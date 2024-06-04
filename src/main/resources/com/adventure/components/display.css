@@ -1,8 +1,6 @@
 .graphics
 {
-    -fx-background-image: url('../assets/castle.png');
-    -fx-background-size: cover;
-    -fx-font-family: 'ubuntu';
+    -fx-font-family: 'Retro Gaming';
 }
 
 .display-wrapper
@@ -12,8 +10,8 @@
 
 .separator
 {
-    -fx-border-color: orange;
-    -fx-border-width: 3;
+    -fx-border-color: #222222;
+    -fx-border-width: 1;
     -fx-border-style: solid;
 }
 
@@ -34,9 +32,9 @@
 
 .console-output
 {
-    -fx-font-family: 'ubuntu';
-    -fx-background-color: orange;
-    -fx-font-size: 16;
+    -fx-font-family: 'Retro Gaming';
+    -fx-text-fill: white;
+    -fx-font-size: 14;
 }
 
 .console-input-wrapper
@@ -54,7 +52,7 @@
 {
     -fx-background-color: transparent;
     -fx-text-fill: white;
-    -fx-font-family: 'ubuntu';
+    -fx-font-family: 'Retro Gaming';
     -fx-font-size: 16;
 }
 
@@ -66,10 +64,10 @@
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track
 {
-    -fx-background-color :transparent;
-    -fx-border-color :transparent;
+    -fx-background-color :black;
+    -fx-border-color : transparent;
     -fx-background-radius : 0.0em;
-    -fx-border-radius :2.0em;
+    -fx-border-radius :2.0em
 }
 
 .scroll-bar:horizontal .increment-button ,
@@ -102,14 +100,14 @@
 
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {
-    -fx-background-color :derive(black,90.0%);
+    -fx-background-color : #252525;
     -fx-background-insets : 2.0, 0.0, 0.0;
     -fx-background-radius : 2.0em;
 }
 
 .scroll-bar:horizontal .thumb:hover,
 .scroll-bar:vertical .thumb:hover {
-    -fx-background-color :derive(#4D4C4F,10.0%);
+    -fx-background-color : #333333;
     -fx-background-insets : 2.0, 0.0, 0.0;
     -fx-background-radius : 2.0em;
 }

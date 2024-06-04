@@ -17,46 +17,55 @@ public class StringPropertyWriter extends StringWriter
 
     public void write(int c) {
         super.write(c);
-        this.flush();
+        this.out();
     }
 
-    public void write(char[] cbuf, int off, int len) {
-        super.write(cbuf, off, len);
-        this.flush();
+    public void write(char[] buf, int off, int len) {
+        super.write(buf, off, len);
+        this.out();
     }
 
     public void write(String str)
     {
         super.write(str);
-        this.flush();
+        this.out();
     }
 
     public void write(String str, int off, int len)
     {
         super.write(str, off, len);
-        this.flush();
+        this.out();
     }
 
     public StringWriter append(CharSequence csq) {
         StringWriter sw = super.append(csq);
-        this.flush();
+        this.out();
         return sw;
     }
 
     public StringWriter append(CharSequence csq, int start, int end) {
         StringWriter sw = super.append(csq, start, end);
-        this.flush();
+        this.out();
         return sw;
     }
 
     public StringWriter append(char c) {
         StringWriter sw = super.append(c);
-        this.flush();
+        this.out();
         return sw;
     }
 
+    protected void out()
+    {
+        Platform.runLater(() -> prop.set(this.toString()));
+    }
+
+    /**
+     * Resets the stream.
+     */
     @Override
     public void flush() {
-        Platform.runLater(() -> prop.set(this.toString()));
+        this.out();
+        this.getBuffer().setLength(0);
     }
 }
