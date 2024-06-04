@@ -2,6 +2,10 @@ package com.adventure.components;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.adventure.Resources;
 import com.adventure.commands.CommandParser;
 import com.adventure.utils.StringPropertyWriter;
 import com.adventure.commands.Command;
@@ -66,7 +70,32 @@ public class Display extends GridPane implements BaseController
      * @param event Input event.
      * @throws IOException IOException
      */
-    public void onKeyPressed(KeyEvent event) throws IOException {
+    public void onKeyPressed(KeyEvent event) throws IOException
+    {
+        if(event.getCode() == KeyCode.TAB)
+        {
+            String partialCommand = consolePrompt.getText();
+
+            CommandParser parser = CommandParser.getInstance();
+            List<String> availableCommands = parser.getCommands();
+
+            ArrayList<String> possibleCommands = new ArrayList<>();
+            for(String command : availableCommands)
+                if(command.startsWith(partialCommand))
+                    possibleCommands.add(command);
+
+            if(possibleCommands.size() == 1 )
+            {
+                this.consolePrompt.setText(possibleCommands.get(0));
+                this.consolePrompt.end();
+            }
+            else
+            {
+                String allCommandsString = String.join("\n", possibleCommands);
+                this.consoleOutput.setText(allCommandsString);
+            }
+
+        }
 
         // Checks if the command is complete.
         if( event.getCode() == KeyCode.ENTER )

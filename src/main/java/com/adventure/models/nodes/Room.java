@@ -96,6 +96,18 @@ public class Room extends StoryNode
     }
 
     /**
+     * Remove an item from the room
+     * @param item Item to be removed
+     */
+    public Item removeItem(Item item)
+    {
+        if(! this.items.contains(item))
+            return null;
+        this.items.remove(item);
+        return item;
+    }
+
+    /**
      * Background path setter.
      * @param backgroundPath Background path relative to resources.com.adventure.
      */

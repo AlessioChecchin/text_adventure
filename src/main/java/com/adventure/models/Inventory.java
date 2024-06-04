@@ -107,7 +107,7 @@ public class Inventory
      * @return ArrayList with all items of the inventory
      */
     public ArrayList<Item> getItems() { return this.items; }
-            //new ArrayList<>(this.items); }
+
 
     //
     //  METHODS
@@ -156,6 +156,20 @@ public class Inventory
             throw new TooMuchWeightException("Cannot add an item to the inventory");
         this.items.add(item);
         this.currentWeight += item.getWeight();
+    }
+
+    /**
+     * Method to obtain an item instance from its name
+     * @param name Name of the item to search
+     * @return ArrayList with all the items with the same name
+     */
+    public ArrayList<Item> itemsByName(String name)
+    {
+        ArrayList<Item> matchItems = new ArrayList<>();
+        for(Item item: this.items)
+            if(item.getName().equals(name))
+                matchItems.add(item);
+        return matchItems;
     }
 
     /**
