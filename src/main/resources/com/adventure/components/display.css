@@ -6,6 +6,7 @@
 .display-wrapper
 {
     -fx-background-color: black;
+    -fx-padding: 5px;
 }
 
 .separator
@@ -27,7 +28,6 @@
 
 .console-output-wrapper
 {
-    -fx-padding: 10;
 }
 
 .console-output
@@ -39,8 +39,8 @@
 
 .console-input-wrapper
 {
-    -fx-padding: 10;
-
+    -fx-font-family: 'Retro Gaming';
+    -fx-font-size: 14;
 }
 
 .console-input-prefix
@@ -52,8 +52,6 @@
 {
     -fx-background-color: transparent;
     -fx-text-fill: white;
-    -fx-font-family: 'Retro Gaming';
-    -fx-font-size: 16;
 }
 
 
