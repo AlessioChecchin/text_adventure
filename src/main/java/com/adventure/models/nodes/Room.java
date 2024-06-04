@@ -164,14 +164,15 @@ public class Room extends StoryNode
 
     @Override
     public boolean equals(Object room){
-        if (room == this) {
+        if (room == this)
+        {
             return true;
         }
 
         if (room.getClass() != this.getClass()) return false;
 
         Room room1 = (Room) room;
-        return (room1.getName().equals(this.name) && (room1.getDescription().equals(this.description))) /*&& (room1.getItems().equals(this.items)))*/;
+        return (room1.getName().equals(this.name) && (room1.getDescription().equals(this.description))) && (room1.getItems().equals(this.items));
     }
 
     @Override

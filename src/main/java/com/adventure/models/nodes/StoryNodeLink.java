@@ -9,6 +9,14 @@ import java.util.Objects;
 public class StoryNodeLink extends DefaultEdge
 {
 
+    public StoryNodeLink()
+    {
+        super();
+        this.action = new Action("");
+        this.key = "";
+        this.locked = false;
+    }
+
     //
     //  GETTERS
     //
@@ -61,7 +69,10 @@ public class StoryNodeLink extends DefaultEdge
      * Action getter
      * @return Action linked with this edge
      */
-    public Action getAction() { return this.action; }
+    public Action getAction()
+    {
+        return this.action;
+    }
 
     //
     //  SETTERS
@@ -71,7 +82,11 @@ public class StoryNodeLink extends DefaultEdge
      * Link another action to this edge
      * @param switchAction new action to link to the edge
      */
-    public void setAction(Action switchAction) { this.action = switchAction; }
+    public void setAction(Action switchAction)
+    {
+        Objects.requireNonNull(switchAction, "switchAction cant be null");
+        this.action = switchAction;
+    }
 
     /**
      * Sets flag locked.
@@ -83,11 +98,12 @@ public class StoryNodeLink extends DefaultEdge
     }
 
     /**
-     * Key setter.
+     * Key setter. If a key is set, then the edge is automatically locked.
      * @param key key.
      */
     public void setKey(String key)
     {
+        this.locked = true;
         this.key = key;
     }
 
