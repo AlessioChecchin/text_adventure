@@ -11,7 +11,6 @@ import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
 import com.adventure.models.nodes.StoryNodeLink;
 import com.adventure.deserializers.GameDeserializer;
-import com.adventure.deserializers.GraphDeserializer;
 import com.adventure.serializers.GraphSerializer;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -113,7 +112,6 @@ public class BucketStorageService implements StorageService
 
         mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         SimpleModule module = new SimpleModule();
-        module.addDeserializer(Graph.class, new GraphDeserializer());
         module.addDeserializer(Game.class, new GameDeserializer());
         mapper.registerModule(module);
 

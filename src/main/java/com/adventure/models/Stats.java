@@ -86,4 +86,17 @@ public class Stats
     {
         return this.baseDefense;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+            if (obj == this) {
+                return true;
+            }
+
+            if (obj.getClass() != this.getClass()) return false;
+
+            Stats stats = (Stats) obj;
+            return ((this.baseDefense == stats.getBaseDefense()) && (this.baseAttack == stats.getBaseAttack())
+                    && (this.hp == stats.getHp()) && (this.maxHp == stats.getMaxHp()));
+    }
 }

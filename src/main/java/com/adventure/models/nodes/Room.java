@@ -96,6 +96,18 @@ public class Room extends StoryNode
     }
 
     /**
+     * Remove an item from the room
+     * @param item Item to be removed
+     */
+    public Item removeItem(Item item)
+    {
+        if(! this.items.contains(item))
+            return null;
+        this.items.remove(item);
+        return item;
+    }
+
+    /**
      * Background path setter.
      * @param backgroundPath Background path relative to resources.com.adventure.
      */
@@ -162,23 +174,6 @@ public class Room extends StoryNode
         return name + ", " + description + ", " + items.size();
     }
 
-    @Override
-    public boolean equals(Object room){
-        if (room == this) {
-            return true;
-        }
-
-        if (room.getClass() != this.getClass()) return false;
-
-        Room room1 = (Room) room;
-        return (room1.getName().equals(this.name) && (room1.getDescription().equals(this.description))) /*&& (room1.getItems().equals(this.items)))*/;
-    }
-
-    @Override
-    public int hashCode()
-    {
-        return Objects.hash(name, description, items);
-    }
 
     /**
      * Name of the room

@@ -107,7 +107,7 @@ public class Inventory
      * @return ArrayList with all items of the inventory
      */
     public ArrayList<Item> getItems() { return this.items; }
-            //new ArrayList<>(this.items); }
+
 
     //
     //  METHODS
@@ -159,6 +159,20 @@ public class Inventory
     }
 
     /**
+     * Method to obtain an item instance from its name
+     * @param name Name of the item to search
+     * @return ArrayList with all the items with the same name
+     */
+    public ArrayList<Item> itemsByName(String name)
+    {
+        ArrayList<Item> matchItems = new ArrayList<>();
+        for(Item item: this.items)
+            if(item.getName().equals(name))
+                matchItems.add(item);
+        return matchItems;
+    }
+
+    /**
      * Drop an item and remove it from the inventory
      * @param item Item to be removed
      */
@@ -178,6 +192,15 @@ public class Inventory
     private boolean canAdd(Item item)
     {
         return this.currentWeight + item.getWeight() <= this.maxWeight;
+    }
+
+    public boolean equals(Object obj){
+        if (this == obj) { return true; }
+        if (obj == null || this.getClass() != obj.getClass()) { return false; }
+
+        Inventory inventory = (Inventory) obj;
+        return ((this.attackItem.equals(inventory.getEquipedAttackItem())) && (this.defenceItem.equals(inventory.getEquipedDefenceItem()))
+        && (this.items.equals(inventory.getItems())) && (this.maxWeight == inventory.getMaxWeight()));
     }
 
     private AttackItem attackItem;

@@ -55,11 +55,7 @@ public class AttackItem extends Item implements Equipable
     @Override
     public String toString()
     {
-        StringBuilder result = new StringBuilder();
-        result.append("name \t").append(name).append("\n");
-        result.append("adder\t").append(additionalAttack).append("\n");
-        result.append("multi\t").append(attackMultiplier).append("\n");
-        return result.toString();
+        return String.format("%s (atk: %d, %f)", this.getName(), this.getAdder(), this.getMultiplier());
     }
 
     private int additionalAttack;

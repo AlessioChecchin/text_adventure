@@ -55,16 +55,29 @@ public abstract class Item
      */
     public int getWeight() { return this.weight; }
 
-    public boolean equals(Object o) {
-        if (this == o) {
+    /**
+     * Equals method.
+     * @param o
+     * @return
+     */
+    public boolean equals(Object o)
+    {
+        if (this == o)
+        {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (o == null || getClass() != o.getClass())
+        {
             return false;
         }
 
         Item a = (Item) o;
         return ((name.equals(a.getName())) && weight == a.getWeight());
+    }
+
+    public int hashCode()
+    {
+        return Objects.hash(name, weight);
     }
 
     public String toString()

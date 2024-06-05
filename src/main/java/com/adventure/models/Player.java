@@ -2,6 +2,7 @@ package com.adventure.models;
 
 import com.adventure.models.items.Item;
 import com.adventure.models.items.UsableItem;
+import com.adventure.models.nodes.Room;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -34,9 +35,31 @@ public class Player extends Entity
         return name;
     }
 
-    public void use(Item item){
+    public String use(Item item){
         UsableItem usableItem = (UsableItem) item;
-        this.heal(usableItem.getHp());
+        String result = "";
+        if(usableItem.getHp() != 0){
+            this.heal(usableItem.getHp());
+            result += usableItem.getHp() + " HP ";
+        }
+        if(usableItem.getAttack() != 0){
+            int newAttack = usableItem.getAttack() + this.getStats().getBaseAttack();
+            this.getStats().setBaseAttack(newAttack);
+            result += usableItem.getAttack() + " ATK ";
+        }
+        if(usableItem.getDefence() != 0){
+            int newDefence = usableItem.getDefence() + this.getStats().getBaseDefense();
+            this.getStats().setBaseDefense(newDefence);
+            result += usableItem.getDefence() + " DEF ";
+        }
         this.getInventory().getItems().remove(item);
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Player player = (Player) obj;
+
+        return ((super.equals(player)) && (this.name.equals(player.getName())));
     }
 }
