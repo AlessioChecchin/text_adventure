@@ -88,6 +88,9 @@ public class Display extends GridPane implements BaseController
                 }
                 else
                 {
+                    // Clears previous command.
+                    this.consoleOutput.setText("");
+
                     // Generating streams.
                     PrintWriter writer = new PrintWriter(new StringPropertyWriter(this.consoleOutput.textProperty()));
                     cmd.setWriter(writer);

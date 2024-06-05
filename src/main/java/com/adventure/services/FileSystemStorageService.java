@@ -219,7 +219,7 @@ public class FileSystemStorageService implements StorageService
         g.addEdge(room2, room3, edge23);
 
         StoryNodeLink edge32 = new StoryNodeLink();
-        edge23.setAction(new Action("east"));
+        edge32.setAction(new Action("east"));
         g.addEdge(room3, room2, edge32);
 
         StoryNodeLink edge24 = new StoryNodeLink();
@@ -247,7 +247,6 @@ public class FileSystemStorageService implements StorageService
 
         StoryNodeLink edge65 = new StoryNodeLink();
         edge65.setAction(new Action("south"));
-        edge65.setKey(key6);
         g.addEdge(room6, room5, edge65);
 
         StoryNodeLink edge27 = new StoryNodeLink();

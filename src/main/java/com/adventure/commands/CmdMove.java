@@ -24,7 +24,7 @@ public class CmdMove extends AbstractCommand
         Game game = this.context.getGame();
 
         Graph<StoryNode, StoryNodeLink> g = game.getGameGraph();
-        Set<StoryNodeLink> outgoingEdges = g.outgoingEdgesOf(game.getCurrentNode()); // W Prof. dei Guai!
+        Set<StoryNodeLink> outgoingEdges = g.outgoingEdgesOf(game.getCurrentNode());
 
         // Checking outgoing edges to see if the direction is allowed.
         for(StoryNodeLink outgoingEdge: outgoingEdges)

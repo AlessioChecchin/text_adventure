@@ -128,7 +128,7 @@ public class StoryNodeLink extends DefaultEdge
     @Override
     public int hashCode()
     {
-        return Objects.hash(action);
+        return Objects.hash(action, locked, key);
     }
 
     //

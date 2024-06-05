@@ -22,16 +22,6 @@ public class CmdWai extends AbstractCommand
 
             Graph<StoryNode, StoryNodeLink> g = this.context.getGame().getGameGraph();
 
-            System.out.println(room.getItems().hashCode() + " " + Objects.hash(room.getName(), room.getDescription(), room.getItems()));
-
-            for(StoryNode node: g.vertexSet())
-            {
-                Room r = (Room)node;
-                System.out.println(r.getDescription() + " " + (r.hashCode() == room.hashCode()) + " " + r.equals(currentNode) + " " + Objects.hash(r.getName(), r.getDescription(), r.getItems()));
-            }
-
-            System.out.println(g.vertexSet().contains(currentNode));
-
             for(StoryNodeLink link: g.outgoingEdgesOf(currentNode))
             {
                 this.writer.printf("%s, locked=%s%n", link.getAction().getActionName(), link.getLocked() ? "true" : "false");
