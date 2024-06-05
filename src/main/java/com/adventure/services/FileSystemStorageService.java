@@ -135,6 +135,8 @@ public class FileSystemStorageService implements StorageService
 
         game.setPlayer(new Player(playerName, playerInventory, stats));
 
+        game.getPlayer().getInventory().addItem(new UsableItem("Pozione"));
+
         String key1 = "Level 1";
         String key2 = "Level 2";
         String key3 = "Level 3";
