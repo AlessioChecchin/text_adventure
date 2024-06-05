@@ -2,6 +2,7 @@ package com.adventure.models;
 
 import com.adventure.models.items.Item;
 import com.adventure.models.items.UsableItem;
+import com.adventure.models.nodes.Room;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -38,5 +39,12 @@ public class Player extends Entity
         UsableItem usableItem = (UsableItem) item;
         this.heal(usableItem.getHp());
         this.getInventory().getItems().remove(item);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Player player = (Player) obj;
+
+        return ((super.equals(player)) && (this.name.equals(player.getName())));
     }
 }

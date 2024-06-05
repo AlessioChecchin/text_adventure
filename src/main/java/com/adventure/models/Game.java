@@ -4,6 +4,7 @@ import com.adventure.Main;
 import com.adventure.Resources;
 import com.adventure.controllers.BaseController;
 import com.adventure.deserializers.GameDeserializer;
+import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
 import com.adventure.models.nodes.StoryNodeLink;
 import com.adventure.serializers.InventorySerializer;
@@ -224,6 +225,22 @@ public class Game
         {
             this.currentController.shutdown();
         }
+    }
+
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (obj == null || obj.getClass() != this.getClass()) return false;
+
+        Game game = (Game) obj;
+        Room check = (Room) this.currentNode;
+        Room check2 = (Room) game.getCurrentNode();
+        boolean result;
+        result = ((this.gameGraph.equals(game.getGameGraph())) && (check.equals(check2))
+                && (this.player.equals(game.getPlayer())) && (this.id.equals(game.getId())));
+        return result;
     }
 
     //

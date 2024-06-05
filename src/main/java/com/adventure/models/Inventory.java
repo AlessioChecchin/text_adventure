@@ -180,6 +180,15 @@ public class Inventory
         return this.currentWeight + item.getWeight() <= this.maxWeight;
     }
 
+    public boolean equals(Object obj){
+        if (this == obj) { return true; }
+        if (obj == null || this.getClass() != obj.getClass()) { return false; }
+
+        Inventory inventory = (Inventory) obj;
+        return ((this.attackItem.equals(inventory.getEquipedAttackItem())) && (this.defenceItem.equals(inventory.getEquipedDefenceItem()))
+        && (this.items.equals(inventory.getItems())) && (this.maxWeight == inventory.getMaxWeight()));
+    }
+
     private AttackItem attackItem;
     @JsonIgnore
     private final AttackItem defaultAtkItem;
