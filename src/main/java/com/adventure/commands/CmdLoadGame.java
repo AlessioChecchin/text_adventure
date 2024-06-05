@@ -1,5 +1,6 @@
 package com.adventure.commands;
 
+import com.adventure.exceptions.GameStorageException;
 import com.adventure.models.Game;
 import javafx.application.Platform;
 
@@ -16,11 +17,8 @@ public class CmdLoadGame extends AbstractCommand
             Game loadedGame;
             try {
                 loadedGame = this.context.getStorageService().loadGame(gameName);
-            } catch (NoSuchElementException e) {
-                writer.println("Game with name " + gameName + " not found");
-                return;
-            } catch (Exception e) {
-                System.err.println(e);
+            } catch (GameStorageException e) {
+                logger.error("Error loading game {}", gameName);
                 writer.println("Error loading game " + gameName);
                 return;
             }

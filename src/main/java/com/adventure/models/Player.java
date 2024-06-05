@@ -2,6 +2,7 @@ package com.adventure.models;
 
 import com.adventure.models.items.Item;
 import com.adventure.models.items.UsableItem;
+import com.adventure.models.nodes.Room;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -23,7 +24,6 @@ public class Player extends Entity
         this.setName(name);
     }
 
-    @JsonIgnore
     public void setName(String name)
     {
         Objects.requireNonNull(name, "Can't set a null name");
@@ -54,5 +54,12 @@ public class Player extends Entity
         }
         this.getInventory().getItems().remove(item);
         return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Player player = (Player) obj;
+
+        return ((super.equals(player)) && (this.name.equals(player.getName())));
     }
 }

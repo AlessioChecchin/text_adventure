@@ -1,6 +1,8 @@
 package com.adventure.models.nodes;
 
 import com.adventure.serializers.ActionSerializer;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize(using = ActionSerializer.class)
@@ -14,7 +16,8 @@ public class Action
      * Default constructor
      * @param actionName Name of the action
      */
-    public Action(String actionName)
+    @JsonCreator
+    public Action(@JsonProperty("name") String actionName)
     {
         this.actionName = actionName;
     }

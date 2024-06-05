@@ -30,4 +30,15 @@ public class Key extends Item
         return String.format("%s (%s)", this.name, this.value);
     }
 
+    @Override
+    public boolean equals(Object o)
+    {
+        return super.equals(o) && this.getValue().equals(((Key) o).getValue());
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(super.hashCode(), value);
+    }
 }

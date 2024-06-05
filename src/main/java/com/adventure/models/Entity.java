@@ -1,5 +1,6 @@
 package com.adventure.models;
 
+import com.adventure.models.items.Item;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -78,6 +79,18 @@ abstract public class Entity
     }
 
     //  Necessary for deserialization of entities
-    @JsonProperty("dodge")
     private void setDodge(int dodges) { this.dodge = dodges; }
+
+    public boolean equals(Object obj){
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Entity entity = (Entity) obj;
+        return ((this.stats.equals(entity.getStats())) && (this.inventory.equals(entity.getInventory())));
+    }
+
 }

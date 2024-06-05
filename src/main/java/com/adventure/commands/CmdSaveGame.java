@@ -10,7 +10,7 @@ public class CmdSaveGame extends AbstractCommand
     public void execute() throws InterruptedException
     {
         //  User has passed no argument
-        if(this.getArgs().size() == 0)
+        if(this.getArgs().isEmpty())
         {
             Game currentGame = this.context.getGame();
 
