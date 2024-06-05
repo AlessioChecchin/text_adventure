@@ -1,5 +1,8 @@
 package com.adventure.models.items;
 
+/**
+ * Equipable interface.
+ */
 public interface Equipable
 {
     /**

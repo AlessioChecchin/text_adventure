@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * Abstract command that contains basic functionality for a generic command.
+ */
 public abstract class AbstractCommand implements Command
 {
     /**
@@ -19,11 +22,60 @@ public abstract class AbstractCommand implements Command
      */
     public AbstractCommand()
     {
-        this.args = new ArrayList<>();
+        // Using default stdin / stdout.
         this.writer = new PrintWriter(System.out);
         this.inputStream = System.in;
+
+        // Default: no args provided.
+        this.args = new ArrayList<>();
+
+        // When spawned the command should not terminate.
         this.shouldTerminate = false;
     }
+
+    //
+    // GETTERS.
+    //
+
+    /**
+     * Writer getter.
+     * @return Writer object.
+     */
+    @Override
+    public Writer getWriter()
+    {
+        return this.writer;
+    }
+
+    /**
+     * Input stream getter.
+     * @return Input stream.
+     */
+    @Override
+    public InputStream getInputStream()
+    {
+        return this.inputStream;
+    }
+
+    /**
+     * Arguments getter.
+     * @return Arguments.
+     */
+    @Override
+    public List<String> getArgs()
+    {
+        return new ArrayList<>(this.args);
+    }
+
+    @Override
+    public ApplicationContext getContext()
+    {
+        return this.context;
+    }
+
+    //
+    // SETTERS.
+    //
 
     /**
      * Writer setter.
@@ -36,12 +88,10 @@ public abstract class AbstractCommand implements Command
         this.writer = new PrintWriter(out);
     }
 
-    @Override
-    public Writer getWriter()
-    {
-        return this.writer;
-    }
-
+    /**
+     * Input stream setter.
+     * @param inputStream Input stream.
+     */
     @Override
     public void setInputStream(InputStream inputStream)
     {
@@ -49,12 +99,10 @@ public abstract class AbstractCommand implements Command
         this.inputStream = inputStream;
     }
 
-    @Override
-    public InputStream getInputStream()
-    {
-        return this.inputStream;
-    }
-
+    /**
+     * Arguments setter.
+     * @param args Arguments.
+     */
     @Override
     public void setArgs(List<String> args)
     {
@@ -62,12 +110,10 @@ public abstract class AbstractCommand implements Command
         this.args = new ArrayList<>(args);
     }
 
-    @Override
-    public List<String> getArgs()
-    {
-        return new ArrayList<>(this.args);
-    }
-
+    /**
+     * Context setter.
+     * @param context Application context.
+     */
     @Override
     public void setContext(ApplicationContext context)
     {
@@ -75,17 +121,25 @@ public abstract class AbstractCommand implements Command
         this.context = context;
     }
 
-    @Override
-    public ApplicationContext getContext()
-    {
-        return this.context;
-    }
+    //
+    // OTHER.
+    //
 
     public void kill()
     {
         this.shouldTerminate = true;
     }
 
+    //
+    // PROTECTED METHODS.
+    //
+
+    /**
+     * Read method used for non-blocking read operations.
+     * Non-blocking implementation of Scanner.next().
+     * @return Next valid string token.
+     * @throws InterruptedException If the command gets a kill request.
+     */
     protected String safeReadNext() throws InterruptedException
     {
         Scanner scanner = new Scanner(this.inputStream);
@@ -98,6 +152,12 @@ public abstract class AbstractCommand implements Command
         return scanner.next();
     }
 
+    /**
+     * Read method used for non-blocking read (entire line) operations.
+     * Non-blocking implementation of Scanner.nextLine().
+     * @return Text line.
+     * @throws InterruptedException If the command gets a kill request.
+     */
     protected String safeReadNextLine() throws InterruptedException
     {
         Scanner scanner = new Scanner(this.inputStream);
@@ -110,6 +170,11 @@ public abstract class AbstractCommand implements Command
         return scanner.nextLine();
     }
 
+    /**
+     * Method used to ask yes/no response from a user.
+     * @return Response (true = yes, false = no)
+     * @throws InterruptedException If the command gets a kill request.
+     */
     protected boolean askConfirmation() throws InterruptedException
     {
         boolean decided = true;
@@ -159,20 +224,43 @@ public abstract class AbstractCommand implements Command
         return true;
     }
 
+    //
+    // VARIABLES.
+    //
 
-
-
+    /**
+     * Writer for output.
+     */
     protected PrintWriter writer;
 
+    /**
+     * Stream used to receive user input.
+     */
     protected InputStream inputStream;
 
+    /**
+     * Eventual parameters for the command.
+     */
     protected List<String> args;
 
+    /**
+     * Current application context.
+     */
     protected ApplicationContext context;
 
+    /**
+     * Flag that indicates if the main thread requested the command to terminate.
+     */
     protected boolean shouldTerminate;
 
+    /**
+     * Interval for busy waiting regarding safe input read.
+     * Busy waiting is used to avoid blocking calls and allow thread termination when requested.
+     */
     public static final int BUSY_WAITING_QUANTUM = 10;
 
+    /**
+     * Logger.
+     */
     protected static final Logger logger = LogManager.getLogger();
 }

@@ -1,17 +1,15 @@
 package com.adventure.models.items;
 
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
 public class Key extends Item
 {
-    @JsonIgnore
-    private final String value;
-
+    /**
+     * Constructor.
+     * @param key Key value.
+     */
     public Key(@JsonProperty("value") String key)
     {
         super("key");
@@ -19,10 +17,22 @@ public class Key extends Item
         this.value = key;
     }
 
+    //
+    // GETTERS.
+    //
+
+    /**
+     * Value getter.
+     * @return Key value.
+     */
     public String getValue()
     {
         return this.value;
     }
+
+    //
+    // OTHERS.
+    //
 
     @Override
     public String toString()
@@ -41,4 +51,13 @@ public class Key extends Item
     {
         return Objects.hash(super.hashCode(), value);
     }
+
+    //
+    // VARIABLES.
+    //
+
+    /**
+     * Key value.
+     */
+    private final String value;
 }

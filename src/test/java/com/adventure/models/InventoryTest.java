@@ -71,8 +71,8 @@ class InventoryTest {
         assertEquals(defenceTest, inventory.getEquipedDefenceItem(), "Problems with equip method if getEquiped is correct");
 
         //exercise
-        inventory.unequipItem(Inventory.equipType.ATTACK);
-        inventory.unequipItem(Inventory.equipType.DEFENSE);
+        inventory.unequipItem(Inventory.EquipType.ATTACK);
+        inventory.unequipItem(Inventory.EquipType.DEFENSE);
 
         //test
         assertEquals(attackItem, inventory.getEquipedAttackItem(),"Problems with unequip method if getEquiped is correct");

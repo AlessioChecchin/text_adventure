@@ -6,7 +6,6 @@ public class TooMuchWeightException extends RuntimeException
     {
         super();
     }
-
     public TooMuchWeightException(String message)
     {
         super(message);

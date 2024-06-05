@@ -1,14 +1,18 @@
 package com.adventure.models.nodes;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jgrapht.graph.DefaultEdge;
 
 import java.util.Objects;
 
+/**
+ * This class represents a game graph edge.
+ * It connects two story-nodes and represents a possible path for a player.
+ */
 public class StoryNodeLink extends DefaultEdge
 {
-
+    /**
+     * Constructor.
+     */
     public StoryNodeLink()
     {
         super();
@@ -49,23 +53,6 @@ public class StoryNodeLink extends DefaultEdge
     }
 
     /**
-     * Tries to unlock the link.
-     * @param key Key used to unlock.
-     * @return True if the link was unlocked successfully, false otherwise.
-     */
-    public boolean tryUnlock(String key)
-    {
-        if(key == null) return false;
-        if(key.equals(this.key))
-        {
-            this.locked = false;
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
      * Action getter
      * @return Action linked with this edge
      */
@@ -103,13 +90,31 @@ public class StoryNodeLink extends DefaultEdge
      */
     public void setKey(String key)
     {
+        Objects.requireNonNull(key, "key can't be null");
         this.locked = true;
         this.key = key;
     }
 
     //
-    // DEFAULT OVERRIDES.
+    // OTHERS.
     //
+
+    /**
+     * Tries to unlock the link.
+     * @param key Key used to unlock.
+     * @return True if the link was unlocked successfully, false otherwise.
+     */
+    public boolean tryUnlock(String key)
+    {
+        if(key == null) return false;
+        if(key.equals(this.key))
+        {
+            this.locked = false;
+            return true;
+        }
+
+        return false;
+    }
 
     @Override
     public boolean equals(Object edge)
