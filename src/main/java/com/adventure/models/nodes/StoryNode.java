@@ -12,10 +12,6 @@ import java.util.Objects;
 })
 public abstract class StoryNode
 {
-    //
-    //  CONSTRUCTOR
-    //
-
     /**
      * Constructor.
      * @param targetView Node target view.
@@ -34,8 +30,10 @@ public abstract class StoryNode
      * Get the current view
      * @return String current view
      */
-   // @JsonIgnore
-    public String getTargetView() { return this.targetView; }
+    public String getTargetView()
+    {
+        return this.targetView;
+    }
 
     /**
      * Get the ID of the object

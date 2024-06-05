@@ -2,10 +2,13 @@ package com.adventure.models.items;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Item used for attack.
+ */
 public class AttackItem extends Item implements Equipable
 {
     /**
-     * Default constructor
+     * Default constructor.
      * <ul>
      *     <li>weight: 0</li>
      *     <li>adder: 0</li>
@@ -21,25 +24,53 @@ public class AttackItem extends Item implements Equipable
     }
 
     //
-    //  SETTERS
+    // SETTERS.
     //
 
-    public void setAdder(int adder) { this.additionalAttack = adder; }
+    /**
+     * Attack adder setter.
+     * @param adder additional attack value.
+     */
+    public void setAdder(int adder)
+    {
+        this.additionalAttack = adder;
+    }
 
-    public void setMultiplier(double multiplier) { this.attackMultiplier = multiplier; }
+    /**
+     * Attack multiplier setter.
+     * @param multiplier additional attack multiplier.
+     */
+    public void setMultiplier(double multiplier)
+    {
+        this.attackMultiplier = multiplier;
+    }
 
     //
-    //  GETTERS
+    // GETTERS.
     //
 
+    /**
+     * Attack adder getter.
+     * @return Attack adder.
+     */
     @JsonProperty("additionalAttack")
-    public int getAdder() { return this.additionalAttack; }
+    public int getAdder()
+    {
+        return this.additionalAttack;
+    }
 
+    /**
+     * Attack factor getter.
+     * @return Attack factor.
+     */
     @JsonProperty("attackMultiplier")
-    public double getMultiplier() { return this.attackMultiplier; }
+    public double getMultiplier()
+    {
+        return this.attackMultiplier;
+    }
 
     //
-    //  OTHER
+    // OTHERS.
     //
 
     @Override
@@ -58,7 +89,13 @@ public class AttackItem extends Item implements Equipable
         return String.format("%s (atk: %d, %f)", this.getName(), this.getAdder(), this.getMultiplier());
     }
 
+    /**
+     * Additional attack.
+     */
     private int additionalAttack;
-    private double attackMultiplier;
 
+    /**
+     * Attack factor.
+     */
+    private double attackMultiplier;
 }

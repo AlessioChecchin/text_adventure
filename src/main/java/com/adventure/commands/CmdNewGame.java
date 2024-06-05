@@ -12,15 +12,20 @@ public class CmdNewGame extends AbstractCommand
         int n = this.context.getGame().getGameGraph().vertexSet().size();
 
         // n = 0:
-        // In this case the GameLoaderNode (detached from the graph) is loaded.
-        // A new game can be created without asking user consent (no data will be lost)
+        //      In this case the GameLoaderNode (detached from the graph) is loaded.
+        //      A new game can be created without asking user consent (no data will be lost)
+        //
         // n != 0:
-        // A valid game is loaded, confirmation required.
+        //      A valid game is loaded, confirmation required.
         if(n != 0)
         {
+            this.writer.println("Do you really want to create a new game? Current unsaved progress will be lost! [yes/no]");
+
             // If the user says no, then the command terminates.
             if(!this.askConfirmation())
             {
+                this.writer.flush();
+                this.writer.println("No game was created.");
                 return;
             }
         }

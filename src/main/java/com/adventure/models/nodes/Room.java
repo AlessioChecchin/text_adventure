@@ -32,6 +32,10 @@ public class Room extends StoryNode
         this.completed = false;
     }
 
+    //
+    // GETTERS.
+    //
+
     /**
      * ID getter
      * @return String current id of the room
@@ -60,61 +64,12 @@ public class Room extends StoryNode
     }
 
     /**
-     * Name setter
-     * @param name name of the room
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Description setter
-     * @param description description of the room
-     */
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
-
-    /**
      * Items list getter
      * @return List of all items in the room
      */
     public List<Item> getItems()
     {
         return items;
-    }
-
-    /**
-     * Items list setter
-     * @param items List of items to place in the room
-     */
-    public void setItems(List<Item> items)
-    {
-        Objects.requireNonNull(items, "items cannot be null");
-        this.items = items;
-    }
-
-    /**
-     * Remove an item from the room
-     * @param item Item to be removed
-     */
-    public Item removeItem(Item item)
-    {
-        if(! this.items.contains(item))
-            return null;
-        this.items.remove(item);
-        return item;
-    }
-
-    /**
-     * Background path setter.
-     * @param backgroundPath Background path relative to resources.com.adventure.
-     */
-    public void setBackgroundPath(String backgroundPath)
-    {
-        Objects.requireNonNull(backgroundPath, "backgroundPath cannot be null");
-        this.backgroundPath = backgroundPath;
     }
 
     /**
@@ -130,15 +85,68 @@ public class Room extends StoryNode
      * Monster getter
      * @return Monster inside the room
      */
-    public Enemy getMonster() {
+    public Enemy getMonster()
+    {
         return monster;
+    }
+
+    /**
+     * Completed getter.
+     * @return True if the room is completed, false otherwise.
+     */
+    public boolean getCompleted()
+    {
+        return this.completed;
+    }
+
+    //
+    // SETTERS.
+    //
+
+    /**
+     * Name setter
+     * @param name name of the room
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    /**
+     * Description setter
+     * @param description description of the room
+     */
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+    /**
+     * Items list setter
+     * @param items List of items to place in the room
+     */
+    public void setItems(List<Item> items)
+    {
+        Objects.requireNonNull(items, "items cannot be null");
+        this.items = items;
+    }
+
+    /**
+     * Background path setter.
+     * @param backgroundPath Background path relative to resources.com.adventure.
+     */
+    public void setBackgroundPath(String backgroundPath)
+    {
+        Objects.requireNonNull(backgroundPath, "backgroundPath cannot be null");
+        this.backgroundPath = backgroundPath;
     }
 
     /**
      * Monster setter
      * @param monster Monster to set
      */
-    public void setMonster(Enemy monster) {
+    public void setMonster(Enemy monster)
+    {
         this.monster = monster;
     }
 
@@ -151,18 +159,21 @@ public class Room extends StoryNode
         this.completed = completed;
     }
 
-    /**
-     * Completed getter.
-     * @return If the room is completed.
-     */
-    public boolean getCompleted()
-    {
-        return this.completed;
-    }
+    //
+    // OTHERS.
+    //
 
-    //
-    // OBJECT OVERRIDE
-    //
+    /**
+     * Remove an item from the room
+     * @param item Item to be removed
+     */
+    public Item removeItem(Item item)
+    {
+        if(! this.items.contains(item))
+            return null;
+        this.items.remove(item);
+        return item;
+    }
 
     /**
      * To string method
@@ -171,9 +182,12 @@ public class Room extends StoryNode
     @Override
     public String toString()
     {
-        return name + ", " + description + ", " + items.size();
+        return String.format("name: %s, description: %s", name, description);
     }
 
+    //
+    // VARIABLES.
+    //
 
     /**
      * Name of the room

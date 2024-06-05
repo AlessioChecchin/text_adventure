@@ -38,8 +38,6 @@ public class GameLoaderController implements BaseController
         parser.enable("help");
         parser.enable("clear");
         parser.enable("delete");
-        parser.enable("fight");
-        parser.enable("use");
 
         Label instructions = new Label();
         instructions.setText("Type help to view possible actions");

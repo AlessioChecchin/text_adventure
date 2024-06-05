@@ -17,7 +17,7 @@ public class CmdLook extends AbstractCommand
 
             for(Item itm: room.getItems())
             {
-                this.writer.printf("*%s%n", itm);
+                this.writer.printf("* %s%n", itm);
             }
         }
         else

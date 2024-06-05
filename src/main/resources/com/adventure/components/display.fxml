@@ -16,8 +16,8 @@
     </columnConstraints>
     <rowConstraints>
         <RowConstraints minHeight="10.0" percentHeight="70"  prefHeight="100" vgrow="ALWAYS"/>
-        <RowConstraints minHeight="10.0" percentHeight="22"  prefHeight="100" vgrow="ALWAYS"/>
-        <RowConstraints minHeight="5" percentHeight="8" prefHeight="100" vgrow="ALWAYS"/>
+        <RowConstraints minHeight="10.0" percentHeight="25"  prefHeight="100" vgrow="ALWAYS"/>
+        <RowConstraints minHeight="5" percentHeight="5" prefHeight="100" vgrow="ALWAYS"/>
     </rowConstraints>
 
 

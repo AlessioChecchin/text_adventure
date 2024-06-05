@@ -53,7 +53,9 @@ public class Main extends Application
         commandParser.registerCommand("look", CmdLook.class, "Inspects the current room.");
         commandParser.registerCommand("move", CmdMove.class, "Moves in the map.");
         commandParser.registerCommand("pick", CmdPick.class, "Picks a specific item.");
-        commandParser.registerCommand("wai", CmdWai.class, "Shows the player the room descriptions and gives information about valid paths");
+        commandParser.registerCommand("wai", CmdWai.class, "Gives information about valid paths");
+
+
 
         Properties props = context.getProperties();
 

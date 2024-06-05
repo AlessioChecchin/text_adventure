@@ -2,6 +2,9 @@ package com.adventure.models.items;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Usable item. Gives some boost or nerf.
+ */
 public class UsableItem extends Item implements Usable
 {
     /**
@@ -21,55 +24,81 @@ public class UsableItem extends Item implements Usable
     }
 
     //
-    //  SETTERS
+    //  GETTERS.
     //
 
     @JsonProperty("atk")
-    public void setAdditionalAttack(int atk) { this.atk = atk; }
+    public int getAttack()
+    {
+        return  this.atk;
+    }
+
     @JsonProperty("def")
-    public void setAdditionalDefence(int def) { this.def = def; }
+    public int getDefence()
+    {
+        return this.def;
+    }
+
     @JsonProperty("hp")
-    public void setAdditionalHp(int hp) { this.hp = hp; }
+    public int getHp()
+    {
+        return this.hp;
+    }
 
     //
-    //  GETTERS
+    // SETTERS.
     //
 
     @JsonProperty("atk")
-    public int getAttack() { return  this.atk; }
+    public void setAdditionalAttack(int atk)
+    {
+        this.atk = atk;
+    }
+
     @JsonProperty("def")
-    public int getDefence() { return this.def; }
+    public void setAdditionalDefence(int def)
+    {
+        this.def = def;
+    }
+
     @JsonProperty("hp")
-    public int getHp() { return this.hp; }
+    public void setAdditionalHp(int hp)
+    {
+        this.hp = hp;
+    }
 
     //
-    //  OTHER
+    //  OTHER.
     //
 
     @Override
     public String toString()
     {
-        StringBuilder result = new StringBuilder();
-        result.append("name \t").append(name).append("\n");
-        result.append("atk  \t").append(atk).append("\n");
-        result.append("def  \t").append(def).append("\n");
-        result.append("hp   \t").append(hp).append("\n");
-        return result.toString();
+        return String.format("name: %s, atk: %d, def: %d, hp: %d", name, atk, def, hp);
     }
 
     @Override
-    public boolean equals(Object obj){
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || this.getClass() != obj.getClass()) {
-            return false;
-        }
+    public boolean equals(Object obj)
+    {
+        if (this == obj) return true;
+        if (obj == null || this.getClass() != obj.getClass()) return false;
 
         UsableItem usa = (UsableItem) obj;
         return ((atk == usa.getAttack()) && (def == usa.getDefence()) && (hp == usa.getHp()) && super.equals(usa));
     }
 
+    /**
+     * Item attack.
+     */
+    private int atk;
 
-    private int atk, def, hp;
+    /**
+     * Item defence.
+     */
+    private int def;
+
+    /**
+     * Health points increment.
+     */
+    private int hp;
 }

@@ -36,7 +36,7 @@ public class CmdUse extends AbstractCommand{
             try {
                 Item item = player.getInventory().getItems().stream().filter(Item -> key.equals(Item.getName())).findFirst().orElse(null);
                 this.writer.println("You use " + item.getName());
-                this.writer.println(player.getName() + " gains " + player.use(item));
+                //this.writer.println(player.getName() + " gains " + player.use(item));
             }
             catch(Exception e){
                 this.writer.println("Item not found");

@@ -2,6 +2,9 @@ package com.adventure.models.items;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Item used for defence.
+ */
 public class DefenceItem extends Item implements Equipable
 {
     /**
@@ -21,32 +24,60 @@ public class DefenceItem extends Item implements Equipable
     }
 
     //
-    //  SETTERS
+    //  GETTERS.
     //
 
-    public void setAdder(int adder) { this.additionalDefence = adder; }
-    public void setMultiplier(double multiplier) { this.defenceMultiplier = multiplier; }
-
-    //
-    //  GETTERS
-    //
-
+    /**
+     * Adder getter.
+     * @return Defence increase.
+     */
     @JsonProperty("additionalDefence")
-    public int getAdder() { return this.additionalDefence; }
+    public int getAdder()
+    {
+        return this.additionalDefence;
+    }
+
+    /**
+     * Defence multiplier getter.
+     * @return Defence factor.
+     */
     @JsonProperty("defenceMultiplier")
-    public double getMultiplier() { return this.defenceMultiplier; }
-
-
+    public double getMultiplier()
+    {
+        return this.defenceMultiplier;
+    }
 
     //
-    //  OTHER
+    //  SETTERS.
+    //
+
+    /**
+     * Additional defence setter.
+     * @param adder additional defence value.
+     */
+    public void setAdder(int adder)
+    {
+        this.additionalDefence = adder;
+    }
+
+    /**
+     * Defence multiplier setter.
+     * @param multiplier additional defence multiplier
+     */
+    public void setMultiplier(double multiplier)
+    {
+        this.defenceMultiplier = multiplier;
+    }
+
+    //
+    // OTHERS.
     //
 
     @Override
     public boolean equals(Object obj)
     {
-        if (this == obj) { return true; }
-        if (obj == null || this.getClass() != obj.getClass()) { return false; }
+        if (this == obj) return true;
+        if (obj == null || this.getClass() != obj.getClass()) return false;
 
         DefenceItem def = (DefenceItem) obj;
         return ((additionalDefence == def.getAdder()) && (defenceMultiplier == def.getMultiplier() && (super.equals(def))));
@@ -55,15 +86,17 @@ public class DefenceItem extends Item implements Equipable
     @Override
     public String toString()
     {
-        StringBuilder result = new StringBuilder();
-        result.append("name \t").append(name).append("\n");
-        result.append("adder\t").append(additionalDefence).append("\n");
-        result.append("multi\t").append(defenceMultiplier).append("\n");
-        return result.toString();
+        return String.format("name: %s, adder: %d, multi: %f", name, additionalDefence, defenceMultiplier);
     }
 
-
+    /**
+     * Item additional defence.
+     */
     private int additionalDefence;
+
+    /**
+     * item defence multiplier.
+     */
     private double defenceMultiplier;
 
 }

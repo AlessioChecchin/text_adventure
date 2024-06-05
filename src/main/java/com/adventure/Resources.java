@@ -5,6 +5,9 @@ import javafx.scene.layout.*;
 
 import java.net.URL;
 
+/**
+ * Class used to gather useful resources.
+ */
 public class Resources
 {
     public static BackgroundImage getBackground(String source)

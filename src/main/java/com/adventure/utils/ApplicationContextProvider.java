@@ -1,6 +1,6 @@
 package com.adventure.utils;
 
-import com.adventure.Main;
+import com.adventure.Resources;
 import com.adventure.models.Game;
 
 import com.adventure.services.BucketStorageService;
@@ -21,30 +21,53 @@ public class ApplicationContextProvider implements ApplicationContext
 
     /**
      * Private singleton constructor.
+     * @throws IOException Thrown if the configuration file is not found.
      */
-    private ApplicationContextProvider()
+    private ApplicationContextProvider() throws IOException
     {
         this.properties = new Properties();
-        try (InputStream fis = Main.class.getClassLoader().getResourceAsStream("application.conf"))
+
+        try (InputStream fis = Resources.class.getClassLoader().getResourceAsStream("application.conf"))
         {
             this.properties.load(fis);
         }
         catch (IOException e)
         {
             logger.fatal("Error loading application.conf", e);
+            throw e;
         }
 
-        //this.storageService = new BucketStorageService(this.properties);
-        this.storageService = new FileSystemStorageService(this.properties);
+        String storageProvider = this.properties.getProperty("storage.provider", "filesystem");
+        if(storageProvider.equals("aws"))
+        {
+            this.storageService = new BucketStorageService(this.properties);
+        }
+        // Fallback storage service.
+        else
+        {
+            logger.debug("Preferred storage provider set to filesystem...");
+            this.storageService = new FileSystemStorageService(this.properties);
+        }
     }
 
     /**
      * Singleton getter.
+     * Returns null if the configuration file is not found.
      * @return Singleton instance.
      */
     public static ApplicationContextProvider getInstance()
     {
-        if(instance == null) { instance = new ApplicationContextProvider(); }
+        if(instance == null)
+        {
+            try
+            {
+                instance = new ApplicationContextProvider();
+            }
+            catch(IOException e)
+            {
+                return null;
+            }
+        }
         return instance;
     }
 
