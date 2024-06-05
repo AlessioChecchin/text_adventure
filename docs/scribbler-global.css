@@ -250,13 +250,13 @@ table td, table th {
 }
 
 table th {
-  background-color: white;
-  border-color: white;
+  background-color: var(--bg-color);
   border-bottom-color: var(--code-bg-color);
+  font-weight: bold;
 }
 
 table td:first-child {
-  background-color: var(--bg-color);
+  background-color: white;
   font-weight: 600;
   text-align: center;
 }

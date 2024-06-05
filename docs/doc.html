@@ -17,7 +17,7 @@
       <h1 class="logo">Text Adventure <span class="logo__thin">Documentation</span></h1>
       <ul class="menu">
         <div class="menu__item toggle"><span></span></div>
-        <li class="menu__item"><a href="https://github.com/ssiodev/text_adventure" class="link link--dark"><i class="fa fa-github"></i> Github</a></li>
+        <li class="menu__item"><a href="https://github.com/ssiodev/text_adventure.git" class="link link--dark"><i class="fa fa-github"></i> Github</a></li>
         <li class="menu__item"><a href="index.html" class="link link--dark"><i class="fa fa-home"></i> Home</a></li>
       </ul>
     </nav>
@@ -28,6 +28,7 @@
           <li class="js-btn">Specifications</li>
           <li class="js-btn">Design</li>
           <li class="js-btn">Testing</li>
+          <li class="js-btn">JavaDoc</li>
         </ul>
       </aside>
       <article class="doc__content">
@@ -35,27 +36,35 @@
           <h2 class="section__title">Manual</h2>
           <h3 class="section__title">Introduction</h3>
           <p>
-            <b>Text Adventure</b> is a text-adventure RPG in which you play the role of the Hero,
-            which has the mission of defeating
+            <b>Text Adventure</b> is a text-based RPG set in a fantasy world. You will be the hero of our story,
+            are you ready for this exciting adventure?!
+          </p>
+          <h3 class="section__title">The Plot</h3>
+          <p>
+            In a distant era, in the lands of Margorgh, in the darkest depths of a shadowy forest, it is said that there exists a Castle ruled by the forces of evil, housing an unimaginable power.
+            For millennia, humanity has sought to wrest this power from the forces of evil; battles and wars have marked the quest for this power.<br/>
+            Over time, the traces of the Castle and the power within have been lost, vanished like leaves on trees in winter, or at least, so it was believed...
+            A mysterious scroll was discovered by a warrior with a golden heart, a scroll containing knowledge that he could not have imagined and that would lead him to an unbelievable destiny....<br/>
           </p>
           <h3 class="section__title">How To Play</h3>
           <p>
-            The user interact with the display via command line, which is located at the bottom of the game windows.<br/>
-            The user have to type the command followed by (if any) the arguments and then press enter.
+            The user interact with the display using a <b>custom command line</b>, which is located at the bottom of the game window.<br/>
+            The user have to type the command followed by (if any) arguments and then press enter to trigger the specific in-game action.<br/>
+            Example: <br/>
           </p>
           <code>>>command &lt;argument&gt; </code>
 
-          <p>Here is the list of the possibles commands with a description</p>
+          <p>Here we have the list of the possibles commands with a description</p>
           <table>
             <tr>
-              <th>Name</th>
-              <th>Arguments</th>
+              <th> Name </th>
+              <th>Argument</th>
               <th>Description</th>
             </tr>
             <tr>
               <td>help</td>
               <td>-</td>
-              <td>Show all the possible commands in a precise moment of the game.<br/> It can be always utilized.</td>
+              <td>Show all the possible commands in a precise moment of the game.</td>
             </tr>
             <tr>
               <td>newGame</td>
@@ -63,19 +72,77 @@
               <td>Create a new game.<br/>It can be utilized only in the menu.</td>
             </tr>
             <tr>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>save</td>
+              <td>(Optional) name of the save </td>
+              <td>Command for save the current game.<br/> Require a name for identify the game that you are saving</td>
             </tr>
             <tr>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>loadGame</td>
+              <td>Name of the saved game</td>
+              <td>Command for load a game previously saved entering its name</td>
             </tr>
             <tr>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>listGames</td>
+              <td>-</td>
+              <td>Command that shows the saved games</td>
+            </tr>
+            <tr>
+              <td>deleteGame</td>
+              <td>Name of the save to be delete </td>
+              <td>Command for deleting a previously saved game.<br/> Enter the name of the game to be deleted</td>
+            </tr>
+            <tr>
+              <td>show</td>
+              <td>(Optional) one between <code>inventory</code> / <code>stats</code></td>
+              <td>Command for show the stats and the inventory of the player.<br/> If digit <code>show inventory</code> the command shows only the player's inventory.<br/>
+              if digit <code>show stats</code> the command shows only the player's stats.</td>
+            </tr>
+            <tr>
+              <td>move</td>
+              <td>Cardinal directions:<br/><code>north </code>/ <code>south </code>/ <code>east </code>/ <code>west</code></td>
+              <td>Command manage the movement in the map using cardinal directions.<br/> If possible you move in the digit direction</td>
+            </tr>
+            <tr>
+              <td>look</td>
+              <td>-</td>
+              <td>Command shows the available items, in the current part of the map, that the player could take if has enough space in his inventory.</td>
+            </tr>
+            <tr>
+              <td>pick</td>
+              <td>Name of the item to be taken</td>
+              <td>Command for take an item from the available items if player has enough space</td>
+            </tr>
+            <tr>
+              <td>fight</td>
+              <td>-</td>
+              <td>Command for start a battle between the player and a hostile enemy</td>
+            </tr>
+            <tr>
+              <td>attack</td>
+              <td>-</td>
+              <td>Command for attack a monster during a fight</td>
+            </tr>
+            <tr>
+              <td>dodge</td>
+              <td>-</td>
+              <td>Command for dodging an incoming attack from a monster.<br/>
+                During a fight a player can dodge three times</td>
+            </tr>
+            <tr>
+              <td>use</td>
+              <td>Name of the item to be used in the inventory</td>
+              <td>Command for using an item in the player's inventory.<br/>
+                The second parameter of the command specify wich item the player want to use.</td>
+            </tr>
+            <tr>
+              <td>wai</td>
+              <td>-</td>
+              <td>Command for show to the player the things that he can do right now</td>
+            </tr>
+            <tr>
+              <td>clear</td>
+              <td>-</td>
+              <td>Command for clean the game terminal from previous outputs of other commands.</td>
             </tr>
 
           </table>
