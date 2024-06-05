@@ -110,6 +110,30 @@ public class CommandParser
         this.lookupTable.put(key, new CommandMetadata(commandClass, description));
     }
 
+
+    public ArrayList<String> argsFromCommand(String key)
+    {
+        CommandMetadata metadata = this.lookupTable.get(key);
+        if(metadata != null)
+            try {
+                Object temp = metadata.getCommandClass().getDeclaredMethod("args").invoke(null);
+                if(temp instanceof ArrayList<?>)
+                    return (ArrayList<String>) temp;
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        return new ArrayList<>();
+    }
+
+    public  Class<? extends Command> getCommandClass(String key)
+    {
+        CommandMetadata metadata = this.lookupTable.get(key);
+        if(metadata == null)
+            return null;
+        else
+            return metadata.getCommandClass();
+    }
+
     /**
      * Unregisters a command.
      * @param key Command name to unregister.
