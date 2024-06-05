@@ -2,10 +2,8 @@ package com.adventure.components;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 
-import com.adventure.Resources;
+import com.adventure.commands.CmdUse;
 import com.adventure.commands.CommandParser;
 import com.adventure.utils.StringPropertyWriter;
 import com.adventure.commands.Command;
@@ -35,6 +33,7 @@ public class Display extends GridPane implements BaseController
     private Command currentCommand;
     private Task<Void> task;
     private PipedOutputStream cmdInput;
+
 
     public Display()
     {
@@ -72,34 +71,33 @@ public class Display extends GridPane implements BaseController
      */
     public void onKeyPressed(KeyEvent event) throws IOException
     {
-        if(event.getCode() == KeyCode.TAB)
+        AutoCompleter autoCompl = AutoCompleter.getInstance();
+
+        if(event.getCode() == KeyCode.SPACE)
         {
-            String partialCommand = consolePrompt.getText();
+            //for(String s : CmdUse.args())
+                //System.out.println(s);
+        }
 
-            CommandParser parser = CommandParser.getInstance();
-            List<String> availableCommands = parser.getCommands();
+        //  Loads the completer only when is detects a change in the input
+        //  A change occurs when
+        //  1) input character is non-empty (e.g. arrows, shift...) AND it's not TAB
+        //  2) input character is 'delete' key (back_space)
+        if((! event.getText().isEmpty() && ! event.getText().equals("\t")) || event.getCode() == KeyCode.BACK_SPACE )
+        {
+            autoCompl.loadCompleter(event.getText(), this.consolePrompt.getText());
+        }
 
-            ArrayList<String> possibleCommands = new ArrayList<>();
-            for(String command : availableCommands)
-                if(command.startsWith(partialCommand))
-                    possibleCommands.add(command);
-
-            if(possibleCommands.size() == 1 )
-            {
-                this.consolePrompt.setText(possibleCommands.get(0));
-                this.consolePrompt.end();
-            }
-            else
-            {
-                String allCommandsString = String.join("\n", possibleCommands);
-                this.consoleOutput.setText(allCommandsString);
-            }
-
+        if( event.getCode() == KeyCode.TAB)
+        {
+            //  Execute autoCompleter
+            autoCompl.operate(this.consoleOutput, this.consolePrompt);
         }
 
         // Checks if the command is complete.
         if( event.getCode() == KeyCode.ENTER )
         {
+            autoCompl.loadCompleter("","");
             String command = consolePrompt.getText();
 
             // If there aren't command currently executing, then a new command is spawned.
