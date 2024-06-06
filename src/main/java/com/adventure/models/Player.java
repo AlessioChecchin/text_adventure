@@ -1,9 +1,12 @@
 package com.adventure.models;
 
+import com.adventure.exceptions.NotUsableItemException;
 import com.adventure.models.items.Item;
 import com.adventure.models.items.UsableItem;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 /**
@@ -20,36 +23,7 @@ public class Player extends Entity
      */
     public Player(@JsonProperty("name") String name, @JsonProperty("inventory") Inventory inventory, @JsonProperty("stats") Stats stats)
     {
-        super(inventory, stats);
-
-        this.setName(name);
-    }
-
-    //
-    // GETTERS.
-    //
-
-    /**
-     * Name getter.
-     * @return Player name.
-     */
-    public String getName()
-    {
-        return name;
-    }
-
-    //
-    // SETTERS.
-    //
-
-    /**
-     * Name setter.
-     * @param name Player name.
-     */
-    public void setName(String name)
-    {
-        Objects.requireNonNull(name, "Can't set a null name");
-        this.name = name;
+        super(inventory, stats, name);
     }
 
     //
@@ -58,39 +32,40 @@ public class Player extends Entity
 
     /**
      * Method implemented to use an item.
-     * @param item Item to use.
+     * @param itemName Item to use.
      */
-    public void use(Item item)
+    public void use(String itemName) throws NoSuchElementException, NotUsableItemException
     {
-        UsableItem usableItem = (UsableItem) item;
+        //search item in the inventory
+        Item item = this.getInventory().getItems().stream().filter(Item -> itemName.equals(Item.getName())).findFirst().orElse(null);
 
-        if(usableItem.getHp() != 0)
-        {
-            this.heal(usableItem.getHp());
+        //check if item is in the inventory
+        if(item != null) {
+            //check if its a usable item
+            if (item instanceof UsableItem usableItem) {
+
+                if (usableItem.getHp() != 0) {
+                    this.heal(usableItem.getHp());
+                }
+
+                if (usableItem.getAttack() != 0) {
+                    int newAttack = usableItem.getAttack() + this.getStats().getBaseAttack();
+                    this.getStats().setBaseAttack(newAttack);
+                }
+
+                if (usableItem.getDefence() != 0) {
+                    int newDefence = usableItem.getDefence() + this.getStats().getBaseDefense();
+                    this.getStats().setBaseDefense(newDefence);
+                }
+
+                this.getInventory().getItems().remove(item);
+            }
+            else{
+                throw new NotUsableItemException();
+            }
         }
-
-        if(usableItem.getAttack() != 0)
-        {
-            int newAttack = usableItem.getAttack() + this.getStats().getBaseAttack();
-            this.getStats().setBaseAttack(newAttack);
+        else{
+            throw new NoSuchElementException();
         }
-
-        if(usableItem.getDefence() != 0)
-        {
-            int newDefence = usableItem.getDefence() + this.getStats().getBaseDefense();
-            this.getStats().setBaseDefense(newDefence);
-        }
-
-        this.getInventory().getItems().remove(item);
     }
-
-    @Override
-    public boolean equals(Object obj)
-    {
-        Player player = (Player) obj;
-
-        return ((super.equals(player)) && (this.name.equals(player.getName())));
-    }
-
-    private String name;
 }

@@ -28,7 +28,7 @@ public class Room extends StoryNode
         this.description = description;
         this.items = new ArrayList<>();
         this.backgroundPath = "";
-        this.monster = new Enemy(new Inventory(10), new Stats());
+        this.monster = null;
         this.completed = false;
     }
 
@@ -147,6 +147,7 @@ public class Room extends StoryNode
      */
     public void setMonster(Enemy monster)
     {
+        Objects.requireNonNull(monster, "monster cannot be null");
         this.monster = monster;
     }
 

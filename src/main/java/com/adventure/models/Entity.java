@@ -12,12 +12,12 @@ abstract public class Entity
      * @param inventory Player inventory.
      * @param stats Player stats.
      */
-    public Entity(Inventory inventory, Stats stats)
+    public Entity(Inventory inventory, Stats stats, String name)
     {
         this.setInventory(inventory);
         this.setStats(stats);
-
         this.availableDodges = 3;
+        this.name = name;
     }
 
     //
@@ -40,6 +40,15 @@ abstract public class Entity
     public boolean getAlive()
     {
         return stats.getHp() > 0;
+    }
+
+    /**
+     * Returns the name of the entity.
+     * @return name of the entoty.
+     */
+    public String getName()
+    {
+        return this.name;
     }
 
     /**
@@ -84,6 +93,16 @@ abstract public class Entity
     {
         Objects.requireNonNull(inventory, "stats cannot be null");
         this.stats = stats;
+    }
+
+    /**
+     * Sets entity name.
+     * @param name Entity name.
+     */
+    public void setName(String name)
+    {
+        Objects.requireNonNull(name, "name cannot be null");
+        this.name = name;
     }
 
     /**
@@ -133,8 +152,10 @@ abstract public class Entity
      */
     public void hit(int damage)
     {
-        if(damage > this.stats.getHp()) this.stats.setHp(0);
-        else this.stats.setHp(this.stats.getHp() - damage);
+        //Check if it's a mortal hit
+        if(damage > (this.stats.getHp() + this.stats.getBaseDefense())) this.setAlive(false);
+        //Check if incoming damage is more than the shield
+        else if (damage > this.stats.getBaseDefense()) this.stats.setHp(this.stats.getHp() - damage);
     }
 
     //
@@ -168,4 +189,9 @@ abstract public class Entity
      * Currently available dodges.
      */
     private int availableDodges;
+
+    /**
+     * Entity name.
+     */
+    private String name;
 }

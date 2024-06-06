@@ -1,5 +1,6 @@
 package com.adventure.models;
 
+import com.adventure.exceptions.NotUsableItemException;
 import com.adventure.models.items.UsableItem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ class PlayerTest {
     }
 
     @Test
-    void useTest() {
+    void useTest() throws NotUsableItemException {
         //exercise
         int previousHp = player.getStats().getHp();
         Inventory inventory = new Inventory(10);
@@ -24,7 +25,7 @@ class PlayerTest {
         inventory.addItem(apple);
         player.setInventory(inventory);
         player.getStats().setMaxHp(30);
-        player.use(apple);
+        player.use("apple");
 
         //test
         assertEquals(previousHp +10, player.getStats().getHp(), "Problems with use method for a player");

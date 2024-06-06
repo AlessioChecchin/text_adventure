@@ -13,8 +13,8 @@ public class Enemy extends NPC
      * @param stats     Enemy stats.
      */
     @JsonCreator
-    public Enemy(@JsonProperty("inventory") Inventory inventory, @JsonProperty("stats") Stats stats)
+    public Enemy(@JsonProperty("inventory") Inventory inventory, @JsonProperty("stats") Stats stats, @JsonProperty("name") String name)
     {
-        super(inventory, stats);
+        super(inventory, stats, name);
     }
 }

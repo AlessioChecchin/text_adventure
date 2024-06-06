@@ -42,7 +42,7 @@ class GameSerializerTest {
         stats.setBaseAttack(1);
         stats.setBaseDefense(1);
 
-        game.setPlayer(new Player("test", playerInventory, stats));
+        game.setPlayer(new Player("Napoli", playerInventory, stats));
 
         String firstFightRoomKey = "Level 1";
 
