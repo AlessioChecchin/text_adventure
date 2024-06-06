@@ -4,10 +4,7 @@ import com.adventure.commands.CommandParser;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Singleton that predicts text when pressing tab
@@ -55,8 +52,13 @@ public class AutoCompleter
         CommandParser parser = CommandParser.getInstance();
         prediction = new ArrayList<>();
 
+        //  Is just white spaces
+        if(allWords.length == 0)
+        {
+            // Do nothing
+        }
         //  Is base command (e.g. newGame, move, load ...)
-        if(allWords.length == 1 && ! partialCommand.contains(" "))
+        else if(allWords.length == 1 && ! partialCommand.contains(" "))
         {
             for (String command : parser.getCommands())
                 if (command.startsWith(partialCommand))
@@ -98,6 +100,8 @@ public class AutoCompleter
 
     private String buildInputText(direction dir)
     {
+        //TODO possible better solutions: count number of spaces to detect if it's a command or an argument
+
         //  Checks which direction to follow
         if(dir == direction.FORWARD)
             incrementCounter();
