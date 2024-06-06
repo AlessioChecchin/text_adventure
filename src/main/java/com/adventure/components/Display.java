@@ -18,6 +18,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Display extends GridPane implements BaseController
 {
@@ -34,6 +36,10 @@ public class Display extends GridPane implements BaseController
     private Task<Void> task;
     private PipedOutputStream cmdInput;
 
+    /**
+     * Logger.
+     */
+    protected static final Logger logger = LogManager.getLogger();
 
     public Display()
     {
@@ -162,9 +168,13 @@ public class Display extends GridPane implements BaseController
                 {
                     cmd.execute();
                 }
+                catch(InterruptedException exception)
+                {
+                    logger.debug("Command '{}' was interrupted...", cmd.getClass().getSimpleName());
+                }
                 catch (Exception exception)
                 {
-                    exception.printStackTrace();
+                    logger.error("Error while executing command: ", exception);
                 }
                 return null;
             }
