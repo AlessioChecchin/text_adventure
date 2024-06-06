@@ -3,6 +3,8 @@ package com.adventure.commands;
 import com.adventure.models.Game;
 import javafx.application.Platform;
 
+import java.util.List;
+
 public class CmdNewGame extends AbstractCommand
 {
     @Override
@@ -31,10 +33,12 @@ public class CmdNewGame extends AbstractCommand
         }
 
         this.writer.println("Enter player name: ");
-
+        //  Disable all commands (so that the user must insert the name)
+        disableSaveAll();
         // If we reach this code, then the user answered yes.
         String username = this.safeReadNextLine();
-
+        //  Re-enable previously disabled commands
+        reEnableSaved();
         logger.debug("Switching game...");
 
         Game game = this.context.getStorageService().newGame(username);

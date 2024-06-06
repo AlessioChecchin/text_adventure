@@ -82,14 +82,20 @@ public class GameDeserializer extends StdDeserializer<Game>
         //  PREVIOUSNODE
         //
 
-        StoryNode previous = fromNodetoRoom(node.get("previousNode"));
-        StoryNode current = fromNodetoRoom(node.get("currentNode"));
+
+        //  To obtain previous or current we get the ID of the node inside the json
+        //  Then the ID is used to get the node from the storyNodes
+        StoryNode previous = null;
+        StoryNode current = null;
+        if(!node.get("previousNode").asText().equals("null"))
+            previous = storyNodes.get(node.get("previousNode").get("id").asText());
+        if(!node.get("currentNode").asText().equals("null"))
+            current = storyNodes.get(node.get("currentNode").get("id").asText());
 
         /*  Since previousNode is set only when a new currentNode is set, we set
             firstly set the currentNode as previousNode and the set the currentNode with
             the real currentNode.
             In this way previousNode is set correctly
-
             If the previousNode is null we only set the currentNode
          */
 

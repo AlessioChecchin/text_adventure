@@ -4,9 +4,11 @@ import com.adventure.models.Enemy;
 import com.adventure.models.Player;
 import com.adventure.models.RandomCollection;
 import com.adventure.models.items.Item;
+import com.adventure.models.items.UsableItem;
 import com.adventure.models.nodes.Room;
-import com.adventure.utils.ApplicationContextProvider;
+import com.adventure.utils.ApplicationContext;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CmdUse extends AbstractCommand{
@@ -35,6 +37,7 @@ public class CmdUse extends AbstractCommand{
             String key = this.getArgs().get(0);
             try {
                 Item item = player.getInventory().getItems().stream().filter(Item -> key.equals(Item.getName())).findFirst().orElse(null);
+                assert item != null;
                 this.writer.println("You use " + item.getName());
                 //this.writer.println(player.getName() + " gains " + player.use(item));
             }
@@ -52,6 +55,21 @@ public class CmdUse extends AbstractCommand{
             }
         }
         else this.writer.println("Wrong parameters for this command");
+    }
+
+    /**
+     * Get all possible arguments for this command
+     * @return all possible items
+     */
+    public static ArrayList<String> args(ApplicationContext context)
+    {
+
+        Player player = context.getGame().getPlayer();
+        List<Item> item = player.getInventory().getItems().stream().filter(Item -> Item.getClass().equals(UsableItem.class)).toList();
+        ArrayList<String> possibleItems = new ArrayList<>();
+        for(Item i : item)
+            possibleItems.add(i.getName());
+        return possibleItems;
     }
 
 }

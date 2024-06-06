@@ -18,7 +18,11 @@ public class CmdSaveGame extends AbstractCommand
             if (currentGame.getId() == null)
             {
                 writer.print("Enter game name: ");
+
+                //  User MUST insert save name
+                this.disableSaveAll();
                 String id = this.safeReadNext();
+                this.reEnableSaved();
                 writer.flush();
 
                 currentGame.setId(id);

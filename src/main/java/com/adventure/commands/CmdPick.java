@@ -4,7 +4,9 @@ import com.adventure.models.Inventory;
 import com.adventure.models.items.Item;
 import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
+import com.adventure.utils.ApplicationContext;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CmdPick extends AbstractCommand
@@ -52,5 +54,23 @@ public class CmdPick extends AbstractCommand
         {
             this.writer.println("Can't perform this command here.");
         }
+    }
+
+
+    /**
+     * Get all possible arguments for this command
+     * @return all possible items
+     */
+    public static ArrayList<String> args(ApplicationContext context)
+    {
+        ArrayList<String> result = new ArrayList<>();
+        StoryNode node = context.getGame().getCurrentNode();
+        if(node instanceof Room room)
+        {
+            List<Item> items = room.getItems();
+            for(Item item : items)
+                result.add(item.getName());
+        }
+        return result;
     }
 }
