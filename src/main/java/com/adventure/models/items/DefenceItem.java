@@ -23,6 +23,23 @@ public class DefenceItem extends Item implements Equipable
         this.defenceMultiplier = 1;
     }
 
+    /**
+     * Constructor.
+     * @param name Item name.
+     * @param defenceMultiplier Defence multiplier.
+     * @param additionalDefence Additional defence.
+     */
+    public DefenceItem(@JsonProperty("name") String name, @JsonProperty("defenceMultiplier") double defenceMultiplier, @JsonProperty("additionalDefence") int additionalDefence)
+    {
+        super(name);
+
+        if(defenceMultiplier < 0) throw new IllegalArgumentException("defenceMultiplier cannot be negative");
+        if(additionalDefence < 0) throw new IllegalArgumentException("additionalDefence cant be negative");
+
+        this.defenceMultiplier = defenceMultiplier;
+        this.additionalDefence = additionalDefence;
+    }
+
     //
     //  GETTERS.
     //

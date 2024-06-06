@@ -1,13 +1,9 @@
-package com.adventure.components;
+package com.adventure.commands;
 
-import com.adventure.commands.CommandParser;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Singleton that predicts text when pressing tab
