@@ -2,32 +2,36 @@ package com.adventure.commands;
 
 import com.adventure.models.Game;
 import com.adventure.services.StorageService;
-import software.amazon.awssdk.services.ec2.model.Storage;
 
 public class CmdSaveGame extends AbstractCommand
 {
     @Override
     public void execute() throws InterruptedException
     {
-        //  User has passed no argument
+        // User has passed no argument
         if(this.getArgs().isEmpty())
         {
             Game currentGame = this.context.getGame();
 
-            //  If the game has no name, the user must enter it
-            //  Otherwise the saving can continue
-            if (currentGame.getId() == null) {
+            // If the game has no name, the user must enter it
+            // Otherwise the saving can continue
+            if (currentGame.getId() == null)
+            {
                 writer.print("Enter game name: ");
+
+                //  User MUST insert save name
+                this.disableSaveAll();
                 String id = this.safeReadNext();
+                this.reEnableSaved();
                 writer.flush();
 
                 currentGame.setId(id);
             }
 
-            //  Saving the game
+            // Saving the game
             save(this.context.getStorageService(), currentGame);
         }
-        //  User specifies the name of the game. If the game had another name, now it is overwritten
+        // User specifies the name of the game. If the game had another name, now it is overwritten
         else if(this.getArgs().size() == 1)
         {
             Game currentGame = this.context.getGame();

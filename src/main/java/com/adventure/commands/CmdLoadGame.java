@@ -1,9 +1,11 @@
 package com.adventure.commands;
 
+import com.adventure.exceptions.GameStorageException;
 import com.adventure.models.Game;
+import com.adventure.utils.ApplicationContext;
 import javafx.application.Platform;
 
-import java.util.NoSuchElementException;
+import java.util.ArrayList;
 
 public class CmdLoadGame extends AbstractCommand
 {
@@ -16,11 +18,8 @@ public class CmdLoadGame extends AbstractCommand
             Game loadedGame;
             try {
                 loadedGame = this.context.getStorageService().loadGame(gameName);
-            } catch (NoSuchElementException e) {
-                writer.println("Game with name " + gameName + " not found");
-                return;
-            } catch (Exception e) {
-                System.err.println(e);
+            } catch (GameStorageException e) {
+                logger.error("Error loading game {}", gameName);
                 writer.println("Error loading game " + gameName);
                 return;
             }
@@ -35,5 +34,13 @@ public class CmdLoadGame extends AbstractCommand
 
             writer.println("Game loaded");
         }
+    }
+
+    /**
+     * Get all possible arguments for this command
+     * @return all possible game files
+     */
+    public static ArrayList<String> args(ApplicationContext context) throws GameStorageException {
+        return new ArrayList<>(context.getStorageService().listGames());
     }
 }

@@ -6,7 +6,6 @@ public class GameStorageException extends Exception
     {
         super();
     }
-
     public GameStorageException(String message)
     {
         super(message);

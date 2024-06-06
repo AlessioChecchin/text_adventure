@@ -32,6 +32,10 @@ public class Room extends StoryNode
         this.completed = false;
     }
 
+    //
+    // GETTERS.
+    //
+
     /**
      * ID getter
      * @return String current id of the room
@@ -60,10 +64,51 @@ public class Room extends StoryNode
     }
 
     /**
+     * Items list getter
+     * @return List of all items in the room
+     */
+    public List<Item> getItems()
+    {
+        return items;
+    }
+
+    /**
+     * Background path getter.
+     * @return Background path relative to resources.com.adventure.
+     */
+    public String getBackgroundPath()
+    {
+        return this.backgroundPath;
+    }
+
+    /**
+     * Monster getter
+     * @return Monster inside the room
+     */
+    public Enemy getMonster()
+    {
+        return monster;
+    }
+
+    /**
+     * Completed getter.
+     * @return True if the room is completed, false otherwise.
+     */
+    public boolean getCompleted()
+    {
+        return this.completed;
+    }
+
+    //
+    // SETTERS.
+    //
+
+    /**
      * Name setter
      * @param name name of the room
      */
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
@@ -74,15 +119,6 @@ public class Room extends StoryNode
     public void setDescription(String description)
     {
         this.description = description;
-    }
-
-    /**
-     * Items list getter
-     * @return List of all items in the room
-     */
-    public List<Item> getItems()
-    {
-        return items;
     }
 
     /**
@@ -106,27 +142,11 @@ public class Room extends StoryNode
     }
 
     /**
-     * Background path getter.
-     * @return Background path relative to resources.com.adventure.
-     */
-    public String getBackgroundPath()
-    {
-        return this.backgroundPath;
-    }
-
-    /**
-     * Monster getter
-     * @return Monster inside the room
-     */
-    public Enemy getMonster() {
-        return monster;
-    }
-
-    /**
      * Monster setter
      * @param monster Monster to set
      */
-    public void setMonster(Enemy monster) {
+    public void setMonster(Enemy monster)
+    {
         this.monster = monster;
     }
 
@@ -139,18 +159,21 @@ public class Room extends StoryNode
         this.completed = completed;
     }
 
-    /**
-     * Completed getter.
-     * @return If the room is completed.
-     */
-    public boolean getCompleted()
-    {
-        return this.completed;
-    }
+    //
+    // OTHERS.
+    //
 
-    //
-    // OBJECT OVERRIDE
-    //
+    /**
+     * Remove an item from the room
+     * @param item Item to be removed
+     */
+    public Item removeItem(Item item)
+    {
+        if(! this.items.contains(item))
+            return null;
+        this.items.remove(item);
+        return item;
+    }
 
     /**
      * To string method
@@ -159,9 +182,12 @@ public class Room extends StoryNode
     @Override
     public String toString()
     {
-        return name + ", " + description + ", " + items.size();
+        return String.format("name: %s, description: %s", name, description);
     }
 
+    //
+    // VARIABLES.
+    //
 
     /**
      * Name of the room

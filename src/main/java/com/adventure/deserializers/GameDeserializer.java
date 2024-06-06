@@ -40,6 +40,7 @@ public class GameDeserializer extends StdDeserializer<Game>
         Game game = new Game(ApplicationContextProvider.getInstance().getProperties());
 
 
+
         //
         //  GAMEGRAPH
         //
@@ -59,13 +60,21 @@ public class GameDeserializer extends StdDeserializer<Game>
         //      key: StoryNode unique id
         //      value: StoryNode object
         storyNodes  = new HashMap<>();
-        vertexesNode.fields().forEachRemaining(this::creatStoryNodeMap);
+        Iterator<Map.Entry<String,JsonNode>> vertexIterator = vertexesNode.fields();
+        while(vertexIterator.hasNext())
+            creatStoryNodeMap(vertexIterator.next());
+
+
+
 
         //  Add vertexes to graph
         storyNodes.forEach((k,v) -> gameGraph.addVertex(v));
 
         //  Deserialize edges and populate graph
-        edgesNode.fields().forEachRemaining(this::populateGraph);
+        Iterator<Map.Entry<String,JsonNode>> edgesIterator = edgesNode.fields();
+        while(edgesIterator.hasNext())
+            populateGraph(edgesIterator.next());
+
 
 
         //
@@ -73,14 +82,20 @@ public class GameDeserializer extends StdDeserializer<Game>
         //  PREVIOUSNODE
         //
 
-        StoryNode previous = fromNodetoRoom(node.get("previousNode"));
-        StoryNode current = fromNodetoRoom(node.get("currentNode"));
+
+        //  To obtain previous or current we get the ID of the node inside the json
+        //  Then the ID is used to get the node from the storyNodes
+        StoryNode previous = null;
+        StoryNode current = null;
+        if(!node.get("previousNode").asText().equals("null"))
+            previous = storyNodes.get(node.get("previousNode").get("id").asText());
+        if(!node.get("currentNode").asText().equals("null"))
+            current = storyNodes.get(node.get("currentNode").get("id").asText());
 
         /*  Since previousNode is set only when a new currentNode is set, we set
             firstly set the currentNode as previousNode and the set the currentNode with
             the real currentNode.
             In this way previousNode is set correctly
-
             If the previousNode is null we only set the currentNode
          */
 
@@ -109,7 +124,6 @@ public class GameDeserializer extends StdDeserializer<Game>
         Player player = fromNodeToObject(node.get("player"), Player.class);
         game.setPlayer(player);
 
-
         return game;
     }
 
@@ -118,7 +132,7 @@ public class GameDeserializer extends StdDeserializer<Game>
      * Populate gameGraph with vertexes and links
      * @param element {@literal <String,JsonNode>} as {@literal <unique id, edge node>}
      */
-    private void populateGraph(Map.Entry<String,JsonNode> element)
+    private void populateGraph(Map.Entry<String,JsonNode> element) throws JsonProcessingException
     {
         //  Get key and value from map
         String key = element.getKey();
@@ -142,7 +156,7 @@ public class GameDeserializer extends StdDeserializer<Game>
      * Deserialize vertexes and populates storyNodes map
      * @param element {@literal <String,JsonNode>} as {@literal <unique id, storyNode node>}
      */
-    private void creatStoryNodeMap(Map.Entry<String,JsonNode> element)
+    private void creatStoryNodeMap(Map.Entry<String,JsonNode> element) throws JsonProcessingException
     {
         //  Get key and value from map
         String key = element.getKey();
@@ -165,7 +179,7 @@ public class GameDeserializer extends StdDeserializer<Game>
      * @param roomNode JsonNode to use
      * @return Room deserialized
      */
-    private Room fromNodetoRoom(JsonNode roomNode)
+    private Room fromNodetoRoom(JsonNode roomNode)  throws JsonProcessingException
     {
         if(roomNode.asText().equals("null"))
             return null;
@@ -179,7 +193,8 @@ public class GameDeserializer extends StdDeserializer<Game>
         // * Items
         ArrayList<Item> items = new ArrayList<>();
         Iterator<JsonNode> iterator = roomNode.get("items").elements();
-        iterator.forEachRemaining(e -> items.add(fromNodeToObject(e,Item.class)));
+        while(iterator.hasNext())
+            items.add(fromNodeToObject(iterator.next(),Item.class));
         room.setItems(items);
         // * Entities
         room.setMonster(fromNodeToObject(roomNode.get("monster"), Enemy.class));
@@ -195,15 +210,9 @@ public class GameDeserializer extends StdDeserializer<Game>
      * @return A deserialized object of type tClass
      * @param <T> the type to use
      */
-    private <T> T fromNodeToObject(JsonNode objectNode, Class<T> tClass)
+    private <T> T fromNodeToObject(JsonNode objectNode, Class<T> tClass) throws JsonProcessingException
     {
-        try {
             return new ObjectMapper().readValue(objectNode.toString(), tClass);
-        } catch(JsonProcessingException e) {
-            e.printStackTrace();
-            System.err.println("Error: cannot get Object from json");
-        }
-        return null;
     }
 
 

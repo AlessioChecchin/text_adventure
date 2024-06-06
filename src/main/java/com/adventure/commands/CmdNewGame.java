@@ -3,6 +3,8 @@ package com.adventure.commands;
 import com.adventure.models.Game;
 import javafx.application.Platform;
 
+import java.util.List;
+
 public class CmdNewGame extends AbstractCommand
 {
     @Override
@@ -12,24 +14,31 @@ public class CmdNewGame extends AbstractCommand
         int n = this.context.getGame().getGameGraph().vertexSet().size();
 
         // n = 0:
-        // In this case the GameLoaderNode (detached from the graph) is loaded.
-        // A new game can be created without asking user consent (no data will be lost)
+        //      In this case the GameLoaderNode (detached from the graph) is loaded.
+        //      A new game can be created without asking user consent (no data will be lost)
+        //
         // n != 0:
-        // A valid game is loaded, confirmation required.
+        //      A valid game is loaded, confirmation required.
         if(n != 0)
         {
+            this.writer.println("Do you really want to create a new game? Current unsaved progress will be lost! [yes/no]");
+
             // If the user says no, then the command terminates.
             if(!this.askConfirmation())
             {
+                this.writer.flush();
+                this.writer.println("No game was created.");
                 return;
             }
         }
 
         this.writer.println("Enter player name: ");
-
+        //  Disable all commands (so that the user must insert the name)
+        disableSaveAll();
         // If we reach this code, then the user answered yes.
         String username = this.safeReadNextLine();
-
+        //  Re-enable previously disabled commands
+        reEnableSaved();
         logger.debug("Switching game...");
 
         Game game = this.context.getStorageService().newGame(username);

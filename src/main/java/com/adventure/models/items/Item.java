@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import java.util.Objects;
 
+/**
+ * Class that represents a generic item.
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = AttackItem.class, name = "AttackItem"),
@@ -31,16 +34,6 @@ public abstract class Item
     }
 
     //
-    //  SETTERS
-    //
-
-    /**
-     * Set the weight of the item
-     * @param weight weight of the item
-     */
-    public void setWeight(int weight) { this.weight = weight; }
-
-    //
     //  GETTERS
     //
 
@@ -48,18 +41,37 @@ public abstract class Item
      * Get the name of the item
      * @return name of the item
      */
-    public String getName() { return this.name; }
+    public String getName()
+    {
+        return this.name;
+    }
+
     /**
      * Get the weight of the item
      * @return weight of the item
      */
-    public int getWeight() { return this.weight; }
+    public int getWeight()
+    {
+        return this.weight;
+    }
+
+    //
+    //  SETTERS.
+    //
 
     /**
-     * Equals method.
-     * @param o
-     * @return
+     * Set the weight of the item
+     * @param weight weight of the item
      */
+    public void setWeight(int weight)
+    {
+        this.weight = weight;
+    }
+
+    //
+    // OTHERS.
+    //
+
     public boolean equals(Object o)
     {
         if (this == o)
@@ -85,7 +97,13 @@ public abstract class Item
         return this.name;
     }
 
-
+    /**
+     * Item name.
+     */
     protected String name;
+
+    /**
+     * Item weight.
+     */
     protected int weight;
 }

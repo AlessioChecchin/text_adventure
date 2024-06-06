@@ -5,13 +5,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+/**
+ * Represents an action used to move in the game graph.
+ */
 @JsonSerialize(using = ActionSerializer.class)
 public class Action
 {
-    //
-    //  CONSTRUCTOR
-    //
-
     /**
      * Default constructor
      * @param actionName Name of the action
@@ -23,7 +22,7 @@ public class Action
     }
 
     //
-    //  GETTERS
+    //  GETTERS.
     //
 
     /**
@@ -32,10 +31,8 @@ public class Action
      */
     public String getActionName() { return this.actionName; }
 
-
-
     //
-    //  OTHERS
+    //  OTHERS.
     //
 
     @Override
@@ -51,14 +48,13 @@ public class Action
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return this.actionName.hashCode();
     }
 
-
-
     //
-    //  VARIABLES
+    //  VARIABLES.
     //
 
     /**
