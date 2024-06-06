@@ -51,6 +51,10 @@ public class Main extends Application
         commandParser.registerCommand("delete", CmdDeleteGame.class, "Remove the specified game.");
         commandParser.registerCommand("show", CmdShow.class, "Shows inventory or stats, usage: show [inventory/stats]");
         commandParser.registerCommand("look", CmdLook.class, "Inspects the current room.");
+        commandParser.registerCommand("move", CmdMove.class, "Moves in the map.");
+        commandParser.registerCommand("pick", CmdPick.class, "Picks a specific item.");
+        commandParser.registerCommand("wai", CmdWai.class, "Gives information about valid paths");
+
 
         Properties props = context.getProperties();
 

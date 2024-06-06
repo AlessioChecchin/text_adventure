@@ -5,6 +5,9 @@ import com.adventure.services.StorageService;
 
 import java.util.Properties;
 
+/**
+ * Interface for application context.
+ */
 public interface ApplicationContext
 {
     /**

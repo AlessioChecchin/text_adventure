@@ -1,13 +1,25 @@
 package com.adventure.models.nodes;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jgrapht.graph.DefaultEdge;
 
 import java.util.Objects;
 
+/**
+ * This class represents a game graph edge.
+ * It connects two story-nodes and represents a possible path for a player.
+ */
 public class StoryNodeLink extends DefaultEdge
 {
+    /**
+     * Constructor.
+     */
+    public StoryNodeLink()
+    {
+        super();
+        this.action = new Action("");
+        this.key = "";
+        this.locked = false;
+    }
 
     //
     //  GETTERS
@@ -41,6 +53,53 @@ public class StoryNodeLink extends DefaultEdge
     }
 
     /**
+     * Action getter
+     * @return Action linked with this edge
+     */
+    public Action getAction()
+    {
+        return this.action;
+    }
+
+    //
+    //  SETTERS
+    //
+
+    /**
+     * Link another action to this edge
+     * @param switchAction new action to link to the edge
+     */
+    public void setAction(Action switchAction)
+    {
+        Objects.requireNonNull(switchAction, "switchAction cant be null");
+        this.action = switchAction;
+    }
+
+    /**
+     * Sets flag locked.
+     * @param locked Flag value.
+     */
+    public void setLocked(boolean locked)
+    {
+        this.locked = locked;
+    }
+
+    /**
+     * Key setter. If a key is set, then the edge is automatically locked.
+     * @param key key.
+     */
+    public void setKey(String key)
+    {
+        Objects.requireNonNull(key, "key can't be null");
+        this.locked = true;
+        this.key = key;
+    }
+
+    //
+    // OTHERS.
+    //
+
+    /**
      * Tries to unlock the link.
      * @param key Key used to unlock.
      * @return True if the link was unlocked successfully, false otherwise.
@@ -56,44 +115,6 @@ public class StoryNodeLink extends DefaultEdge
 
         return false;
     }
-
-    /**
-     * Action getter
-     * @return Action linked with this edge
-     */
-    public Action getAction() { return this.action; }
-
-    //
-    //  SETTERS
-    //
-
-    /**
-     * Link another action to this edge
-     * @param switchAction new action to link to the edge
-     */
-    public void setAction(Action switchAction) { this.action = switchAction; }
-
-    /**
-     * Sets flag locked.
-     * @param locked Flag value.
-     */
-    public void setLocked(boolean locked)
-    {
-        this.locked = locked;
-    }
-
-    /**
-     * Key setter.
-     * @param key key.
-     */
-    public void setKey(String key)
-    {
-        this.key = key;
-    }
-
-    //
-    // DEFAULT OVERRIDES.
-    //
 
     @Override
     public boolean equals(Object edge)
@@ -112,7 +133,7 @@ public class StoryNodeLink extends DefaultEdge
     @Override
     public int hashCode()
     {
-        return Objects.hash(action);
+        return Objects.hash(action, locked, key);
     }
 
     //

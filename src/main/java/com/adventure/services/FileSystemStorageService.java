@@ -1,14 +1,13 @@
 package com.adventure.services;
 
 import com.adventure.Resources;
-import com.adventure.deserializers.GameDeserializer;
-import com.adventure.deserializers.GraphDeserializer;
 import com.adventure.exceptions.GameStorageException;
 import com.adventure.models.Game;
 import com.adventure.models.Inventory;
 import com.adventure.models.Player;
 import com.adventure.models.Stats;
 import com.adventure.models.items.*;
+import com.adventure.models.nodes.Action;
 import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
 import com.adventure.models.nodes.StoryNodeLink;
@@ -18,6 +17,8 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jgrapht.Graph;
 
 import java.io.File;
@@ -28,14 +29,15 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Properties;
 
-public class FileSystemStorageService implements StorageService
+public class FileSystemStorageService extends AbstractStorageService
 {
     public FileSystemStorageService(Properties properties)
     {
+        super(properties);
+
         //  Create or ensure the existence of the 'saves' folder
         ensureSaveFolder();
         this.savePath = Resources.getAssetsPath() + "saves/";
-        this.properties = properties;
     }
 
     @Override
@@ -66,7 +68,6 @@ public class FileSystemStorageService implements StorageService
         {
             //  Create the json string
             String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(game);
-            System.out.println(json);
 
             //  Get json file path
             String saveName = game.getId() + ".json";
@@ -74,9 +75,9 @@ public class FileSystemStorageService implements StorageService
             //  Create json file and write the json string into it
             File file = new File(this.savePath + saveName);
             if(file.createNewFile())
-                System.out.println("Saved " + saveName);
+                logger.debug("Saved {}", saveName);
             else
-                System.out.println(saveName + " overwritten");
+                logger.debug("{} overwritten", saveName);
             FileWriter write = new FileWriter(file);
             write.write(json);
             write.close();
@@ -92,19 +93,21 @@ public class FileSystemStorageService implements StorageService
     }
 
     @Override
-    public Game loadGame(String gameId) throws NoSuchElementException, GameStorageException
+    public Game loadGame(String gameId) throws GameStorageException
     {
         File json = new File(this.savePath + gameId + ".json");
-        if(! json.exists())
-            throw new NoSuchElementException("Game with id " + gameId + " does not exist");
+
+        if(!json.exists())
+            throw new GameStorageException("Game with id " + gameId + " does not exist");
 
         //  Creates game from json
         ObjectMapper mapper = new ObjectMapper();
-        try {
+        try
+        {
             return mapper.readValue(json, Game.class);
-        } catch (JsonProcessingException e) {
-            throw new GameStorageException(e.getMessage());
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             throw new GameStorageException(e.getMessage());
         }
     }
@@ -113,52 +116,11 @@ public class FileSystemStorageService implements StorageService
     public void deleteGame(String gameId)
     {
         File game = new File(Resources.getAssetsPath() + "saves/" + gameId + ".json");
+
         if(game.delete())
-            System.out.println("Deleted " + game.getName().replace(".json", ""));
+            logger.debug("Deleted {}", game.getName().replace(".json", ""));
         else
             throw new NoSuchElementException("No such game");
-    }
-
-    @Override
-    public Game newGame(String playerName)
-    {
-        Game game = new Game(this.properties);
-
-        Inventory playerInventory = new Inventory(100);
-
-        playerInventory.addItem(new AttackItem("Sword"));
-
-        Stats stats = new Stats();
-        stats.setMaxHp(100);
-        stats.setHp(100);
-        stats.setBaseAttack(1);
-        stats.setBaseDefense(1);
-
-        game.setPlayer(new Player(playerName, playerInventory, stats));
-
-        String firstFightRoomKey = "Level 1";
-
-        Room startingRoom = new Room("Introduction room", "Welcome to the first room, take the key and go on an adventure!");
-        startingRoom.setBackgroundPath("assets/castle.png");
-        startingRoom.getItems().add(new Key(firstFightRoomKey));
-
-        game.setCurrentNode(startingRoom);
-
-        Room firstFightRoom = new Room("First fight room", "Oh no, a goblin! Fight him and take the loot that drops");
-        firstFightRoom.setBackgroundPath("assets/castle.png");
-
-        // Populating the game graph.
-        Graph<StoryNode, StoryNodeLink> g = game.getGameGraph();
-        g.addVertex(startingRoom);
-        g.addVertex(firstFightRoom);
-
-        StoryNodeLink toFirstFightRoom = new StoryNodeLink();
-        toFirstFightRoom.setLocked(true);
-        toFirstFightRoom.setKey(firstFightRoomKey);
-
-        g.addEdge(startingRoom, firstFightRoom, toFirstFightRoom);
-
-        return game;
     }
 
     /**
@@ -177,10 +139,4 @@ public class FileSystemStorageService implements StorageService
      * Save folder path
      */
     private final String savePath;
-
-    /**
-     * Application properties.
-     */
-    private final Properties properties;
-
 }

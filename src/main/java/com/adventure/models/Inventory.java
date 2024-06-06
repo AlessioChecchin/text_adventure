@@ -13,17 +13,20 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
+/**
+ * Class used to handle an inventory of items.
+ */
 @JsonSerialize(using = InventorySerializer.class)
 public class Inventory
 {
     /**
-     * Default constructor
+     * Default constructor.
      * <ul>
      *     <li>currentWeight: 0</li>
      *     <li>attackItem: hands</li>
      *     <li>defenceItem: hands</li>
      * </ul>
-     * @param maxWeight Max weight the inventory can have
+     * @param maxWeight Max weight the inventory can have.
      */
     @JsonCreator
     public Inventory(@JsonProperty("maxWeight") int maxWeight)
@@ -42,25 +45,80 @@ public class Inventory
     }
 
     //
-    //  SETTERS
+    //  GETTERS.
     //
 
     /**
-     * Set max weight the inventory can hold
-     * @param maxWeight value of max weight
+     * Get the equipped attack item.
+     * @return AttackItem equipped.
      */
-    public void setMaxWeight(int maxWeight) { this.maxWeight = maxWeight; }
+    public AttackItem getEquipedAttackItem()
+    {
+        return this.attackItem;
+    }
 
     /**
-     * Set the current weight in the inventory
-     * @param currentWeight value of the current weight
+     * Get the equipped defence item.
+     * @return DefenceItem equipped.
      */
-    public void setCurrentWeight(int currentWeight) { this.currentWeight = currentWeight; }
+    public DefenceItem getEquipedDefenceItem()
+    {
+        return this.defenceItem;
+    }
 
     /**
-     * Set all items in the inventory
-     * @param items ArrayList containing all the items
-     * @throws TooMuchWeightException If the weight is over maxWeight
+     * Get the value of max weight the inventory can handle.
+     * @return max weight of the inventory.
+     */
+    public int getMaxWeight()
+    {
+        return this.maxWeight;
+    }
+
+    /**
+     * Get the value of the current weight in the inventory.
+     * @return current weight in the inventory.
+     */
+    public int getCurrentWeight()
+    {
+        return this.currentWeight;
+    }
+
+    /**
+     * Get a copy of the ArrayList containing all the items.
+     * @return ArrayList with all items of the inventory.
+     */
+    public ArrayList<Item> getItems()
+    {
+        return this.items;
+    }
+
+    //
+    // SETTERS.
+    //
+
+    /**
+     * Set max weight the inventory can hold.
+     * @param maxWeight value of max weight.
+     */
+    public void setMaxWeight(int maxWeight)
+    {
+        this.maxWeight = maxWeight;
+    }
+
+    /**
+     * Set the current weight in the inventory.
+     * @param currentWeight value of the current weight.
+     */
+    public void setCurrentWeight(int currentWeight)
+    {
+        this.currentWeight = currentWeight;
+    }
+
+    /**
+     * Set all items in the inventory.
+     * @param items ArrayList containing all the items.
+     * @throws TooMuchWeightException If the weight is over maxWeight.
      */
     public void setItems(ArrayList<Item> items) throws TooMuchWeightException
     {
@@ -74,43 +132,28 @@ public class Inventory
         }
     }
 
-    //
-    //  GETTERS
-    //
+    /**
+     * Attack item setter.
+     * @param equipable Attack item.
+     */
+    @JsonProperty("equippedAttackItem")
+    private void setAttackItem(AttackItem equipable)
+    {
+        this.attackItem = equipable;
+    }
 
     /**
-     * Get the equipped attack item
-     * @return AttakItem equipped
+     * Defence item setter.
+     * @param equipable Defence item.
      */
-    public AttackItem getEquipedAttackItem() { return this.attackItem; }
-
-    /**
-     * Get the equipped defence item
-     * @return DefenceItem equipped
-     */
-    public DefenceItem getEquipedDefenceItem() { return this.defenceItem; }
-
-    /**
-     * Get the value of max weight the inventory can handle
-     * @return max weight of the inventory
-     */
-    public int getMaxWeight()  { return this.maxWeight; }
-
-    /**
-     * Get the value of the current weight in the inventory
-     * @return current weight in the inventory
-     */
-    public int getCurrentWeight() { return this.currentWeight; }
-
-    /**
-     * Get a copy of the ArrayList containing all the items
-     * @return ArrayList with all items of the inventory
-     */
-    public ArrayList<Item> getItems() { return this.items; }
-            //new ArrayList<>(this.items); }
+    @JsonProperty("equippedDefenceItem")
+    private void setDefenceItem(DefenceItem equipable)
+    {
+        this.defenceItem = equipable;
+    }
 
     //
-    //  METHODS
+    // OTHERS.
     //
 
     /**
@@ -119,29 +162,20 @@ public class Inventory
      */
     public void equipItem(Equipable equipable)
     {
-        if( !items.contains((Item) equipable) )
-            throw new NoSuchElementException();
-        if(equipable instanceof AttackItem)
-            this.attackItem = (AttackItem) equipable;
-        if(equipable instanceof DefenceItem)
-            this.defenceItem = (DefenceItem) equipable;
+        if(!items.contains((Item) equipable)) throw new NoSuchElementException();
+        if(equipable instanceof AttackItem) this.attackItem = (AttackItem) equipable;
+        if(equipable instanceof DefenceItem) this.defenceItem = (DefenceItem) equipable;
     }
-
-    //  Added those methods in order to make Deserialization easier
-    @JsonProperty("equippedAttackItem")
-    private void setAttackItem(AttackItem equipable) { this.attackItem = equipable; }
-    @JsonProperty("equippedDefenceItem")
-    private void setDefenceItem(DefenceItem equipable) { this.defenceItem = equipable; }
 
     /**
      * Unequip an attack or defense item
      * @param type Type of the item to unequip (ATTACK or DEFENSE)
      */
-    public void unequipItem(equipType type)
+    public void unequipItem(EquipType type)
     {
-        if(type == equipType.ATTACK)
+        if(type == EquipType.ATTACK)
             this.attackItem = this.defaultAtkItem;
-        if(type == equipType.DEFENSE)
+        if(type == EquipType.DEFENSE)
             this.defenceItem = this.defaultDefItem;
     }
 
@@ -152,10 +186,28 @@ public class Inventory
      */
     public void addItem(Item item)
     {
-        if( !canAdd(item) )
-            throw new TooMuchWeightException("Cannot add an item to the inventory");
+        if(!canAdd(item)) throw new TooMuchWeightException("Cannot add an item to the inventory");
         this.items.add(item);
         this.currentWeight += item.getWeight();
+    }
+
+    /**
+     * Method to obtain an item instance from its name
+     * @param name Name of the item to search
+     * @return ArrayList with all the items with the same name
+     */
+    public ArrayList<Item> itemsByName(String name)
+    {
+        ArrayList<Item> matchItems = new ArrayList<>();
+        for(Item item: this.items)
+        {
+            if (item.getName().equals(name))
+            {
+                matchItems.add(item);
+            }
+        }
+
+        return matchItems;
     }
 
     /**
@@ -164,8 +216,7 @@ public class Inventory
      */
     public void dropItem(Item item)
     {
-        if( !items.contains(item) )
-            throw new NoSuchElementException("Item not in inventory");
+        if( !items.contains(item) ) throw new NoSuchElementException("Item not in inventory");
         items.remove(item);
         this.currentWeight -= item.getWeight();
     }
@@ -177,18 +228,60 @@ public class Inventory
      */
     private boolean canAdd(Item item)
     {
+        if(item == null) return false;
         return this.currentWeight + item.getWeight() <= this.maxWeight;
     }
 
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj) return true;
+        if (obj == null || this.getClass() != obj.getClass()) return false;
+
+        Inventory inventory = (Inventory) obj;
+        return ((this.attackItem.equals(inventory.getEquipedAttackItem())) && (this.defenceItem.equals(inventory.getEquipedDefenceItem()))
+        && (this.items.equals(inventory.getItems())) && (this.maxWeight == inventory.getMaxWeight()));
+    }
+
+    /**
+     * Currently equipped attack item.
+     */
     private AttackItem attackItem;
+
+    /**
+     * Currently equipped defence item.
+     */
+    private DefenceItem defenceItem;
+
+    /**
+     * Default attack item.
+     */
     @JsonIgnore
     private final AttackItem defaultAtkItem;
-    private DefenceItem defenceItem;
+
+    /**
+     * Default defence item.
+     */
     @JsonIgnore
     private final DefenceItem defaultDefItem;
+
+    /**
+     * List of items present in the inventory.
+     */
     private ArrayList<Item> items;
+
+    /**
+     * The max weight that the inventory can carry.
+     */
     private int maxWeight;
+
+    /**
+     * Current weight.
+     */
     private int currentWeight;
 
-    public enum equipType{ ATTACK, DEFENSE}
+    /**
+     * Enum used to
+     */
+    public enum EquipType { ATTACK, DEFENSE }
 }

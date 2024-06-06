@@ -1,6 +1,6 @@
 .graphics
 {
-    -fx-font-family: 'Retro Gaming';
+    -fx-font-family: 'Monocraft';
 }
 
 .display-wrapper
@@ -15,10 +15,9 @@
     -fx-border-style: solid;
 }
 
-
 /* See https://stackoverflow.com/questions/40253661/javafx-scrollpane-how-set-transparent-background */
 .scroll-pane{
-    -fx-background-color:transparent;
+    -fx-background-color: transparent;
 }
 
 .scroll-pane > .viewport {
@@ -32,7 +31,7 @@
 
 .console-output
 {
-    -fx-font-family: 'Retro Gaming';
+    -fx-font-family: 'Monocraft';
     -fx-text-fill: white;
     -fx-font-size: 14;
 }
@@ -40,20 +39,20 @@
 .console-input-wrapper
 {
     -fx-padding: 10;
-
 }
 
 .console-input-prefix
 {
     -fx-text-fill: white;
+    -fx-font-family: 'Monocraft';
 }
 
 .console-input
 {
     -fx-background-color: transparent;
     -fx-text-fill: white;
-    -fx-font-family: 'Retro Gaming';
-    -fx-font-size: 16;
+    -fx-font-family: 'Monocraft';
+    -fx-font-size: 14;
 }
 
 

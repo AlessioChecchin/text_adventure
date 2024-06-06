@@ -10,6 +10,7 @@ module com.adventure {
     requires javafx.media;
     requires org.apache.logging.log4j;
     requires org.apache.logging.log4j.core;
+    requires software.amazon.awssdk.core;
 
     // Opening to com.fasterxml.jackson.databind necessary for serialization
     opens com.adventure to javafx.fxml, com.fasterxml.jackson.databind;
@@ -21,6 +22,7 @@ module com.adventure {
     exports com.adventure.models.nodes;
     exports com.adventure.controllers;
     exports com.adventure.models;
+    exports com.adventure.exceptions;
     opens com.adventure.controllers to javafx.fxml;
     opens com.adventure.components to javafx.fxml;
     exports com.adventure.commands;

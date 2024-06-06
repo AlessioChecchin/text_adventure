@@ -16,10 +16,6 @@ class StringPropertyWriterTest extends FxTest {
     StringPropertyWriter stringPropertyWriter;
     StringProperty stringProperty;
 
-    @BeforeAll
-    static void initJfxRuntime(){
-        Platform.startup(() -> {});
-    }
     @BeforeEach
     void setUp() {
         stringProperty = new SimpleStringProperty();
