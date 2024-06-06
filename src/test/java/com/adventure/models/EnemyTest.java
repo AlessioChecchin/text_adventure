@@ -26,6 +26,7 @@ class EnemyTest {
         //exercise
         Enemy enemyTest = new Enemy(new Inventory(10), new Stats(), "test");
         enemyTest.setDefaultDialog("test");
+        enemyTest.getInventory().addItem(apple);
 
         //test
         assertEquals(enemyTest, enemy);

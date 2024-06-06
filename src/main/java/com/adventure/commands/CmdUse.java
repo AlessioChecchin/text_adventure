@@ -17,6 +17,7 @@ import java.util.NoSuchElementException;
 public class CmdUse extends AbstractCommand{
     @Override
     public void execute() throws InterruptedException {
+        this.writer.println("hello");
 
         //check the correct number of parameters
         int size = getArgs().size();
@@ -24,6 +25,19 @@ public class CmdUse extends AbstractCommand{
             //setting player and monster
             Player player = this.context.getGame().getPlayer();
             StoryNode node = this.context.getGame().getCurrentNode();
+
+            //player use item
+            String key = this.getArgs().get(0);
+            try {
+                player.use(key);
+                this.writer.println("You use " + key);
+            }
+            catch (NotUsableItemException notUsable) {
+                this.writer.println("Item is not usable");
+            }
+            catch (NoSuchElementException noElement){
+                this.writer.println("Item not found");
+            }
             if(node instanceof Room currentRoom) {
 
                 Enemy monster = currentRoom.getMonster();
@@ -38,21 +52,8 @@ public class CmdUse extends AbstractCommand{
                     if (!monster.useDodge()) choice = CmdFight.Move.ATTACK;
                 }
 
-                //player interactions with the monster
-                String key = this.getArgs().get(0);
-                try {
-                    player.use(key);
-                    this.writer.println("You use " + key);
-                }
-                catch (NotUsableItemException notUsable) {
-                    this.writer.println("Item is not usable");
-                }
-                catch (NoSuchElementException noElement){
-                    this.writer.println("Item not found");
-                }
-
                 //if use is call in a fight, monster can attack
-                if (monster.getAlive()) {
+                if ((monster.getAlive()) && (monster != null)) {
                     if (choice == CmdFight.Move.ATTACK) {
                         player.hit(monster.getStats().getBaseAttack());
                         this.writer.println("Monster hits " + player.getName() + " and damage is " + monster.getStats().getBaseAttack() + "hp");
