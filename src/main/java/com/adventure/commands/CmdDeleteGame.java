@@ -1,5 +1,6 @@
 package com.adventure.commands;
 
+import com.adventure.exceptions.GameStorageException;
 import com.adventure.utils.ApplicationContext;
 
 import java.util.ArrayList;
@@ -34,8 +35,7 @@ public class CmdDeleteGame extends AbstractCommand
      * Get all possible arguments for this command
      * @return all game files
      */
-    public static ArrayList<String> args(ApplicationContext context)
-    {
+    public static ArrayList<String> args(ApplicationContext context) throws GameStorageException {
         return new ArrayList<>(context.getStorageService().listGames());
     }
 }
