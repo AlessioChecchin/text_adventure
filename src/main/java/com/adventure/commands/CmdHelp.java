@@ -20,7 +20,7 @@ public class CmdHelp extends AbstractCommand
         {
             int padding = maxLength - command.length();
 
-            writer.printf("%s%s : %s%n", command, " ".repeat(padding), commandParser.getCommandDescription(command));
+            writer.printf("%s%s : %s%n", command, " ".repeat(padding), commandParser.getCommandMetadata(command).getDescription());
         }
     }
 }

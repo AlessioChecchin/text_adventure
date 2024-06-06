@@ -232,41 +232,11 @@ public class CommandParser
      * @param key Command name.
      * @return Command description.
      */
-    public String getCommandDescription(String key)
+    public CommandMetadata getCommandMetadata(String key)
     {
         CommandMetadata metadata = this.lookupTable.get(key);
         if(metadata == null || !this.enabledCommands.contains(key)) return null;
-        return metadata.getDescription();
-    }
 
-    /**
-     * Contains command information.
-     */
-    protected static class CommandMetadata
-    {
-        private final Class<? extends Command> commandClass;
-        private final String description;
-
-        public CommandMetadata(Class<? extends Command> commandClass, String description)
-        {
-            this.commandClass = commandClass;
-            this.description = description;
-        }
-
-        public CommandMetadata(Class<? extends Command> commandClass)
-        {
-            this.commandClass = commandClass;
-            this.description = "";
-        }
-
-        public Class<? extends Command> getCommandClass()
-        {
-            return this.commandClass;
-        }
-
-        public String getDescription()
-        {
-            return this.description;
-        }
+        return metadata;
     }
 }
