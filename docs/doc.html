@@ -18,13 +18,14 @@
       <ul class="menu">
         <div class="menu__item toggle"><span></span></div>
         <li class="menu__item"><a href="https://github.com/ssiodev/text_adventure.git" class="link link--dark"><i class="fa fa-github"></i> Github</a></li>
-        <li class="menu__item"><a href="index.html" class="link link--dark"><i class="fa fa-home"></i> Home</a></li>
+        <li class="menu__item"><a href="doc.html" class="link link--dark"><i class="fa fa-home"></i> Home</a></li>
       </ul>
     </nav>
     <div class="wrapper">
       <aside class="doc__nav">
         <ul>
-          <li class="js-btn selected">Manual</li>
+          <li class="js-btn selected">Project Description</li>
+          <li class="js-btn">Manual</li>
           <li class="js-btn">Specifications</li>
           <li class="js-btn">Design</li>
           <li class="js-btn">Testing</li>
@@ -33,129 +34,47 @@
       </aside>
       <article class="doc__content">
         <section class="js-section">
-          <h2 class="section__title">Manual</h2>
+          <h2 class="section__title">Project Description</h2>
           <h3 class="section__title">Introduction</h3>
           <p>
             <b>Text Adventure</b> is a text-based RPG set in a fantasy world. You will be the hero of our story,
-            are you ready for this exciting adventure?!
+            are you ready for this exciting adventure?
           </p>
-          <h3 class="section__title">The Plot</h3>
-          <p>
+          <h3 class="section__title">Game Plot</h3>
+          <p >
             In a distant era, in the lands of Margorgh, in the darkest depths of a shadowy forest, it is said that there exists a Castle ruled by the forces of evil, housing an unimaginable power.
             For millennia, humanity has sought to wrest this power from the forces of evil; battles and wars have marked the quest for this power.<br/>
             Over time, the traces of the Castle and the power within have been lost, vanished like leaves on trees in winter, or at least, so it was believed...
             A mysterious scroll was discovered by a warrior with a golden heart, a scroll containing knowledge that he could not have imagined and that would lead him to an unbelievable destiny....<br/>
           </p>
-          <h3 class="section__title">How To Play</h3>
+          <h3 class="section__title">Graphic Interface</h3>
+          <p>For the GUI (graphical user interface) it has been used <i>JavaFX FXML</i>.</p>
+          <h3 class="section__title">Gameplay</h3>
           <p>
-            The user interact with the display using a <b>custom command line</b>, which is located at the bottom of the game window.<br/>
-            The user have to type the command followed by (if any) arguments and then press enter to trigger the specific in-game action.<br/>
-            Example: <br/>
+            The game is set in two different levels, one located in a deadly forest, the latter in a evil castle; each one of them is subdivided
           </p>
-          <code>>>command &lt;argument&gt; </code>
+          <p>At the first launch of the game, the program will load the main menu, where you can choose between:</p>
+            <ul>- start a new game</ul>
+            <ul>- load a pre-existing game (if existing)</ul>
+            <ul>- remove a pre-existing game (if existing)</ul>
+            <ul>- see a list of the pre-saved games</ul>
+          <p>
+            If you start a new game, you will be asked to enter your hero-name.
+            In any moment of the game you can use <code>clear</code> and <code>help</code> to, respectively, clear the output section and request the list of the available commands.
 
-          <p>Here we have the list of the possibles commands with a description</p>
-          <table>
-            <tr>
-              <th> Name </th>
-              <th>Argument</th>
-              <th>Description</th>
-            </tr>
-            <tr>
-              <td>help</td>
-              <td>-</td>
-              <td>Show all the possible commands in a precise moment of the game.</td>
-            </tr>
-            <tr>
-              <td>newGame</td>
-              <td>-</td>
-              <td>Create a new game.<br/>It can be utilized only in the menu.</td>
-            </tr>
-            <tr>
-              <td>save</td>
-              <td>(Optional) name of the save </td>
-              <td>Command for save the current game.<br/> Require a name for identify the game that you are saving</td>
-            </tr>
-            <tr>
-              <td>loadGame</td>
-              <td>Name of the saved game</td>
-              <td>Command for load a game previously saved entering its name</td>
-            </tr>
-            <tr>
-              <td>listGames</td>
-              <td>-</td>
-              <td>Command that shows the saved games</td>
-            </tr>
-            <tr>
-              <td>deleteGame</td>
-              <td>Name of the save to be delete </td>
-              <td>Command for deleting a previously saved game.<br/> Enter the name of the game to be deleted</td>
-            </tr>
-            <tr>
-              <td>show</td>
-              <td>(Optional) one between <code>inventory</code> / <code>stats</code></td>
-              <td>Command for show the stats and the inventory of the player.<br/> If digit <code>show inventory</code> the command shows only the player's inventory.<br/>
-              if digit <code>show stats</code> the command shows only the player's stats.</td>
-            </tr>
-            <tr>
-              <td>move</td>
-              <td>Cardinal directions:<br/><code>north </code>/ <code>south </code>/ <code>east </code>/ <code>west</code></td>
-              <td>Command manage the movement in the map using cardinal directions.<br/> If possible you move in the digit direction</td>
-            </tr>
-            <tr>
-              <td>look</td>
-              <td>-</td>
-              <td>Command shows the available items, in the current part of the map, that the player could take if has enough space in his inventory.</td>
-            </tr>
-            <tr>
-              <td>pick</td>
-              <td>Name of the item to be taken</td>
-              <td>Command for take an item from the available items if player has enough space</td>
-            </tr>
-            <tr>
-              <td>fight</td>
-              <td>-</td>
-              <td>Command for start a battle between the player and a hostile enemy</td>
-            </tr>
-            <tr>
-              <td>attack</td>
-              <td>-</td>
-              <td>Command for attack a monster during a fight</td>
-            </tr>
-            <tr>
-              <td>dodge</td>
-              <td>-</td>
-              <td>Command for dodging an incoming attack from a monster.<br/>
-                During a fight a player can dodge three times</td>
-            </tr>
-            <tr>
-              <td>use</td>
-              <td>Name of the item to be used in the inventory</td>
-              <td>Command for using an item in the player's inventory.<br/>
-                The second parameter of the command specify wich item the player want to use.</td>
-            </tr>
-            <tr>
-              <td>wai</td>
-              <td>-</td>
-              <td>Command for show to the player the things that he can do right now</td>
-            </tr>
-            <tr>
-              <td>clear</td>
-              <td>-</td>
-              <td>Command for clean the game terminal from previous outputs of other commands.</td>
-            </tr>
-
-          </table>
-          <h3 class="section__title">Guide to installation</h3>
-          <h4>Jar</h4>
-          <p>To install with Jar click on the link below:</p>
-          <br/>
+            The goal of the game is to beat the final boss!
+          </p>
           <h3 class="section__title">Utilized Technologies</h3>
           <table>
             <tr>
               <th>Name</th>
               <th>Version</th>
               <th>Description</th>
+            </tr>
+            <tr>
+              <td>Maven</td>
+              <td>4.0.0</td>
+              <td>software for dependencies and project structure management </td>
             </tr>
             <tr>
               <td>Java</td>
@@ -187,6 +106,114 @@
           <br/>
         </section>
         <section class="js-section">
+          <h2 class="section__title">Manual</h2>
+          <h3 class="section__title">How To Play</h3>
+          <p></p>
+          <p>
+            The user interact with the display using a <b>custom command line</b>, which is located at the bottom of the game window.<br/>
+            The user have to type the command followed by (if any) arguments and then press enter to trigger the specific in-game action.<br/>
+            Example: <br/>
+          </p>
+          <code>>>command &lt;argument&gt; </code>
+          <p>The list of all the possible commands is available <a href="#CommandsList">below</a></p>
+          <h3 id="CommandsList">Commands List</h3>
+          <table>
+            <tr>
+              <th>Name</th>
+              <th>Argument</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>newGame</td>
+              <td>-</td>
+              <td>Create a new game.<br/>It can be utilized only in the menu.</td>
+            </tr>
+            <tr>
+              <td>loadGame</td>
+              <td>Name of the saved game</td>
+              <td>Command for loading a game previously saved.</td>
+            </tr>
+            <tr>
+              <td>save</td>
+              <td>(Optional) name of the save </td>
+              <td>Command for save the current game.<br/> Require a name for the game that you are saving.</td>
+            </tr>
+            <tr>
+              <td>deleteGame</td>
+              <td>Name of the save to be deleted</td>
+              <td>Command for deleting a previously saved game.<br/> Enter the name of the game to be deleted</td>
+            </tr>
+            <tr>
+              <td>listGames</td>
+              <td>-</td>
+              <td>Command that showing a list of the saved games.</td>
+            </tr>
+            <tr>
+              <td>show</td>
+              <td>(Optional) one between <code>inventory</code> / <code>stats</code></td>
+              <td>Command for showing the stats and inventory of the player.<br/><code>show inventory</code> for showing only the player's inventory.<br/>
+              <code>show stats</code> the showing only the player's stats.</td>
+            </tr>
+            <tr>
+              <td>move</td>
+              <td>Cardinal directions:<br/><code>north </code>/ <code>south </code>/ <code>east </code>/ <code>west</code></td>
+              <td>Command manage the movement in the map using cardinal directions.<br/> If possible you move in the digit direction</td>
+            </tr>
+            <tr>
+              <td>look</td>
+              <td>-</td>
+              <td>Command for showing a list of the items in the room.</td>
+            </tr>
+            <tr>
+              <td>pick</td>
+              <td>Name of the item to be taken</td>
+              <td>Command for taking an item from the items present in the room<br/>Return error message if the inventory has not enough space.
+              </td>
+            </tr>
+            <tr>
+              <td>fight</td>
+              <td>-</td>
+              <td>Command for starting a battle with a hostile mob (enemy).</td>
+            </tr>
+            <tr>
+              <td>attack</td>
+              <td>-</td>
+              <td>Command for attacking a monster in a fight.</td>
+            </tr>
+            <tr>
+              <td>dodge</td>
+              <td>-</td>
+              <td>Command for dodging an incoming attack from a monster.<br/>
+                It can be used 3 times per fight.</td>
+            </tr>
+            <tr>
+              <td>use</td>
+              <td>Name of the item to be used in the inventory</td>
+              <td>Command for using an item in the player's inventory.</td>
+            </tr>
+            <tr>
+              <td>wai</td>
+              <td>-</td>
+              <td>Command for showing the properties (locked/unlocked) of directions that can be used with <code>move</code></td>
+            </tr>
+            <tr>
+              <td>help</td>
+              <td>-</td>
+              <td>Show all the possible commands in a precise moment of the game.</td>
+            </tr>
+            <tr>
+              <td>clear</td>
+              <td>-</td>
+              <td>Command for cleaning the game terminal.</td>
+            </tr>
+          </table>
+          <h3 class="section__title">How To Install</h3>
+          <h4>Jar</h4>
+          <p>To install with Jar click on the link below:</p>
+          <br/>
+        </section>
+        <section class="js-section">
+          <h2 class="section__title">Specifications</h2>
          <hr />
         </section>
         <section class="js-section">
@@ -195,7 +222,11 @@
         </section>
         <section class="js-section">
           <h2 class="section__title">Testing</h2>
-          </section>
+          <hr/>
+        </section>
+        <section class="js-section">
+          <h2 class="section__title">JavaDoc</h2>
+        </section>
       </article>
     </div>
 

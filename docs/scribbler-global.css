@@ -2,7 +2,7 @@
 :root {
   --primary-color: #432E30;
   --primary-color-light: #8E7474;
-  --accent-color: #FE6A6B;
+  --accent-color: #0018ff;
   --accent-color-light: #FFE4E4;
   --accent-color-dark: #B94B4C;
   --white-color: #FAFBFC;
@@ -253,6 +253,7 @@ table th {
   background-color: var(--bg-color);
   border-bottom-color: var(--code-bg-color);
   font-weight: bold;
+  text-align: center;
 }
 
 table td:first-child {

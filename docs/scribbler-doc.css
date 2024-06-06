@@ -2,6 +2,7 @@ html, body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  text-align: justify;
 }
 
 /* layout */
@@ -21,6 +22,7 @@ html, body {
   color: var(--primary-color);
   font-size: 1.4em;
   grid-column: 2;
+  text-align: initial;
 }
 
 .logo__thin {
