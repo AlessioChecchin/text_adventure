@@ -47,7 +47,7 @@ public class Room extends StoryNode
         this.description = description;
         this.items = new ArrayList<>();
         this.backgroundPath = "";
-        this.monster = new Enemy(new Inventory(10), new Stats(100,100,5,5));
+        this.monster = new Enemy(new Inventory(10), new Stats(100,100,5,5), "Monster");
         this.completed = false;
         this.setID(ID);
     }
