@@ -1,6 +1,7 @@
 package com.adventure.utils;
 
 import com.adventure.Main;
+import com.adventure.config.ApplicationContextProvider;
 import com.adventure.models.Game;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,8 +10,6 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ApplicationContextProviderTest {
 

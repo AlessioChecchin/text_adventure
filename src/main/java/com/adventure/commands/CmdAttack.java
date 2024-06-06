@@ -2,7 +2,6 @@ package com.adventure.commands;
 
 import com.adventure.models.*;
 import com.adventure.models.nodes.*;
-import com.adventure.utils.ApplicationContextProvider;
 
 public class CmdAttack extends AbstractCommand {
 

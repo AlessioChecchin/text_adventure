@@ -6,7 +6,7 @@ import com.adventure.models.nodes.Action;
 import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
 import com.adventure.models.nodes.StoryNodeLink;
-import com.adventure.utils.ApplicationContextProvider;
+import com.adventure.config.ApplicationContextProvider;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -16,10 +16,7 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import org.jgrapht.Graph;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class GameDeserializer extends StdDeserializer<Game>
 {
@@ -37,7 +34,7 @@ public class GameDeserializer extends StdDeserializer<Game>
         JsonNode node = jp.getCodec().readTree(jp);
 
         // Create Game with Properties
-        Game game = new Game(ApplicationContextProvider.getInstance().getProperties());
+        Game game = new Game(Objects.requireNonNull(ApplicationContextProvider.getInstance()).getConfig());
 
 
 

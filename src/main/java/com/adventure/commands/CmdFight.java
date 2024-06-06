@@ -1,14 +1,10 @@
 package com.adventure.commands;
 
-import com.adventure.models.Enemy;
-import com.adventure.models.Inventory;
-import com.adventure.models.Player;
-import com.adventure.models.Stats;
-import com.adventure.models.items.UsableItem;
+import com.adventure.exceptions.GameStorageException;
+import com.adventure.models.*;
 import com.adventure.models.nodes.*;
-import com.adventure.utils.ApplicationContextProvider;
-
-import java.util.ArrayList;
+import com.adventure.services.StorageService;
+import javafx.application.Platform;
 
 
 public class CmdFight extends AbstractCommand {
@@ -16,79 +12,159 @@ public class CmdFight extends AbstractCommand {
     private Command command;
 
     @Override
-    public void execute() throws InterruptedException {
+    public void execute() throws InterruptedException
+    {
+        // Check the correct number of parameters for this command
+        if(!this.correctArgumentsNumber(0)) { return; }
 
-        //check the correct number of parameters for this command
-        int size = this.getArgs().size();
-        if (size == 0) {
+        // Set player and monster.
+        Game game = this.context.getGame();
+        Player player = game.getPlayer();
+        StoryNode node = this.context.getGame().getCurrentNode();
 
-            //set Player and monster
-            Player player = this.context.getGame().getPlayer();
-            StoryNode node = this.context.getGame().getCurrentNode();
-            if((node instanceof Room currentRoom) && (currentRoom.getMonster() != null)) {
-                Enemy monster = currentRoom.getMonster();
+        if((node instanceof Room currentRoom) && (currentRoom.getMonster() != null))
+        {
+            Enemy monster = currentRoom.getMonster();
 
-                //check if you have killed the monster
-                if (monster.getAlive()) {
+            // Check if the monster is alive.
+            if (monster.getAlive())
+            {
+                // Enabling commands during the fight.
+                CommandParser commandParser = CommandParser.getInstance();
+                commandParser.disableAll();
 
-                    //command enable during the fight
-                    CommandParser commandParser = CommandParser.getInstance();
-                    commandParser.disableAll();
-                    commandParser.enable("attack");
-                    commandParser.enable("dodge");
-                    commandParser.enable("use");
-                    commandParser.enable("help");
-                    commandParser.enable("clear");
-                    commandParser.enable("show");
+                commandParser.enable("attack");
+                commandParser.enable("dodge");
+                commandParser.enable("use");
+                commandParser.enable("help");
+                commandParser.enable("clear");
+                commandParser.enable("show");
 
-                    //Introduction fight
-                    this.writer.println(monster.getDefaultDialog());
-                    player.resetDodge();
-                    monster.resetDodge();
-                    this.writer.println("");
-                    this.writer.println("The battle against " + monster.getName() + " is starting...");
+                // Introduction fight.
+                this.writer.println(monster.getDefaultDialog());
 
-                    //iterate battle
-                    while ((player.getAlive()) || (monster.getAlive())) {
-                        //player have to digit a command
-                        this.writer.println("What do you want to do?");
-                        String s = this.safeReadNextLine();
-                        try {
-                            this.writer.flush();
-                            this.command = commandParser.parseCommand(s);
-                            this.command.setInputStream(this.getInputStream());
-                            this.command.setWriter(this.getWriter());
-                            this.command.execute();
-                        } catch (Exception e) {
-                            this.writer.println("Unknown command, try with attack, dodge or use");
-                        }
+                player.resetDodge();
+                monster.resetDodge();
 
+                this.writer.println("");
+                this.writer.println("The battle against " + monster.getName() + " is starting...");
+
+                // Iterate battle.
+                while (player.getAlive() && monster.getAlive())
+                {
+                    // Player have to digit a command.
+                    this.writer.println("What do you want to do?");
+
+                    String s = this.safeReadNextLine();
+
+                    this.writer.flush();
+                    this.command = commandParser.parseCommand(s);
+
+                    if(command != null)
+                    {
+                        this.command.setInputStream(this.getInputStream());
+                        this.command.setWriter(this.getWriter());
+                        this.command.execute();
                     }
-                    this.writer.println("End fight");
-                    this.writer.println(player.getName() + " wins");
+                    else
+                    {
+                        this.writer.println("Unknown command, try with attack, dodge or use");
+                    }
+                }
 
-                    //enable and disable command after finish the fight
+                this.writer.println("Fight finished!");
+
+                if(player.getAlive())
+                {
+                    // TODO: loot drop.
+
+                    String winOutput = "You won!";
+
+                    if(!monster.getInventory().getItems().isEmpty())
+                    {
+                        winOutput += " Take the monster's loot!";
+                    }
+
+                    this.writer.println(winOutput);
+
+                    // Enable all other commands and disable command after finish the fight
                     commandParser.enableAll();
                     commandParser.disable("attack");
                     commandParser.disable("dodge");
-                } else this.writer.println("You have already kill the monster in this room");
-            } else this.writer.println("No monster to fight");
+                }
+                else
+                {
+                    this.writer.println("You lost :(");
+                    this.writer.println("Press ENTER to start new game...");
+
+                    this.safeReadNextLine();
+                    commandParser.disableAll();
+
+                    this.resetGame();
+                }
+
+
+            }
+            else
+            {
+                this.writer.println("You have already kill the monster in this room.");
+            }
         }
-        else this.writer.println("Wrong number of parameters");
+        else
+        {
+            this.writer.println("No monster to fight!");
+        }
+
     }
 
 
-    public void kill(){
+    public void kill()
+    {
         super.kill();
-        if(this.command != null){
-            super.kill();
+
+        if(this.command != null)
+        {
+            command.kill();
         }
     }
 
-    //enum for choosing what a monster has to do in a random way
-    public enum Move {
+    // Enum for choosing what a monster has to do in a random way
+    public enum Move
+    {
         ATTACK,
         DODGE
+    }
+
+    private void resetGame()
+    {
+        StorageService storageService = this.context.getConfig().getStorageService();
+
+        Game currentGame = this.context.getGame();
+        String currentGameName = currentGame.getId();
+
+        Game newGame = storageService.newGame(currentGame.getPlayer().getName());
+        this.context.setGame(newGame);
+
+        // It means that the user had previously saved the game, and it must be overwritten.
+        if(currentGameName != null)
+        {
+            try
+            {
+                storageService.saveGame(newGame);
+            }
+            catch (GameStorageException e)
+            {
+                logger.error("Error saving game", e);
+                this.writer.println("Error saving game");
+            }
+        }
+
+        Platform.runLater(() -> {
+            logger.debug("Loading new game...");
+            newGame.load();
+        });
+
+
     }
 }
 

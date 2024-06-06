@@ -3,6 +3,8 @@ package com.adventure.models;
 import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
 
+import java.util.Objects;
+
 /**
  * Class used for a generic Non-Playing-Character.
  */
@@ -17,6 +19,7 @@ public abstract class NPC extends Entity
     public NPC(Inventory inventory, Stats stats, String name)
     {
         super(inventory, stats, name);
+        this.defaultDialog = "";
     }
 
     //
@@ -42,6 +45,7 @@ public abstract class NPC extends Entity
      */
     public void setDefaultDialog(String defaultDialog)
     {
+        Objects.requireNonNull(defaultDialog, "Default dialog cannot be null");
         this.defaultDialog = defaultDialog;
     }
 

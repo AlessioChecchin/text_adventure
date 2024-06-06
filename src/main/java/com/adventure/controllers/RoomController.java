@@ -2,16 +2,14 @@ package com.adventure.controllers;
 
 import com.adventure.Resources;
 import com.adventure.components.Display;
-import com.adventure.utils.ApplicationContext;
+import com.adventure.config.ApplicationContext;
 import com.adventure.models.nodes.Room;
-import com.adventure.utils.ApplicationContextProvider;
+import com.adventure.config.ApplicationContextProvider;
 import com.adventure.commands.CommandParser;
 import javafx.fxml.FXML;
 import javafx.scene.layout.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.net.URISyntaxException;
 
 public class RoomController implements BaseController
 {

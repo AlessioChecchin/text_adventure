@@ -1,7 +1,7 @@
 package com.adventure.commands;
 
 import com.adventure.exceptions.GameStorageException;
-import com.adventure.utils.ApplicationContext;
+import com.adventure.config.ApplicationContext;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
@@ -16,7 +16,7 @@ public class CmdDeleteGame extends AbstractCommand
             //  Delete game
             String gameName = this.getArgs().get(0);
             try {
-                this.context.getStorageService().deleteGame(gameName);
+                this.context.getConfig().getStorageService().deleteGame(gameName);
                 writer.println("Deleted game " + gameName);
             }
             catch (NoSuchElementException e)
@@ -36,6 +36,6 @@ public class CmdDeleteGame extends AbstractCommand
      * @return all game files
      */
     public static ArrayList<String> args(ApplicationContext context) throws GameStorageException {
-        return new ArrayList<>(context.getStorageService().listGames());
+        return new ArrayList<>(context.getConfig().getStorageService().listGames());
     }
 }
