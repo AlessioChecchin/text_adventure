@@ -78,9 +78,9 @@ public class FileSystemStorageService extends AbstractStorageService
                 logger.debug("Saved {}", saveName);
             else
                 logger.debug("{} overwritten", saveName);
-            FileWriter write = new FileWriter(file);
-            write.write(json);
-            write.close();
+            FileWriter writer = new FileWriter(file);
+            writer.write(json);
+            writer.close();
         }
         catch (JsonProcessingException e)
         {

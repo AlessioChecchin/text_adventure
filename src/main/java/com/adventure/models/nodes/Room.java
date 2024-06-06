@@ -19,8 +19,8 @@ public class Room extends StoryNode
      * Constructor
      * @param name Name of the room
      * @param description Description of the room
+     * @apiNote The ID of the class is set using the IdManager
      */
-    @JsonCreator
     public Room(@JsonProperty("name")  String name, @JsonProperty("description") String description)
     {
         super("views/room.fxml");
@@ -30,21 +30,31 @@ public class Room extends StoryNode
         this.backgroundPath = "";
         this.monster = null;
         this.completed = false;
+        this.setID();
+    }
+
+    /**
+     * Constructor for deserialization
+     * @param name Name of the room
+     * @param description Description of the room
+     * @param ID int ID of the class
+     */
+    @JsonCreator
+    public Room(@JsonProperty("name")  String name, @JsonProperty("description") String description, int ID)
+    {
+        super("views/room.fxml");
+        this.name = name;
+        this.description = description;
+        this.items = new ArrayList<>();
+        this.backgroundPath = "";
+        this.monster = new Enemy(new Inventory(10), new Stats(100,100,5,5));
+        this.completed = false;
+        this.setID(ID);
     }
 
     //
     // GETTERS.
     //
-
-    /**
-     * ID getter
-     * @return String current id of the room
-     */
-    @Override
-    public String getID()
-    {
-        return "room_" + System.identityHashCode(this);
-    }
 
     /**
      * Name getter

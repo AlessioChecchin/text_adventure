@@ -37,11 +37,7 @@ abstract class AbstractStorageService implements StorageService
         // Adding sword.
         playerInventory.addItem(new AttackItem("Sword"));
 
-        Stats stats = new Stats();
-        stats.setMaxHp(100);
-        stats.setHp(100);
-        stats.setBaseAttack(1);
-        stats.setBaseDefense(1);
+        Stats stats = new Stats(100,100,1,1);
 
         game.setPlayer(new Player(playerName, playerInventory, stats));
 
