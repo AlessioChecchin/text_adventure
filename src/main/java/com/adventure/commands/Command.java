@@ -1,6 +1,6 @@
 package com.adventure.commands;
 
-import com.adventure.utils.ApplicationContext;
+import com.adventure.config.ApplicationContext;
 
 import java.io.InputStream;
 import java.io.Writer;

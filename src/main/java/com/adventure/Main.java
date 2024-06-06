@@ -3,8 +3,8 @@ package com.adventure;
 import com.adventure.commands.*;
 import com.adventure.models.Game;
 import com.adventure.models.nodes.GameLoaderNode;
-import com.adventure.utils.ApplicationContextProvider;
-import com.adventure.utils.ApplicationContext;
+import com.adventure.config.ApplicationContextProvider;
+import com.adventure.config.ApplicationContext;
 import com.adventure.commands.CommandParser;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -15,8 +15,6 @@ import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.LoggerConfig;
 
-import java.util.Properties;
-
 public class Main extends Application
 {
 
@@ -26,15 +24,22 @@ public class Main extends Application
     public void start(Stage stage)
     {
         // TODO: integrate in log4j config file
-
+        {
             LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
             Configuration config = ctx.getConfiguration();
             LoggerConfig loggerConfig = config.getLoggerConfig(LogManager.ROOT_LOGGER_NAME);
             loggerConfig.setLevel(Level.DEBUG);
             ctx.updateLoggers();
+        }
 
         CommandParser commandParser = CommandParser.getInstance();
         ApplicationContext context = ApplicationContextProvider.getInstance();
+
+        if(context == null)
+        {
+            logger.fatal("Unable to load application context!");
+            return;
+        }
 
         commandParser.setContext(context);
 
@@ -55,17 +60,14 @@ public class Main extends Application
         commandParser.registerCommand("pick", CmdPick.class, "Picks a specific item.");
         commandParser.registerCommand("wai", CmdWai.class, "Gives information about valid paths");
 
-
-        Properties props = context.getProperties();
-
         // Generating dummy game to host the proper game loader.
-        Game dummyGame = new Game(props, stage);
+        Game dummyGame = new Game(context.getConfig(), stage);
         context.setGame(dummyGame);
 
         dummyGame.setCurrentNode(new GameLoaderNode());
         dummyGame.load();
 
-        stage.setResizable(Boolean.parseBoolean(props.getProperty("resizable", "false")));
+        stage.setResizable(context.getConfig().isResizable());
         stage.show();
     }
 

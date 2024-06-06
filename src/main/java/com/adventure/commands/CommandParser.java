@@ -1,6 +1,6 @@
 package com.adventure.commands;
 
-import com.adventure.utils.ApplicationContext;
+import com.adventure.config.ApplicationContext;
 import org.apache.logging.log4j.LogManager;
 
 import java.util.*;

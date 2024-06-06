@@ -31,7 +31,7 @@ public class GameDeserializer extends StdDeserializer<Game>
         JsonNode node = jp.getCodec().readTree(jp);
 
         // Create Game with Properties
-        Game game = new Game(ApplicationContextProvider.getInstance().getProperties());
+        Game game = new Game(Objects.requireNonNull(ApplicationContextProvider.getInstance()).getConfig());
 
 
 

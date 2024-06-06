@@ -1,15 +1,12 @@
-package com.adventure.utils;
+package com.adventure.config;
 
 import com.adventure.Resources;
+import com.adventure.exceptions.ConfigurationException;
 import com.adventure.models.Game;
 
-import com.adventure.services.BucketStorageService;
-import com.adventure.services.FileSystemStorageService;
-import com.adventure.services.StorageService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
@@ -21,32 +18,22 @@ public class ApplicationContextProvider implements ApplicationContext
 
     /**
      * Private singleton constructor.
-     * @throws IOException Thrown if the configuration file is not found.
+     * @throws ConfigurationException Thrown if the configuration file is not found or has a bad format.
      */
-    private ApplicationContextProvider() throws IOException
+    private ApplicationContextProvider() throws ConfigurationException
     {
-        this.properties = new Properties();
+        Properties props = new Properties();
 
         try (InputStream fis = Resources.class.getClassLoader().getResourceAsStream("application.conf"))
         {
-            this.properties.load(fis);
+            props.load(fis);
+
+            this.config = new ApplicationConfig(props);
         }
-        catch (IOException e)
+        catch (Exception e)
         {
             logger.fatal("Error loading application.conf", e);
-            throw e;
-        }
-
-        String storageProvider = this.properties.getProperty("storage.provider", "filesystem");
-        if(storageProvider.equals("aws"))
-        {
-            this.storageService = new BucketStorageService(this.properties);
-        }
-        // Fallback storage service.
-        else
-        {
-            logger.debug("Preferred storage provider set to filesystem...");
-            this.storageService = new FileSystemStorageService(this.properties);
+            throw new ConfigurationException(e.getMessage());
         }
     }
 
@@ -63,7 +50,7 @@ public class ApplicationContextProvider implements ApplicationContext
             {
                 instance = new ApplicationContextProvider();
             }
-            catch(IOException e)
+            catch(ConfigurationException e)
             {
                 return null;
             }
@@ -86,22 +73,12 @@ public class ApplicationContextProvider implements ApplicationContext
     }
 
     /**
-     * Properties getter.
-     * @return Properties.
+     * Application configuration getter.
+     * @return Current application config.
      */
-    @Override
-    public Properties getProperties()
+    public Config getConfig()
     {
-        return this.properties;
-    }
-
-    /**
-     * Storage service getter.
-     * @return Storage service.
-     */
-    public StorageService getStorageService()
-    {
-        return this.storageService;
+        return this.config;
     }
 
     //
@@ -135,9 +112,9 @@ public class ApplicationContextProvider implements ApplicationContext
     private static ApplicationContextProvider instance;
 
     /**
-     * Application properties.
+     * Application config.
      */
-    private final Properties properties;
+    private final Config config;
 
     /**
      * Current game instance.
@@ -145,13 +122,7 @@ public class ApplicationContextProvider implements ApplicationContext
     private Game game;
 
     /**
-     * Storage service.
-     */
-    private final StorageService storageService;
-
-    /**
      * Logger.
      */
     protected static final Logger logger = LogManager.getLogger();
-
 }

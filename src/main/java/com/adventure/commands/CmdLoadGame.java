@@ -2,7 +2,7 @@ package com.adventure.commands;
 
 import com.adventure.exceptions.GameStorageException;
 import com.adventure.models.Game;
-import com.adventure.utils.ApplicationContext;
+import com.adventure.config.ApplicationContext;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class CmdLoadGame extends AbstractCommand
             String gameName = this.getArgs().get(0);
             Game loadedGame;
             try {
-                loadedGame = this.context.getStorageService().loadGame(gameName);
+                loadedGame = this.context.getConfig().getStorageService().loadGame(gameName);
             } catch (GameStorageException e) {
                 logger.error("Error loading game {}", gameName);
                 writer.println("Error loading game " + gameName);
@@ -41,6 +41,6 @@ public class CmdLoadGame extends AbstractCommand
      * @return all possible game files
      */
     public static ArrayList<String> args(ApplicationContext context) throws GameStorageException {
-        return new ArrayList<>(context.getStorageService().listGames());
+        return new ArrayList<>(context.getConfig().getStorageService().listGames());
     }
 }

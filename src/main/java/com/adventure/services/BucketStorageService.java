@@ -1,16 +1,9 @@
 package com.adventure.services;
 
 
+import com.adventure.config.Config;
 import com.adventure.exceptions.GameStorageException;
 import com.adventure.models.Game;
-import com.adventure.models.Inventory;
-import com.adventure.models.Player;
-import com.adventure.models.Stats;
-import com.adventure.models.items.*;
-import com.adventure.models.nodes.Action;
-import com.adventure.models.nodes.Room;
-import com.adventure.models.nodes.StoryNode;
-import com.adventure.models.nodes.StoryNodeLink;
 import com.adventure.serializers.GraphSerializer;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -34,15 +27,17 @@ public class BucketStorageService extends AbstractStorageService
 {
     /**
      * Constructor
-     * @param properties Application properties.
+     * @param config Application config.
      */
-    public BucketStorageService(Properties properties)
+    public BucketStorageService(Config config)
     {
-        super(properties);
+        super(config);
 
-        String key = properties.getProperty("storage.aws.key");
-        String secret = properties.getProperty("storage.aws.secret");
-        Region region = Region.of(properties.getProperty("storage.aws.region"));
+        Properties props = config.getProperties();
+
+        String key = props.getProperty("storage.aws.key");
+        String secret = props.getProperty("storage.aws.secret");
+        Region region = Region.of(props.getProperty("storage.aws.region"));
 
         AwsBasicCredentials credentials = AwsBasicCredentials.create(key, secret);
 
@@ -57,7 +52,7 @@ public class BucketStorageService extends AbstractStorageService
     @Override
     public List<String> listGames() throws GameStorageException
     {
-        String bucketName = this.properties.getProperty("storage.aws.bucket.name");
+        String bucketName = this.config.getProperties().getProperty("storage.aws.bucket.name");
 
         try
         {
@@ -89,7 +84,7 @@ public class BucketStorageService extends AbstractStorageService
     @Override
     public void saveGame(Game game) throws GameStorageException
     {
-        String bucketName = this.properties.getProperty("storage.aws.bucket.name");
+        String bucketName = this.config.getProperties().getProperty("storage.aws.bucket.name");
 
         ObjectMapper mapper = new ObjectMapper();
 
@@ -122,7 +117,7 @@ public class BucketStorageService extends AbstractStorageService
     @Override
     public Game loadGame(String gameId) throws GameStorageException
     {
-        String bucketName = this.properties.getProperty("storage.aws.bucket.name");
+        String bucketName = this.config.getProperties().getProperty("storage.aws.bucket.name");
 
         try
         {
@@ -149,7 +144,7 @@ public class BucketStorageService extends AbstractStorageService
     @Override
     public void deleteGame(String gameId) throws GameStorageException
     {
-        String bucketName = this.properties.getProperty("storage.aws.bucket.name");
+        String bucketName = this.config.getProperties().getProperty("storage.aws.bucket.name");
 
         try
         {

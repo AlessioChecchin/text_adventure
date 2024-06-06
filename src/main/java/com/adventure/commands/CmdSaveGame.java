@@ -29,14 +29,14 @@ public class CmdSaveGame extends AbstractCommand
             }
 
             // Saving the game
-            save(this.context.getStorageService(), currentGame);
+            save(this.context.getConfig().getStorageService(), currentGame);
         }
         // User specifies the name of the game. If the game had another name, now it is overwritten
         else if(this.getArgs().size() == 1)
         {
             Game currentGame = this.context.getGame();
             currentGame.setId(this.getArgs().get(0));
-            save(this.context.getStorageService(), this.context.getGame());
+            save(this.context.getConfig().getStorageService(), this.context.getGame());
         }
     }
 
@@ -47,13 +47,15 @@ public class CmdSaveGame extends AbstractCommand
      */
     private void save(StorageService storageService, Game currentGame)
     {
-        try {
+        try
+        {
             storageService.saveGame(currentGame);
             writer.println("Game saved!");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        }
+        catch (Exception e)
+        {
+            writer.println("Error saving game");
             logger.error("Error saving game: {}", e.getLocalizedMessage());
-            writer.println("Error saving game: " + e.getMessage());
         }
     }
 }

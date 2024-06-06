@@ -6,7 +6,7 @@ import com.adventure.models.items.Item;
 import com.adventure.models.items.Key;
 import com.adventure.models.nodes.StoryNode;
 import com.adventure.models.nodes.StoryNodeLink;
-import com.adventure.utils.ApplicationContext;
+import com.adventure.config.ApplicationContext;
 import javafx.application.Platform;
 import org.jgrapht.Graph;
 

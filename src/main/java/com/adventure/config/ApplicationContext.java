@@ -1,4 +1,4 @@
-package com.adventure.utils;
+package com.adventure.config;
 
 import com.adventure.models.Game;
 import com.adventure.services.StorageService;
@@ -22,15 +22,10 @@ public interface ApplicationContext
      */
     Game getGame();
 
-    /**
-     * Application properties getter.
-     * @return Application properties.
-     */
-    Properties getProperties();
 
     /**
-     * Storage service getter.
-     * @return Storage service.
+     * Gets current application config.
+     * @return Current application config.
      */
-    StorageService getStorageService();
+    Config getConfig();
 }
