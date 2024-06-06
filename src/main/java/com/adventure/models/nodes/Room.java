@@ -2,11 +2,9 @@ package com.adventure.models.nodes;
 
 import com.adventure.models.Enemy;
 import com.adventure.models.Inventory;
-import com.adventure.models.NPC;
 import com.adventure.models.Stats;
 import com.adventure.models.items.Item;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
@@ -28,7 +26,7 @@ public class Room extends StoryNode
         this.description = description;
         this.items = new ArrayList<>();
         this.backgroundPath = "";
-        this.monster = null;
+        this.monster = new Enemy(new Inventory(10), new Stats(100,100,5,5), "Monster");
         this.completed = false;
         this.setID();
     }

@@ -1,14 +1,10 @@
 package com.adventure.components;
 
-import com.adventure.commands.AbstractCommand;
-import com.adventure.commands.*;
 import com.adventure.commands.CommandParser;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 
 import java.lang.reflect.Array;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,9 +16,8 @@ public class AutoCompleter
 {
     /**
      * Default constructor
-     * @param list List with all the possible commands' name
      */
-    private AutoCompleter(List<String> list)
+    private AutoCompleter()
     {
         this.loadCompleter("","");
     }
@@ -34,7 +29,7 @@ public class AutoCompleter
     public static AutoCompleter getInstance()
     {
         if(instance == null)
-            instance = new AutoCompleter(new LinkedList<String>());
+            instance = new AutoCompleter();
         return instance;
     }
 
@@ -70,8 +65,15 @@ public class AutoCompleter
         //  Is argument (e.g. stats, inventory, name of an item, name of a gameFile)
         else if(allWords.length > 1 || partialCommand.endsWith(" "))
         {
+            String partialArgument = "";
+            if(allWords.length > 1)
+                partialArgument = allWords[allWords.length - 1];
+
             String prevCommand = getPreviousCommand();
-            prediction = parser.argsFromCommand(prevCommand);
+            ArrayList<String> arguments = parser.argsFromCommand(prevCommand);
+            for(String arg : arguments)
+                if(arg.startsWith(partialArgument))
+                    prediction.add(arg);
         }
 
         //  Create string of this list that will be printed to Output
