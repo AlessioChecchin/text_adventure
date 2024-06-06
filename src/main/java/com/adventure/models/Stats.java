@@ -1,5 +1,7 @@
 package com.adventure.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Player stats.
  */
@@ -8,12 +10,15 @@ public class Stats
     /**
      * Default constructor.
      */
-    public Stats()
+    public Stats(@JsonProperty("hp") int hp,
+                 @JsonProperty("maxHp") int maxHp,
+                 @JsonProperty("baseAttack") int baseAttack,
+                 @JsonProperty("baseDefense") int baseDefense)
     {
-        this.hp = 10;
-        this.maxHp = 20;
-        this.baseAttack = 2;
-        this.baseDefense = 0;
+        this.maxHp = maxHp;
+        this.hp = Math.min(hp, this.maxHp);
+        this.baseAttack = baseAttack;
+        this.baseDefense = baseDefense;
     }
 
     //

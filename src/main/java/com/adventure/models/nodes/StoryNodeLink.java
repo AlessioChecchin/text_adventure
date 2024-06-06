@@ -11,7 +11,7 @@ import java.util.Objects;
 public class StoryNodeLink extends DefaultEdge
 {
     /**
-     * Constructor.
+     * Default constructor
      */
     public StoryNodeLink()
     {
@@ -19,19 +19,43 @@ public class StoryNodeLink extends DefaultEdge
         this.action = new Action("");
         this.key = "";
         this.locked = false;
+        this.setID();
     }
+
+    /**
+     * Constructor for deserialization
+     * @param id id to set when creating the edge
+     */
+    public StoryNodeLink(int id)
+    {
+        super();
+        this.action = new Action("");
+        this.key = "";
+        this.locked = false;
+        this.setID(id);
+    }
+
 
     //
     //  GETTERS
     //
 
     /**
-     * ID getter
+     * Get String ID of the edge
      * @return String ID of the edge
      */
     public String getID()
     {
-        return "edge_" + System.identityHashCode(this);
+        return this.ID;
+    }
+
+    /**
+     * Get int ID of the edge
+     * @return int ID of the edge
+     */
+    public int getNumericID()
+    {
+        return this.numericID;
     }
 
     /**
@@ -61,9 +85,34 @@ public class StoryNodeLink extends DefaultEdge
         return this.action;
     }
 
+
     //
     //  SETTERS
     //
+
+    /**
+     * Set numeric and stringID with IdManager given an int ID
+     * @param ID int ID to set for the edge
+     */
+    public void setID(int ID)
+    {
+        IdManager idManager = IdManager.getInstance();
+        idManager.check(ID);
+        // Set node numeric ID
+        this.numericID = ID;
+        // Set node String ID
+        String[] classpath = this.getClass().getName().split("\\.");
+        this.ID = classpath[classpath.length - 1] + "_" + ID;
+    }
+
+    /**
+     * Set numericID and stringID with IdManager
+     */
+    public void setID()
+    {
+        IdManager idManager = IdManager.getInstance();
+        setID(idManager.getNext());
+    }
 
     /**
      * Link another action to this edge
@@ -154,4 +203,13 @@ public class StoryNodeLink extends DefaultEdge
      * Key value to unlock the link.
      */
     private String key;
+
+    /**
+     * Numeric ID for the edge
+     */
+    private int numericID;
+    /**
+     * String ID for the edge
+     */
+    private String ID;
 }
