@@ -3,7 +3,7 @@ package com.adventure.components;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
-import com.adventure.commands.CmdUse;
+import com.adventure.commands.AutoCompleter;
 import com.adventure.commands.CommandParser;
 import com.adventure.utils.StringPropertyWriter;
 import com.adventure.commands.Command;

@@ -1,10 +1,5 @@
 package com.adventure.models.nodes;
 
-import com.adventure.components.AutoCompleter;
-
-import java.util.LinkedList;
-import java.util.List;
-
 public class IdManager
 {
     /**

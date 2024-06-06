@@ -1,6 +1,5 @@
-package com.adventure.components;
+package com.adventure.commands;
 
-import com.adventure.commands.CommandParser;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
