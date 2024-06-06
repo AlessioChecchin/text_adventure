@@ -24,7 +24,7 @@
     <div class="wrapper">
       <aside class="doc__nav">
         <ul>
-          <li class="js-btn selected">Project Description</li>
+          <li class="js-btn selected">Introduction</li>
           <li class="js-btn">Manual</li>
           <li class="js-btn">Specifications</li>
           <li class="js-btn">Design</li>
@@ -34,8 +34,7 @@
       </aside>
       <article class="doc__content">
         <section class="js-section">
-          <h2 class="section__title">Project Description</h2>
-          <h3 class="section__title">Introduction</h3>
+          <h2 class="section__title">Introduction</h2>
           <p>
             <b>Text Adventure</b> is a text-based RPG set in a fantasy world. You will be the hero of our story,
             are you ready for this exciting adventure?
@@ -47,23 +46,38 @@
             Over time, the traces of the Castle and the power within have been lost, vanished like leaves on trees in winter, or at least, so it was believed...
             A mysterious scroll was discovered by a warrior with a golden heart, a scroll containing knowledge that he could not have imagined and that would lead him to an unbelievable destiny....<br/>
           </p>
-          <h3 class="section__title">Graphic Interface</h3>
-          <p>For the GUI (graphical user interface) it has been used <i>JavaFX FXML</i>.</p>
+          <br/>
+        </section>
+        <section class="js-section">
+          <h2 class="section__title">Manual</h2>
           <h3 class="section__title">Gameplay</h3>
           <p>
-            The game is set in two different levels, one located in a deadly forest, the latter in a evil castle; each one of them is subdivided
+            The game is set in two different levels, one located in a forest, the latter in a castle.<br/>
+            Each one of them is subdivided in various section, that we will call "room" for simplicity.
           </p>
           <p>At the first launch of the game, the program will load the main menu, where you can choose between:</p>
-            <ul>- start a new game</ul>
-            <ul>- load a pre-existing game (if existing)</ul>
-            <ul>- remove a pre-existing game (if existing)</ul>
-            <ul>- see a list of the pre-saved games</ul>
+          <ul>
+            <li>start a new game</li>
+            <li>load a pre-existing game (if existing)</li>
+            <li>remove a pre-existing game (if existing)</li>
+            <li>see a list of the pre-saved games</li>
+          </ul>
           <p>
-            If you start a new game, you will be asked to enter your hero-name.
-            In any moment of the game you can use <code>clear</code> and <code>help</code> to, respectively, clear the output section and request the list of the available commands.
-
-            The goal of the game is to beat the final boss!
+          If you start a new game, you will be asked to enter your hero-name.
+          In any moment of the game you can use <code>help</code> to request the list of the available commands.
+          [...]
+          The goal of the game is to beat the final boss!
           </p>
+          <h3 class="section__title">Graphic Interface</h3>
+          <p>
+            For the GUI it has been used <i>JavaFX FXML</i>, with which you can implement the graphics of a desktop application.
+            The graphic interface is composed in three main parts:
+          </p>
+            <ul>
+              <li>an "artistic" section, where there is a image/video (created and rendered with the program Blender) which represents the content of that specific room</li>
+              <li>an output section, where you can see the program's response </li>
+              <li>an input section, with which you can interact with the game</li>
+            </ul>
           <h3 class="section__title">Utilized Technologies</h3>
           <table>
             <tr>
@@ -101,14 +115,19 @@
               <td>5.11.0</td>
               <td>Framework for automatic testing</td>
             </tr>
+            <tr>
+              <td>AWS</td>
+              <td>5.11.0</td>
+              <td>Framework for automatic testing</td>
+            </tr>
+            <tr>
+            <td>log4j</td>
+            <td>5.11.0</td>
+            <td>Framework for automatic testing</td>
+          </tr>
 
           </table>
-          <br/>
-        </section>
-        <section class="js-section">
-          <h2 class="section__title">Manual</h2>
           <h3 class="section__title">How To Play</h3>
-          <p></p>
           <p>
             The user interact with the display using a <b>custom command line</b>, which is located at the bottom of the game window.<br/>
             The user have to type the command followed by (if any) arguments and then press enter to trigger the specific in-game action.<br/>
@@ -208,8 +227,11 @@
             </tr>
           </table>
           <h3 class="section__title">How To Install</h3>
-          <h4>Jar</h4>
-          <p>To install with Jar click on the link below:</p>
+          <h4 class="section__title">Maven</h4>
+          <p></p>
+          <h4 class="section__title">IntelliJ IDEA</h4>
+          <h4 class="section__title">Jar</h4>
+          <p>Not supported yet</p>
           <br/>
         </section>
         <section class="js-section">

@@ -37,6 +37,11 @@ hr {
   border-bottom: 1px solid var(--bg-color);
 }
 
+ul {
+  font-weight: lighter;
+  list-style: "- ";
+}
+
 * {
   box-sizing: border-box;
 }
@@ -46,6 +51,7 @@ hr {
 /* typography */
 .section__title {
   color: var(--primary-color);
+  
 }
 
 /* tabs */
