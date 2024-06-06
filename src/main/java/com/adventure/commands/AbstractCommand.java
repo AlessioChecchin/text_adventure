@@ -179,15 +179,20 @@ public abstract class AbstractCommand implements Command
     {
         boolean decided = true;
 
+        //  Create 2 dummy commands so that when pressing "tab" they are displayed as commands
+        String[] dummyCmds = new String[]{"no","yes"};
+        enableDummyCommands(dummyCmds);
+
         do {
             String response = this.safeReadNextLine().toLowerCase();
-
             if(response.equals("yes"))
             {
+                disableDummyCommands(dummyCmds);
                 return true;
             }
             else if(response.equals("no"))
             {
+                disableDummyCommands(dummyCmds);
                 return false;
             }
             else
@@ -202,6 +207,7 @@ public abstract class AbstractCommand implements Command
 
         } while(!decided);
 
+        disableDummyCommands(dummyCmds);
         return false;
     }
 
@@ -224,10 +230,70 @@ public abstract class AbstractCommand implements Command
         return true;
     }
 
+    /**
+     * Disable all commands and enable a list of dummy commands with a specific name
+     * @param commandNames String[] array of dummy commands names
+     */
+    protected void enableDummyCommands(String[] commandNames)
+    {
+        CommandParser parser = CommandParser.getInstance();
+        //  Save currently enabled commands and disable them
+        prevEnabledCommands = parser.getCommands();
+        parser.disableAll();
+        //  Register and enable dummy commands
+        for(String cmd : commandNames)
+        {
+            parser.registerCommand(cmd, DummyCmd.class);
+            parser.enable(cmd);
+        }
+    }
+
+    /**
+     * Disable all commands and enable again the commands disabled with the method "enableDummyCommands"
+     * @param commandNames String[] array of dummy commands names that will be unregistered
+     */
+    protected void disableDummyCommands(String[] commandNames)
+    {
+        CommandParser parser = CommandParser.getInstance();
+        parser.disableAll();
+        //  Unregister all dummy commands
+        for(String cmd : commandNames)
+            parser.unregisterCommand(cmd);
+        //  Enable again previously enabled commands
+        for(String cmd : prevEnabledCommands)
+            parser.enable(cmd);
+    }
+
+    /**
+     * Save and disable all enabled commands
+     * @apiNote Previously enabled commands can be enabled again with reEnableSaved()
+     */
+    protected void disableSaveAll()
+    {
+        CommandParser parser = CommandParser.getInstance();
+        prevEnabledCommands = parser.getCommands();
+        parser.disableAll();
+    }
+
+    /**
+     * Re-enable previously enabled commands
+     * @apiNote Enable commands disabled through disableSaveAll()
+     */
+    protected void reEnableSaved()
+    {
+        CommandParser parser = CommandParser.getInstance();
+        for (String cmd : prevEnabledCommands)
+            parser.enable(cmd);
+    }
+
     //
     // VARIABLES.
     //
 
+    /**
+     * List of previously enabled commands
+     */
+    private List<String> prevEnabledCommands;
     /**
      * Writer for output.
      */
@@ -246,7 +312,7 @@ public abstract class AbstractCommand implements Command
     /**
      * Current application context.
      */
-    protected ApplicationContext context;
+    protected static ApplicationContext context;
 
     /**
      * Flag that indicates if the main thread requested the command to terminate.

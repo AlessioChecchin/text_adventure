@@ -2,8 +2,13 @@ package com.adventure.commands;
 
 import com.adventure.exceptions.GameStorageException;
 import com.adventure.models.Game;
+import com.adventure.models.items.Item;
+import com.adventure.models.nodes.Room;
+import com.adventure.models.nodes.StoryNode;
 import javafx.application.Platform;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class CmdLoadGame extends AbstractCommand
@@ -34,4 +39,14 @@ public class CmdLoadGame extends AbstractCommand
             writer.println("Game loaded");
         }
     }
+
+    /**
+     * Get all possible arguments for this command
+     * @return all possible game files
+     */
+    public static ArrayList<String> args()
+    {
+        return new ArrayList<>(context.getStorageService().listGames());
+    }
+
 }

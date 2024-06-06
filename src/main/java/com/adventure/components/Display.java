@@ -15,6 +15,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -29,6 +31,11 @@ public class Display extends GridPane implements BaseController
 
     @FXML
     private VBox graphics;
+
+    @FXML private TextField textField;
+
+    //  Necessary to detect TAB + SHIFT pressing
+    final KeyCombination keyShiftTab = new KeyCodeCombination(KeyCode.TAB, KeyCombination.SHIFT_DOWN);
 
     private Command currentCommand;
     private Task<Void> task;
@@ -73,30 +80,32 @@ public class Display extends GridPane implements BaseController
     {
         AutoCompleter autoCompl = AutoCompleter.getInstance();
 
-        if(event.getCode() == KeyCode.SPACE)
-        {
-            //for(String s : CmdUse.args())
-                //System.out.println(s);
-        }
-
-        //  Loads the completer only when is detects a change in the input
+        //  Loads the autoCompleter only when is detects a change in the input
         //  A change occurs when
-        //  1) input character is non-empty (e.g. arrows, shift...) AND it's not TAB
+        //  1) input character is non-empty (e.g. arrows, shift...) AND it's not TAB AND it's not TAB + SHIFT
         //  2) input character is 'delete' key (back_space)
-        if((! event.getText().isEmpty() && ! event.getText().equals("\t")) || event.getCode() == KeyCode.BACK_SPACE )
-        {
+        if((! event.getText().isEmpty() && event.getCode() != KeyCode.TAB && !keyShiftTab.match(event))
+                        || event.getCode() == KeyCode.BACK_SPACE )
             autoCompl.loadCompleter(event.getText(), this.consolePrompt.getText());
-        }
 
-        if( event.getCode() == KeyCode.TAB)
-        {
-            //  Execute autoCompleter
-            autoCompl.operate(this.consoleOutput, this.consolePrompt);
-        }
+        //  3) input character is 'TAB' but there's no text in the input TextField except the tab
+        //  In this case loadCompleter is called with empty newInput field
+        if(event.getCode() == KeyCode.TAB && this.consolePrompt.getText().isEmpty())
+            autoCompl.loadCompleter("", this.consolePrompt.getText());
+
+        //  TAB pressed --> FORWARD prediction
+        if(event.getCode() == KeyCode.TAB && !keyShiftTab.match(event))
+            autoCompl.operate(this.consoleOutput, this.consolePrompt, AutoCompleter.direction.FORWARD);
+
+        //  TAB + SHIFT pressed --> BACKWARD prediction
+        if(keyShiftTab.match(event))
+            autoCompl.operate(this.consoleOutput, this.consolePrompt, AutoCompleter.direction.BACKWARD);
 
         // Checks if the command is complete.
         if( event.getCode() == KeyCode.ENTER )
         {
+            //  Prediction with empty String -> all commands will be suggested
+            // TODO can this line be removed?
             autoCompl.loadCompleter("","");
             String command = consolePrompt.getText();
 

@@ -9,6 +9,7 @@ import com.adventure.models.nodes.StoryNodeLink;
 import javafx.application.Platform;
 import org.jgrapht.Graph;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -85,6 +86,21 @@ public class CmdMove extends AbstractCommand
 
             this.writer.println("Passage opened successfully!");
         });
+    }
+
+    /**
+     * Get all possible arguments for this command
+     * @return all possible directions
+     */
+    public static ArrayList<String> args()
+    {
+        ArrayList<String> result = new ArrayList<>();
+        StoryNode currentNode = context.getGame().getCurrentNode();
+        Graph<StoryNode, StoryNodeLink> g = context.getGame().getGameGraph();
+
+        for(StoryNodeLink link: g.outgoingEdgesOf(currentNode))
+            result.add(link.getAction().getActionName());
+        return result;
     }
 
 }

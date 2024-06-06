@@ -1,8 +1,11 @@
 package com.adventure.commands;
 
 import com.adventure.utils.ApplicationContext;
+import org.apache.logging.log4j.LogManager;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
+
 
 public class CommandParser
 {
@@ -82,7 +85,7 @@ public class CommandParser
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            LogManager.getLogger().error(e);
         }
 
         return null;
@@ -111,6 +114,11 @@ public class CommandParser
     }
 
 
+    /**
+     * It gives a list of all the possible arguments for a command given its name
+     * @param key String name of the command
+     * @return ArrayList of Strings with all the possible arguments for this command
+     */
     public ArrayList<String> argsFromCommand(String key)
     {
         CommandMetadata metadata = this.lookupTable.get(key);
@@ -119,20 +127,15 @@ public class CommandParser
                 Object temp = metadata.getCommandClass().getDeclaredMethod("args").invoke(null);
                 if(temp instanceof ArrayList<?>)
                     return (ArrayList<String>) temp;
+            } catch (NoSuchMethodException e) {
+                //  If method not found it means the command has no arguments -> fails silently
+                return new ArrayList<>();
             } catch(Exception e) {
-                e.printStackTrace();
+                LogManager.getLogger().error(e);
             }
         return new ArrayList<>();
     }
 
-    public  Class<? extends Command> getCommandClass(String key)
-    {
-        CommandMetadata metadata = this.lookupTable.get(key);
-        if(metadata == null)
-            return null;
-        else
-            return metadata.getCommandClass();
-    }
 
     /**
      * Unregisters a command.

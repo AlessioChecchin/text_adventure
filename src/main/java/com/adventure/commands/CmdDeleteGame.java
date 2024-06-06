@@ -1,5 +1,6 @@
 package com.adventure.commands;
 
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 public class CmdDeleteGame extends AbstractCommand
@@ -18,5 +19,14 @@ public class CmdDeleteGame extends AbstractCommand
                 writer.println("Error: No such game");
             }
         }
+    }
+
+    /**
+     * Get all possible arguments for this command
+     * @return all game files
+     */
+    public static ArrayList<String> args()
+    {
+        return new ArrayList<>(context.getStorageService().listGames());
     }
 }
