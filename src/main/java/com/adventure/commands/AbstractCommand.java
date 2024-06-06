@@ -211,6 +211,8 @@ public abstract class AbstractCommand implements Command
         return false;
     }
 
+
+
     /**
      * Checks whether the number of arguments is correct or not
      * @param argumentsNumber number of arguments expected
@@ -312,7 +314,7 @@ public abstract class AbstractCommand implements Command
     /**
      * Current application context.
      */
-    protected static ApplicationContext context;
+    protected ApplicationContext context;
 
     /**
      * Flag that indicates if the main thread requested the command to terminate.

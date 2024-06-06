@@ -3,7 +3,6 @@ package com.adventure.commands;
 import com.adventure.utils.ApplicationContext;
 import org.apache.logging.log4j.LogManager;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 
@@ -124,9 +123,14 @@ public class CommandParser
         CommandMetadata metadata = this.lookupTable.get(key);
         if(metadata != null)
             try {
-                Object temp = metadata.getCommandClass().getDeclaredMethod("args").invoke(null);
-                if(temp instanceof ArrayList<?>)
-                    return (ArrayList<String>) temp;
+                Class<?>[] methodArguments = new Class[1];
+                methodArguments[0] = ApplicationContext.class;
+                //  Calls static method "args" of the command
+                Object result = metadata.getCommandClass().getDeclaredMethod("args", methodArguments).invoke(null, context);
+                if(result instanceof ArrayList)
+                    return (ArrayList<String>) result;
+                else 
+                    return new ArrayList<>();
             } catch (NoSuchMethodException e) {
                 //  If method not found it means the command has no arguments -> fails silently
                 return new ArrayList<>();

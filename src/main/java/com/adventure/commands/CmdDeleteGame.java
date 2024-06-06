@@ -1,5 +1,7 @@
 package com.adventure.commands;
 
+import com.adventure.utils.ApplicationContext;
+
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
@@ -25,7 +27,7 @@ public class CmdDeleteGame extends AbstractCommand
      * Get all possible arguments for this command
      * @return all game files
      */
-    public static ArrayList<String> args()
+    public static ArrayList<String> args(ApplicationContext context)
     {
         return new ArrayList<>(context.getStorageService().listGames());
     }

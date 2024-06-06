@@ -6,6 +6,7 @@ import com.adventure.models.items.Item;
 import com.adventure.models.items.Key;
 import com.adventure.models.nodes.StoryNode;
 import com.adventure.models.nodes.StoryNodeLink;
+import com.adventure.utils.ApplicationContext;
 import javafx.application.Platform;
 import org.jgrapht.Graph;
 
@@ -92,7 +93,7 @@ public class CmdMove extends AbstractCommand
      * Get all possible arguments for this command
      * @return all possible directions
      */
-    public static ArrayList<String> args()
+    public static ArrayList<String> args(ApplicationContext context)
     {
         ArrayList<String> result = new ArrayList<>();
         StoryNode currentNode = context.getGame().getCurrentNode();
