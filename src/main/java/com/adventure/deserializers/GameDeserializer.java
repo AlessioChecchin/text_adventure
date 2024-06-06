@@ -3,7 +3,7 @@ package com.adventure.deserializers;
 import com.adventure.models.*;
 import com.adventure.models.items.Item;
 import com.adventure.models.nodes.*;
-import com.adventure.utils.ApplicationContextProvider;
+import com.adventure.config.ApplicationContextProvider;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;

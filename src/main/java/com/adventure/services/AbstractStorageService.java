@@ -62,7 +62,7 @@ abstract class AbstractStorageService implements StorageService
 
         {
             Inventory enemyInventory2 = new Inventory(100);
-            Stats enemyStats2 = new Stats();
+            Stats enemyStats2 = new Stats(100,100,1,1);
             enemyInventory2.addItem(new Key(key2));
             Enemy enemy2 = new Enemy(enemyInventory2, enemyStats2, "Monster k2");
             enemy2.setDefaultDialog("I'm monster that holds K2.\nI'll kill u.");
@@ -79,7 +79,7 @@ abstract class AbstractStorageService implements StorageService
 
         {
             Inventory enemyInventory3 = new Inventory(100);
-            Stats enemyStats3 = new Stats();
+            Stats enemyStats3 = new Stats(100,100,1,1);
             enemyInventory3.addItem(new Key(key3));
             Enemy enemy3 = new Enemy(enemyInventory3, enemyStats3, "Monster K3");
             enemy3.setDefaultDialog("I'm monster that holds K3.\nI'll kill u.");
@@ -95,7 +95,7 @@ abstract class AbstractStorageService implements StorageService
 
         {
             Inventory enemyInventory4 = new Inventory(100);
-            Stats enemyStats4= new Stats();
+            Stats enemyStats4 = new Stats(100,100,1,1);
             enemyInventory4.addItem(new Key(key4));
             Enemy enemy4 = new Enemy(enemyInventory4, enemyStats4, "Monster K4");
             enemy4.setDefaultDialog("I'm monster that holds K4.\nI'll kill u.");
@@ -117,7 +117,7 @@ abstract class AbstractStorageService implements StorageService
 
         {
             Inventory enemyInventory6 = new Inventory(100);
-            Stats enemyStats6= new Stats();
+            Stats enemyStats6= new Stats(100,100,1,1);
             enemyInventory6.addItem(new Key(key6));
             Enemy enemy6 = new Enemy(enemyInventory6, enemyStats6, "Monster K6");
             enemy6.setDefaultDialog("I'm monster that holds K6.\nI'll kill u.");
@@ -139,7 +139,7 @@ abstract class AbstractStorageService implements StorageService
 
         {
             Inventory enemyInventory5 = new Inventory(100);
-            Stats enemyStats5 = new Stats();
+            Stats enemyStats5 = new Stats(100,100,1,1);
             enemyInventory5.addItem(new Key(key5));
             Enemy enemy5 = new Enemy(enemyInventory5, enemyStats5, "Monster K5");
 
@@ -238,7 +238,7 @@ abstract class AbstractStorageService implements StorageService
     /**
      * Application properties.
      */
-    protected final Properties properties;
+    protected final Config config;
 
     /**
      * Logger.
