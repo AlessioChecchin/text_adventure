@@ -1,10 +1,14 @@
 package com.adventure.components;
 
+import com.adventure.commands.AbstractCommand;
+import com.adventure.commands.*;
 import com.adventure.commands.CommandParser;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
+import java.lang.reflect.Array;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,125 +39,134 @@ public class AutoCompleter
     }
 
     /**
-     * partialCommand field setter
-     * @param partialCommand String with the partialCommand to set
+     * Given a string of words, this method detects which is the last complete word in the String
+     * @return The last complete word in the String
      */
-    public void setPartialCommand(String partialCommand)
+    private String getPreviousCommand()
     {
-        this.partialCommand = partialCommand;
-        this.cycleCounter = 0;
+        //  "test1 " -> previous command = "test1"
+        if(this.partialCommand.endsWith(" "))
+            return this.allWords[allWords.length - 1];
+        //  "test1 tes" -> previous command = "test1"
+        else
+            return this.allWords[allWords.length - 2];
     }
 
     /**
-     * Possible commands list setter
-     * @param list List of all the names of possible commands
-     * @apiNote First element of the list is always the initial uncompleted command
+     * Create an ArrayList with all the possible prediction for the given partial command
      */
-    public void setList(List<String> list)
+    private void buildPredictionList()
     {
-        this.list = list;
-        this.allCommandsString = String.join("\n", list);
-        list.add(0, this.partialCommand);
+        CommandParser parser = CommandParser.getInstance();
+        prediction = new ArrayList<>();
+
+        //  Is base command (e.g. newGame, move, load ...)
+        if(allWords.length == 1 && ! partialCommand.contains(" "))
+        {
+            for (String command : parser.getCommands())
+                if (command.startsWith(partialCommand))
+                    prediction.add(command);
+        }
+        //  Is argument (e.g. stats, inventory, name of an item, name of a gameFile)
+        else if(allWords.length > 1 || partialCommand.endsWith(" "))
+        {
+            String prevCommand = getPreviousCommand();
+            prediction = parser.argsFromCommand(prevCommand);
+        }
+
+        //  Create string of this list that will be printed to Output
+        allCommandsString = String.join("\n", prediction);
+
     }
 
     /**
-     * Checks if the autoCompleter was never loaded before
-     * @return False if it was never loaded, true otherwise
-     */
-    public boolean isLoaded()
-    {
-        return this.loaded;
-    }
-
-    /**
-     * Gets all possible commands from the partial command inserted by the user
+     * Gets all possible commands from the initial command inserted by the user
      * @param previousInput String The partial command found in the input field
      * @param newInput String The input just inserted
      */
-    public void loadCompleter(String previousInput, String newInput)
+    public void loadCompleter(String newInput, String previousInput)
     {
-        this.loaded = true;
+        //  Get complete input text (newInput is the char just inserted by the user)
+        this.partialCommand = previousInput + newInput;
         this.cycleCounter = 0;
+        allWords = partialCommand.split(" ");
 
-        //  Get input text (partial command = previous input + new character inserted)
-        this.partialCommand = newInput + previousInput;
+        buildPredictionList();
+    }
 
-        CommandParser parser = CommandParser.getInstance();
+    private String buildInputText(direction dir)
+    {
+        //  Checks which direction to follow
+        if(dir == direction.FORWARD)
+            incrementCounter();
+        if(dir == direction.BACKWARD)
+            decrementCounter();
 
-        //  List all enabled commands for the current room
-        ArrayList<String> possibleCommands = new ArrayList<>();
-        for (String command : parser.getCommands())
-            if (command.startsWith(partialCommand))
-                possibleCommands.add(command);
+        //  Get the uncompleted command
+        if (cycleCounter == 0)
+            return partialCommand;
 
-        //  Set the command list for the autoCompleter
-        setList(possibleCommands);
+        //  1 word with 1 space ::: "use " -> "use Potion"
+        if (allWords.length == 1 && partialCommand.endsWith(" "))
+            return allWords[0] + " " + prediction.get(cycleCounter-1);
+
+        //  1 word with 0 space ::: "newG" -> "newGame"
+        if (allWords.length == 1 && !partialCommand.endsWith(" "))
+            return prediction.get(cycleCounter-1);
+
+        //  2 words with 1 space ::: "cmd1 cmd2 " -> "cm1 cmd2 cmd3"
+        if (allWords.length == 2 && partialCommand.endsWith(" "))
+            return allWords[0] + " " + allWords[1] + " " + prediction.get(cycleCounter-1);
+
+        //  2 words with 0 space ::: "use Pot" -> "use Potion"
+        if (allWords.length == 2 && !partialCommand.endsWith(" "))
+            return allWords[0] + " " + prediction.get(cycleCounter-1);
+
+        return partialCommand;
     }
 
     /**
-     * Cycles through all list of commands
-     * @param output Label with outputPrompt
-     * @param input TextField with inputPrompt
+     * Obtain and set the input and output Strings
+     * @param output Label of the output prompt
+     * @param input TextFiled for the input prompt
+     * @param dir Direction to follow when selecting the next prediction
      */
-    public void operate(Label output, TextField input )
+    public void operate(Label output, TextField input, direction dir)
     {
-        //  Checks if there are multiple possible commands (> 2 and not > 1 because one element of the list is partialCommand
-        if(this.list.size() > 2)
-        {
-            //  At first cycle it prints to the output all possible commands and
-            //  places the partialCommand in the input field
-            if (this.cycleCounter == 0)
-            {
-                output.setText(this.allCommandsString);
-                input.setText(this.list.get(0));
-            }
-            //  For all other cycles it completes the input field with the next possible command
-            else
-            {
-                input.setText(this.list.get(this.cycleCounter));
-            }
-        }
-        //  If there's only one possible command it automatically completes it in the input field
-        else if(this.list.size() == 2)
-        {
+        if(!this.allCommandsString.isEmpty())
             output.setText(this.allCommandsString);
-            input.setText(this.list.get(1));
-        }
-
+        input.setText(buildInputText(dir));
 
         //  Put selection bar ( | ) to the end of the text
         input.end();
-        this.incrementCounter();
     }
 
     /**
      * Increment the number of times the 'tab' key has been pressed
-     * @apiNote The range of the counter is always within the list size
+     * @apiNote The range of the counter reaches prediction.size() + 1
      */
     public void incrementCounter()
     {
         this.cycleCounter++;
-        if(this.cycleCounter == this.list.size())
+        if(this.cycleCounter > prediction.size())
             this.cycleCounter = 0;
     }
 
     /**
-     * partialCommand field getter
-     * @return String partialCommand memorized
+     * Decrement the number of times the 'tab' key has been pressed
+     * @apiNote The range of the counter reaches prediction.size() - 1
      */
-    public String getPartialCommand()
+    public void decrementCounter()
     {
-        return this.partialCommand;
+        this.cycleCounter--;
+        if(this.cycleCounter < 0)
+            this.cycleCounter = prediction.size();
     }
 
     /**
      * Instance of the singleton
      */
     private static AutoCompleter instance;
-    /**
-     * List of all possible commands. First element is always the uncompleted command inserted by the user
-     */
-    private List<String> list;
     /**
      * partialCommand initially inserted by the user
      */
@@ -167,7 +180,15 @@ public class AutoCompleter
      */
     private String allCommandsString;
     /**
-     * Keep record if this autoCompleter was never loaded before
+     *  Array with all the words in the partialCommand String
      */
-    private boolean loaded = false;
+    private String[] allWords;
+    /**
+     * ArrayList with all the possible prediction for the given partialCommand
+     */
+    private ArrayList<String> prediction;
+    /**
+     * Direction to follow when selecting the next prediction
+     */
+    public enum direction{BACKWARD, FORWARD}
 }

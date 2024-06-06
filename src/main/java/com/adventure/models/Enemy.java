@@ -3,7 +3,8 @@ package com.adventure.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Enemy extends NPC{
+public class Enemy extends NPC
+{
 
     /**
      * Entity constructor.

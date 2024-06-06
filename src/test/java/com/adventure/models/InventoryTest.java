@@ -59,10 +59,12 @@ class InventoryTest {
     }
 
     @Test
-    void equipTest() throws IllegalAccessException, NoSuchFieldException{
+    void equipTest() throws IllegalAccessException, NoSuchElementException{
         //exercise
         AttackItem attackTest = new AttackItem("Sword");
         DefenceItem defenceTest = new DefenceItem("Shield");
+        inventory.addItem(attackTest);
+        inventory.addItem(defenceTest);
         inventory.equipItem(new AttackItem("Sword"));
         inventory.equipItem(new DefenceItem("Shield"));
 
@@ -71,8 +73,8 @@ class InventoryTest {
         assertEquals(defenceTest, inventory.getEquipedDefenceItem(), "Problems with equip method if getEquiped is correct");
 
         //exercise
-        inventory.unequipItem(Inventory.equipType.ATTACK);
-        inventory.unequipItem(Inventory.equipType.DEFENSE);
+        inventory.unequipItem(Inventory.EquipType.ATTACK);
+        inventory.unequipItem(Inventory.EquipType.DEFENSE);
 
         //test
         assertEquals(attackItem, inventory.getEquipedAttackItem(),"Problems with unequip method if getEquiped is correct");

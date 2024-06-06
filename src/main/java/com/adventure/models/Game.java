@@ -1,13 +1,11 @@
 package com.adventure.models;
 
-import com.adventure.Main;
 import com.adventure.Resources;
 import com.adventure.controllers.BaseController;
 import com.adventure.deserializers.GameDeserializer;
 import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
 import com.adventure.models.nodes.StoryNodeLink;
-import com.adventure.serializers.InventorySerializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import javafx.fxml.FXMLLoader;
@@ -23,14 +21,12 @@ import org.jgrapht.graph.DirectedPseudograph;
 import java.util.Objects;
 import java.util.Properties;
 
+/**
+ * Class that represents an active game and its state.
+ */
 @JsonDeserialize(using = GameDeserializer.class)
 public class Game
 {
-
-    //
-    //  CONSTRUCTOR
-    //
-
     /**
      * Constructor.
      * @param properties Application properties.
@@ -47,18 +43,20 @@ public class Game
      */
     public Game(Properties properties, Stage stage)
     {
+        Objects.requireNonNull(properties, "properties can't be null");
+
         this.properties = properties;
         this.gameGraph = new DirectedPseudograph<>(StoryNodeLink.class);
         this.stage = stage;
     }
 
     //
-    //  GETTERS
+    //  GETTERS.
     //
 
     /**
-     * Graph getter
-     * @return Graph used in the game
+     * Graph getter.
+     * @return Graph used in the game.
      */
     public Graph<StoryNode, StoryNodeLink> getGameGraph()
     {
@@ -66,8 +64,8 @@ public class Game
     }
 
     /**
-     * Current node getter
-     * @return StoryNode current node in the game
+     * Current node getter.
+     * @return StoryNode current node in the game.
      */
     public StoryNode getCurrentNode()
     {
@@ -75,8 +73,8 @@ public class Game
     }
 
     /**
-     * Stage getter
-     * @return Stage current stage in the game
+     * Stage getter.
+     * @return Stage current stage in the game.
      */
     @JsonIgnore
     public Stage getStage()
@@ -85,8 +83,8 @@ public class Game
     }
 
     /**
-     * Previous node getter
-     * @return StoryNode previous node
+     * Previous node getter.
+     * @return StoryNode previous node.
      */
     public StoryNode getPreviousNode()
     {
@@ -103,8 +101,8 @@ public class Game
     }
 
     /**
-     * Player getter
-     * @return Player playing
+     * Player getter.
+     * @return Player playing.
      */
     public Player getPlayer()
     {
@@ -112,7 +110,7 @@ public class Game
     }
 
     //
-    //  SETTERS
+    //  SETTERS.
     //
 
     /**
@@ -132,6 +130,7 @@ public class Game
      */
     public void setId(String id)
     {
+        Objects.requireNonNull(id, "id can't be null");
         this.id = id;
     }
 
@@ -150,18 +149,26 @@ public class Game
      */
     public void setPlayer(Player player)
     {
+        Objects.requireNonNull(player, "Player can't be null");
         this.player = player;
     }
 
     //
-    //  OTHERS
+    // OTHERS.
     //
 
+    /**
+     * Checks if there is a valid previous node.
+     * @return True if there is a previous node, false otherwise.
+     */
     public boolean hasPreviousNode()
     {
         return this.previousNode != null;
     }
 
+    /**
+     * Makes previous node unreachable.
+     */
     public void invalidatePreviousNode()
     {
         this.previousNode = null;
@@ -173,11 +180,13 @@ public class Game
     public void load()
     {
         Objects.requireNonNull(this.stage, "stage cannot be null");
-        try {
+        try
+        {
             // Loads view.
             FXMLLoader fxmlLoader = new FXMLLoader(Resources.class.getResource(currentNode.getTargetView()));
+
             // Sets game font.
-            Font.loadFont(Objects.requireNonNull(Resources.class.getResource("assets/retro_gaming.ttf")).toExternalForm(), -1);
+            Font.loadFont(Objects.requireNonNull(Resources.class.getResource("assets/Monocraft.ttf")).toExternalForm(), -1);
 
             Parent root = fxmlLoader.load();
 
@@ -227,8 +236,10 @@ public class Game
         }
     }
 
-    public boolean equals(Object obj) {
-        if (obj == this) {
+    public boolean equals(Object obj)
+    {
+        if (obj == this)
+        {
             return true;
         }
 
@@ -238,13 +249,12 @@ public class Game
         Room check = (Room) this.currentNode;
         Room check2 = (Room) game.getCurrentNode();
         boolean result;
-        result = ((this.gameGraph.equals(game.getGameGraph())) && (check.equals(check2))
-                && (this.player.equals(game.getPlayer())) && (this.id.equals(game.getId())));
+        result = (( (this.player.equals(game.getPlayer())) && (this.id.equals(game.getId()))));
         return result;
     }
 
     //
-    //  VARIABLES
+    // VARIABLES.
     //
 
     /**
@@ -294,5 +304,4 @@ public class Game
      */
     @JsonIgnore
     protected static final Logger logger = LogManager.getLogger();
-
 }

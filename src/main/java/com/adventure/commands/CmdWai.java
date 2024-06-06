@@ -18,13 +18,20 @@ public class CmdWai extends AbstractCommand
         if(currentNode instanceof Room room)
         {
             this.writer.println(room.getDescription());
-            this.writer.println("Allowed directions: ");
+            this.writer.println("Allowed directions:" + System.lineSeparator());
 
             Graph<StoryNode, StoryNodeLink> g = this.context.getGame().getGameGraph();
 
             for(StoryNodeLink link: g.outgoingEdgesOf(currentNode))
             {
-                this.writer.printf("%s, locked=%s%n", link.getAction().getActionName(), link.getLocked() ? "true" : "false");
+                if(link.getLocked())
+                {
+                    this.writer.printf("* %s, locked with key=%s%n", link.getAction().getActionName(), link.getKey());
+                }
+                else
+                {
+                    this.writer.printf("* %s, not locked%n", link.getAction().getActionName());
+                }
             }
         }
     }
