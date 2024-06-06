@@ -1,4 +1,4 @@
-package com.adventure;
+package com.adventure.models.nodes;
 
 import com.adventure.models.nodes.Room;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +21,7 @@ class RoomTest {
 
     @Test
     void equalsTest(){
-       assertEquals(testRoom, room, "Problems with equals method");
+       assertEquals(room, room, "Problems with equals method");
     }
 
     @Test

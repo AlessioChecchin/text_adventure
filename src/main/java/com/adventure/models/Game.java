@@ -238,8 +238,7 @@ public class Game
         Room check = (Room) this.currentNode;
         Room check2 = (Room) game.getCurrentNode();
         boolean result;
-        result = ((this.gameGraph.equals(game.getGameGraph())) && (check.equals(check2))
-                && (this.player.equals(game.getPlayer())) && (this.id.equals(game.getId())));
+        result = (( (this.player.equals(game.getPlayer())) && (this.id.equals(game.getId()))));
         return result;
     }
 

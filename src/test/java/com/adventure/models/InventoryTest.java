@@ -59,10 +59,12 @@ class InventoryTest {
     }
 
     @Test
-    void equipTest() throws IllegalAccessException, NoSuchFieldException{
+    void equipTest() throws IllegalAccessException, NoSuchElementException{
         //exercise
         AttackItem attackTest = new AttackItem("Sword");
         DefenceItem defenceTest = new DefenceItem("Shield");
+        inventory.addItem(attackTest);
+        inventory.addItem(defenceTest);
         inventory.equipItem(new AttackItem("Sword"));
         inventory.equipItem(new DefenceItem("Shield"));
 

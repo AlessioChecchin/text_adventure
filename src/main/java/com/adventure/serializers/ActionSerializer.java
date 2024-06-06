@@ -24,7 +24,7 @@ public class ActionSerializer extends StdSerializer<Action>
     public void serialize(Action action, JsonGenerator jsonGenerator, SerializerProvider provider) throws IOException, JsonProcessingException
     {
         jsonGenerator.writeStartObject();
-        jsonGenerator.writeStringField("action", action.getActionName());
+        jsonGenerator.writeStringField("name", action.getActionName());
         jsonGenerator.writeEndObject();
     }
 
