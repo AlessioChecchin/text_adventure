@@ -14,8 +14,15 @@ public class CmdDeleteGame extends AbstractCommand
             try {
                 this.context.getStorageService().deleteGame(gameName);
                 writer.println("Deleted game " + gameName);
-            } catch (NoSuchElementException e) {
+            }
+            catch (NoSuchElementException e)
+            {
                 writer.println("Error: No such game");
+            }
+            catch(Exception e)
+            {
+                writer.println("Error deleting game");
+                logger.error("Error deleting game", e);
             }
         }
     }

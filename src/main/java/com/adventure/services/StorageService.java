@@ -14,7 +14,7 @@ public interface StorageService
      * Lists available games.
      * @return A list of unique string identifiers of available games.
      */
-    List<String> listGames();
+    List<String> listGames() throws GameStorageException;
 
     /**
      * Saves a game.
@@ -35,7 +35,7 @@ public interface StorageService
      * Deletes a game.
      * @param gameId Unique identifier of the game to delete.
      */
-    void deleteGame(String gameId);
+    void deleteGame(String gameId) throws GameStorageException;
 
     /**
      * Creates a new game.

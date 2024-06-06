@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.util.Duration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -64,6 +65,12 @@ public class GameLoaderController implements BaseController
 
                 this.player.setMute(true);
                 this.player.setAutoPlay(true);
+
+                player.setOnEndOfMedia(() -> {
+                    player.seek(Duration.ZERO);
+                    player.play();
+                });
+
                 this.player.play();
             });
 

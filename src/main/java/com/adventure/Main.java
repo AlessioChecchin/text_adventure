@@ -56,7 +56,6 @@ public class Main extends Application
         commandParser.registerCommand("wai", CmdWai.class, "Gives information about valid paths");
 
 
-
         Properties props = context.getProperties();
 
         // Generating dummy game to host the proper game loader.
