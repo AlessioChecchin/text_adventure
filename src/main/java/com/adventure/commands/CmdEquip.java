@@ -1,10 +1,13 @@
 package com.adventure.commands;
 
+import com.adventure.exceptions.GameStorageException;
 import com.adventure.models.Game;
 import com.adventure.models.Player;
 import com.adventure.models.items.Equipable;
 import com.adventure.models.items.Item;
 import com.adventure.models.items.UsableItem;
+
+import java.util.ArrayList;
 
 public class CmdEquip extends AbstractCommand{
     @Override
@@ -25,5 +28,11 @@ public class CmdEquip extends AbstractCommand{
             else {this.writer.println("Item isn't equipable");}
         }
         else {this.writer.println("Item not found");}
+    }
+
+    @Override
+    public ArrayList<String> getPossibleArgs() throws GameStorageException
+    {
+        return new ArrayList<>();
     }
 }
