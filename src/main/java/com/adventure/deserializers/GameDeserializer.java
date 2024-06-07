@@ -2,11 +2,8 @@ package com.adventure.deserializers;
 
 import com.adventure.models.*;
 import com.adventure.models.items.Item;
-import com.adventure.models.nodes.Action;
-import com.adventure.models.nodes.Room;
-import com.adventure.models.nodes.StoryNode;
-import com.adventure.models.nodes.StoryNodeLink;
-import com.adventure.utils.ApplicationContextProvider;
+import com.adventure.models.nodes.*;
+import com.adventure.config.ApplicationContextProvider;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -16,10 +13,7 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import org.jgrapht.Graph;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class GameDeserializer extends StdDeserializer<Game>
 {
@@ -37,13 +31,16 @@ public class GameDeserializer extends StdDeserializer<Game>
         JsonNode node = jp.getCodec().readTree(jp);
 
         // Create Game with Properties
-        Game game = new Game(ApplicationContextProvider.getInstance().getProperties());
+        Game game = new Game(Objects.requireNonNull(ApplicationContextProvider.getInstance()).getConfig());
 
 
 
         //
         //  GAMEGRAPH
         //
+
+        //  Reset ID counter for nodes when loading a new game
+        IdManager.getInstance().resetCounter();
 
         // Get game graph node and gameGraph object
         ObjectMapper mapper = new ObjectMapper();
@@ -54,6 +51,7 @@ public class GameDeserializer extends StdDeserializer<Game>
         //  Edges contains all info concerning StoryNodeLinks that links 2 StoryNodes together
         JsonNode vertexesNode = graphNode.get("vertexes");
         JsonNode edgesNode = graphNode.get("edges");
+
 
         //  vertexes deserialization
         //      StoryNodes map
@@ -68,7 +66,12 @@ public class GameDeserializer extends StdDeserializer<Game>
 
 
         //  Add vertexes to graph
-        storyNodes.forEach((k,v) -> gameGraph.addVertex(v));
+        //  Vertexes are added to graph in order of ID
+        ArrayList<String> sortedKeys = new ArrayList<String>(storyNodes.keySet());
+        Collections.sort(sortedKeys);
+        for (String key : sortedKeys)
+            gameGraph.addVertex(storyNodes.get(key));
+        //storyNodes.forEach((k,v) -> gameGraph.addVertex(v));
 
         //  Deserialize edges and populate graph
         Iterator<Map.Entry<String,JsonNode>> edgesIterator = edgesNode.fields();
@@ -185,7 +188,7 @@ public class GameDeserializer extends StdDeserializer<Game>
             return null;
         // * Name
         // * Description
-        Room room = new Room(roomNode.get("name").asText(), roomNode.get("description").asText());
+        Room room = new Room(roomNode.get("name").asText(), roomNode.get("description").asText(), roomNode.get("numericID").asInt());
         // * Completed
         room.setCompleted(roomNode.get("completed").asBoolean());
         // * BackgroundPath

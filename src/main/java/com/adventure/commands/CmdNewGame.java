@@ -41,7 +41,7 @@ public class CmdNewGame extends AbstractCommand
         reEnableSaved();
         logger.debug("Switching game...");
 
-        Game game = this.context.getStorageService().newGame(username);
+        Game game = this.context.getConfig().getStorageService().newGame(username);
 
         Platform.runLater(() -> {
             // Forwards the stage to the new game.

@@ -34,4 +34,6 @@ module com.adventure {
     opens com.adventure.services to javafx.fxml;
     opens com.adventure.models.items to com.fasterxml.jackson.databind, javafx.fxml;
     exports com.adventure.deserializers to com.fasterxml.jackson.databind;
+    exports com.adventure.config;
+    opens com.adventure.config to javafx.fxml;
 }

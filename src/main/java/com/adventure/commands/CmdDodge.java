@@ -4,7 +4,6 @@ import com.adventure.models.Enemy;
 import com.adventure.models.Player;
 import com.adventure.models.RandomCollection;
 import com.adventure.models.nodes.Room;
-import com.adventure.utils.ApplicationContextProvider;
 
 public class CmdDodge extends AbstractCommand{
 

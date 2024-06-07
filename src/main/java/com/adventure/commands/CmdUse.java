@@ -8,7 +8,7 @@ import com.adventure.models.items.Item;
 import com.adventure.models.items.UsableItem;
 import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
-import com.adventure.utils.ApplicationContext;
+import com.adventure.config.ApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;

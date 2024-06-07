@@ -1,10 +1,260 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    Hello world
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Text Adventure - Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="scribbler-global.css">
+    <link rel="stylesheet" href="scribbler-doc.css">
+    <link rel="author" href="humans.txt">
+  </head>
+  <body>
+    <div class="doc__bg"></div>
+    <nav class="header">
+      <h1 class="logo">Text Adventure <span class="logo__thin">Documentation</span></h1>
+      <ul class="menu">
+        <div class="menu__item toggle"><span></span></div>
+        <li class="menu__item"><a href="https://github.com/ssiodev/text_adventure.git" class="link link--dark"><i class="fa fa-github"></i> Github</a></li>
+        <li class="menu__item"><a href="doc.html" class="link link--dark"><i class="fa fa-home"></i> Home</a></li>
+      </ul>
+    </nav>
+    <div class="wrapper">
+      <aside class="doc__nav">
+        <ul>
+          <li class="js-btn selected">Introduction</li>
+          <li class="js-btn">Manual</li>
+          <li class="js-btn">Specifications</li>
+          <li class="js-btn">Design</li>
+          <li class="js-btn">Testing</li>
+          <li class="js-btn">JavaDoc</li>
+        </ul>
+      </aside>
+      <article class="doc__content">
+        <section class="js-section">
+          <h2 class="section__title">Introduction</h2>
+          <p>
+            <b>Text Adventure</b> is a text-based RPG set in a fantasy world. You will be the hero of our story,
+            are you ready for this exciting adventure?
+          </p>
+          <h3 class="section__title">Game Plot</h3>
+          <p >
+            In a distant era, in the lands of Margorgh, in the darkest depths of a shadowy forest, it is said that there exists a Castle ruled by the forces of evil, housing an unimaginable power.
+            For millennia, humanity has sought to wrest this power from the forces of evil; battles and wars have marked the quest for this power.<br/>
+            Over time, the traces of the Castle and the power within have been lost, vanished like leaves on trees in winter, or at least, so it was believed...
+            A mysterious scroll was discovered by a warrior with a golden heart, a scroll containing knowledge that he could not have imagined and that would lead him to an unbelievable destiny....<br/>
+          </p>
+          <br/>
+        </section>
+        <section class="js-section">
+          <h2 class="section__title">Manual</h2>
+          <h3 class="section__title">Gameplay</h3>
+          <p>
+            The game is set in two different levels, one located in a forest, the latter in a castle.<br/>
+            Each one of them is subdivided in various section, that we will call "room" for simplicity.
+          </p>
+          <p>At the first launch of the game, the program will load the main menu, where you can choose between:</p>
+          <ul>
+            <li>start a new game</li>
+            <li>load a pre-existing game (if existing)</li>
+            <li>remove a pre-existing game (if existing)</li>
+            <li>see a list of the pre-saved games</li>
+          </ul>
+          <p>
+          If you start a new game, you will be asked to enter your hero-name.
+          In any moment of the game you can use <code>help</code> to request the list of the available commands.
+          [...]
+          The goal of the game is to beat the final boss!
+          </p>
+          <h3 class="section__title">Graphic Interface</h3>
+          <p>
+            For the GUI it has been used <i>JavaFX FXML</i>, with which you can implement the graphics of a desktop application.
+            The graphic interface is composed in three main parts:
+          </p>
+            <ul>
+              <li>an "artistic" section, where there is a image/video (created and rendered with the program Blender) which represents the content of that specific room</li>
+              <li>an output section, where you can see the program's response </li>
+              <li>an input section, with which you can interact with the game</li>
+            </ul>
+          <h3 class="section__title">Utilized Technologies</h3>
+          <table>
+            <tr>
+              <th>Name</th>
+              <th>Version</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>Maven</td>
+              <td>4.0.0</td>
+              <td>software for dependencies and project structure management </td>
+            </tr>
+            <tr>
+              <td>Java</td>
+              <td>20</td>
+              <td>primary programming language</td>
+            </tr>
+            <tr>
+              <td>JavaFX</td>
+              <td>22.0.1</td>
+              <td>Java-based software platform for creating desktop applications</td>
+            </tr>
+            <tr>
+              <td>Jackson</td>
+              <td>2.16.1</td>
+              <td>Open-source Java class library for serialization to JSON and viceversa.</td>
+            </tr>
+            <tr>
+              <td>JGraphT</td>
+              <td>1.5.2</td>
+              <td>Open-source Java class library for the graph structure</td>
+            </tr>
+            <tr>
+              <td>JUnit</td>
+              <td>5.11.0</td>
+              <td>Framework for automatic testing</td>
+            </tr>
+            <tr>
+              <td>AWS</td>
+              <td>5.11.0</td>
+              <td>Framework for automatic testing</td>
+            </tr>
+            <tr>
+            <td>log4j</td>
+            <td>5.11.0</td>
+            <td>Framework for automatic testing</td>
+          </tr>
+
+          </table>
+          <h3 class="section__title">How To Play</h3>
+          <p>
+            The user interact with the display using a <b>custom command line</b>, which is located at the bottom of the game window.<br/>
+            The user have to type the command followed by (if any) arguments and then press enter to trigger the specific in-game action.<br/>
+            Example: <br/>
+          </p>
+          <code>>>command &lt;argument&gt; </code>
+          <p>The list of all the possible commands is available <a href="#CommandsList">below</a></p>
+          <h3 id="CommandsList">Commands List</h3>
+          <table>
+            <tr>
+              <th>Name</th>
+              <th>Argument</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>newGame</td>
+              <td>-</td>
+              <td>Create a new game.<br/>It can be utilized only in the menu.</td>
+            </tr>
+            <tr>
+              <td>loadGame</td>
+              <td>Name of the saved game</td>
+              <td>Command for loading a game previously saved.</td>
+            </tr>
+            <tr>
+              <td>save</td>
+              <td>(Optional) name of the save </td>
+              <td>Command for save the current game.<br/> Require a name for the game that you are saving.</td>
+            </tr>
+            <tr>
+              <td>deleteGame</td>
+              <td>Name of the save to be deleted</td>
+              <td>Command for deleting a previously saved game.<br/> Enter the name of the game to be deleted</td>
+            </tr>
+            <tr>
+              <td>listGames</td>
+              <td>-</td>
+              <td>Command that showing a list of the saved games.</td>
+            </tr>
+            <tr>
+              <td>show</td>
+              <td>(Optional) one between <code>inventory</code> / <code>stats</code></td>
+              <td>Command for showing the stats and inventory of the player.<br/><code>show inventory</code> for showing only the player's inventory.<br/>
+              <code>show stats</code> the showing only the player's stats.</td>
+            </tr>
+            <tr>
+              <td>move</td>
+              <td>Cardinal directions:<br/><code>north </code>/ <code>south </code>/ <code>east </code>/ <code>west</code></td>
+              <td>Command manage the movement in the map using cardinal directions.<br/> If possible you move in the digit direction</td>
+            </tr>
+            <tr>
+              <td>look</td>
+              <td>-</td>
+              <td>Command for showing a list of the items in the room.</td>
+            </tr>
+            <tr>
+              <td>pick</td>
+              <td>Name of the item to be taken</td>
+              <td>Command for taking an item from the items present in the room<br/>Return error message if the inventory has not enough space.
+              </td>
+            </tr>
+            <tr>
+              <td>fight</td>
+              <td>-</td>
+              <td>Command for starting a battle with a hostile mob (enemy).</td>
+            </tr>
+            <tr>
+              <td>attack</td>
+              <td>-</td>
+              <td>Command for attacking a monster in a fight.</td>
+            </tr>
+            <tr>
+              <td>dodge</td>
+              <td>-</td>
+              <td>Command for dodging an incoming attack from a monster.<br/>
+                It can be used 3 times per fight.</td>
+            </tr>
+            <tr>
+              <td>use</td>
+              <td>Name of the item to be used in the inventory</td>
+              <td>Command for using an item in the player's inventory.</td>
+            </tr>
+            <tr>
+              <td>wai</td>
+              <td>-</td>
+              <td>Command for showing the properties (locked/unlocked) of directions that can be used with <code>move</code></td>
+            </tr>
+            <tr>
+              <td>help</td>
+              <td>-</td>
+              <td>Show all the possible commands in a precise moment of the game.</td>
+            </tr>
+            <tr>
+              <td>clear</td>
+              <td>-</td>
+              <td>Command for cleaning the game terminal.</td>
+            </tr>
+          </table>
+          <h3 class="section__title">How To Install</h3>
+          <h4 class="section__title">Maven</h4>
+          <p></p>
+          <h4 class="section__title">IntelliJ IDEA</h4>
+          <h4 class="section__title">Jar</h4>
+          <p>Not supported yet</p>
+          <br/>
+        </section>
+        <section class="js-section">
+          <h2 class="section__title">Specifications</h2>
+         <hr />
+        </section>
+        <section class="js-section">
+          <h2 class="section__title">Design</h2>
+          <hr />
+        </section>
+        <section class="js-section">
+          <h2 class="section__title">Testing</h2>
+          <hr/>
+        </section>
+        <section class="js-section">
+          <h2 class="section__title">JavaDoc</h2>
+        </section>
+      </article>
+    </div>
+
+    <footer class="footer">Project by Checchin Alessio, Chen Simone, Parravicini Alberto & Toniolo Jacopo.</footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="scribbler.js"></script>
+  </body>
 </html>

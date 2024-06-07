@@ -1,6 +1,7 @@
 package com.adventure.models;
 
 import com.adventure.Resources;
+import com.adventure.config.Config;
 import com.adventure.controllers.BaseController;
 import com.adventure.deserializers.GameDeserializer;
 import com.adventure.models.nodes.Room;
@@ -29,23 +30,23 @@ public class Game
 {
     /**
      * Constructor.
-     * @param properties Application properties.
+     * @param config Application properties.
      */
-    public Game(Properties properties)
+    public Game(Config config)
     {
-        this(properties, null);
+        this(config, null);
     }
 
     /**
      * Constructor
-     * @param properties Properties to use for this game
+     * @param config Properties to use for this game
      * @param stage Game stage.
      */
-    public Game(Properties properties, Stage stage)
+    public Game(Config config, Stage stage)
     {
-        Objects.requireNonNull(properties, "properties can't be null");
+        Objects.requireNonNull(config, "properties can't be null");
 
-        this.properties = properties;
+        this.config = config;
         this.gameGraph = new DirectedPseudograph<>(StoryNodeLink.class);
         this.stage = stage;
     }
@@ -203,13 +204,14 @@ public class Game
             {
                 currentScene.setRoot(root);
             }
+
             // If there's no scene, a new one is created.
             else
             {
                 Scene scene = new Scene(
                         root,
-                        Integer.parseInt(this.properties.getProperty("display.width")),
-                        Integer.parseInt(this.properties.getProperty("display.height"))
+                        this.config.getDisplayWidth(),
+                        this.config.getDisplayHeight()
                 );
                 this.stage.setScene(scene);
             }
@@ -276,7 +278,7 @@ public class Game
      * Properties of the game
      */
     @JsonIgnore
-    private final Properties properties;
+    private final Config config;
 
     /**
      * Current node controller.

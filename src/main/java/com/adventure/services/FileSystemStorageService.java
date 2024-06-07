@@ -1,6 +1,7 @@
 package com.adventure.services;
 
 import com.adventure.Resources;
+import com.adventure.config.Config;
 import com.adventure.exceptions.GameStorageException;
 import com.adventure.models.Game;
 import com.adventure.models.Inventory;
@@ -31,9 +32,9 @@ import java.util.Properties;
 
 public class FileSystemStorageService extends AbstractStorageService
 {
-    public FileSystemStorageService(Properties properties)
+    public FileSystemStorageService(Config config)
     {
-        super(properties);
+        super(config);
 
         //  Create or ensure the existence of the 'saves' folder
         ensureSaveFolder();
@@ -78,9 +79,9 @@ public class FileSystemStorageService extends AbstractStorageService
                 logger.debug("Saved {}", saveName);
             else
                 logger.debug("{} overwritten", saveName);
-            FileWriter write = new FileWriter(file);
-            write.write(json);
-            write.close();
+            FileWriter writer = new FileWriter(file);
+            writer.write(json);
+            writer.close();
         }
         catch (JsonProcessingException e)
         {

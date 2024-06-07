@@ -1,5 +1,7 @@
 package com.adventure.commands;
 
+import com.adventure.services.StorageService;
+
 import java.util.List;
 
 public class CmdListGames extends AbstractCommand
@@ -9,11 +11,13 @@ public class CmdListGames extends AbstractCommand
     {
         try
         {
-            List<String> games = this.context.getStorageService().listGames();
+            StorageService storageService = this.context.getConfig().getStorageService();
+
+            List<String> games = storageService.listGames();
             if(games.isEmpty())
                 writer.print("No game saved");
 
-            for(String game : this.context.getStorageService().listGames())
+            for(String game : games)
                 writer.println(game);
         }
         catch (Exception e)

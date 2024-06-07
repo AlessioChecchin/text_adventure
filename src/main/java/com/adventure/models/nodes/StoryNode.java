@@ -36,12 +36,21 @@ public abstract class StoryNode
     }
 
     /**
-     * Get the ID of the object
+     * Get the String ID of the object
      * @return String ID of the object
      */
     public String getID()
     {
-        return "" + System.identityHashCode(this);
+        return this.ID;
+    }
+
+    /**
+     * Get the numeric ID of the object
+     * @return int numeric ID of the object
+     */
+    public int getNumericID()
+    {
+        return this.numericID;
     }
 
     //
@@ -53,6 +62,31 @@ public abstract class StoryNode
         this.targetView = targetView;
     }
 
+    /**
+     * Sets the numeric ID and the String ID for the class
+     * @param ID int id of the current object
+     */
+    protected void setID(int ID)
+    {
+        IdManager idManager = IdManager.getInstance();
+        idManager.check(ID);
+        // Set node numeric ID
+        this.numericID = ID;
+        // Set node String ID
+        String[] classpath = this.getClass().getName().split("\\.");
+        this.ID = classpath[classpath.length - 1] + "_" + ID;
+    }
+
+    /**
+     * Sets the numeric ID and the String ID for the class
+     * @apiNote the ID is set using the IdManager
+     */
+    protected void setID()
+    {
+        IdManager idManager = IdManager.getInstance();
+        setID(idManager.getNext());
+    }
+
     //
     //  VARIABLES
     //
@@ -61,5 +95,7 @@ public abstract class StoryNode
      * Represents the view to be used
      */
     private String targetView;
+    private int numericID;
+    private String ID;
 
 }

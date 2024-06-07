@@ -1,9 +1,7 @@
 package com.adventure.services;
 
-import com.adventure.models.Game;
-import com.adventure.models.Inventory;
-import com.adventure.models.Player;
-import com.adventure.models.Stats;
+import com.adventure.config.Config;
+import com.adventure.models.*;
 import com.adventure.models.items.AttackItem;
 import com.adventure.models.items.Key;
 import com.adventure.models.items.UsableItem;
@@ -16,20 +14,19 @@ import org.apache.logging.log4j.Logger;
 import org.jgrapht.Graph;
 
 import java.util.Objects;
-import java.util.Properties;
 
 abstract class AbstractStorageService implements StorageService
 {
-    public AbstractStorageService(Properties properties)
+    public AbstractStorageService(Config config)
     {
-        Objects.requireNonNull(properties, "properties cannot be null");
-        this.properties = properties;
+        Objects.requireNonNull(config, "properties cannot be null");
+        this.config = config;
     }
 
     @Override
     public Game newGame(String playerName)
     {
-        Game game = new Game(this.properties);
+        Game game = new Game(this.config);
         Graph<StoryNode, StoryNodeLink> g = game.getGameGraph();
 
         Inventory playerInventory = new Inventory(100);
@@ -37,11 +34,7 @@ abstract class AbstractStorageService implements StorageService
         // Adding sword.
         playerInventory.addItem(new AttackItem("Sword"));
 
-        Stats stats = new Stats();
-        stats.setMaxHp(100);
-        stats.setHp(100);
-        stats.setBaseAttack(1);
-        stats.setBaseDefense(1);
+        Stats stats = new Stats(100,100,1,1);
 
         game.setPlayer(new Player(playerName, playerInventory, stats));
 
@@ -66,19 +59,50 @@ abstract class AbstractStorageService implements StorageService
         // Room 2.
         Room room2 = new Room("K2 fight room", "Oh no, a goblin! Fight him and take the loot that drops");
         room2.setBackgroundPath("assets/castle.png");
-        room2.getItems().add(new Key(key2));
+
+        {
+            Inventory enemyInventory2 = new Inventory(100);
+            Stats enemyStats2 = new Stats(100,100,1,1);
+            enemyInventory2.addItem(new Key(key2));
+            Enemy enemy2 = new Enemy(enemyInventory2, enemyStats2, "Monster k2");
+            enemy2.setDefaultDialog("I'm monster that holds K2.\nI'll kill u.");
+
+            room2.setMonster(enemy2);
+            //room2.getItems().add();
+        }
+
         g.addVertex(room2);
 
         // Room 3.
         Room room3 = new Room("K3 fight room", "Oh no, a witch! Fight the witch and take the loot that drops");
         room3.setBackgroundPath("assets/castle.png");
-        room3.getItems().add(new Key(key3));
+
+        {
+            Inventory enemyInventory3 = new Inventory(100);
+            Stats enemyStats3 = new Stats(100,100,1,1);
+            enemyInventory3.addItem(new Key(key3));
+            Enemy enemy3 = new Enemy(enemyInventory3, enemyStats3, "Monster K3");
+            enemy3.setDefaultDialog("I'm monster that holds K3.\nI'll kill u.");
+
+            room3.setMonster(enemy3);
+        }
+
         g.addVertex(room3);
 
         // Room 4.
         Room room4 = new Room("K4 fight room", "Oh no, a troll! Fight the troll and take the loot that drops");
         room4.setBackgroundPath("assets/castle.png");
-        room4.getItems().add(new Key(key4));
+
+        {
+            Inventory enemyInventory4 = new Inventory(100);
+            Stats enemyStats4 = new Stats(100,100,1,1);
+            enemyInventory4.addItem(new Key(key4));
+            Enemy enemy4 = new Enemy(enemyInventory4, enemyStats4, "Monster K4");
+            enemy4.setDefaultDialog("I'm monster that holds K4.\nI'll kill u.");
+
+            room4.setMonster(enemy4);
+        }
+
         g.addVertex(room4);
 
         // Room 5.
@@ -90,6 +114,17 @@ abstract class AbstractStorageService implements StorageService
         // Room 6.
         Room room6 = new Room("K6 fight room", "Oh no, a dragon! Fight the dragon and take the loot that drops");
         room6.setBackgroundPath("assets/castle.png");
+
+        {
+            Inventory enemyInventory6 = new Inventory(100);
+            Stats enemyStats6= new Stats(100,100,1,1);
+            enemyInventory6.addItem(new Key(key6));
+            Enemy enemy6 = new Enemy(enemyInventory6, enemyStats6, "Monster K6");
+            enemy6.setDefaultDialog("I'm monster that holds K6.\nI'll kill u.");
+
+            room6.setMonster(enemy6);
+        }
+
         room6.getItems().add(new Key(key6));
         g.addVertex(room6);
 
@@ -101,7 +136,18 @@ abstract class AbstractStorageService implements StorageService
         // Room 8.
         Room room8 = new Room("K5 fight room", "Oh no, a gym bro! Fight the gym bro and take the loot that drops");
         room8.setBackgroundPath("assets/castle.png");
-        room8.getItems().add(new Key(key5));
+
+        {
+            Inventory enemyInventory5 = new Inventory(100);
+            Stats enemyStats5 = new Stats(100,100,1,1);
+            enemyInventory5.addItem(new Key(key5));
+            Enemy enemy5 = new Enemy(enemyInventory5, enemyStats5, "Monster K5");
+
+            room8.setMonster(enemy5);
+
+            room8.getItems().add(new Key(key5));
+        }
+
         g.addVertex(room8);
 
         // Room 9.
@@ -192,7 +238,7 @@ abstract class AbstractStorageService implements StorageService
     /**
      * Application properties.
      */
-    protected final Properties properties;
+    protected final Config config;
 
     /**
      * Logger.
