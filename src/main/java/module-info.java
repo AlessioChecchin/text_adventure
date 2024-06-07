@@ -6,7 +6,6 @@ module com.adventure {
     requires software.amazon.awssdk.auth;
     requires software.amazon.awssdk.regions;
     requires software.amazon.awssdk.services.s3;
-    requires software.amazon.awssdk.services.ec2;
     requires javafx.media;
     requires org.apache.logging.log4j;
     requires org.apache.logging.log4j.core;
