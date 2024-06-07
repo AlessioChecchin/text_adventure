@@ -54,7 +54,11 @@ abstract class AbstractStorageService implements StorageService
         String key6 = "Level 6";
 
         // Room 1.
-        Room room1 = new Room("Introduction room", "Welcome to the first room, take the key and go on an adventure!");
+        Room room1 = new Room("Introduction room", "In a distant era, in the lands of Margorgh, in the darkest depths of a shadowy forest, it is said that there exists a Castle ruled by evil, housing an unimaginable power. For millennia, humanity has sought to wrest this power from the forces of evil, with battles and wars marking the quest for this power. Over time, the traces of the Castle and the power it held within were lost, vanished like leaves on the trees in winter, or so it was believed...\n" +
+                "\n" +
+                "A mysterious scroll was found by a warrior with a heart of gold, a scroll containing knowledge that even he could not imagine where it would lead him. The name of this hero was " + playerName + ", a name that, unbeknownst to him, would be remembered forever.\n" +
+                "\n" +
+                "The scroll led him through abandoned and devastated lands where the scent of death and torment still lingered. Our Hero arrived at the edge of a forest with a spectral aura, but driven by curiosity, he did not hesitate to venture into the dark woods...\n" + "Welcome, it is time to embark on this adventure as " + playerName + ". The forest that lies before your eyes is a dense network of dark canopies, creating a natural barrier to the sight of the horizon. Inside, all is silent, and not even the leaves stir in this gloomy and mysterious atmosphere. However, your determined warrior spirit urges you to venture into the forest, something calls to you. Explore the forest following the scroll, good luck Hero!");
         room1.setBackgroundPath("assets/castle.png");
         room1.getItems().add(new Key(key1));
         g.addVertex(room1);
