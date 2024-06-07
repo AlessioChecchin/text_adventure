@@ -67,10 +67,10 @@
           <ul>
             <li>use <code>help</code> to request the list of the available commands.</li>
             <li>use <code>save</code> to save your current progress into a <code>.json</code> file which will be used to reload the game at the next access.<br/>
-            <b>Warning!</b> The game will not automatically save the progress!</li>
+            <strong>Warning!</strong><br/>The game will not automatically save the progress!<br/><u>You must set up its own bucket environment.</u></li>
           </ul>
           <p>
-            The main goal of the game is to complete all the rooms, reach the castle and beat the final boss! Have fun!
+            The main goal of the game is to complete all the rooms, reach the castle and beat the final boss!
           </p>
           <h3 class="section__title">Graphic Interface</h3>
           <p>
@@ -230,20 +230,20 @@
               <td>Command for cleaning the game terminal.</td>
             </tr>
           </table>
-          <h2 class="section__title">How To Install</h2>
-          <h3 class="section__title">Maven</h3>
+          <h3 class="section__title">How To Install</h3>
+          <h4 class="section__title">Maven</h4>
           <ol>
             <li>
-              <h4>
+              <h5>
                 Clone the repository
-              </h4>
+              </h5>
               <p>
                 If not installed, <strong>install GIT</strong> using <a href="https://git-scm.com/downloads" target="_blank" class="link-color">this guide </a><br>
                 Once installed, from the terminal move to the folder where you want the repository to be cloned and run <br><code class="code-block">git clone https://github.com/ssiodev/text_adventure.git</code><br>
               </p>
             </li>
             <li>
-              <h4>Install Maven</h4>
+              <h5>Install Maven</h5>
               <p>
                 Maven version <code>3.9.7</code> doesn't work with this project <br>
                 Maven version <code>3.9.6, 3.8.8, 4.0.0</code> has been tested <br>
@@ -252,7 +252,7 @@
               </p>
             </li>
             <li>
-              <h4>Install JDK20</h4>
+              <h5>Install JDK20</h5>
               <p>
                 Check if in the system is already installed JDK20 by running on the terminal <br>
                 <code class="code-block">java --version</code><br>
@@ -261,37 +261,37 @@
               </p>
             </li>
             <li>
-              <h4>Build the project</h4>
+              <h5>Build the project</h5>
               <p>
                 On the terminal, move to the folder <code class="code--inline">text_adventure</code> (the repository previously cloned). Then run <br>
                 <code class="code-block">mvn package</code><br>
               </p>
             </li>
           </ol>
-          <h3 class="section__title">IntelliJ IDEA</h3>
+          <h4 class="section__title">IntelliJ IDEA</h4>
           <ol>
             <li>
-              <h4>
+              <h5>
                 Install Intellij
-              </h4>
+              </h5>
               <p>
                 To install Intellij firstly install <strong>JetBrains Toolbox App</strong> from <a href="https://www.jetbrains.com/toolbox-app/" target="_blank" class="link-color"> this link</a>. <br>
                 Once Toolbox is installed, run it and install <strong>Intellij Community</strong> (or Intellij Ultimate if holder of a valid license)
               </p>
             </li>
             <li>
-              <h4>
+              <h5>
                 Clone the repository
-              </h4>
+              </h5>
               <p>
                 If not installed, <strong>install GIT</strong> using <a href="https://git-scm.com/downloads" target="_blank" class="link-color">this guide </a><br>
                 Once installed, from the terminal move to the folder where you want the repository to be cloned and run <br><code class="code-block">git clone https://github.com/ssiodev/text_adventure.git</code><br>
               </p>
             </li>
             <li>
-              <h4>
+              <h5>
                 Install JDK20
-              </h4>
+              </h5>
               <p>
                 Check if in the system is already installed JDK20 by running on the terminal <br><code class="code-block">java --version</code><br>
                 If JDK20 is not installed use <a href="https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html" target="_blank" class="link-color">this page</a> to download the right package or installer. <br>
@@ -299,9 +299,9 @@
               </p>
             </li>
             <li>
-              <h4>
+              <h5>
                 Open the repository
-              </h4>
+              </h5>
               <p>
                 Launch <strong>Intellij IDEA</strong> and click on "Open...". Then select the repository previously cloned. <br>
                 If somewhere in the interface appears the error message <code class="code--inline" style="color:red">JDK "20" is missing</code> then click on <a class="code--inline">Configure...</a> <br>
@@ -309,24 +309,24 @@
               </p>
             </li>
             <li>
-              <h4>
+              <h5>
                 Create <code>application.config</code>
-              </h4>
+              </h5>
               <p>
                 In the folder <a class="file-path" style=""><code> text_adventure > src > main > resources </code></a> create a new file called <code class="code--inline" style=""></code> <br>
                 <strong>Open</strong> the file <a class="file-path" style=""><code> text_adventure > src > main > resources > copy_application.conf</code></a> <br> and <strong>copy its content</strong> inside <a class="code--inline" style=""><code>application.config</code></a> <br>
               </p>
             </li>
             <li>
-              <h4>
+              <h5>
                 Setup the bucket info
-              </h4>
+              </h5>
               <p>
-                In the file <a class="code--inline" style=""><code>application.config</code></a> complete these fields <br>
-                 <code class="code-block">storage.aws.key=</code><br>
-                 <code class="code-block">storage.aws.secret=</code><br>
-                 <code class="code-block">storage.aws.bucket.name=</code><br>
-                 <code class="code-block">storage.aws.region=</code><br>
+                In the file <a class="code--inline" style=""><code>application.config</code></a> complete these fields <br/>
+                <code class="code-block">storage.aws.key=</code><br>
+                <code class="code-block">storage.aws.secret=</code><br>
+                <code class="code-block">storage.aws.bucket.name=</code><br>
+                <code class="code-block">storage.aws.region=</code><br>
                 with the values of <br>
                 <code class="code-block">bucket public key </code><br>
                 <code class="code-block">bucket private key </code><br>
@@ -335,18 +335,18 @@
               </p>
             </li>
             <li>
-              <h4>
+              <h5>
                 Update Maven dependencies
-              </h4>
+              </h5>
               <p>
                 Select the file <a class="file-path">text_adventure > pom.xml</a>   and <strong>right click</strong> on it <br>
                 Then click con <strong>Maven > Reload Project</strong> in the dropdown menu that appears.
               </p>
             </li>
             <li>
-              <h4>
+              <h5>
                 Run the project
-              </h4>
+              </h5>
               <p>
                 Open the file <a class="file-path">text_adventure > src > main > java > com > adventure > Main</a> and then click on the left green arrow <br>
                 near the row with written <code class="code--inline">public static void main(String[] args) { launch(); }</code>

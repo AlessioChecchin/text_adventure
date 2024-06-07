@@ -5,7 +5,7 @@
   --accent-color: #0018ff;
   --accent-color-light: #FFE4E4;
   --accent-color-dark: #020255;
-  --accent-color-darker: #04043a;
+  --accent-color-darker: #080836;
   --white-color: #FAFBFC;
   --light-gray-color: #C6CBD1;
   --medium-gray-color: #959DA5;
@@ -30,14 +30,19 @@ h2 {
 }
 
 h3 {
-  margin-top: 50px;
+  margin-top: 30px;
   font-size: 1.5rem;
   color: var(--accent-color-dark);
 }
 
 h4 {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   color: var(--accent-color-darker);
+}
+
+h5 {
+  font-size: 1.1rem;
+  color: var(--accent-color-darker)
 }
 
 p {
@@ -85,6 +90,7 @@ ul {
 }
 
 li {
+  margin-top: 7px;
   margin-bottom: 7px;
 }
 
