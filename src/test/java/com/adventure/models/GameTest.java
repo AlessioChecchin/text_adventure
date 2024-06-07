@@ -1,5 +1,7 @@
 package com.adventure.models;
 
+import com.adventure.config.ApplicationConfig;
+import com.adventure.exceptions.ConfigurationException;
 import com.adventure.models.nodes.Action;
 import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
@@ -26,9 +28,9 @@ class GameTest {
     Graph<StoryNode, StoryNodeLink> testGraph;
     TestInterface stage;
     @BeforeEach
-    void setUp() {
+    void setUp() throws ConfigurationException {
         Properties init = new Properties();
-        game = new Game(init, stage);
+        game = new Game(new ApplicationConfig(new Properties()));
         testGraph = new DirectedPseudograph<>(StoryNodeLink.class);
         room1 = new Room("Test", "Test");
         room2 = new Room("Test", "Test");

@@ -12,7 +12,7 @@ class PlayerTest {
 
     @BeforeEach
     void setUp() {
-        player = new Player("test", new Inventory(10), new Stats());
+        player = new Player("test", new Inventory(10), new Stats(5,5,5,5));
     }
 
     @Test
@@ -33,7 +33,7 @@ class PlayerTest {
 
     @Test
     void testEquals() {
-        Player playerTest = new Player("test", new Inventory(10), new Stats());
+        Player playerTest = new Player("test", new Inventory(10), new Stats(10,10,10,10));
         assertEquals(playerTest, player);
     }
 }

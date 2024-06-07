@@ -15,7 +15,7 @@ class EnemyTest {
     UsableItem apple;
     @BeforeEach
     void setUp() {
-        enemy = new Enemy(new Inventory(10), new Stats(), "test");
+        enemy = new Enemy(new Inventory(10), new Stats(5, 5, 5, 5), "test");
         enemy.setDefaultDialog("test");
         apple = new UsableItem("apple");
         enemy.getInventory().addItem(apple);
@@ -24,7 +24,7 @@ class EnemyTest {
     @Test
     void equalsTest(){
         //exercise
-        Enemy enemyTest = new Enemy(new Inventory(10), new Stats(), "test");
+        Enemy enemyTest = new Enemy(new Inventory(10), new Stats(5,5,5,5), "test");
         enemyTest.setDefaultDialog("test");
         enemyTest.getInventory().addItem(apple);
 

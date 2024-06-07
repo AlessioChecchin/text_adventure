@@ -10,7 +10,7 @@ class StatsTest {
     Stats stats;
     @BeforeEach
     void setUp() {
-        stats = new Stats();
+        stats = new Stats(10,10,10,10);
     }
 
     @Test
@@ -31,7 +31,7 @@ class StatsTest {
     @Test
     void testEquals() {
         //exercise
-        Stats statsTest = new Stats();
+        Stats statsTest = new Stats(10,10,10,10);
         stats.setBaseAttack(20);
         statsTest.setBaseAttack(20);
 

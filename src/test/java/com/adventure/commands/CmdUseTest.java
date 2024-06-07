@@ -1,6 +1,7 @@
 package com.adventure.commands;
 
-import com.adventure.utils.ApplicationContextProvider;
+import com.adventure.config.ApplicationContextProvider;
+import com.adventure.exceptions.ConfigurationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +23,7 @@ class CmdUseTest extends CmdAttackTest {
     }
 
     @Test
-    void execute() throws InterruptedException {
+    void execute() throws InterruptedException, ConfigurationException {
 
         ApplicationContextProvider applicationContextProvider = ApplicationContextProvider.getInstance();
         this.setTestContext(applicationContextProvider);

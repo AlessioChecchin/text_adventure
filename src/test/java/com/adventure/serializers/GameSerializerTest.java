@@ -1,6 +1,8 @@
 package com.adventure.serializers;
 
 import com.adventure.Resources;
+import com.adventure.config.ApplicationConfig;
+import com.adventure.exceptions.ConfigurationException;
 import com.adventure.models.Game;
 import com.adventure.models.Inventory;
 import com.adventure.models.Player;
@@ -27,16 +29,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class GameSerializerTest {
 
     @Test
-    public void testGraphSerialization() throws IOException {
+    public void testGraphSerialization() throws IOException, ConfigurationException {
 
-        Game game = new Game(new Properties());
+        Game game = new Game(new ApplicationConfig(new Properties()));
         game.setId("test");
 
         Inventory playerInventory = new Inventory(100);
 
         playerInventory.addItem(new AttackItem("Sword"));
 
-        Stats stats = new Stats();
+        Stats stats = new Stats(10,10,10,10);
         stats.setMaxHp(100);
         stats.setHp(100);
         stats.setBaseAttack(1);
