@@ -9,24 +9,6 @@ var getAll = function (selector, scope) {
   return scope.querySelectorAll(selector);
 };
 
-// setup typewriter effect in the terminal demo
-if (document.getElementsByClassName('demo').length > 0) {
-  var i = 0;
-  var txt = `scribbler
-            [Entry mode; press Ctrl+D to save and quit; press Ctrl+C to quit without saving]`;
-  var speed = 60;
-
-  function typeItOut () {
-    if (i < txt.length) {
-      document.getElementsByClassName('demo')[0].innerHTML += txt.charAt(i);
-      i++;
-      setTimeout(typeItOut, speed);
-    }
-  }
-
-  setTimeout(typeItOut, 1800);
-}
-
 // toggle tabs on codeblock
 window.addEventListener("load", function() {
   // get all tab_containers in the document
@@ -120,4 +102,3 @@ window.addEventListener('load', function(){
   }
   icon.addEventListener('click', showNav);
 });
-

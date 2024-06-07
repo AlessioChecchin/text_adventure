@@ -17,8 +17,8 @@
       <h1 class="logo">Text Adventure <span class="logo__thin">Documentation</span></h1>
       <ul class="menu">
         <div class="menu__item toggle"><span></span></div>
-        <li class="menu__item"><a href="https://github.com/ssiodev/text_adventure.git" class="link link--dark"><i class="fa fa-github"></i> Github</a></li>
-        <li class="menu__item"><a href="index.html" class="link link--dark"><i class="fa fa-home"></i> Home</a></li>
+        <li class="menu__item"><a href="https://github.com/ssiodev/text_adventure.git" class="link"><i class="fa fa-github"></i> Github</a></li>
+        <li class="menu__item"><a href="index.html" class="link"><i class="fa fa-home"></i> Home</a></li>
       </ul>
     </nav>
     <div class="wrapper">
@@ -40,13 +40,12 @@
             are you ready for this exciting adventure?
           </p>
           <h3 class="section__title">Game Plot</h3>
-          <p >
+          <p>
             In a distant era, in the lands of Margorgh, in the darkest depths of a shadowy forest, it is said that there exists a Castle ruled by the forces of evil, housing an unimaginable power.
-            For millennia, humanity has sought to wrest this power from the forces of evil; battles and wars have marked the quest for this power.<br/>
+            For countless millennia, humanity has sought to wrest this power from the forces of evil; battles and wars have marked the quest for this power.<br/>
             Over time, the traces of the Castle and the power within have been lost, vanished like leaves on trees in winter, or at least, so it was believed...
             A mysterious scroll was discovered by a warrior with a golden heart, a scroll containing knowledge that he could not have imagined and that would lead him to an unbelievable destiny....<br/>
           </p>
-          <br/>
         </section>
         <section class="js-section">
           <h2 class="section__title">Manual</h2>
@@ -55,7 +54,7 @@
             The game is set in two different levels, located respectively in a forest and in a castle.<br/>
             It is subdivided into various sections (that we will call "rooms" from now on) with at first only one is available to access<br/>
             In these rooms, you will find contexts in which you have to defeat a monster, pick items and search for keys in order to "unlock" all of them.<br/>
-            The dynamics of these interactions is left to be discovered! (Check <a href="#how-to-play">here</a>)
+            The dynamics of these interactions is left to be discovered! (Check <a href="#how-to-play" class="link--dark">here&#8599</a>)
           </p>
           <p>At the first launch of the game, the program will load the main menu, where you can choose between:</p>
           <ul>
@@ -73,7 +72,6 @@
           <p>
             The main goal of the game is to complete all the rooms, reach the castle and beat the final boss! Have fun!
           </p>
-          <br/>
           <h3 class="section__title">Graphic Interface</h3>
           <p>
             For the GUI it has been used <i>JavaFX FXML</i>, with which you can implement the graphics of a desktop application.
@@ -123,13 +121,13 @@
             </tr>
             <tr>
               <td>AWS</td>
-              <td>5.11.0</td>
-              <td>Framework for automatic testing</td>
+              <td>2.25.58</td>
+              <td>Cloud computing platform provided by Amazon</td>
             </tr>
             <tr>
             <td>log4j</td>
-            <td>5.11.0</td>
-            <td>Framework for automatic testing</td>
+            <td>2.20.0</td>
+            <td>Java-based logging utility</td>
           </tr>
 
           </table>
@@ -140,7 +138,7 @@
             Example: <br/>
           </p>
           <code>>>command &lt;argument&gt; </code>
-          <p>The list of all the possible commands is available <a href="#CommandsList">below</a></p>
+          <p>The complete list of all the possible commands is available <a href="#CommandsList" class="link--dark">here &#8599</a></p>
           <h3 id="CommandsList">Commands List</h3>
           <table class="table-commands">
             <tr>
@@ -234,23 +232,32 @@
           </table>
           <h3 class="section__title">How To Install</h3>
           <h4 class="section__title">Maven</h4>
-          <p></p>
+          <p>
+
+          </p>
           <h4 class="section__title">IntelliJ IDEA</h4>
+          <p><b>Warning! It requires Java 20!</b></p>
+          <ol>
+            <li>Install IntelliJ IDEA following <a href="https://www.jetbrains.com/help/idea/installation-guide.html" class="link--dark">this guide &#8599</a></li>
+            <li>
+              Clone the repository which is available <a href="https://github.com/ssiodev/text_adventure.git" class="link--dark">here &#8599</a>
+              (if you have problems with that, check <a href="https://www.jetbrains.com/guide/java/tips/clone-project-from-github/#:~:text=Clone%20a%20project%20from%20the%20IntelliJ%20IDEA%20welcome%20screen&text=Click%20Get%20from%20VCS%2C%20specify,into%20an%20IntelliJ%20IDEA%20project." class="link--dark">this video</a>!)
+            </li>
+            <li>Open the file <code>Main.java</code> in the path <br/><code>src/main/java/com/adventure/Main.java</code></li>
+            <li>Run it</li>
+            <li>Enjoy the Game!</li>
+          </ol>
           <h4 class="section__title">Jar</h4>
-          <p>Not supported yet</p>
-          <br/>
+          <p>Not supported yet.</p>
         </section>
         <section class="js-section">
           <h2 class="section__title">Specifications</h2>
-         <hr />
         </section>
         <section class="js-section">
           <h2 class="section__title">Design</h2>
-          <hr />
         </section>
         <section class="js-section">
           <h2 class="section__title">Testing</h2>
-          <hr/>
         </section>
         <section class="js-section">
           <h2 class="section__title">JavaDoc</h2>
