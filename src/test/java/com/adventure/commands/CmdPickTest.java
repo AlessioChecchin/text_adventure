@@ -12,37 +12,34 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CmdUseTest extends CmdAttackTest {
+class CmdPickTest extends CmdAttackTest {
 
     static Command command;
 
     @BeforeAll
-    static void setUp() {
-        command = new CmdUse();
-    }
+    static void setup(){ command = new CmdPick();}
 
     @Test
-    void execute() throws InterruptedException, ConfigurationException {
+    void execute() throws ConfigurationException, InterruptedException {
         // Set the context.
         ApplicationContextProvider applicationContextProvider = ApplicationContextProvider.getInstance();
         this.setTestContext(applicationContextProvider);
         command.setContext(applicationContextProvider);
 
-        // Set the args and output.
+        // Set the args
         ArrayList<String> args = new ArrayList<>(1);
         args.add("apple");
-        Room room = new Room("test", "test");
-        applicationContextProvider.getGame().setCurrentNode(room);
         command.setArgs(args);
         command.setWriter(new PrintWriter(System.out));
 
-        // Add an item for the test.
+        // Adding an Item fot testing.
         UsableItem apple = new UsableItem("apple");
         apple.setAdditionalHp(10);
-        applicationContextProvider.getGame().getPlayer().getInventory().addItem(apple);
+        Room room = (Room) applicationContextProvider.getGame().getCurrentNode();
+        room.getItems().add(apple);
 
         // Execute and test.
         command.execute();
-        assertEquals(20, applicationContextProvider.getGame().getPlayer().getStats().getHp(), "problems with use");
+        assertTrue(applicationContextProvider.getGame().getPlayer().getInventory().getItems().contains(apple));
     }
 }

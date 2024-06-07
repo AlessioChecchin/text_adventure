@@ -8,41 +8,37 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.io.StringWriter;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CmdUseTest extends CmdAttackTest {
+class CmdLookTest extends CmdAttackTest {
 
     static Command command;
 
     @BeforeAll
-    static void setUp() {
-        command = new CmdUse();
-    }
+    static void setup(){command = new CmdLook();}
 
     @Test
-    void execute() throws InterruptedException, ConfigurationException {
+    void execute() throws ConfigurationException, InterruptedException {
         // Set the context.
         ApplicationContextProvider applicationContextProvider = ApplicationContextProvider.getInstance();
         this.setTestContext(applicationContextProvider);
         command.setContext(applicationContextProvider);
 
-        // Set the args and output.
-        ArrayList<String> args = new ArrayList<>(1);
-        args.add("apple");
-        Room room = new Room("test", "test");
-        applicationContextProvider.getGame().setCurrentNode(room);
-        command.setArgs(args);
-        command.setWriter(new PrintWriter(System.out));
+        // Set the output of the command.
+        StringWriter out    = new StringWriter();
+        PrintWriter writer = new PrintWriter(out);
+        String value = String.format("In the current room you can see: %n* name: apple, atk: 0, def: 0, hp: 0%n");
 
         // Add an item for the test.
         UsableItem apple = new UsableItem("apple");
-        apple.setAdditionalHp(10);
-        applicationContextProvider.getGame().getPlayer().getInventory().addItem(apple);
+        Room room = (Room) applicationContextProvider.getGame().getCurrentNode();
+        room.getItems().add(apple);
+        command.setWriter(writer);
 
         // Execute and test.
         command.execute();
-        assertEquals(20, applicationContextProvider.getGame().getPlayer().getStats().getHp(), "problems with use");
+        assertEquals(out.toString(), value);
     }
 }

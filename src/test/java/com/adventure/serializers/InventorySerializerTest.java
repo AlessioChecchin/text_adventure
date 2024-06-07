@@ -33,14 +33,14 @@ class InventorySerializerTest {
 
     @Test
     void testSerialize() throws JsonProcessingException {
-        //exercise
+        // Exercise.
         ObjectMapper mapper = new ObjectMapper();
         mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         SimpleModule module = new SimpleModule();
         module.addSerializer(Inventory.class, new InventorySerializer());
         mapper.registerModule(module);
 
-        //  Create the json string
+        //  Create the json string.
         String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(inventory);
         System.out.println(json);
 
@@ -50,7 +50,7 @@ class InventorySerializerTest {
         mapper2.registerModule(module1);
         Inventory inventoryTest = mapper2.readValue(json, Inventory.class);
 
-        //test
+        // Test.
         assertEquals(inventoryTest, inventory);
     }
 }

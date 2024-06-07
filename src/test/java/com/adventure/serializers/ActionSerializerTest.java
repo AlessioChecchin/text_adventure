@@ -24,14 +24,14 @@ class ActionSerializerTest {
 
     @Test
     void serializeTest() throws JsonProcessingException {
-        //exercise
+        // Exercise.
         ObjectMapper mapper = new ObjectMapper();
         mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         SimpleModule module = new SimpleModule();
         module.addSerializer(Action.class, new ActionSerializer());
         mapper.registerModule(module);
 
-        //  Create the json string
+        //  Create the json string.
         String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(action);
         System.out.println(json);
 
@@ -42,7 +42,7 @@ class ActionSerializerTest {
         String jsonString = mapper2.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
         System.out.println(jsonString);
 
-        //test
+        // Test.
         assertEquals(json,jsonString);
     }
 }

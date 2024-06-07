@@ -17,7 +17,7 @@ class AttackItemTest {
 
     @Test
     void setTest() throws IllegalAccessException, NoSuchFieldException{
-        //exercise
+        // Exercise.
         attackItem.setAdder(10);
         attackItem.setMultiplier(10.0);
         final Field addAtt = attackItem.getClass().getDeclaredField("additionalAttack");
@@ -25,24 +25,24 @@ class AttackItemTest {
         addAtt.setAccessible(true);
         attMulti.setAccessible(true);
 
-        //test
+        // Test.
         assertEquals(10, addAtt.get(attackItem), "setAdditionalAttack has problems");
         assertEquals(10.0, attMulti.get(attackItem), "setAttackMultiplier has problems");
     }
 
     @Test
     void getTest(){
-        //test
+        // Test.
         assertEquals(1.0, attackItem.getMultiplier());
         assertEquals(0, attackItem.getAdder());
     }
 
     @Test
     void equalsTest(){
-        //exercise
+        // Exercise.
         AttackItem attTest = new AttackItem("Sword");
 
-        //test
+        // Test.
         assertEquals(attTest, attackItem);
     }
 }

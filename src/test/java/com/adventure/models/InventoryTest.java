@@ -29,7 +29,7 @@ class InventoryTest {
 
     @Test
     void getTest(){
-        //Default tests
+        // Default tests.
         assertEquals(100, inventory.getMaxWeight(), "Problems with the get or with constructor of inventory");
         assertEquals(attackItem, inventory.getEquipedAttackItem(), "Problems with setting the default attack Item");
         assertEquals(defenceItem, inventory.getEquipedDefenceItem(), "Problems with the default defence item");
@@ -38,7 +38,7 @@ class InventoryTest {
 
     @Test
     void setTest() throws IllegalAccessException, NoSuchFieldException{
-        //exercise
+        // Exercise.
         inventory.setMaxWeight(200);
         final Field field = inventory.getClass().getDeclaredField("maxWeight");
         field.setAccessible(true);
@@ -52,7 +52,7 @@ class InventoryTest {
         field2.setAccessible(true);
         ArrayList<Item> listTest = new ArrayList<>(2);
 
-        //test
+        // Test.
         assertEquals(200, field.get(inventory), "Problems with setMaxWeight");
         assertEquals(20, field1.get(inventory), "Problems with setCurrentWeight");
         assertEquals(listTest, field2.get(inventory), "Problems with setItems");
@@ -60,7 +60,7 @@ class InventoryTest {
 
     @Test
     void equipTest() throws IllegalAccessException, NoSuchElementException{
-        //exercise
+        // Exercise.
         AttackItem attackTest = new AttackItem("Sword");
         DefenceItem defenceTest = new DefenceItem("Shield");
         inventory.addItem(attackTest);
@@ -68,22 +68,22 @@ class InventoryTest {
         inventory.equipItem(new AttackItem("Sword"));
         inventory.equipItem(new DefenceItem("Shield"));
 
-        //test
+        // Test.
         assertEquals(attackTest, inventory.getEquipedAttackItem(), "Problems with equip method if getEquiped is correct");
         assertEquals(defenceTest, inventory.getEquipedDefenceItem(), "Problems with equip method if getEquiped is correct");
 
-        //exercise
+        // Exercise.
         inventory.unequipItem(Inventory.EquipType.ATTACK);
         inventory.unequipItem(Inventory.EquipType.DEFENSE);
 
-        //test
+        // Test.
         assertEquals(attackItem, inventory.getEquipedAttackItem(),"Problems with unequip method if getEquiped is correct");
         assertEquals(defenceItem, inventory.getEquipedDefenceItem(), "Problems with unequip method if getEquiped is correct");
     }
 
-    @Test //test addItem dropItem and canAdd
+    @Test // Test addItem dropItem and canAdd.
     void manageItemTest(){
-        //exercise
+        // Exercise.
         Inventory testInventory = new Inventory(10);
         testInventory.setItems(list);
         DefenceItem defTest = new DefenceItem("Test");
@@ -91,16 +91,12 @@ class InventoryTest {
         DefenceItem defTest2 = new DefenceItem("Test");
         defTest2.setWeight(10);
 
-        //test canAdd
-        //assertFalse(testInventory.canAdd(defTest), "Problems with the max weight");
-        //assertTrue(testInventory.canAdd(defTest2), "Problems with the max weight");
-
-        //test addItem
+        // Test addItem.
         assertThrows(TooMuchWeightException.class,() -> testInventory.addItem(defTest),"Problems with Exception in addItem method");
         assertDoesNotThrow(() -> testInventory.addItem(defTest2), "Problem with the weight of the inventory");
         assertThrows(TooMuchWeightException.class,() -> testInventory.addItem(defTest2), "Problems with Exception in addItem method");
 
-        //test dropItem
+        // Test dropItem.
         assertDoesNotThrow(() -> testInventory.dropItem(defTest2), "Problem with the dropItem method of the inventory");
         assertThrows(NoSuchElementException.class,() -> testInventory.dropItem(defTest2), "Problems with Exception in dropItem method");
 

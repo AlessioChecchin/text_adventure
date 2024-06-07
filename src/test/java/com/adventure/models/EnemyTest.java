@@ -23,23 +23,23 @@ class EnemyTest {
 
     @Test
     void equalsTest(){
-        //exercise
+        // Exercise.
         Enemy enemyTest = new Enemy(new Inventory(10), new Stats(5,5,5,5), "test");
         enemyTest.setDefaultDialog("test");
         enemyTest.getInventory().addItem(apple);
 
-        //test
+        // Test.
         assertEquals(enemyTest, enemy);
     }
 
     @Test
     void dropTest(){
-        //exercise
+        // Exercise.
         Room room = new Room("test", "test");
         enemy.getStats().setHp(0);
         enemy.drop(room);
 
-        //test
+        // Test.
         assertTrue(room.getItems().contains(apple));
     }
 }

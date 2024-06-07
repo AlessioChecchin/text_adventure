@@ -31,6 +31,7 @@ class GameSerializerTest {
 
     @Test
     public void testGraphSerialization() throws IOException, ConfigurationException {
+        // Exercise.
         ApplicationContextProvider applicationContextProvider = ApplicationContextProvider.getInstance();
         Game game = new Game(applicationContextProvider.getConfig());
         game.setId("test");
@@ -72,22 +73,22 @@ class GameSerializerTest {
         g.addEdge(startingRoom, firstFightRoom, toFirstFightRoom);
         ObjectMapper mapper = new ObjectMapper();
 
-        // Make all member fields serializable without further annotations, instead of just public fields (default setting)
+        // Make all member fields serializable without further annotations, instead of just public fields (default setting).
         mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
 
-        // Set custom serializers
+        // Set custom serializers.
         SimpleModule module = new SimpleModule();
         module.addSerializer(Graph.class, new GraphSerializer());
         mapper.registerModule(module);
 
-            //  Create the json string
+            //  Create the json string.
             String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(game);
             System.out.println(json);
 
-            //  Get json file path
+            //  Get json file path.
             String saveName = game.getId() + ".json";
 
-            //  Create json file and write the json string into it
+            //  Create json file and write the json string into it.
             File file = new File(Resources.getAssetsPath() + "saves" + saveName);
             if (file.createNewFile())
                 System.out.println("Saved " + saveName);
@@ -98,7 +99,7 @@ class GameSerializerTest {
             write.close();
 
             File jsonOut = new File(Resources.getAssetsPath() + "saves" + saveName);
-            //  Creates game from json
+            //  Creates game from json.
             ObjectMapper mapper2 = new ObjectMapper();
             SimpleModule module1 = new SimpleModule();
             module1.addSerializer(Graph.class, new GraphSerializer());
@@ -106,6 +107,8 @@ class GameSerializerTest {
             Game gameTest = mapper2.readValue(jsonOut, Game.class);
             String jOut = mapper2.writerWithDefaultPrettyPrinter().writeValueAsString(gameTest);
             System.out.println(jOut);
+
+            // Test.
             assertEquals(gameTest, game);
 
     }

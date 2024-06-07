@@ -26,11 +26,11 @@ class RoomTest {
 
     @Test
     void getTest(){
-        //exercise
+        // Exercise.
         String test = "Test";
         String notTest = "test";
 
-        //test
+        // Test.
         assertEquals(test, room.getName(), "Problems with get methods");
         assertEquals(test, room.getDescription(),"Problems with get methods");
         assertNotEquals(notTest, room.getName(), "Problems with get methods");
@@ -39,7 +39,7 @@ class RoomTest {
 
     @Test
     void setTest() throws IllegalAccessException, NoSuchFieldException {
-        //exercise
+        // Exercise.
         room.setName("test");
         final Field field = room.getClass().getDeclaredField("name");
         field.setAccessible(true);
@@ -48,7 +48,7 @@ class RoomTest {
         final Field field1 = room.getClass().getDeclaredField("description");
         field1.setAccessible(true);
 
-        //test
+        // Test.
         assertEquals(field.get(room),"test", "Problems with set methods"); //setName test
         assertEquals(field1.get(room),"test", "Problems with set methods"); //setDescription test
     }

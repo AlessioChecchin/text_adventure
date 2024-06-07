@@ -17,7 +17,7 @@ class PlayerTest {
 
     @Test
     void useTest() throws NotUsableItemException {
-        //exercise
+        // Exercise.
         int previousHp = player.getStats().getHp();
         Inventory inventory = new Inventory(10);
         UsableItem apple = new UsableItem("apple");
@@ -27,7 +27,7 @@ class PlayerTest {
         player.getStats().setMaxHp(30);
         player.use("apple");
 
-        //test
+        // Test.
         assertEquals(previousHp +10, player.getStats().getHp(), "Problems with use method for a player");
     }
 

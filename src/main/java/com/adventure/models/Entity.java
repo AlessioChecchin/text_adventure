@@ -60,6 +60,14 @@ abstract public class Entity
         return this.stats;
     }
 
+    /**
+     * Returns the number of the dodge
+     * @return number of available dodges
+     */
+    public int getAvailableDodges(){
+        return this.availableDodges;
+    }
+
     //
     // SETTERS.
     //

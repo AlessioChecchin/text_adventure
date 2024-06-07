@@ -15,13 +15,13 @@ class StatsTest {
 
     @Test
     void setTest() {
-        //exercise
+        // Exercise.
         stats.setMaxHp(10);
         stats.setBaseAttack(10);
         stats.setBaseDefense(10);
         stats.setHp(10);
 
-        //test
+        // Test.
         assertEquals(10, stats.getHp(), "Problems with Hp of the player");
         assertEquals(10, stats.getBaseAttack(), "Problems with Attack of the player");
         assertEquals(10, stats.getBaseDefense(), "Problems with Defense of the player");
@@ -30,12 +30,12 @@ class StatsTest {
 
     @Test
     void testEquals() {
-        //exercise
+        // Exercise.
         Stats statsTest = new Stats(10,10,10,10);
         stats.setBaseAttack(20);
         statsTest.setBaseAttack(20);
 
-        //test
+        // Test.
         assertEquals(statsTest, stats, "Problems with equals method");
     }
 }

@@ -17,7 +17,7 @@ class UsableItemTest {
 
     @Test
     void setTest() throws NoSuchFieldException, IllegalAccessException {
-        //exercise
+        // Exercise.
         usableItem.setAdditionalHp(10);
         usableItem.setAdditionalAttack(10);
         usableItem.setAdditionalDefence(10);
@@ -28,7 +28,7 @@ class UsableItemTest {
         addAtt.setAccessible(true);
         addDef.setAccessible(true);
 
-        //test
+        // Test.
         assertEquals(10, addHp.get(usableItem), "problems with setHp method");
         assertEquals(10, addAtt.get(usableItem), "problems with setAtk method");
         assertEquals(10, addDef.get(usableItem), "problems with setDef method");
@@ -36,7 +36,7 @@ class UsableItemTest {
 
     @Test
     void getTest(){
-        //test
+        // Test.
         assertEquals(0, usableItem.getHp(), "Problems with getHp method");
         assertEquals(0, usableItem.getAttack(), "Problems with getAttack method");
         assertEquals(0, usableItem.getDefence(), "Problems with getDefence method");
@@ -44,10 +44,10 @@ class UsableItemTest {
 
     @Test
     void equalsTest(){
-        //exercise
+        // Exercise.
         UsableItem testUsable = new UsableItem("Key");
 
-        //test
+        // Test.
         assertEquals(testUsable, usableItem, "Problems with equals method");
     }
 }

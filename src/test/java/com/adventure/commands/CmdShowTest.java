@@ -3,46 +3,42 @@ package com.adventure.commands;
 import com.adventure.config.ApplicationContextProvider;
 import com.adventure.exceptions.ConfigurationException;
 import com.adventure.models.items.UsableItem;
-import com.adventure.models.nodes.Room;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import software.amazon.awssdk.services.config.model.ConfigException;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.io.StringWriter;
+import java.io.Writer;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CmdUseTest extends CmdAttackTest {
+class CmdShowTest extends CmdAttackTest {
 
     static Command command;
 
     @BeforeAll
-    static void setUp() {
-        command = new CmdUse();
-    }
-
+    static void setup() {command = new CmdShow();}
     @Test
-    void execute() throws InterruptedException, ConfigurationException {
+    public void executeTest() throws InterruptedException, ConfigurationException {
         // Set the context.
         ApplicationContextProvider applicationContextProvider = ApplicationContextProvider.getInstance();
         this.setTestContext(applicationContextProvider);
         command.setContext(applicationContextProvider);
 
-        // Set the args and output.
-        ArrayList<String> args = new ArrayList<>(1);
-        args.add("apple");
-        Room room = new Room("test", "test");
-        applicationContextProvider.getGame().setCurrentNode(room);
-        command.setArgs(args);
-        command.setWriter(new PrintWriter(System.out));
+        // Set the output of the command.
+        StringWriter out    = new StringWriter();
+        PrintWriter  writer = new PrintWriter(out);
+        String value = String.format("Inventory content: %nname: apple, atk: 0, def: 0, hp: 0%n");
+        command.setWriter(writer);
 
-        // Add an item for the test.
+        // Add an item for test.
         UsableItem apple = new UsableItem("apple");
-        apple.setAdditionalHp(10);
         applicationContextProvider.getGame().getPlayer().getInventory().addItem(apple);
 
         // Execute and test.
         command.execute();
-        assertEquals(20, applicationContextProvider.getGame().getPlayer().getStats().getHp(), "problems with use");
+        System.out.println(out);
+        assertEquals(out.toString(), value);
     }
 }

@@ -18,12 +18,12 @@ class StoryNodeLinkTest {
 
     @Test
     void setTest(){
-        //exercise
+        // Exercise.
         storyNodeLink.setAction(new Action("testAction"));
         storyNodeLink.setKey("testKey");
         storyNodeLink.setLocked(true);
 
-        //test
+        // Test.
         assertEquals(new Action("testAction"), storyNodeLink.getAction(), "Problems with action equals or setAction");
         assertEquals("testKey", storyNodeLink.getKey(), "Problems with key");
         assertTrue(storyNodeLink.getLocked(), "Problems with locker of the link");
@@ -31,7 +31,7 @@ class StoryNodeLinkTest {
 
     @Test
     void testEquals() {
-        //exercise
+        // Exercise.
         storyNodeLink.setAction(new Action("testAction"));
         storyNodeLink.setKey("testKey");
         storyNodeLink.setLocked(true);
@@ -48,7 +48,7 @@ class StoryNodeLinkTest {
         graph.addEdge(source, target, storyLinkTest);
 
 
-        //test
+        // Test.
         assertEquals(storyLinkTest, storyNodeLink, "Problems with equals of a StoryNodeLink");
     }
 }

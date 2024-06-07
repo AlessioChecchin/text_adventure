@@ -16,7 +16,7 @@ class DefenceItemTest {
 
     @Test
     void setTest() throws IllegalAccessException, NoSuchFieldException{
-        //exercise
+        // Exercise.
         defenceItem.setAdder(10);
         defenceItem.setMultiplier(10.0);
         final Field addDef = defenceItem.getClass().getDeclaredField("additionalDefence");
@@ -24,24 +24,24 @@ class DefenceItemTest {
         addDef.setAccessible(true);
         defMulti.setAccessible(true);
 
-        //test
+        // Test.
         assertEquals(10, addDef.get(defenceItem), "setAdditionalDefence has problems");
         assertEquals(10.0, defMulti.get(defenceItem), "setDefenceMultiplier has problems");
     }
 
     @Test
     void getTest(){
-        //test
+        // Test.
         assertEquals(1.0, defenceItem.getMultiplier());
         assertEquals(0, defenceItem.getAdder());
     }
 
     @Test
     void equalsTest(){
-        //exercise
+        // Exercise.
         DefenceItem defTest = new DefenceItem("Shield");
 
-        //test
+        // Test.
         assertEquals(defTest, defenceItem);
     }
 

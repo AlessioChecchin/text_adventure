@@ -25,59 +25,59 @@ class StringPropertyWriterTest extends FxTest {
 
     @Test
     void writeTest() throws Exception{
-        //exercise
+        // Exercise.
         stringPropertyWriter.write("Test");
 
-        //test
+        // Test.
         assertEquals("Test", stringPropertyWriter.toString());
 
-        //exercise
+        // Exercise.
         stringPropertyWriter.write("Test", 0, 4);
 
-        //test
+        // Test.
         assertEquals("TestTest", stringPropertyWriter.toString());
 
-        //exercise
+        // Exercise.
         stringPropertyWriter.write(1);
 
-        //test
+        // Test.
         assertEquals("TestTest\u0001", stringPropertyWriter.toString());
 
-        //exercise
+        // Exercise.
         char[] test = {'T', 'e', 's', 't'};
         stringPropertyWriter.write(test, 0, 4);
         System.out.println(stringPropertyWriter.toString());
 
-        //test
+        // Test.
         assertEquals("TestTest\u0001Test", stringPropertyWriter.toString());
     }
 
     @Test
     void appendTest(){
-        //exercise
+        // Exercise.
         stringPropertyWriter.append('t');
-        //test
+        // Test.
         assertEquals("t", stringPropertyWriter.toString());
 
-        //exercise
+        // Exercise.
         stringPropertyWriter.append("Test", 0, 4);
-        //test
+        // Test.
         assertEquals("tTest", stringPropertyWriter.toString());
 
-        //exercise
+        // Exercise.
         stringPropertyWriter.append("Test");
-        //test
+        // Test.
         assertEquals("tTestTest", stringPropertyWriter.toString());
     }
 
     @Test
     void equalsTest(){
-        //exercise
+        // Exercise.
         StringPropertyWriter strTest = new StringPropertyWriter(stringProperty);
         strTest.write("Test");
         stringPropertyWriter.write("Test");
 
-        //test
+        // Test.
         assertEquals(strTest.toString(), stringPropertyWriter.toString());
 
     }

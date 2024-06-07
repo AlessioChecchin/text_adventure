@@ -40,35 +40,36 @@ class GameTest {
     }
     @Test
     void currentNodeTest(){
-        //exercise
+        // Exercise.
         game.setCurrentNode(room1);
-        //test get and set current node
+        // Test get and set current node.
         assertEquals(room1, game.getCurrentNode(), "Problems with set and get current node");
     }
 
     @Test
     void previousNodeTest(){
 
-        //exercise
+        // Exercise.
         game.setCurrentNode(room2);
 
-        //test2 hasPreviousNode
+        // Test2 hasPreviousNode.
         assertTrue(game.hasPreviousNode(), "Previous node not recognised");
 
-        //exercise
+        // Exercise.
         game.invalidatePreviousNode();
 
-        //test invalidatePreviousNode
+        // Test invalidatePreviousNode.
         assertNull(game.getPreviousNode(), "Problems with InvalidatePreviousNode method");
         assertFalse(game.hasPreviousNode(), "Problems with InvalidatePreviousNode method");
 
-        //retesting previousNode
+        // Retesting previousNode.
         game.setCurrentNode(room2);
         assertTrue(game.hasPreviousNode(), "Problems with InvalidatePreviousNode method");
     }
 
     @Test
     void testGameGraph(){
+        // Exercise.
         testGraph.addVertex(room1);
         testGraph.addVertex(room2);
 
@@ -84,14 +85,14 @@ class GameTest {
         testGraph.addEdge(room1, room2, link1);
         game.getGameGraph().addEdge(room1, room2, link1);
 
-        //test equals for Graphs
+        // Test equals for Graphs.
         assertEquals(testGraph, game.getGameGraph(), "Problems with equals method");
     }
 
 
 }
 
-//Abstract Class for Testing without the graphics
+// Abstract Class for Testing without the graphics.
 abstract class TestInterface extends Stage
 {
 
