@@ -11,7 +11,7 @@ public class CmdAttack extends AbstractCommand
     public void execute() throws InterruptedException
     {
         // Check the correct number of parameters
-        if (this.correctArgumentsNumber(0)) { return; }
+        if (!this.correctArgumentsNumber(0)) { return; }
 
         Config currentConfig = this.context.getConfig();
         Game game = this.context.getGame();
@@ -52,18 +52,19 @@ public class CmdAttack extends AbstractCommand
         //if monster dodge he doesn't get damage
         if (monsterMove != CmdFight.Move.DODGE)
         {
-            monster.hit(player.getStats().getBaseAttack());
-            this.writer.println(player.getName() + " hits the monster and damage is " + player.getStats().getBaseAttack() + " hp");
+            int damage = player.getAttackDamage();
+            int inflectedDamage = monster.hit(damage);
+            this.writer.println(player.getName() + " hits " + monster.getName() +" and damage is " + inflectedDamage + " hp");
         }
         else
         {
-            this.writer.println("Ouch, Monster dodges the attack!");
+            this.writer.println("Ouch, " + monster.getName() + " dodges the attack!");
         }
 
         // The player always gets a hit if he decides to attack.
         int damage = monster.getAttackDamage();
         int inflectedDamage = player.hit(damage);
 
-        this.writer.println("Monster hits " + player.getName() + " and damage is " + inflectedDamage + " hp");
+        this.writer.println(monster.getName() + " hits " + player.getName() + " and damage is " + inflectedDamage + " hp");
     }
 }

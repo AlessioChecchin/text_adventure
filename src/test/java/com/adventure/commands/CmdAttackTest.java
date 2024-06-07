@@ -3,6 +3,7 @@ package com.adventure.commands;
 import com.adventure.config.ApplicationConfig;
 import com.adventure.exceptions.ConfigurationException;
 import com.adventure.models.*;
+import com.adventure.models.items.AttackItem;
 import com.adventure.models.items.UsableItem;
 import com.adventure.models.nodes.Room;
 import com.adventure.config.ApplicationContextProvider;
@@ -27,10 +28,16 @@ class CmdAttackTest {
         ApplicationContextProvider applicationContextProvider = ApplicationContextProvider.getInstance();
         this.setTestContext(applicationContextProvider);
         command.setContext(applicationContextProvider);
+        AttackItem sword = new AttackItem("sword", 2, 1);
+        Room test = (Room) applicationContextProvider.getGame().getCurrentNode();
+        test.getMonster().getInventory().addItem(sword);
+        test.getMonster().getInventory().equipItem(sword);
+        applicationContextProvider.getGame().setCurrentNode(test);
 
         // Execute and test.
         command.execute();
-        assertEquals(applicationContextProvider.getGame().getPlayer().getStats().getHp(), 5, "Problems with the attack command");
+
+        assertEquals(applicationContextProvider.getGame().getPlayer().getStats().getHp(), 9, "Problems with the attack command");
     }
 
     // Method for initialize a Context for the command testing.
@@ -41,7 +48,7 @@ class CmdAttackTest {
         Enemy monster = new Enemy(new Inventory(10),new Stats(5,5,5,5), "monster");
         room.setMonster(monster);
         game.setCurrentNode(room);
-        game.setPlayer(new Player("player", new Inventory(10), new Stats(10,20,2,0)));
+        game.setPlayer(new Player("player", new Inventory(10), new Stats(20,20,1,0)));
         applicationContextProvider.setGame(game);
     }
 }
