@@ -187,8 +187,8 @@ abstract public class Entity
         // Check if incoming damage is more than the shield
         else if (damage > this.stats.getBaseDefense())
         {
-            inflictedDamage = this.stats.getHp() - damage;
-            this.stats.setHp(this.stats.getHp() - damage);
+            inflictedDamage = damage - this.stats.getBaseDefense();
+            this.stats.setHp(this.stats.getHp() - inflictedDamage);
         }
 
         return inflictedDamage;
