@@ -8,7 +8,8 @@ html, body {
 /* layout */
 .header {
   border-bottom: 1px solid var(--code-bg-color);
-  grid-template-columns: 2fr 200px 60% 1fr;
+  grid-template-columns: 2fr 300px 60% 1fr;
+  background-color: var(--primary-color-light)
 }
 
 .wrapper {
@@ -19,8 +20,8 @@ html, body {
 /* logo */
 .logo {
   font-weight: 900;
-  color: var(--primary-color);
-  font-size: 1.4em;
+  color: navy;
+  font-size: 1.6em;
   grid-column: 2;
   text-align: initial;
 }
@@ -36,6 +37,7 @@ html, body {
 
 .menu__item {
   padding: 1.5rem 1rem;
+  font-size: 1.1rem;
 }
 
 /* doc */
@@ -89,6 +91,19 @@ html, body {
 .doc__content {
   flex-basis: 80%;
   padding: 0 0 5rem 1rem;
+}
+
+.js-section {
+  margin-bottom: 70px;
+}
+
+.table-commands td:first-child {
+  width: 25%
+}
+
+.table-commands td:first-child code {
+  font-weight: 300;
+  font-size: 18px;
 }
 
 @media (max-width: 750px) {
