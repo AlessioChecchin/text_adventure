@@ -40,6 +40,7 @@ public class AttackItem extends Item implements Equipable
 
         this.attackMultiplier = attackMultiplier;
         this.additionalAttack = additionalAttack;
+        this.isEquiped = false;
     }
 
     //
@@ -62,6 +63,14 @@ public class AttackItem extends Item implements Equipable
     public void setMultiplier(double multiplier)
     {
         this.attackMultiplier = multiplier;
+    }
+
+    /**
+     * isEquipable setter.
+     * @param equip equip condition.
+     */
+    public void setEquiped(boolean equip){
+        this.isEquiped = equip;
     }
 
     //
@@ -88,6 +97,14 @@ public class AttackItem extends Item implements Equipable
         return this.attackMultiplier;
     }
 
+    /**
+     * isEquiped getter
+     * @return IsEquiped
+     */
+    public boolean getIsEquiped(){
+        return this.isEquiped;
+    }
+
     //
     // OTHERS.
     //
@@ -105,7 +122,9 @@ public class AttackItem extends Item implements Equipable
     @Override
     public String toString()
     {
-        return String.format("%s (atk: %d, %f)", this.getName(), this.getAdder(), this.getMultiplier());
+        String result = String.format("%s (atk: %d, %f)", this.getName(), this.getAdder(), this.getMultiplier());
+        if(this.isEquiped) return result + " [Equiped]";
+        return result;
     }
 
     /**
@@ -117,4 +136,9 @@ public class AttackItem extends Item implements Equipable
      * Attack factor.
      */
     private double attackMultiplier;
+
+    /**
+     * Item is equip
+     */
+    private boolean isEquiped;
 }

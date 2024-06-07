@@ -66,6 +66,14 @@ public class DefenceItem extends Item implements Equipable
         return this.defenceMultiplier;
     }
 
+    /**
+     * isEquiped getter
+     * @return IsEquiped
+     */
+    public boolean getIsEquiped(){
+        return this.isEquiped;
+    }
+
     //
     //  SETTERS.
     //
@@ -88,6 +96,14 @@ public class DefenceItem extends Item implements Equipable
         this.defenceMultiplier = multiplier;
     }
 
+    /**
+     * isEquipable setter.
+     * @param equip equip condition.
+     */
+    public void setEquiped(boolean equip){
+        this.isEquiped = equip;
+    }
+
     //
     // OTHERS.
     //
@@ -105,7 +121,9 @@ public class DefenceItem extends Item implements Equipable
     @Override
     public String toString()
     {
-        return String.format("name: %s, adder: %d, multi: %f", name, additionalDefence, defenceMultiplier);
+        String result = String.format("%s (atk: %d, %f)", this.getName(), this.getAdder(), this.getMultiplier());
+        if(this.isEquiped) return result + " [Equiped]";
+        return result;
     }
 
     /**
@@ -117,5 +135,10 @@ public class DefenceItem extends Item implements Equipable
      * item defence multiplier.
      */
     private double defenceMultiplier;
+
+    /**
+     * Check if item is equiped.
+     */
+    private boolean isEquiped;
 
 }

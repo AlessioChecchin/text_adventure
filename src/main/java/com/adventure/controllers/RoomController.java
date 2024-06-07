@@ -27,7 +27,19 @@ public class RoomController implements BaseController
 
         // Enabling all commands.
         CommandParser commandParser = CommandParser.getInstance();
-        commandParser.enableAll();
+        commandParser.disableAll();
+        commandParser.enable("help");
+        commandParser.enable("clear");
+        commandParser.enable("save");
+        commandParser.enable("fight");
+        commandParser.enable("use");
+        commandParser.enable("show");
+        commandParser.enable("look");
+        commandParser.enable("move");
+        commandParser.enable("pick");
+        commandParser.enable("wai");
+        commandParser.enable("back");
+        commandParser.enable("equip");
 
         Room room = (Room) context.getGame().getCurrentNode();
 

@@ -163,8 +163,14 @@ public class Inventory
     public void equipItem(Equipable equipable)
     {
         if(!items.contains((Item) equipable)) throw new NoSuchElementException();
-        if(equipable instanceof AttackItem) this.attackItem = (AttackItem) equipable;
-        if(equipable instanceof DefenceItem) this.defenceItem = (DefenceItem) equipable;
+        if(equipable instanceof AttackItem){
+            this.attackItem = (AttackItem) equipable;
+            this.attackItem.setEquiped(true);
+        }
+        if(equipable instanceof DefenceItem){
+            this.defenceItem = (DefenceItem) equipable;
+            this.defenceItem.setEquiped(true);
+        }
     }
 
     /**
