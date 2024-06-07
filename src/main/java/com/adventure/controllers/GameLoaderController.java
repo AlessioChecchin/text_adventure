@@ -51,37 +51,45 @@ public class GameLoaderController implements BaseController
 
         if(videoUrl != null)
         {
-            Media media = new Media(videoUrl.toString());
-            this.player = new MediaPlayer(media);
+            try
+            {
+                Media media = new Media(videoUrl.toString());
+                this.player = new MediaPlayer(media);
 
-            this.player.setOnReady(() -> {
-                MediaView mediaView = new MediaView(player);
+                this.player.setOnReady(() -> {
+                    MediaView mediaView = new MediaView(player);
 
-                mediaView.fitWidthProperty().bind(this.display.getGraphics().widthProperty());
-                mediaView.fitHeightProperty().bind(this.display.getGraphics().heightProperty());
+                    mediaView.fitWidthProperty().bind(this.display.getGraphics().widthProperty());
+                    mediaView.fitHeightProperty().bind(this.display.getGraphics().heightProperty());
 
-                this.display.getGraphics().setAlignment(Pos.CENTER);
-                this.display.getGraphics().getChildren().add(mediaView);
+                    this.display.getGraphics().setAlignment(Pos.CENTER);
+                    this.display.getGraphics().getChildren().add(mediaView);
 
-                this.player.setMute(true);
-                this.player.setAutoPlay(true);
+                    this.player.setMute(true);
+                    this.player.setAutoPlay(true);
 
-                player.setOnEndOfMedia(() -> {
-                    player.seek(Duration.ZERO);
-                    player.play();
+                    player.setOnEndOfMedia(() -> {
+                        player.seek(Duration.ZERO);
+                        player.play();
+                    });
+
+                    this.player.play();
                 });
 
-                this.player.play();
-            });
+                // We noticed that on some windows versions loading the video results in an unknown error.
+                // In these cases the system fallbacks into a textual visualization.
+                this.player.setOnError(() -> {
+                    logger.error("Error loading presentation video");
+                    logger.debug("Falling back to textual view...");
 
-            // We noticed that on some windows versions loading the video results in an unknown error.
-            // In these cases the system fallbacks into a textual visualization.
-            this.player.setOnError(() -> {
-                logger.error("Error loading presentation video");
-                logger.debug("Falling back to textual view...");
-
+                    this.loadFallback();
+                });
+            }
+            catch (Exception e)
+            {
+                logger.error("Error instantiating MediaPlayer", e);
                 this.loadFallback();
-            });
+            }
         }
         else
         {
