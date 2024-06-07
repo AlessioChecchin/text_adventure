@@ -4,7 +4,6 @@ import com.adventure.models.Inventory;
 import com.adventure.models.items.Item;
 import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
-import com.adventure.config.ApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,12 +55,10 @@ public class CmdPick extends AbstractCommand
         }
     }
 
-
     /**
-     * Get all possible arguments for this command
-     * @return all possible items
+     * @return all possible items the player can pick
      */
-    public static ArrayList<String> args(ApplicationContext context)
+    public ArrayList<String> getPossibleArgs()
     {
         ArrayList<String> result = new ArrayList<>();
         StoryNode node = context.getGame().getCurrentNode();

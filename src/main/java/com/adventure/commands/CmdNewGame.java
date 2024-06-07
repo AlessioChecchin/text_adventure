@@ -3,7 +3,7 @@ package com.adventure.commands;
 import com.adventure.models.Game;
 import javafx.application.Platform;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class CmdNewGame extends AbstractCommand
 {
@@ -52,5 +52,10 @@ public class CmdNewGame extends AbstractCommand
             game.getPlayer().setName(username);
         });
 
+    }
+
+    public ArrayList<String> getPossibleArgs()
+    {
+        return new ArrayList<>();
     }
 }

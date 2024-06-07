@@ -37,10 +37,10 @@ public class CmdLoadGame extends AbstractCommand
     }
 
     /**
-     * Get all possible arguments for this command
      * @return all possible game files
      */
-    public static ArrayList<String> args(ApplicationContext context) throws GameStorageException {
+    public ArrayList<String> getPossibleArgs() throws GameStorageException
+    {
         return new ArrayList<>(context.getConfig().getStorageService().listGames());
     }
 }

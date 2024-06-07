@@ -4,6 +4,8 @@ import com.adventure.models.items.Item;
 import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
 
+import java.util.ArrayList;
+
 public class CmdLook extends AbstractCommand
 {
     @Override
@@ -24,5 +26,10 @@ public class CmdLook extends AbstractCommand
         {
             this.writer.println("Command not supported in this room!");
         }
+    }
+
+    public ArrayList<String> getPossibleArgs()
+    {
+        return new ArrayList<>();
     }
 }

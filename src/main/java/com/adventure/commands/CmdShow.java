@@ -4,10 +4,8 @@ import com.adventure.models.Inventory;
 import com.adventure.models.Player;
 import com.adventure.models.Stats;
 import com.adventure.models.items.Item;
-import com.adventure.models.items.UsableItem;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CmdShow extends AbstractCommand
 {
@@ -86,10 +84,9 @@ public class CmdShow extends AbstractCommand
     }
 
     /**
-     * Get all possible arguments for this command
      * @return 'stats' or 'inventory'
      */
-    public static ArrayList<String> args()
+    public ArrayList<String> getPossibleArgs()
     {
         ArrayList<String> result = new ArrayList<>();
         result.add("stats");

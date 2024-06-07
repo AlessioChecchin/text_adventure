@@ -8,7 +8,9 @@ import com.adventure.models.RandomCollection;
 import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
 
-public class CmdDodge extends AbstractCommand
+import java.util.ArrayList;
+
+public class CmdDodge extends AbstractCommand{
 {
 
     @Override
@@ -80,4 +82,8 @@ public class CmdDodge extends AbstractCommand
         }
     }
 
+    public ArrayList<String> getPossibleArgs()
+    {
+        return new ArrayList<>();
+    }
 }

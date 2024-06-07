@@ -3,6 +3,8 @@ package com.adventure.commands;
 import com.adventure.models.Game;
 import com.adventure.services.StorageService;
 
+import java.util.ArrayList;
+
 public class CmdSaveGame extends AbstractCommand
 {
     @Override
@@ -57,5 +59,10 @@ public class CmdSaveGame extends AbstractCommand
             writer.println("Error saving game");
             logger.error("Error saving game: {}", e.getLocalizedMessage());
         }
+    }
+
+    public ArrayList<String> getPossibleArgs()
+    {
+        return new ArrayList<>();
     }
 }

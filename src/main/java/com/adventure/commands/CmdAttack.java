@@ -1,10 +1,13 @@
 package com.adventure.commands;
 
 import com.adventure.config.Config;
+import com.adventure.exceptions.GameStorageException;
 import com.adventure.models.*;
 import com.adventure.models.nodes.*;
 
-public class CmdAttack extends AbstractCommand
+import java.util.ArrayList;
+
+public class CmdAttack extends AbstractCommand {
 {
 
     @Override
@@ -66,5 +69,9 @@ public class CmdAttack extends AbstractCommand
         int inflectedDamage = player.hit(damage);
 
         this.writer.println(monster.getName() + " hits " + player.getName() + " and damage is " + inflectedDamage + " hp");
+    }
+    public ArrayList<String> getPossibleArgs()
+    {
+        return new ArrayList<>();
     }
 }

@@ -10,7 +10,6 @@ import com.adventure.models.items.Item;
 import com.adventure.models.items.UsableItem;
 import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
-import com.adventure.config.ApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,10 +81,9 @@ public class CmdUse extends AbstractCommand
     }
 
     /**
-     * Get all possible arguments for this command
-     * @return all possible items
+     * @return all possible items the player can use
      */
-    public static ArrayList<String> args(ApplicationContext context)
+    public ArrayList<String> getPossibleArgs()
     {
 
         Player player = context.getGame().getPlayer();

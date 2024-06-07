@@ -6,6 +6,8 @@ import com.adventure.models.nodes.*;
 import com.adventure.services.StorageService;
 import javafx.application.Platform;
 
+import java.util.ArrayList;
+
 
 public class CmdFight extends AbstractCommand {
 
@@ -162,6 +164,11 @@ public class CmdFight extends AbstractCommand {
             logger.debug("Loading new game...");
             newGame.load();
         });
+    }
+
+    public ArrayList<String> getPossibleArgs()
+    {
+        return new ArrayList<>();
     }
 }
 
