@@ -39,18 +39,22 @@ public class CmdFight extends AbstractCommand {
                 commandParser.enable("help");
                 commandParser.enable("clear");
                 commandParser.enable("show");
+                commandParser.enable("equip");
+                commandParser.enable("run");
 
                 // Introduction fight.
                 this.writer.println(monster.getDefaultDialog());
 
                 player.resetDodge();
                 monster.resetDodge();
+                monster.heal(monster.getStats().getMaxHp());
+                battleIsActive = true;
 
                 this.writer.println("");
                 this.writer.println("The battle against " + monster.getName() + " is starting...");
 
                 // Iterate battle.
-                while (player.getAlive() && monster.getAlive())
+                while (player.getAlive() && monster.getAlive() && battleIsActive)
                 {
                     // Player have to digit a command.
                     this.writer.println("What do you want to do?");
@@ -73,28 +77,29 @@ public class CmdFight extends AbstractCommand {
                     }
                 }
 
-                this.writer.println("Fight finished!");
+                // Enable all other commands and disable command after finish the fight
+                commandParser.enableAll();
+                commandParser.disable("attack");
+                commandParser.disable("dodge");
+                commandParser.disable("run");
 
-                if(player.getAlive())
+                if(player.getAlive() && battleIsActive)
                 {
-                    // TODO: loot drop.
-
+                    this.writer.println("Fight finished!");
                     String winOutput = "You won!";
 
                     if(!monster.getInventory().getItems().isEmpty())
                     {
+                        monster.drop(currentRoom);
                         winOutput += " Take the monster's loot!";
                     }
 
                     this.writer.println(winOutput);
 
-                    // Enable all other commands and disable command after finish the fight
-                    commandParser.enableAll();
-                    commandParser.disable("attack");
-                    commandParser.disable("dodge");
                 }
-                else
+                else if(battleIsActive)
                 {
+                    this.writer.println("Fight finished!");
                     this.writer.println("You lost!");
                     this.writer.println("Press ENTER to start new game...");
 
@@ -163,5 +168,7 @@ public class CmdFight extends AbstractCommand {
             newGame.load();
         });
     }
+
+    static boolean battleIsActive;
 }
 

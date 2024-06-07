@@ -32,13 +32,19 @@ abstract class AbstractStorageService implements StorageService
         Inventory playerInventory = new Inventory(100);
 
         // Adding sword.
-        playerInventory.addItem(new AttackItem("Sword"));
+        AttackItem sword = new AttackItem("Sword");
+        sword.setMultiplier(2);
+        sword.setAdder(4);
 
         Stats stats = new Stats(100,100,1,1);
 
         game.setPlayer(new Player(playerName, playerInventory, stats));
 
-        game.getPlayer().getInventory().addItem(new UsableItem("Pozione"));
+        UsableItem potion = new UsableItem("Potion");
+        potion.setAdditionalHp(10);
+        game.getPlayer().getInventory().addItem(potion);
+        game.getPlayer().getInventory().addItem(sword);
+
 
         String key1 = "Level 1";
         String key2 = "Level 2";
@@ -64,11 +70,10 @@ abstract class AbstractStorageService implements StorageService
             Inventory enemyInventory2 = new Inventory(100);
             Stats enemyStats2 = new Stats(100,100,1,1);
             enemyInventory2.addItem(new Key(key2));
-            Enemy enemy2 = new Enemy(enemyInventory2, enemyStats2, "Monster k2");
+            Enemy enemy2 = new Enemy(enemyInventory2, enemyStats2, "Goblin");
             enemy2.setDefaultDialog("I'm monster that holds K2.\nI'll kill u.");
 
             room2.setMonster(enemy2);
-            //room2.getItems().add();
         }
 
         g.addVertex(room2);
