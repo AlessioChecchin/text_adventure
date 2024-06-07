@@ -261,6 +261,33 @@
               </p>
             </li>
             <li>
+              <h4>
+                Create <code>application.config</code>
+              </h4>
+              <p>
+                In the folder <a class="file-path" style=""><code> text_adventure > src > main > resources </code></a> create a new file called <code class="code--inline" style="">application.conf</code> <br>
+                <strong>Open</strong> the file <a class="file-path" style=""><code> text_adventure > src > main > resources > copy_application.conf</code></a> <br> and <strong>copy its content</strong> inside <a class="code--inline" style=""><code>application.config</code></a> <br>
+              </p>
+            </li>
+            <li>
+              <h4>
+                Setup the bucket info
+              </h4>
+              <p>
+                In the file <a class="code--inline" style=""><code>application.config</code></a> complete these fields <br>
+                <code class="code-block">storage.aws.key=</code><br>
+                <code class="code-block">storage.aws.secret=</code><br>
+                <code class="code-block">storage.aws.bucket.name=</code><br>
+                <code class="code-block">storage.aws.region=</code><br>
+                with the values of <br>
+                <code class="code-block">bucket public key </code><br>
+                <code class="code-block">bucket private key </code><br>
+                <code class="code-block">bucket name </code><br>
+                <code class="code-block">bucket region</code><br>
+              </p>
+            </li>
+            <li>
+              <h4>Build the project</h4>
               <h5>Build the project</h5>
               <p>
                 On the terminal, move to the folder <code class="code--inline">text_adventure</code> (the repository previously cloned). Then run <br>
@@ -304,7 +331,7 @@
               </h5>
               <p>
                 Launch <strong>Intellij IDEA</strong> and click on "Open...". Then select the repository previously cloned. <br>
-                If somewhere in the interface appears the error message <code class="code--inline" style="color:red">JDK "20" is missing</code> then click on <a class="code--inline">Configure...</a> <br>
+                If somewhere in the interface appears the error message <code class="code--inline" style="color:red">JDK "20" is missing</code> then click on <a class="code--inline" style="color:red">Configure...</a> <br>
                 It should automatically detect the presence of JDK20 previously installed and it should appear on the top of the dropdown menu. If that's not the case, click on <code class="code--inline">Add JDK...</code> and select JDK20 folder previously installed
               </p>
             </li>
@@ -313,8 +340,8 @@
                 Create <code>application.config</code>
               </h5>
               <p>
-                In the folder <a class="file-path" style=""><code> text_adventure > src > main > resources </code></a> create a new file called <code class="code--inline" style=""></code> <br>
-                <strong>Open</strong> the file <a class="file-path" style=""><code> text_adventure > src > main > resources > copy_application.conf</code></a> <br> and <strong>copy its content</strong> inside <a class="code--inline" style=""><code>application.config</code></a> <br>
+                In the folder <br><a class="file-path" style="margin-left: 20px"> text_adventure > src > main > resources </a><br> create a new file called <br><code class="file-path" style="margin-left: 20px">application.conf</code> <br>
+                <strong>Open</strong> the file <a class="file-path" style=""><code> text_adventure > src > main > resources > copy_application.conf</code></a> <br> and <strong>copy its content</strong> inside <a class="code--inline"><code>application.config</code></a> <br>
               </p>
             </li>
             <li>
