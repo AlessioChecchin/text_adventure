@@ -17,8 +17,8 @@
       <h1 class="logo">Text Adventure <span class="logo__thin">Documentation</span></h1>
       <ul class="menu">
         <div class="menu__item toggle"><span></span></div>
-        <li class="menu__item"><a href="https://github.com/ssiodev/text_adventure.git" class="link link--dark"><i class="fa fa-github"></i> Github</a></li>
-        <li class="menu__item"><a href="doc.html" class="link link--dark"><i class="fa fa-home"></i> Home</a></li>
+        <li class="menu__item"><a href="https://github.com/ssiodev/text_adventure.git" class="link"><i class="fa fa-github"></i> Github</a></li>
+        <li class="menu__item"><a href="index.html" class="link"><i class="fa fa-home"></i> Home</a></li>
       </ul>
     </nav>
     <div class="wrapper">
@@ -40,33 +40,37 @@
             are you ready for this exciting adventure?
           </p>
           <h3 class="section__title">Game Plot</h3>
-          <p >
+          <p>
             In a distant era, in the lands of Margorgh, in the darkest depths of a shadowy forest, it is said that there exists a Castle ruled by the forces of evil, housing an unimaginable power.
-            For millennia, humanity has sought to wrest this power from the forces of evil; battles and wars have marked the quest for this power.<br/>
+            For countless millennia, humanity has sought to wrest this power from the forces of evil; battles and wars have marked the quest for this power.<br/>
             Over time, the traces of the Castle and the power within have been lost, vanished like leaves on trees in winter, or at least, so it was believed...
             A mysterious scroll was discovered by a warrior with a golden heart, a scroll containing knowledge that he could not have imagined and that would lead him to an unbelievable destiny....<br/>
           </p>
-          <br/>
         </section>
         <section class="js-section">
           <h2 class="section__title">Manual</h2>
           <h3 class="section__title">Gameplay</h3>
           <p>
-            The game is set in two different levels, one located in a forest, the latter in a castle.<br/>
-            Each one of them is subdivided in various section, that we will call "room" for simplicity.
+            The game is set in two different levels, located respectively in a forest and in a castle.<br/>
+            It is subdivided into various sections (that we will call "rooms" from now on) with at first only one is available to access<br/>
+            In these rooms, you will find contexts in which you have to defeat a monster, pick items and search for keys in order to "unlock" all of them.<br/>
+            The dynamics of these interactions is left to be discovered! (Check <a href="#how-to-play" class="link--dark">here&#8599</a>)
           </p>
           <p>At the first launch of the game, the program will load the main menu, where you can choose between:</p>
           <ul>
-            <li>start a new game</li>
-            <li>load a pre-existing game (if existing)</li>
-            <li>remove a pre-existing game (if existing)</li>
-            <li>see a list of the pre-saved games</li>
+            <li>starting a new game</li>
+            <li>loading a pre-existing game (if existing)</li>
+            <li>deleting a pre-existing game (if existing)</li>
+            <li>seeing a list of the pre-saved games</li>
+          </ul>
+          <p>At any moment of the game you can:
+          <ul>
+            <li>use <code>help</code> to request the list of the available commands.</li>
+            <li>use <code>save</code> to save your current progress into a <code>.json</code> file which will be used to reload the game at the next access.<br/>
+            <b>Warning!</b> The game will not automatically save the progress!</li>
           </ul>
           <p>
-          If you start a new game, you will be asked to enter your hero-name.
-          In any moment of the game you can use <code>help</code> to request the list of the available commands.
-          [...]
-          The goal of the game is to beat the final boss!
+            The main goal of the game is to complete all the rooms, reach the castle and beat the final boss! Have fun!
           </p>
           <h3 class="section__title">Graphic Interface</h3>
           <p>
@@ -117,134 +121,143 @@
             </tr>
             <tr>
               <td>AWS</td>
-              <td>5.11.0</td>
-              <td>Framework for automatic testing</td>
+              <td>2.25.58</td>
+              <td>Cloud computing platform provided by Amazon</td>
             </tr>
             <tr>
             <td>log4j</td>
-            <td>5.11.0</td>
-            <td>Framework for automatic testing</td>
+            <td>2.20.0</td>
+            <td>Java-based logging utility</td>
           </tr>
 
           </table>
-          <h3 class="section__title">How To Play</h3>
+          <h3 class="section__title" id="how-to-play">How To Play</h3>
           <p>
             The user interact with the display using a <b>custom command line</b>, which is located at the bottom of the game window.<br/>
             The user have to type the command followed by (if any) arguments and then press enter to trigger the specific in-game action.<br/>
             Example: <br/>
           </p>
           <code>>>command &lt;argument&gt; </code>
-          <p>The list of all the possible commands is available <a href="#CommandsList">below</a></p>
+          <p>The complete list of all the possible commands is available <a href="#CommandsList" class="link--dark">here &#8599</a></p>
           <h3 id="CommandsList">Commands List</h3>
-          <table>
+          <table class="table-commands">
             <tr>
               <th>Name</th>
               <th>Argument</th>
               <th>Description</th>
             </tr>
             <tr>
-              <td>newGame</td>
+              <td><code>newGame</code></td>
               <td>-</td>
               <td>Create a new game.<br/>It can be utilized only in the menu.</td>
             </tr>
             <tr>
-              <td>loadGame</td>
+              <td><code>loadGame</code></td>
               <td>Name of the saved game</td>
               <td>Command for loading a game previously saved.</td>
             </tr>
             <tr>
-              <td>save</td>
+              <td><code>save</code></td>
               <td>(Optional) name of the save </td>
               <td>Command for save the current game.<br/> Require a name for the game that you are saving.</td>
             </tr>
             <tr>
-              <td>deleteGame</td>
+              <td><code>deleteGame</code></td>
               <td>Name of the save to be deleted</td>
               <td>Command for deleting a previously saved game.<br/> Enter the name of the game to be deleted</td>
             </tr>
             <tr>
-              <td>listGames</td>
+              <td><code>listGames</code></td>
               <td>-</td>
               <td>Command that showing a list of the saved games.</td>
             </tr>
             <tr>
-              <td>show</td>
+              <td><code>show</code></td>
               <td>(Optional) one between <code>inventory</code> / <code>stats</code></td>
               <td>Command for showing the stats and inventory of the player.<br/><code>show inventory</code> for showing only the player's inventory.<br/>
               <code>show stats</code> the showing only the player's stats.</td>
             </tr>
             <tr>
-              <td>move</td>
+              <td><code>move</code></td>
               <td>Cardinal directions:<br/><code>north </code>/ <code>south </code>/ <code>east </code>/ <code>west</code></td>
               <td>Command manage the movement in the map using cardinal directions.<br/> If possible you move in the digit direction</td>
             </tr>
             <tr>
-              <td>look</td>
+              <td><code>look</code></td>
               <td>-</td>
               <td>Command for showing a list of the items in the room.</td>
             </tr>
             <tr>
-              <td>pick</td>
+              <td><code>pick</code></td>
               <td>Name of the item to be taken</td>
               <td>Command for taking an item from the items present in the room<br/>Return error message if the inventory has not enough space.
               </td>
             </tr>
             <tr>
-              <td>fight</td>
+              <td><code>fight</code></td>
               <td>-</td>
               <td>Command for starting a battle with a hostile mob (enemy).</td>
             </tr>
             <tr>
-              <td>attack</td>
+              <td><code>attack</code></td>
               <td>-</td>
               <td>Command for attacking a monster in a fight.</td>
             </tr>
             <tr>
-              <td>dodge</td>
+              <td><code>dodge</code></td>
               <td>-</td>
               <td>Command for dodging an incoming attack from a monster.<br/>
                 It can be used 3 times per fight.</td>
             </tr>
             <tr>
-              <td>use</td>
+              <td><code>use</code></td>
               <td>Name of the item to be used in the inventory</td>
               <td>Command for using an item in the player's inventory.</td>
             </tr>
             <tr>
-              <td>wai</td>
+              <td><code>wai</code></td>
               <td>-</td>
               <td>Command for showing the properties (locked/unlocked) of directions that can be used with <code>move</code></td>
             </tr>
             <tr>
-              <td>help</td>
+              <td><code>help</code></td>
               <td>-</td>
               <td>Show all the possible commands in a precise moment of the game.</td>
             </tr>
             <tr>
-              <td>clear</td>
+              <td><code>clear</code></td>
               <td>-</td>
               <td>Command for cleaning the game terminal.</td>
             </tr>
           </table>
           <h3 class="section__title">How To Install</h3>
           <h4 class="section__title">Maven</h4>
-          <p></p>
+          <p>
+
+          </p>
           <h4 class="section__title">IntelliJ IDEA</h4>
+          <p><b>Warning! It requires Java 20!</b></p>
+          <ol>
+            <li>Install IntelliJ IDEA following <a href="https://www.jetbrains.com/help/idea/installation-guide.html" class="link--dark">this guide &#8599</a></li>
+            <li>
+              Clone the repository which is available <a href="https://github.com/ssiodev/text_adventure.git" class="link--dark">here &#8599</a>
+              (if you have problems with that, check <a href="https://www.jetbrains.com/guide/java/tips/clone-project-from-github/#:~:text=Clone%20a%20project%20from%20the%20IntelliJ%20IDEA%20welcome%20screen&text=Click%20Get%20from%20VCS%2C%20specify,into%20an%20IntelliJ%20IDEA%20project." class="link--dark">this video</a>!)
+            </li>
+            <li>Open the file <code>Main.java</code> in the path <br/><code>src/main/java/com/adventure/Main.java</code></li>
+            <li>Run it</li>
+            <li>Enjoy the Game!</li>
+          </ol>
           <h4 class="section__title">Jar</h4>
-          <p>Not supported yet</p>
-          <br/>
+          <p>Not supported yet.</p>
         </section>
         <section class="js-section">
           <h2 class="section__title">Specifications</h2>
-         <hr />
         </section>
         <section class="js-section">
           <h2 class="section__title">Design</h2>
-          <hr />
         </section>
         <section class="js-section">
           <h2 class="section__title">Testing</h2>
-          <hr/>
         </section>
         <section class="js-section">
           <h2 class="section__title">JavaDoc</h2>
