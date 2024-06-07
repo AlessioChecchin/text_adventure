@@ -123,14 +123,11 @@ public class CommandParser
         CommandMetadata metadata = this.lookupTable.get(key);
         if(metadata != null)
             try {
-                Class<?>[] methodArguments = new Class[1];
-                methodArguments[0] = ApplicationContext.class;
-                //  Calls static method "args" of the command
-                Object result = metadata.getCommandClass().getDeclaredMethod("args", methodArguments).invoke(null, context);
-                if(result instanceof ArrayList)
-                    return (ArrayList<String>) result;
-                else 
-                    return new ArrayList<>();
+                // Get command instance and set the context
+                Command cmdInstance = metadata.getCommandClass().getDeclaredConstructor().newInstance();
+                cmdInstance.setContext(this.context);
+                // Get the possible arguments for the command
+                return cmdInstance.getPossibleArgs();
             } catch (NoSuchMethodException e) {
                 //  If method not found it means the command has no arguments -> fails silently
                 return new ArrayList<>();

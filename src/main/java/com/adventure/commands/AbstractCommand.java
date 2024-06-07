@@ -1,6 +1,7 @@
 package com.adventure.commands;
 
 import com.adventure.config.ApplicationContext;
+import com.adventure.exceptions.GameStorageException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -33,9 +34,12 @@ public abstract class AbstractCommand implements Command
         this.shouldTerminate = false;
     }
 
+
     //
     // GETTERS.
     //
+
+    public abstract ArrayList<String> getPossibleArgs() throws GameStorageException;
 
     /**
      * Writer getter.

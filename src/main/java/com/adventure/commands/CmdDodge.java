@@ -5,6 +5,8 @@ import com.adventure.models.Player;
 import com.adventure.models.RandomCollection;
 import com.adventure.models.nodes.Room;
 
+import java.util.ArrayList;
+
 public class CmdDodge extends AbstractCommand{
 
     @Override
@@ -41,4 +43,8 @@ public class CmdDodge extends AbstractCommand{
         else this.writer.println("Wrong parameters for this command");
     }
 
+    public ArrayList<String> getPossibleArgs()
+    {
+        return new ArrayList<>();
+    }
 }

@@ -1,5 +1,7 @@
 package com.adventure.commands;
 
+import java.util.ArrayList;
+
 public class CmdHelp extends AbstractCommand
 {
     @Override
@@ -22,5 +24,10 @@ public class CmdHelp extends AbstractCommand
 
             writer.printf("%s%s : %s%n", command, " ".repeat(padding), commandParser.getCommandMetadata(command).getDescription());
         }
+    }
+
+    public ArrayList<String> getPossibleArgs()
+    {
+        return new ArrayList<>();
     }
 }

@@ -1,12 +1,12 @@
 package com.adventure.commands;
 
+import com.adventure.exceptions.GameStorageException;
 import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
 import com.adventure.models.nodes.StoryNodeLink;
 import org.jgrapht.Graph;
 
-import java.util.Objects;
-import java.util.Set;
+import java.util.ArrayList;
 
 public class CmdWai extends AbstractCommand
 {
@@ -34,5 +34,10 @@ public class CmdWai extends AbstractCommand
                 }
             }
         }
+    }
+
+    public ArrayList<String> getPossibleArgs()
+    {
+        return new ArrayList<>();
     }
 }

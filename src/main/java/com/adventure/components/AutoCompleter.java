@@ -100,8 +100,6 @@ public class AutoCompleter
 
     private String buildInputText(direction dir)
     {
-        //TODO possible better solutions: count number of spaces to detect if it's a command or an argument
-
         //  Checks which direction to follow
         if(dir == direction.FORWARD)
             incrementCounter();

@@ -2,6 +2,7 @@ package com.adventure.commands;
 
 import com.adventure.services.StorageService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CmdListGames extends AbstractCommand
@@ -27,5 +28,10 @@ public class CmdListGames extends AbstractCommand
         }
 
 
+    }
+
+    public ArrayList<String> getPossibleArgs()
+    {
+        return new ArrayList<>();
     }
 }

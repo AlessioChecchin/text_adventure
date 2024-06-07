@@ -1,9 +1,11 @@
 package com.adventure.commands;
 
 import com.adventure.config.ApplicationContext;
+import com.adventure.exceptions.GameStorageException;
 
 import java.io.InputStream;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface Command
@@ -13,6 +15,13 @@ public interface Command
      * @return A copy of the argument list.
      */
     List<String> getArgs();
+
+    /**
+     * Get a list of all the available argument for this command (necessary for command prediction)
+     * @return ArrayList with all the possible arguments
+     * @throws GameStorageException
+     */
+    ArrayList<String> getPossibleArgs() throws GameStorageException;
 
     /**
      * Sets command arguments.
