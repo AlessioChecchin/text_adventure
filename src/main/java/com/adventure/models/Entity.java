@@ -1,6 +1,7 @@
 package com.adventure.models;
 
 import com.adventure.models.items.AttackItem;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Objects;
 
@@ -143,6 +144,7 @@ abstract public class Entity
      * Returns the damage done by a player when attacking.
      * @return Attack done by the player.
      */
+    @JsonIgnore
     public int getAttackDamage()
     {
         AttackItem item = this.inventory.getEquipedAttackItem();
