@@ -45,6 +45,20 @@ p {
   color: #4A4A4A;
 }
 
+.link-color {
+  color: #B94B4C;
+}
+
+.file-path {
+  font-family: monospace;
+  color: #34723e;
+}
+
+.code-block {
+  margin-left:20px;
+}
+
+
 a, a:hover {
   text-decoration: none;
   color: var(--primary-color)

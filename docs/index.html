@@ -230,25 +230,137 @@
               <td>Command for cleaning the game terminal.</td>
             </tr>
           </table>
-          <h3 class="section__title">How To Install</h3>
-          <h4 class="section__title">Maven</h4>
-          <p>
-
-          </p>
-          <h4 class="section__title">IntelliJ IDEA</h4>
-          <p><b>Warning! It requires Java 20!</b></p>
+          <h2 class="section__title">How To Install</h2>
+          <h3 class="section__title">Maven</h3>
           <ol>
-            <li>Install IntelliJ IDEA following <a href="https://www.jetbrains.com/help/idea/installation-guide.html" class="link--dark">this guide &#8599</a></li>
             <li>
-              Clone the repository which is available <a href="https://github.com/ssiodev/text_adventure.git" class="link--dark">here &#8599</a>
-              (if you have problems with that, check <a href="https://www.jetbrains.com/guide/java/tips/clone-project-from-github/#:~:text=Clone%20a%20project%20from%20the%20IntelliJ%20IDEA%20welcome%20screen&text=Click%20Get%20from%20VCS%2C%20specify,into%20an%20IntelliJ%20IDEA%20project." class="link--dark">this video</a>!)
+              <h4>
+                Clone the repository
+              </h4>
+              <p>
+                If not installed, <strong>install GIT</strong> using <a href="https://git-scm.com/downloads" target="_blank" class="link-color">this guide </a><br>
+                Once installed, from the terminal move to the folder where you want the repository to be cloned and run <br><code class="code-block">git clone https://github.com/ssiodev/text_adventure.git</code><br>
+              </p>
             </li>
-            <li>Open the file <code>Main.java</code> in the path <br/><code>src/main/java/com/adventure/Main.java</code></li>
-            <li>Run it</li>
-            <li>Enjoy the Game!</li>
+            <li>
+              <h4>Install Maven</h4>
+              <p>
+                Maven version <code>3.9.7</code> doesn't work with this project <br>
+                Maven version <code>3.9.6, 3.8.8, 4.0.0</code> has been tested <br>
+                If not already installed, follow <a class="link-color" href="https://maven.apache.org/install.html" target="_blank">this guide</a> to install Maven.<br>
+                A useful guide to install and set environment variables <a class="link-color" href="https://phoenixnap.com/kb/install-maven-windows" tag="_blank">on Windows</a>, <a class="link-color" href="https://www.digitalocean.com/community/tutorials/install-maven-linux-ubuntu" tag="_blank">on Ubuntu</a>, <a class="link-color" href="https://www.digitalocean.com/community/tutorials/install-maven-mac-os" tag="_blank">on Mac</a><br>
+              </p>
+            </li>
+            <li>
+              <h4>Install JDK20</h4>
+              <p>
+                Check if in the system is already installed JDK20 by running on the terminal <br>
+                <code class="code-block">java --version</code><br>
+                If JDK20 is not installed use <a href="https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html" target="_blank" class="link-color">this page</a> to download the right package or installer. <br>
+                For any issue, follow <a href="https://docs.oracle.com/en/java/javase/20/install/overview-jdk-installation.html" target="_blank" class="link-color">this guide</a>.
+              </p>
+            </li>
+            <li>
+              <h4>Build the project</h4>
+              <p>
+                On the terminal, move to the folder <code class="code--inline">text_adventure</code> (the repository previously cloned). Then run <br>
+                <code class="code-block">mvn package</code><br>
+              </p>
+            </li>
           </ol>
+          <h3 class="section__title">IntelliJ IDEA</h3>
+          <ol>
+            <li>
+              <h4>
+                Install Intellij
+              </h4>
+              <p>
+                To install Intellij firstly install <strong>JetBrains Toolbox App</strong> from <a href="https://www.jetbrains.com/toolbox-app/" target="_blank" class="link-color"> this link</a>. <br>
+                Once Toolbox is installed, run it and install <strong>Intellij Community</strong> (or Intellij Ultimate if holder of a valid license)
+              </p>
+            </li>
+            <li>
+              <h4>
+                Clone the repository
+              </h4>
+              <p>
+                If not installed, <strong>install GIT</strong> using <a href="https://git-scm.com/downloads" target="_blank" class="link-color">this guide </a><br>
+                Once installed, from the terminal move to the folder where you want the repository to be cloned and run <br><code class="code-block">git clone https://github.com/ssiodev/text_adventure.git</code><br>
+              </p>
+            </li>
+            <li>
+              <h4>
+                Install JDK20
+              </h4>
+              <p>
+                Check if in the system is already installed JDK20 by running on the terminal <br><code class="code-block">java --version</code><br>
+                If JDK20 is not installed use <a href="https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html" target="_blank" class="link-color">this page</a> to download the right package or installer. <br>
+                For any issue, follow <a href="https://docs.oracle.com/en/java/javase/20/install/overview-jdk-installation.html" target="_blank" class="link-color">this guide</a>.
+              </p>
+            </li>
+            <li>
+              <h4>
+                Open the repository
+              </h4>
+              <p>
+                Launch <strong>Intellij IDEA</strong> and click on "Open...". Then select the repository previously cloned. <br>
+                If somewhere in the interface appears the error message <code class="code--inline" style="color:red">JDK "20" is missing</code> then click on <a class="code--inline">Configure...</a> <br>
+                It should automatically detect the presence of JDK20 previously installed and it should appear on the top of the dropdown menu. If that's not the case, click on <code class="code--inline">Add JDK...</code> and select JDK20 folder previously installed
+              </p>
+            </li>
+            <li>
+              <h4>
+                Create <code>application.config</code>
+              </h4>
+              <p>
+                In the folder <a class="file-path" style=""><code> text_adventure > src > main > resources </code></a> create a new file called <code class="code--inline" style=""></code> <br>
+                <strong>Open</strong> the file <a class="file-path" style=""><code> text_adventure > src > main > resources > copy_application.conf</code></a> <br> and <strong>copy its content</strong> inside <a class="code--inline" style=""><code>application.config</code></a> <br>
+              </p>
+            </li>
+            <li>
+              <h4>
+                Setup the bucket info
+              </h4>
+              <p>
+                In the file <a class="code--inline" style=""><code>application.config</code></a> complete these fields <br>
+                 <code class="code-block">storage.aws.key=</code><br>
+                 <code class="code-block">storage.aws.secret=</code><br>
+                 <code class="code-block">storage.aws.bucket.name=</code><br>
+                 <code class="code-block">storage.aws.region=</code><br>
+                with the values of <br>
+                <code class="code-block">bucket public key </code><br>
+                <code class="code-block">bucket private key </code><br>
+                <code class="code-block">bucket name </code><br>
+                <code class="code-block">bucket region</code><br>
+              </p>
+            </li>
+            <li>
+              <h4>
+                Update Maven dependencies
+              </h4>
+              <p>
+                Select the file <a class="file-path">text_adventure > pom.xml</a>   and <strong>right click</strong> on it <br>
+                Then click con <strong>Maven > Reload Project</strong> in the dropdown menu that appears.
+              </p>
+            </li>
+            <li>
+              <h4>
+                Run the project
+              </h4>
+              <p>
+                Open the file <a class="file-path">text_adventure > src > main > java > com > adventure > Main</a> and then click on the left green arrow <br>
+                near the row with written <code class="code--inline">public static void main(String[] args) { launch(); }</code>
+              </p>
+              <p>Note:</p>
+              <p style="margin-left: 30px; margin-top: -15px">
+                if after running the project appears and error with written <code class="code--inline" style="color:red">"Command line too long"</code><br> just click on  <code class="code--inline" style="color:red">"Shorten the command line and return"</code> <br>
+              </p>
+            </li>
+          </ol>
+
           <h4 class="section__title">Jar</h4>
-          <p>Not supported yet.</p>
+          <p>Not supported yet</p>
+          <br/>
         </section>
         <section class="js-section">
           <h2 class="section__title">Specifications</h2>
