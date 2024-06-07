@@ -58,7 +58,8 @@ public class Main extends Application
         commandParser.registerCommand("look", CmdLook.class, "Inspects the current room.");
         commandParser.registerCommand("move", CmdMove.class, "Moves in the map.");
         commandParser.registerCommand("pick", CmdPick.class, "Picks a specific item.");
-        commandParser.registerCommand("wai", CmdWai.class, "Gives information about valid paths");
+        commandParser.registerCommand("wai", CmdWai.class, "Gives information about valid paths.");
+        commandParser.registerCommand("back", CmdBack.class, "Go back to the previous room.");
 
         // Generating dummy game to host the proper game loader.
         Game dummyGame = new Game(context.getConfig(), stage);

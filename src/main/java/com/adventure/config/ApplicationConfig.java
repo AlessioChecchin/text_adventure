@@ -71,6 +71,18 @@ public class ApplicationConfig implements Config
     }
 
     @Override
+    public double getMonsterAttackProbability()
+    {
+        return 85;
+    }
+
+    @Override
+    public double getMonsterDodgeProbability()
+    {
+        return 15;
+    }
+
+    @Override
     public Properties getProperties()
     {
         return this.properties;

@@ -1,5 +1,7 @@
 package com.adventure.models;
 
+import com.adventure.models.items.AttackItem;
+
 import java.util.Objects;
 
 /**
@@ -138,6 +140,17 @@ abstract public class Entity
     }
 
     /**
+     * Returns the damage done by a player when attacking.
+     * @return Attack done by the player.
+     */
+    public int getAttackDamage()
+    {
+        AttackItem item = this.inventory.getEquipedAttackItem();
+
+        return (int) (this.stats.getBaseAttack() * item.getMultiplier() + item.getAdder());
+    }
+
+    /**
      * Heals the entity.
      * @param points Health points to gain.
      */
@@ -148,14 +161,27 @@ abstract public class Entity
 
     /**
      * Damages the entity.
-     * @param damage Health points to lose.
+     * @param damage Health points to lose. This damage is mitigated by the entity defence.
+     * @return Inflicted damage.
      */
-    public void hit(int damage)
+    public int hit(int damage)
     {
-        //Check if it's a mortal hit
-        if(damage > (this.stats.getHp() + this.stats.getBaseDefense())) this.setAlive(false);
-        //Check if incoming damage is more than the shield
-        else if (damage > this.stats.getBaseDefense()) this.stats.setHp(this.stats.getHp() - damage);
+        int inflictedDamage = 0;
+
+        // Check if it's a mortal hit
+        if(damage > this.stats.getHp() + this.stats.getBaseDefense())
+        {
+            inflictedDamage = this.stats.getHp() + this.stats.getBaseDefense();
+            this.setAlive(false);
+        }
+        // Check if incoming damage is more than the shield
+        else if (damage > this.stats.getBaseDefense())
+        {
+            inflictedDamage = this.stats.getHp() - damage;
+            this.stats.setHp(this.stats.getHp() - damage);
+        }
+
+        return inflictedDamage;
     }
 
     //

@@ -1,41 +1,69 @@
 package com.adventure.commands;
 
+import com.adventure.config.Config;
 import com.adventure.models.*;
 import com.adventure.models.nodes.*;
 
-public class CmdAttack extends AbstractCommand {
+public class CmdAttack extends AbstractCommand
+{
 
     @Override
-    public void execute() throws InterruptedException {
-        //check the correct number of parameters
-        int size = this.getArgs().size();
-        if (size == 0) {
-            Player player = this.context.getGame().getPlayer();
-            Room currentRoom = (Room) this.context.getGame().getCurrentNode();
-            Enemy monster = currentRoom.getMonster();
+    public void execute() throws InterruptedException
+    {
+        // Check the correct number of parameters
+        if (this.correctArgumentsNumber(0)) { return; }
 
-            //Monster set moves
-            RandomCollection<Object> decision = new RandomCollection<>()
-                    .add(85, CmdFight.Move.ATTACK).add(15, CmdFight.Move.DODGE);
-            CmdFight.Move choice = (CmdFight.Move) decision.next();
+        Config currentConfig = this.context.getConfig();
+        Game game = this.context.getGame();
+        Player player = game.getPlayer();
 
-            //monster dodges check
-            if (choice == CmdFight.Move.DODGE) {
-                if (!monster.useDodge()) choice = CmdFight.Move.ATTACK;
-            }
+        StoryNode currentNode = game.getCurrentNode();
 
-            //if monster dodge he doesn't get damage
-            if (choice != CmdFight.Move.DODGE) {
-                monster.hit(player.getStats().getBaseAttack());
-                this.writer.println(player.getName() + " hits the monster and damage is " + player.getStats().getBaseAttack() + "hp");
-            } else this.writer.println("Ouch, Monster dodge");
-
-            //player move
-            player.hit(monster.getStats().getBaseAttack());
-            this.writer.println("Monster hits " + player.getName() + " and damage is " + monster.getStats().getBaseAttack() + "hp");
+        if(!(currentNode instanceof Room))
+        {
+            this.writer.println("You can't perform this action here");
+            return;
         }
-        else{ this.writer.println("Wrong parameters for this command");}
+
+        Room currentRoom = (Room) currentNode;
+        Enemy monster = currentRoom.getMonster();
+
+        if(monster == null)
+        {
+            this.writer.println("There is no monster to fight here");
+            return;
+        }
+
+        // Monster set moves
+        RandomCollection<Object> decision = new RandomCollection<>()
+                .add(currentConfig.getMonsterAttackProbability(), CmdFight.Move.ATTACK)
+                .add(currentConfig.getMonsterDodgeProbability(), CmdFight.Move.DODGE);
+
+        CmdFight.Move monsterMove = (CmdFight.Move) decision.next();
+
+        // Checks if the monster decides to dodge.
+        if (monsterMove == CmdFight.Move.DODGE)
+        {
+            // If the monster can't consume a dodge (the monster already consumed all available dodges)
+            // then the move becomes an attack.
+            if (!monster.useDodge()) monsterMove = CmdFight.Move.ATTACK;
+        }
+
+        //if monster dodge he doesn't get damage
+        if (monsterMove != CmdFight.Move.DODGE)
+        {
+            monster.hit(player.getStats().getBaseAttack());
+            this.writer.println(player.getName() + " hits the monster and damage is " + player.getStats().getBaseAttack() + " hp");
+        }
+        else
+        {
+            this.writer.println("Ouch, Monster dodges the attack!");
+        }
+
+        // The player always gets a hit if he decides to attack.
+        int damage = monster.getAttackDamage();
+        int inflectedDamage = player.hit(damage);
+
+        this.writer.println("Monster hits " + player.getName() + " and damage is " + inflectedDamage + " hp");
     }
-
-
 }

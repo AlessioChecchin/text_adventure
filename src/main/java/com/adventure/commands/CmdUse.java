@@ -1,7 +1,9 @@
 package com.adventure.commands;
 
+import com.adventure.config.Config;
 import com.adventure.exceptions.NotUsableItemException;
 import com.adventure.models.Enemy;
+import com.adventure.models.Game;
 import com.adventure.models.Player;
 import com.adventure.models.RandomCollection;
 import com.adventure.models.items.Item;
@@ -14,54 +16,69 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class CmdUse extends AbstractCommand{
+public class CmdUse extends AbstractCommand
+{
     @Override
-    public void execute() throws InterruptedException {
-        this.writer.println("hello");
+    public void execute() throws InterruptedException
+    {
+        // Check the correct number of parameters
+        if(this.correctArgumentsNumber(1)) { return; }
 
-        //check the correct number of parameters
-        int size = getArgs().size();
-        if(size == 1) {
-            //setting player and monster
-            Player player = this.context.getGame().getPlayer();
-            StoryNode node = this.context.getGame().getCurrentNode();
+        Config currentConfig = this.context.getConfig();
+        Game game = this.context.getGame();
+        Player player = game.getPlayer();
+        StoryNode node = game.getCurrentNode();
 
-            //player use item
-            String key = this.getArgs().get(0);
-            try {
-                player.use(key);
-                this.writer.println("You use " + key);
+        // Player uses the item
+        String key = this.getArgs().get(0);
+
+        try
+        {
+            player.use(key);
+            this.writer.println("You used " + key + "!");
+        }
+        catch (NotUsableItemException notUsable)
+        {
+            this.writer.println("Item is not usable!");
+        }
+        catch (NoSuchElementException noElement)
+        {
+            this.writer.println("Item not found!");
+        }
+
+        if(node instanceof Room currentRoom && currentRoom.getMonster() != null)
+        {
+            Enemy monster = currentRoom.getMonster();
+
+            // Monster set moves.
+            RandomCollection<Object> decision = new RandomCollection<>()
+                    .add(currentConfig.getMonsterAttackProbability(), CmdFight.Move.ATTACK)
+                    .add(currentConfig.getMonsterDodgeProbability(), CmdFight.Move.DODGE);
+
+            CmdFight.Move monsterChoice = (CmdFight.Move) decision.next();
+
+            // Monster dodges check.
+            if (monsterChoice == CmdFight.Move.DODGE)
+            {
+                if (!monster.useDodge()) monsterChoice = CmdFight.Move.ATTACK;
             }
-            catch (NotUsableItemException notUsable) {
-                this.writer.println("Item is not usable");
-            }
-            catch (NoSuchElementException noElement){
-                this.writer.println("Item not found");
-            }
-            if(node instanceof Room currentRoom) {
 
-                Enemy monster = currentRoom.getMonster();
-
-                //Monster set moves
-                RandomCollection<Object> decision = new RandomCollection<>()
-                        .add(85, CmdFight.Move.ATTACK).add(15, CmdFight.Move.DODGE);
-                CmdFight.Move choice = (CmdFight.Move) decision.next();
-
-                //monster dodges check
-                if (choice == CmdFight.Move.DODGE) {
-                    if (!monster.useDodge()) choice = CmdFight.Move.ATTACK;
+            // If use is call in a fight, monster can attack.
+            if(monster.getAlive())
+            {
+                if (monsterChoice == CmdFight.Move.ATTACK)
+                {
+                    int damage = monster.getAttackDamage();
+                    int inflictedDamage = player.hit(damage);
+                    this.writer.println("Monster hits " + player.getName() + " and damage is " + inflictedDamage + "hp");
+                }
+                else
+                {
+                    this.writer.println("Monster dodges the attack!");
                 }
 
-                //if use is call in a fight, monster can attack
-                if ((monster.getAlive()) && (monster != null)) {
-                    if (choice == CmdFight.Move.ATTACK) {
-                        player.hit(monster.getStats().getBaseAttack());
-                        this.writer.println("Monster hits " + player.getName() + " and damage is " + monster.getStats().getBaseAttack() + "hp");
-                    } else this.writer.println("Monster dodge");
-                }
             }
         }
-        else this.writer.println("Wrong parameters for this command");
     }
 
     /**
