@@ -1,13 +1,12 @@
 package com.adventure.commands;
 
 import com.adventure.config.Config;
-import com.adventure.exceptions.GameStorageException;
 import com.adventure.models.*;
 import com.adventure.models.nodes.*;
 
 import java.util.ArrayList;
 
-public class CmdAttack extends AbstractCommand {
+public class CmdAttack extends AbstractCommand
 {
 
     @Override

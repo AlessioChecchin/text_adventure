@@ -6,8 +6,11 @@ import com.adventure.models.nodes.StoryNodeLink;
 import javafx.application.Platform;
 import org.jgrapht.Graph;
 
+import java.util.ArrayList;
+
 public class CmdBack extends AbstractCommand
 {
+    @Override
     public void execute()
     {
         Game game = this.context.getGame();
@@ -57,6 +60,11 @@ public class CmdBack extends AbstractCommand
         }
 
         return null;
+    }
+
+    public ArrayList<String> getPossibleArgs()
+    {
+        return new ArrayList<>();
     }
 
 }

@@ -10,7 +10,7 @@ import com.adventure.models.nodes.StoryNode;
 
 import java.util.ArrayList;
 
-public class CmdDodge extends AbstractCommand{
+public class CmdDodge extends AbstractCommand
 {
 
     @Override
