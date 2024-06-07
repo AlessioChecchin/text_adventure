@@ -40,6 +40,18 @@ public interface Config
     StorageService getStorageService();
 
     /**
+     * Gets the probability that a monster attacks during a fight.
+     * @return Monster attack probability.
+     */
+    double getMonsterAttackProbability();
+
+    /**
+     * Gets the probability that a monster dodges during a fight.
+     * @return Monster dodges during a fight.
+     */
+    double getMonsterDodgeProbability();
+
+    /**
      * Properties getter.
      * @return Current properties.
      */

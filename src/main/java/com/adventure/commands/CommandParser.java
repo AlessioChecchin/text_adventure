@@ -224,6 +224,9 @@ public class CommandParser
             }
         }
 
+        // Alphabetically order the commands.
+        Collections.sort(commands);
+
         return commands;
     }
 

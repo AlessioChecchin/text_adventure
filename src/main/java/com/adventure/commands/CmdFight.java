@@ -57,6 +57,7 @@ public class CmdFight extends AbstractCommand {
 
                     String s = this.safeReadNextLine();
 
+                    // Clears the screen.
                     this.writer.flush();
                     this.command = commandParser.parseCommand(s);
 
@@ -94,7 +95,7 @@ public class CmdFight extends AbstractCommand {
                 }
                 else
                 {
-                    this.writer.println("You lost :(");
+                    this.writer.println("You lost!");
                     this.writer.println("Press ENTER to start new game...");
 
                     this.safeReadNextLine();
@@ -102,8 +103,6 @@ public class CmdFight extends AbstractCommand {
 
                     this.resetGame();
                 }
-
-
             }
             else
             {
@@ -163,8 +162,6 @@ public class CmdFight extends AbstractCommand {
             logger.debug("Loading new game...");
             newGame.load();
         });
-
-
     }
 }
 
