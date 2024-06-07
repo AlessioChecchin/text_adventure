@@ -5,11 +5,8 @@ import com.adventure.exceptions.ConfigurationException;
 import com.adventure.models.items.UsableItem;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import software.amazon.awssdk.services.config.model.ConfigException;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.io.Writer;
 
 import static org.junit.jupiter.api.Assertions.*;
 
