@@ -28,16 +28,16 @@ class CmdAttackTest {
         command.execute();
 
         //test
-        assertEquals(applicationContextProvider.getGame().getPlayer().getStats().getHp(), 8, "Problems with the attack command");
+        assertEquals(applicationContextProvider.getGame().getPlayer().getStats().getHp(), 5, "Problems with the attack command");
     }
 
     public void setTestContext(ApplicationContextProvider applicationContextProvider) throws ConfigurationException {
-        Game game = new Game(new ApplicationConfig(new Properties()));
+        Game game = new Game(applicationContextProvider.getConfig());
         game.setId("test");
         Room room = new Room("test", "test");
         Enemy monster = new Enemy(new Inventory(10),new Stats(5,5,5,5), "monster");
         room.setMonster(monster);
-        Player player = new Player("player", new Inventory(10), new Stats(10,10,10,10));
+        Player player = new Player("player", new Inventory(10), new Stats(10,10,10,0));
         game.setPlayer(player);
         game.setCurrentNode(room);
         applicationContextProvider.setGame(game);

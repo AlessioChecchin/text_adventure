@@ -2,6 +2,7 @@ package com.adventure.serializers;
 
 import com.adventure.Resources;
 import com.adventure.config.ApplicationConfig;
+import com.adventure.config.ApplicationContextProvider;
 import com.adventure.exceptions.ConfigurationException;
 import com.adventure.models.Game;
 import com.adventure.models.Inventory;
@@ -30,8 +31,8 @@ class GameSerializerTest {
 
     @Test
     public void testGraphSerialization() throws IOException, ConfigurationException {
-
-        Game game = new Game(new ApplicationConfig(new Properties()));
+        ApplicationContextProvider applicationContextProvider = ApplicationContextProvider.getInstance();
+        Game game = new Game(applicationContextProvider.getConfig());
         game.setId("test");
 
         Inventory playerInventory = new Inventory(100);

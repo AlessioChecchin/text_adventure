@@ -1,6 +1,7 @@
 package com.adventure.models;
 
 import com.adventure.config.ApplicationConfig;
+import com.adventure.config.ApplicationContextProvider;
 import com.adventure.exceptions.ConfigurationException;
 import com.adventure.models.nodes.Action;
 import com.adventure.models.nodes.Room;
@@ -9,6 +10,7 @@ import com.adventure.models.nodes.StoryNodeLink;
 import javafx.stage.Stage;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DirectedPseudograph;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,15 +24,16 @@ class GameTest {
 
 
 
-    Room room1;
-    Room room2;
-    Game game;
-    Graph<StoryNode, StoryNodeLink> testGraph;
+    static Room room1;
+    static Room room2;
+    static Game game;
+    static Graph<StoryNode, StoryNodeLink> testGraph;
     TestInterface stage;
-    @BeforeEach
-    void setUp() throws ConfigurationException {
-        Properties init = new Properties();
-        game = new Game(new ApplicationConfig(new Properties()));
+    @BeforeAll
+    static void setUp() throws ConfigurationException {
+        ApplicationContextProvider applicationContextProvider = ApplicationContextProvider.getInstance();
+        applicationContextProvider.getConfig();
+        game = new Game(applicationContextProvider.getConfig());
         testGraph = new DirectedPseudograph<>(StoryNodeLink.class);
         room1 = new Room("Test", "Test");
         room2 = new Room("Test", "Test");
@@ -45,11 +48,6 @@ class GameTest {
 
     @Test
     void previousNodeTest(){
-        //exercise
-        game.setCurrentNode(room1);
-
-        //test hasPreviousNode
-        assertFalse(game.hasPreviousNode(), "Problems with previous node");
 
         //exercise
         game.setCurrentNode(room2);

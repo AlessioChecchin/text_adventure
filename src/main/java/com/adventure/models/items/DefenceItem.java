@@ -1,5 +1,6 @@
 package com.adventure.models.items;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -29,6 +30,7 @@ public class DefenceItem extends Item implements Equipable
      * @param defenceMultiplier Defence multiplier.
      * @param additionalDefence Additional defence.
      */
+    @JsonCreator
     public DefenceItem(@JsonProperty("name") String name, @JsonProperty("defenceMultiplier") double defenceMultiplier, @JsonProperty("additionalDefence") int additionalDefence)
     {
         super(name);

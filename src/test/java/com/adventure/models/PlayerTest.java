@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
-    static Player player;
+     Player player;
 
     @BeforeEach
     void setUp() {
-        player = new Player("test", new Inventory(10), new Stats(5,5,5,5));
+        player = new Player("test", new Inventory(30), new Stats(5,5,5,5));
     }
 
     @Test
@@ -33,7 +33,7 @@ class PlayerTest {
 
     @Test
     void testEquals() {
-        Player playerTest = new Player("test", new Inventory(10), new Stats(10,10,10,10));
+        Player playerTest = new Player("test", new Inventory(30), new Stats(5,5,5,5));
         assertEquals(playerTest, player);
     }
 }
