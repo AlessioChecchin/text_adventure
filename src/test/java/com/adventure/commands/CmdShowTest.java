@@ -26,7 +26,7 @@ class CmdShowTest extends CmdAttackTest {
         // Set the output of the command.
         StringWriter out    = new StringWriter();
         PrintWriter  writer = new PrintWriter(out);
-        String value = String.format("Inventory content: %nname: apple, atk: 0, def: 0, hp: 0%n");
+        String value = String.format("Inventory content: %nname: apple, atk: 0, def: 0, hp: 0%nTotal weight: 0%n");
         command.setWriter(writer);
 
         // Add an item for test.
