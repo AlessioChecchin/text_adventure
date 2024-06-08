@@ -1,3 +1,0 @@
-# Example title
-
-Hello world

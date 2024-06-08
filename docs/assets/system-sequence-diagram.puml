@@ -22,18 +22,18 @@ loop while !Game.EXIT
   alt command=newGame
     Player -> Game: newGame(playerName)
     Game -> StorageService: Requests a new game for the player.
-    StorageService -> Game: Game object.
+    StorageService --> Game
     Game -> Game: Populates game object.
   else command=loadGame
     Player -> Game: loadGame(gameId)
     Game -> StorageService: Game object request.
-    StorageService -> Game: Game object.
+    StorageService --> Game
     Game -> Game: Populates game object.
   else command=listGames
     Player -> Game: listGames
     Game -> StorageService: Game list request.
-    StorageService -> Game: List of games.
-    Game -> Player: Shows the list of games.
+    StorageService --> Game
+    Game --> Player: Shows the list of games.
   else command=deleteGame
     Player -> Game: deleteGame
     Game -> StorageService: Delete game object request.
@@ -49,10 +49,10 @@ loop while !Game.EXIT
       Game -> Game: Game state update.
     end
 
-    Game -> Player: Command output may be:\n1) Input request for the user\n2) Command result
+    Game --> Player: Command output may be:\n1) Input request for the user\n2) Command result
     opt The command requested a new input
       Player -> Game: Input specific data
-      Game -> Player: Output specific data
+      Game --> Player
     end
   end
 end
