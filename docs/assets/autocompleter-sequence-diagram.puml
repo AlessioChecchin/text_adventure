@@ -14,38 +14,43 @@ skinparam {
  SequenceGroupBorderColor #9803fc
 }
 
-actor Player
 participant Console
 participant Autocompleter
 participant CommandParser
 participant Command
 
 
-
-Player -> Console: Keyboard input event
+activate Console
+-> Console: Keyboard input event
 alt key != Key.TAB and key != Key.SHIFT+TAB and the key modifies the text
   Console -> Autocompleter: buildPrediction()
-  Autocompleter -> Autocompleter: Calculates number of space separated tokens.
+  activate Autocompleter
 
+  Autocompleter -> Autocompleter: Calculates number of space separated tokens.
   alt tokens number = 1 and there is no space
     Autocompleter -> CommandParser: getCommands()
+    activate CommandParser
     CommandParser --> Autocompleter: Returns all enabled commands.
+    deactivate CommandParser
   else tokens number > 1 or ends with space
 
     Autocompleter -> Autocompleter: Find the command from the last - 1 token.
 
     Autocompleter -> Command: Find if the command supports additional arguments using reflection.
+    activate Command
     Command --> Autocompleter: List of additional arguments (empty if there the command does not support additional arguments)
-  end
+    deactivate Command
 
-  Autocompleter -> Autocompleter: Computes possible completions.
-
-  Autocompleter --> Console: Possibile choces for completion.
+    Autocompleter -> Autocompleter: Computes possible completions.
+    Autocompleter --> Console: Possibile choces for completion.
 
   else key=Key.TAB or key=Key.SHIFT+TAB
     Console -> Autocompleter: operate(input, shiftDirection)
     Autocompleter --> Console: Returns a list with all predictions and the suggested one.
-  end
+    deactivate Autocompleter
 
+  end
+end
+deactivate Console
 
 @enduml
