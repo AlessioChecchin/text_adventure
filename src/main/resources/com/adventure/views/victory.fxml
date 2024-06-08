@@ -1,0 +1,6 @@
+<?import javafx.scene.layout.GridPane?>
+<?import com.adventure.components.Display?>
+
+<GridPane fx:id="box" xmlns:fx="http://javafx.com/fxml" fx:controller="com.adventure.controllers.VictoryController" maxWidth="Infinity" maxHeight="Infinity">
+    <Display fx:id="display" text="" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS"/>
+</GridPane>

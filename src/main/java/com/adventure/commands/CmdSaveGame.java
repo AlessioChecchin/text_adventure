@@ -57,7 +57,7 @@ public class CmdSaveGame extends AbstractCommand
         catch (Exception e)
         {
             writer.println("Error saving game");
-            logger.error("Error saving game: {}", e.getLocalizedMessage());
+            logger.error("Error saving game", e);
         }
     }
 

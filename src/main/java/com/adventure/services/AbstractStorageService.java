@@ -5,10 +5,7 @@ import com.adventure.models.*;
 import com.adventure.models.items.AttackItem;
 import com.adventure.models.items.Key;
 import com.adventure.models.items.UsableItem;
-import com.adventure.models.nodes.Action;
-import com.adventure.models.nodes.Room;
-import com.adventure.models.nodes.StoryNode;
-import com.adventure.models.nodes.StoryNodeLink;
+import com.adventure.models.nodes.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jgrapht.Graph;
@@ -165,6 +162,11 @@ abstract class AbstractStorageService implements StorageService
         room10.setBackgroundPath("assets/castle.png");
         g.addVertex(room10);
 
+        // Victory room
+
+        VictoryNode victoryNode = new VictoryNode();
+        g.addVertex(victoryNode);
+
         // Edges
         StoryNodeLink edge12 = new StoryNodeLink();
         edge12.setAction(new Action("north"));
@@ -235,6 +237,10 @@ abstract class AbstractStorageService implements StorageService
         StoryNodeLink edge910 = new StoryNodeLink();
         edge910.setAction(new Action("north"));
         g.addEdge(room9, room10, edge910);
+
+        StoryNodeLink test = new StoryNodeLink();
+        test.setAction(new Action("win"));
+        g.addEdge(room1, victoryNode, test);
 
         return game;
     }
