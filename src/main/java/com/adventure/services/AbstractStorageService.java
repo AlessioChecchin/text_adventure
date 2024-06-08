@@ -3,6 +3,7 @@ package com.adventure.services;
 import com.adventure.config.Config;
 import com.adventure.models.*;
 import com.adventure.models.items.AttackItem;
+import com.adventure.models.items.DefenceItem;
 import com.adventure.models.items.Key;
 import com.adventure.models.items.UsableItem;
 import com.adventure.models.nodes.*;
@@ -39,11 +40,8 @@ abstract class AbstractStorageService implements StorageService
 
         UsableItem potion = new UsableItem("Potion");
         potion.setAdditionalHp(10);
-        game.getPlayer().getInventory().addItem(potion);
-        game.getPlayer().getInventory().addItem(sword);
 
 
-        String key1 = "Level 1";
         String key2 = "Level 2";
         String key3 = "Level 3";
         String key4 = "Level 4";
@@ -51,66 +49,83 @@ abstract class AbstractStorageService implements StorageService
         String key6 = "Level 6";
 
         // Room 1.
-        Room room1 = new Room("Introduction room", "Welcome to the first room, take the key and go on an adventure!");
+        Room room1 = new Room("Introduction room", "In a distant era, in the lands of Margorgh, in the darkest depths of a shadowy forest, it is said that there exists a Castle ruled by evil, housing an unimaginable power. For millennia, humanity has sought to wrest this power from the forces of evil, with battles and wars marking the quest for this power. Over time, the traces of the Castle and the power it held within were lost, vanished like leaves on the trees in winter, or so it was believed...\n" +
+                "\n" +
+                "A mysterious scroll was found by a warrior with a heart of gold, a scroll containing knowledge that even he could not imagine where it would lead him. The name of this hero was " + playerName + ", a name that, unbeknownst to him, would be remembered forever.\n" +
+                "\n" +
+                "The scroll led him through abandoned and devastated lands where the scent of death and torment still lingered. Our Hero arrived at the edge of a forest with a spectral aura, but driven by curiosity, he did not hesitate to venture into the dark woods...\n" + "Welcome, it is time to embark on this adventure as " + playerName + ". The forest that lies before your eyes is a dense network of dark canopies, creating a natural barrier to the sight of the horizon. Inside, all is silent, and not even the leaves stir in this gloomy and mysterious atmosphere. However, your determined warrior spirit urges you to venture into the forest, something calls to you. Explore the forest following the scroll, good luck Hero!\n" +
+                "It seems that there are some items in this part of the forest, try to 'look' for finding something!");
         room1.setBackgroundPath("assets/castle.png");
-        room1.getItems().add(new Key(key1));
+        room1.getItems().add(sword);
+        room1.getItems().add(potion);
         g.addVertex(room1);
 
         // Set to current node.
         game.setCurrentNode(room1);
 
         // Room 2.
-        Room room2 = new Room("K2 fight room", "Oh no, a goblin! Fight him and take the loot that drops");
+        Room room2 = new Room("K2 fight room", "Oh no, a goblin appears in front of you! Fight him and take the loot that drops");
         room2.setBackgroundPath("assets/castle.png");
 
         {
             Inventory enemyInventory2 = new Inventory(100);
-            Stats enemyStats2 = new Stats(100,100,1,1);
+            Stats enemyStats2 = new Stats(30,30,5,0);
             enemyInventory2.addItem(new Key(key2));
             Enemy enemy2 = new Enemy(enemyInventory2, enemyStats2, "Goblin");
-            enemy2.setDefaultDialog("I'm monster that holds K2.\nI'll kill u.");
+            enemy2.setDefaultDialog("I'm the KeyHolder of the Dark Castle, if you want to open the doors of the castle you have to kill me. \nFight me stupid human!");
 
             room2.setMonster(enemy2);
+            UsableItem apple = new UsableItem("apple");
+            apple.setAdditionalHp(5);
+            room2.getItems().add(apple);
         }
 
         g.addVertex(room2);
 
         // Room 3.
-        Room room3 = new Room("K3 fight room", "Oh no, a witch! Fight the witch and take the loot that drops");
+        Room room3 = new Room("Enter of the castle", "The forest begins to thin out, and in front of you appears a grim scene: a huge castle dominates the horizon. The imposing towers pierce the dark sky like sharp claws, and eerie gargoyle statues along the rooftops seem to be watching you. The eyes of the gargoyles glow a blood-red, the oak wooden gate swings open, a flock of bats flies out from the castle, and the smell of death spreads through the surrounding area. \nA voice in your head calls you, inviting you to enter the castle. You draw your weapon, take a deep breath, and cross the threshold of the castle.\n" +
+                "Inside, no natural light enters; there are candles that dimly illuminate the entrance. You hear suspicious noises, you are not alone in this mysterious place....");
+        //TODO set che correct background path
         room3.setBackgroundPath("assets/castle.png");
 
         {
-            Inventory enemyInventory3 = new Inventory(100);
-            Stats enemyStats3 = new Stats(100,100,1,1);
-            enemyInventory3.addItem(new Key(key3));
-            Enemy enemy3 = new Enemy(enemyInventory3, enemyStats3, "Monster K3");
-            enemy3.setDefaultDialog("I'm monster that holds K3.\nI'll kill u.");
-
-            room3.setMonster(enemy3);
+            UsableItem spiderEye = new UsableItem("spiderEye");
+            DefenceItem goblinHelmet = new DefenceItem("goblinHelmet", 0, 5);
+            AttackItem blackSword = new AttackItem("blackSword", 1, 10);
+            room3.getItems().add(spiderEye);
+            room3.getItems().add(goblinHelmet);
+            room3.getItems().add(blackSword);
         }
 
         g.addVertex(room3);
 
         // Room 4.
-        Room room4 = new Room("K4 fight room", "Oh no, a troll! Fight the troll and take the loot that drops");
+        Room room4 = new Room("Loot Room", "It seems there's no one in this part of the forest, search if there are some items");
         room4.setBackgroundPath("assets/castle.png");
 
         {
-            Inventory enemyInventory4 = new Inventory(100);
-            Stats enemyStats4 = new Stats(100,100,1,1);
-            enemyInventory4.addItem(new Key(key4));
-            Enemy enemy4 = new Enemy(enemyInventory4, enemyStats4, "Monster K4");
-            enemy4.setDefaultDialog("I'm monster that holds K4.\nI'll kill u.");
-
-            room4.setMonster(enemy4);
+            DefenceItem woodArmor = new DefenceItem("woodArmor", 0, 8);
+            UsableItem gingerRoot = new UsableItem("gingerRoot");
+            gingerRoot.setAdditionalHp(3);
+            gingerRoot.setAdditionalDefence(2);
+            AttackItem woodSword = new AttackItem("woodSword", 1, 7);
+            room4.getItems().add(woodArmor);
+            room4.getItems().add(gingerRoot);
+            room4.getItems().add(woodSword);
         }
 
         g.addVertex(room4);
 
         // Room 5.
-        Room room5 = new Room("Loot room", "No enemies here :)");
+        Room room5 = new Room("Second Monster room", "Oh no, a monster appears in front of you!");
         room5.setBackgroundPath("assets/castle.png");
-        //room5.getItems().add(new Key(key5));
+        {
+            Inventory enemyInventory2 = new Inventory(100);
+            Stats enemyStats2 = new Stats(40,40,8,2);
+            Enemy enemy2 = new Enemy(enemyInventory2, enemyStats2, "Gian Spider");
+            enemy2.setDefaultDialog("Hi, human, now it's the hour of your death!");
+        }
+
         g.addVertex(room5);
 
         // Room 6.
@@ -170,16 +185,15 @@ abstract class AbstractStorageService implements StorageService
         // Edges
         StoryNodeLink edge12 = new StoryNodeLink();
         edge12.setAction(new Action("north"));
-        edge12.setKey(key1);
         g.addEdge(room1, room2, edge12);
 
         StoryNodeLink edge23 = new StoryNodeLink();
-        edge23.setAction(new Action("west"));
+        edge23.setAction(new Action("north"));
         edge23.setKey(key2);
         g.addEdge(room2, room3, edge23);
 
         StoryNodeLink edge32 = new StoryNodeLink();
-        edge32.setAction(new Action("east"));
+        edge32.setAction(new Action("south"));
         g.addEdge(room3, room2, edge32);
 
         StoryNodeLink edge24 = new StoryNodeLink();
