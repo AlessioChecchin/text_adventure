@@ -229,7 +229,7 @@ abstract class AbstractStorageService implements StorageService
             room11.setMonster(enemy7);
         }
 
-        g.addVertex(room10);
+        g.addVertex(room11);
 
 
         // Edges

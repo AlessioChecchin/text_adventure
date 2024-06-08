@@ -24,7 +24,7 @@
             <VBox styleClass="separator" />
         </top>
         <center>
-            <TextArea editable="false" focusTraversable="false" wrapText="true"
+            <TextArea editable="false" onMouseClicked="#onPromptClick" wrapText="true"
                           fx:id="consoleOutput" styleClass="console-output"/>
         </center>
         <bottom>
