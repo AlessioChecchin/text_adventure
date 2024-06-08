@@ -60,10 +60,7 @@ public class Display extends GridPane implements BaseController
         this.cmdInput = null;
     }
 
-    /***
-     * Method called when a user click on the output section of the console.
-     * This allows the text field to always be focused.
-     */
+
     public void onPromptClick()
     {
         this.consolePrompt.requestFocus();
@@ -256,7 +253,7 @@ public class Display extends GridPane implements BaseController
     }
 
     @FXML
-    private Label consoleOutput;
+    private TextArea consoleOutput;
 
     @FXML
     private TextField consolePrompt;
@@ -266,7 +263,7 @@ public class Display extends GridPane implements BaseController
 
     @FXML private TextField textField;
 
-    // Necessary to detect TAB + SHIFT pressing
+    //  Necessary to detect TAB + SHIFT pressing
     final KeyCombination keyShiftTab = new KeyCodeCombination(KeyCode.TAB, KeyCombination.SHIFT_DOWN);
 
     private Command currentCommand;

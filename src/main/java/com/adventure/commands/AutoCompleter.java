@@ -1,6 +1,6 @@
 package com.adventure.commands;
 
-import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
@@ -130,11 +130,11 @@ public class AutoCompleter
 
     /**
      * Obtain and set the input and output Strings
-     * @param output Label of the output prompt
+     * @param output TextArea of the output prompt
      * @param input TextFiled for the input prompt
      * @param dir Direction to follow when selecting the next prediction
      */
-    public void operate(Label output, TextField input, direction dir)
+    public void operate(TextArea output, TextField input, direction dir)
     {
         if(!this.allCommandsString.isEmpty())
             output.setText(this.allCommandsString);
