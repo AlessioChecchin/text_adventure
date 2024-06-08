@@ -15,12 +15,14 @@ public class CmdLook extends AbstractCommand
 
         if(node instanceof Room room)
         {
-            this.writer.println("In the current room you can see: ");
-
-            for(Item itm: room.getItems())
+            if( !room.getItems().isEmpty())
             {
-                this.writer.printf("* %s%n", itm);
+                this.writer.println("In the current room you can see: ");
+                for (Item itm : room.getItems())
+                    this.writer.printf("* %s%n", itm);
             }
+            else
+                this.writer.println("No items in this room");
         }
         else
         {

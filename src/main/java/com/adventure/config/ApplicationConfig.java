@@ -79,7 +79,7 @@ public class ApplicationConfig implements Config
     @Override
     public double getMonsterDodgeProbability()
     {
-        return 15;
+        return 30;
     }
 
     @Override
