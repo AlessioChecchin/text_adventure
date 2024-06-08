@@ -1,0 +1,82 @@
+@startuml
+!theme materia-outline
+
+skinparam ArrowColor #9803fc
+skinparam BackgroundColor #FFFFFF
+skinparam ArrowColor #9803fc
+skinparam ActorBorderColor #9803fc
+skinparam ActorFontColor #9803fc
+skinparam ActorBackgroundColor #9803fc
+skinparam ParticipantFontColor #9803fc
+skinparam ParticipantBorderColor #9803fc
+skinparam ParticipantBackgroundColor #FFFFFF
+skinparam {
+ SequenceGroupBorderColor #9803fc
+}
+
+participant CommandMove
+participant ApplicationContext
+participant Game
+participant Player
+participant GameGraph
+participant StoryNodeLink
+
+-> CommandMove: execute()
+activate CommandMove
+CommandMove -> ApplicationContext: getGame()
+activate ApplicationContext
+ApplicationContext --> CommandMove
+deactivate ApplicationContext
+
+CommandMove -> Game: getCurrentNode(), getGameGraph()
+activate Game
+Game --> CommandMove
+deactivate Game
+
+CommandMove -> GameGraph: getOutgoingEdges(currentNode)
+activate GameGraph
+GameGraph --> CommandMove
+deactivate GameGraph
+
+
+loop foreach outgoingEdge
+  CommandMove -> Action: getAction()
+  activate Action
+  Action --> CommandMove
+  deactivate Action
+
+  opt action matches command argument (eg. north, south, ...)
+
+    CommandMove -> StoryNodeLink: getLocked()
+    activate StoryNodeLink
+    StoryNodeLink --> CommandMove
+    deactivate StoryNodeLink
+
+    alt edge locked
+      CommandMove -> Player: getItems()
+      activate Player
+      Player --> CommandMove
+      deactivate Player
+
+      CommandMove -> CommandMove: Search a key in the items that matches edge key.
+
+      alt key found
+        CommandMove -> StoryNodeLink: unlockEdge()
+        CommandMove -> Game: setCurrentNode(targetNode)
+      else else
+        CommandMove -> CommandMove: Notify that the player does not have the correct key.
+      end
+    else else
+      CommandMove -> Game: setCurrentNode(targetNode)
+    end
+  end
+end
+
+opt no action matched command argument
+  CommandMove -> CommandMove: Notify that the argument is not valid.
+end
+
+deactivate CommandMove
+
+
+@enduml
