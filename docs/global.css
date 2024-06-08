@@ -24,7 +24,7 @@ html, body {
 }
 
 h2 {
-  font-size: 1.9rem;
+  font-size: 2rem;
   font-weight: bolder;
   color: var(--primary-color);
 }
@@ -41,6 +41,7 @@ h4 {
 }
 
 h5 {
+  margin-bottom: 15px;
   font-size: 1.1rem;
   color: var(--accent-color-darker)
 }
