@@ -8,7 +8,7 @@ html, body {
 /* layout */
 .header {
   border-bottom: 1px solid var(--code-bg-color);
-  grid-template-columns: 2fr 300px 60% 1fr;
+  grid-template-columns: 1fr 150px 60% 1fr;
   background-color: var(--primary-color-light)
 }
 
