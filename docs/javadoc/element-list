@@ -1,0 +1,14 @@
+module:com.adventure
+com.adventure
+com.adventure.commands
+com.adventure.components
+com.adventure.config
+com.adventure.controllers
+com.adventure.deserializers
+com.adventure.exceptions
+com.adventure.models
+com.adventure.models.items
+com.adventure.models.nodes
+com.adventure.serializers
+com.adventure.services
+com.adventure.utils
