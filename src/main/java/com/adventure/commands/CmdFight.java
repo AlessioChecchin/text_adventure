@@ -149,24 +149,25 @@ public class CmdFight extends AbstractCommand {
         String currentGameName = currentGame.getId();
 
         Game newGame = storageService.newGame(currentGame.getPlayer().getName());
-        this.context.setGame(newGame);
 
-        // It means that the user had previously saved the game, and it must be overwritten.
-        if(currentGameName != null)
-        {
-            try
-            {
-                storageService.saveGame(newGame);
-            }
-            catch (GameStorageException e)
-            {
-                logger.error("Error saving game", e);
-                this.writer.println("Error saving game");
-            }
-        }
 
         Platform.runLater(() -> {
+            this.context.setGame(newGame);
+            // It means that the user had previously saved the game, and it must be overwritten.
+            if(currentGameName != null)
+            {
+                try
+                {
+                    storageService.saveGame(newGame);
+                }
+                catch (GameStorageException e)
+                {
+                    logger.error("Error saving game", e);
+                    this.writer.println("Error saving game");
+                }
+            }
             logger.debug("Loading new game...");
+            newGame.setStage(currentGame.getStage());
             newGame.load();
         });
     }
