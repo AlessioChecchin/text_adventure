@@ -228,6 +228,12 @@ public class Inventory
         return item;
     }
 
+    /**
+     * Drop an item and remove it from the inventory
+     * @param itemName Item to remove.
+     * @return The removed item.
+     * @throws NoSuchElementException If the item is not present.
+     */
     public Item dropItem(String itemName)
     {
         Item item = this.items.stream().filter(Item -> itemName.equals(Item.getName())).findFirst().orElse(null);

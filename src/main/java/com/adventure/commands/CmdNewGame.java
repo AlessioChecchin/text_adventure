@@ -5,6 +5,9 @@ import javafx.application.Platform;
 
 import java.util.ArrayList;
 
+/**
+ * Command used to create a new game.
+ */
 public class CmdNewGame extends AbstractCommand
 {
     @Override

@@ -14,6 +14,7 @@ abstract public class Entity
      * Entity constructor.
      * @param inventory Player inventory.
      * @param stats Player stats.
+     * @param name Entity name.
      */
     public Entity(Inventory inventory, Stats stats, String name)
     {

@@ -11,6 +11,9 @@ import javafx.scene.layout.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Controller for the Room.
+ */
 public class RoomController implements BaseController
 {
     @FXML

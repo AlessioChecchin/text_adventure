@@ -8,6 +8,9 @@ import org.jgrapht.Graph;
 
 import java.util.ArrayList;
 
+/**
+ * Command used to go back to the previous room, if there is one.
+ */
 public class CmdBack extends AbstractCommand
 {
     @Override

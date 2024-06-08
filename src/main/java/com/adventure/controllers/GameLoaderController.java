@@ -15,6 +15,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 
+/**
+ * Controller used to handle game loading for the first time during application lifetime.
+ */
 public class GameLoaderController implements BaseController
 {
     @FXML

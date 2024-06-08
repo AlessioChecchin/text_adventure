@@ -5,6 +5,9 @@ import com.adventure.services.StorageService;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Command used to list available games.
+ */
 public class CmdListGames extends AbstractCommand
 {
     @Override

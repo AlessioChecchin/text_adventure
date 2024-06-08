@@ -14,7 +14,8 @@ public abstract class NPC extends Entity
      * Entity constructor.
      *
      * @param inventory Player inventory.
-     * @param stats     Player stats.
+     * @param stats Player stats.
+     * @param name Npc name
      */
     public NPC(Inventory inventory, Stats stats, String name)
     {

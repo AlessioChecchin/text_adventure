@@ -23,26 +23,12 @@ import javafx.scene.layout.VBox;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * FXML component that represents a display.
+ * Is composed of two parts, a console prompt and a graphics section.
+ */
 public class Display extends GridPane implements BaseController
 {
-    @FXML
-    private Label consoleOutput;
-
-    @FXML
-    private TextField consolePrompt;
-
-    @FXML
-    private VBox graphics;
-
-    @FXML private TextField textField;
-
-    //  Necessary to detect TAB + SHIFT pressing
-    final KeyCombination keyShiftTab = new KeyCodeCombination(KeyCode.TAB, KeyCombination.SHIFT_DOWN);
-
-    private Command currentCommand;
-    private Task<Void> task;
-    private PipedOutputStream cmdInput;
-
     /**
      * Logger.
      */
@@ -64,6 +50,9 @@ public class Display extends GridPane implements BaseController
         }
     }
 
+    /**
+     * Initializes the controller.
+     */
     @FXML
     public void initialize()
     {
@@ -71,7 +60,10 @@ public class Display extends GridPane implements BaseController
         this.cmdInput = null;
     }
 
-
+    /***
+     * Method called when a user click on the output section of the console.
+     * This allows the text field to always be focused.
+     */
     public void onPromptClick()
     {
         this.consolePrompt.requestFocus();
@@ -198,36 +190,63 @@ public class Display extends GridPane implements BaseController
         this.task.setOnCancelled(evtCancelled -> this.currentCommand.kill());
     }
 
+    /**
+     * Get current input value.
+     * @return Current input value.
+     */
     public String getText()
     {
         return textProperty().get();
     }
 
+    /**
+     * Sets input text value.
+     * @param value Value to set.
+     */
     public void setText(String value)
     {
         textProperty().set(value);
     }
 
+    /**
+     * Returns input text property.
+     * @return Input text property.
+     */
     public StringProperty textProperty()
     {
         return consolePrompt.textProperty();
     }
 
+    /**
+     * Returns stdout text content.
+     * @return Stdout text.
+     */
     public String getStdOut()
     {
         return this.consoleOutput.getText();
     }
 
+    /**
+     * Sets text to the stdout of the display console.
+     * @param value Value to prompt out.
+     */
     public void setStdOut(String value)
     {
         this.consoleOutput.setText(value);
     }
 
+    /**
+     * Returns graphical component reference.
+     * @return Component.
+     */
     public VBox getGraphics()
     {
         return this.graphics;
     }
-    
+
+    /**
+     * Tiers down the controller.
+     */
     public void shutdown()
     {
         if(this.task != null && this.task.isRunning())
@@ -235,4 +254,23 @@ public class Display extends GridPane implements BaseController
             this.task.cancel();
         }
     }
+
+    @FXML
+    private Label consoleOutput;
+
+    @FXML
+    private TextField consolePrompt;
+
+    @FXML
+    private VBox graphics;
+
+    @FXML private TextField textField;
+
+    // Necessary to detect TAB + SHIFT pressing
+    final KeyCombination keyShiftTab = new KeyCodeCombination(KeyCode.TAB, KeyCombination.SHIFT_DOWN);
+
+    private Command currentCommand;
+    private Task<Void> task;
+    private PipedOutputStream cmdInput;
+
 }

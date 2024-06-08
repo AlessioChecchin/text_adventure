@@ -6,6 +6,9 @@ import com.adventure.models.nodes.*;
 
 import java.util.ArrayList;
 
+/**
+ * Command used during a fight to attack an enemy.
+ */
 public class CmdAttack extends AbstractCommand
 {
 

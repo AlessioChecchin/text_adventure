@@ -8,7 +8,9 @@ import javafx.application.Platform;
 
 import java.util.ArrayList;
 
-
+/**
+ * Command used to start a fight with an enemy (if there is one).
+ */
 public class CmdFight extends AbstractCommand {
 
     private Command command;

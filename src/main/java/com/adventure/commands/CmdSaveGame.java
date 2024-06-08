@@ -5,6 +5,9 @@ import com.adventure.services.StorageService;
 
 import java.util.ArrayList;
 
+/**
+ * Command used to save the current game.
+ */
 public class CmdSaveGame extends AbstractCommand
 {
     @Override

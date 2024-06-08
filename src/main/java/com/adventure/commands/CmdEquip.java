@@ -5,10 +5,12 @@ import com.adventure.models.Game;
 import com.adventure.models.Player;
 import com.adventure.models.items.Equipable;
 import com.adventure.models.items.Item;
-import com.adventure.models.items.UsableItem;
 
 import java.util.ArrayList;
 
+/**
+ * Equips an item in the inventory.
+ */
 public class CmdEquip extends AbstractCommand{
     @Override
     public void execute() throws InterruptedException {

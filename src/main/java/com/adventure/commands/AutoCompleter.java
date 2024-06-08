@@ -193,5 +193,15 @@ public class AutoCompleter
     /**
      * Direction to follow when selecting the next prediction
      */
-    public enum direction{BACKWARD, FORWARD}
+    public enum direction
+    {
+        /**
+         * Shift direction backward.
+         */
+        BACKWARD,
+        /**
+         * Shift direction forward.
+         */
+        FORWARD
+    }
 }

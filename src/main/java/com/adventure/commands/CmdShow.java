@@ -7,6 +7,9 @@ import com.adventure.models.items.Item;
 
 import java.util.ArrayList;
 
+/**
+ * Command used to show player stats/inventory.
+ */
 public class CmdShow extends AbstractCommand
 {
 

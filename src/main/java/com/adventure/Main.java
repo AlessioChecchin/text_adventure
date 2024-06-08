@@ -15,6 +15,9 @@ import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.LoggerConfig;
 
+/**
+ * Main class used to start the application.
+ */
 public class Main extends Application
 {
 
@@ -75,6 +78,10 @@ public class Main extends Application
         stage.show();
     }
 
+    /**
+     * Main function, launches the application.
+     * @param args Command line arguments.
+     */
     public static void main(String[] args)
     {
         launch();

@@ -12,11 +12,13 @@ import com.adventure.models.nodes.Room;
 
 import java.io.IOException;
 
-/*
-    Used this structure
-    https://stackoverflow.com/questions/43052290/representing-a-graph-in-json
- */
 
+// Used this structure
+// https://stackoverflow.com/questions/43052290/representing-a-graph-in-json
+
+/**
+ * Class that serializes a graph
+ */
 public class GraphSerializer extends StdSerializer<Graph>
 {
     public GraphSerializer()

@@ -1,6 +1,10 @@
 package com.adventure.commands;
 
-public class CmdRun extends CmdFight{
+/**
+ * Command used to run away from a fight.
+ */
+public class CmdRun extends CmdFight
+{
     @Override
     public void execute() throws InterruptedException {
         battleIsActive = false;

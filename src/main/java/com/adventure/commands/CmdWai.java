@@ -8,6 +8,10 @@ import org.jgrapht.Graph;
 
 import java.util.ArrayList;
 
+/**
+ * Command used to gather information about current player location.
+ * Stands for "where am I".
+ */
 public class CmdWai extends AbstractCommand
 {
     @Override

@@ -8,6 +8,9 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Interface for command.
+ */
 public interface Command
 {
     /**
@@ -19,7 +22,7 @@ public interface Command
     /**
      * Get a list of all the available argument for this command (necessary for command prediction)
      * @return ArrayList with all the possible arguments
-     * @throws GameStorageException
+     * @throws GameStorageException If errors occur while fetching game data from the storage.
      */
     ArrayList<String> getPossibleArgs() throws GameStorageException;
 

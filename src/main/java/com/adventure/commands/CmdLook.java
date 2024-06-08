@@ -6,6 +6,9 @@ import com.adventure.models.nodes.StoryNode;
 
 import java.util.ArrayList;
 
+/**
+ * Command used to retrieve information about the room the user is in.
+ */
 public class CmdLook extends AbstractCommand
 {
     @Override

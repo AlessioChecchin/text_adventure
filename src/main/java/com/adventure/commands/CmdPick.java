@@ -8,6 +8,9 @@ import com.adventure.models.nodes.StoryNode;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Command used to pick an item from a room.
+ */
 public class CmdPick extends AbstractCommand
 {
 

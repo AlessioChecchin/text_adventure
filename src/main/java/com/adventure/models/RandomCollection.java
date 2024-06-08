@@ -6,7 +6,7 @@ import java.util.TreeMap;
 
 /**
  * Class used to pick an item randomly from a list with a given probability.
- * @param <E>
+ * @param <E> Collection type
  */
 public class RandomCollection<E>
 {

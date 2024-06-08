@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
+/**
+ * Item used to unlock game graph locked edges.
+ */
 public class Key extends Item
 {
     /**

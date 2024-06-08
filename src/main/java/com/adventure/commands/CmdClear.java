@@ -1,9 +1,10 @@
 package com.adventure.commands;
 
-import com.adventure.exceptions.GameStorageException;
-
 import java.util.ArrayList;
 
+/**
+ * Clears the console.
+ */
 public class CmdClear extends AbstractCommand
 {
     @Override

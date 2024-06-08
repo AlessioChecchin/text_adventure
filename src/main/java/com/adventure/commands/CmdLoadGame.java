@@ -7,6 +7,9 @@ import javafx.application.Platform;
 
 import java.util.ArrayList;
 
+/**
+ * Command used to load a new game.
+ */
 public class CmdLoadGame extends AbstractCommand
 {
     @Override

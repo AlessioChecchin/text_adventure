@@ -10,6 +10,11 @@ import java.net.URL;
  */
 public class Resources
 {
+    /**
+     * Returns background image.
+     * @param source Source of the background image.
+     * @return Background image.
+     */
     public static BackgroundImage getBackground(String source)
     {
         URL imageUrl = Resources.class.getResource(source);
@@ -29,10 +34,21 @@ public class Resources
         return null;
     }
 
-    // TODO : può lanciare NullPointerException
+    /**
+     * Returns asset path is available
+     * @return Asset path or null if the path is not found.
+     */
     public static String getAssetsPath()
     {
-        return Resources.class.getResource("assets").getPath();
+        URL url =  Resources.class.getResource("assets");
+
+        if(url != null)
+        {
+            return url.getPath();
+        }
+
+        return null;
+
     }
 
 }

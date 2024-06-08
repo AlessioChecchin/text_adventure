@@ -13,6 +13,7 @@ public class UsableItem extends Item implements Usable
      *     <li>attack: 0</li>
      *     <li>defence: 0</li>
      *     <li>hp: 0</li>
+     * </ul>
      * @param name Name of the item
      */
     public UsableItem(@JsonProperty("name") String name)

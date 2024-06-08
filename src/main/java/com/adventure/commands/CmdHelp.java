@@ -2,6 +2,9 @@ package com.adventure.commands;
 
 import java.util.ArrayList;
 
+/**
+ * Command used to display possible command with descriptions.
+ */
 public class CmdHelp extends AbstractCommand
 {
     @Override

@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * Command used to consume an item.
+ */
 public class CmdUse extends AbstractCommand
 {
     @Override

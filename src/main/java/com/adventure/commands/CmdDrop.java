@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * Command used to drop an item.
+ */
 public class CmdDrop extends AbstractCommand
 {
     @Override

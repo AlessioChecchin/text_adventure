@@ -10,6 +10,10 @@ import org.apache.logging.log4j.Logger;
 import java.io.InputStream;
 import java.util.*;
 
+/**
+ * This class implements a singleton pattern.
+ * The responsibility of this class is to provide a context object in the whole application.
+ */
 public class ApplicationContextProvider implements ApplicationContext
 {
     //

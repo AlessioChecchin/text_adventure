@@ -5,17 +5,14 @@ import org.apache.logging.log4j.LogManager;
 
 import java.util.*;
 
-
+/**
+ * Class responsible for parsing and instantiating commands.
+ */
 public class CommandParser
 {
-    private static CommandParser instance;
-
-    private ApplicationContext context;
-
-    private final HashMap<String, CommandMetadata> lookupTable;
-
-    private Set<String> enabledCommands;
-
+    /**
+     * Constructs a new command parser.
+     */
     private CommandParser()
     {
         this.lookupTable = new HashMap<>();
@@ -239,4 +236,24 @@ public class CommandParser
 
         return metadata;
     }
+
+    /**
+     * Singleton instance.
+     */
+    private static CommandParser instance;
+
+    /**
+     * Application context.
+     */
+    private ApplicationContext context;
+
+    /**
+     * Lookup table used to search register commands.
+     */
+    private final HashMap<String, CommandMetadata> lookupTable;
+
+    /**
+     * Set used to check which commands are enabled.
+     */
+    private Set<String> enabledCommands;
 }

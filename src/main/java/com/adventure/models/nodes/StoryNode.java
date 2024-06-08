@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.*;
 
 import java.util.Objects;
 
+/**
+ * Class that represents a node in the game graph.
+ * It's a fundamental object to represent game state.
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Room.class, name = "Room"),

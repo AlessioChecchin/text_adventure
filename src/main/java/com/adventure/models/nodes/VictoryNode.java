@@ -10,12 +10,19 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonDeserialize(using = VictoryNodeDeserializer.class)
 public class VictoryNode extends StoryNode
 {
+    /**
+     * Default constructor.
+     */
     public VictoryNode()
     {
         super("views/victory.fxml");
         super.setID();
     }
 
+    /**
+     * Constructor with id.
+     * @param ID Node unique id.
+     */
     public VictoryNode(@JsonProperty("numericID") int ID)
     {
         super("views/victory.fxml");
