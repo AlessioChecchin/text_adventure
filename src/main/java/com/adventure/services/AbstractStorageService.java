@@ -48,6 +48,7 @@ abstract class AbstractStorageService implements StorageService
         String key4 = "Level 4";
         String key5 = "Level 5";
         String key6 = "Level 6";
+        String key7 = "Level 7";
 
         // Room 1.
         Room room1 = new Room("Introduction room", "In a distant era, in the lands of Margorgh, in the darkest depths of a shadowy forest, it is said that there exists a Castle ruled by evil, housing an unimaginable power. For millennia, humanity has sought to wrest this power from the forces of evil, with battles and wars marking the quest for this power. Over time, the traces of the Castle and the power it held within were lost, vanished like leaves on the trees in winter, or so it was believed...\n" +
@@ -178,84 +179,89 @@ abstract class AbstractStorageService implements StorageService
         room10.setBackgroundPath("assets/castle.png");
         g.addVertex(room10);
 
+        {
+
+        }
+
         // Victory room
 
         VictoryNode victoryNode = new VictoryNode();
         g.addVertex(victoryNode);
 
         // Edges
-        StoryNodeLink edge12 = new StoryNodeLink();
-        edge12.setAction(new Action("north"));
-        g.addEdge(room1, room2, edge12);
+        StoryNodeLink edge1to2 = new StoryNodeLink();
+        edge1to2.setAction(new Action("north"));
+        g.addEdge(room1, room2, edge1to2);
 
-        StoryNodeLink edge23 = new StoryNodeLink();
-        edge23.setAction(new Action("north"));
-        edge23.setKey(key2);
-        g.addEdge(room2, room3, edge23);
+        StoryNodeLink edge2to3 = new StoryNodeLink();
+        edge2to3.setAction(new Action("north"));
+        edge2to3.setKey(key2);
+        g.addEdge(room2, room3, edge2to3);
 
-        StoryNodeLink edge32 = new StoryNodeLink();
-        edge32.setAction(new Action("south"));
-        g.addEdge(room3, room2, edge32);
+        StoryNodeLink edge3to2 = new StoryNodeLink();
+        edge3to2.setAction(new Action("south"));
+        g.addEdge(room3, room2, edge3to2);
 
-        StoryNodeLink edge24 = new StoryNodeLink();
-        edge24.setAction(new Action("east"));
-        edge24.setKey(key3);
-        g.addEdge(room2, room4, edge24);
+        StoryNodeLink edge2to4 = new StoryNodeLink();
+        edge2to4.setAction(new Action("east"));
+        edge2to4.setKey(key3);
+        g.addEdge(room2, room4, edge2to4);
 
-        StoryNodeLink edge42 = new StoryNodeLink();
-        edge42.setAction(new Action("west"));
-        g.addEdge(room4, room2, edge42);
+        StoryNodeLink edge4to2 = new StoryNodeLink();
+        edge4to2.setAction(new Action("west"));
+        g.addEdge(room4, room2, edge4to2);
 
-        StoryNodeLink edge45 = new StoryNodeLink();
-        edge45.setAction(new Action("north"));
-        edge45.setKey(key4);
-        g.addEdge(room4, room5, edge45);
+        StoryNodeLink edge4to5 = new StoryNodeLink();
+        edge4to5.setAction(new Action("north"));
+        edge4to5.setKey(key4);
+        g.addEdge(room4, room5, edge4to5);
 
-        StoryNodeLink edge54 = new StoryNodeLink();
-        edge54.setAction(new Action("south"));
-        g.addEdge(room5, room4, edge54);
+        StoryNodeLink edge5to4 = new StoryNodeLink();
+        edge5to4.setAction(new Action("south"));
+        g.addEdge(room5, room4, edge5to4);
 
-        StoryNodeLink edge56 = new StoryNodeLink();
-        edge56.setAction(new Action("north"));
-        edge56.setKey(key5);
-        g.addEdge(room5, room6, edge56);
+        StoryNodeLink edge5to6 = new StoryNodeLink();
+        edge5to6.setAction(new Action("north"));
+        edge5to6.setKey(key5);
+        g.addEdge(room5, room6, edge5to6);
 
-        StoryNodeLink edge65 = new StoryNodeLink();
-        edge65.setAction(new Action("south"));
-        g.addEdge(room6, room5, edge65);
+        StoryNodeLink edge6to5 = new StoryNodeLink();
+        edge6to5.setAction(new Action("south"));
+        g.addEdge(room6, room5, edge6to5);
 
-        StoryNodeLink edge27 = new StoryNodeLink();
-        edge27.setAction(new Action("north"));
-        g.addEdge(room2, room7, edge27);
+        StoryNodeLink edge2to7 = new StoryNodeLink();
+        edge2to7.setAction(new Action("north"));
+        g.addEdge(room2, room7, edge2to7);
 
-        StoryNodeLink edge72 = new StoryNodeLink();
-        edge72.setAction(new Action("south"));
-        g.addEdge(room7, room2, edge72);
+        StoryNodeLink edge7to2 = new StoryNodeLink();
+        edge7to2.setAction(new Action("south"));
+        g.addEdge(room7, room2, edge7to2);
 
-        StoryNodeLink edge78 = new StoryNodeLink();
-        edge78.setAction(new Action("north"));
-        g.addEdge(room7, room8, edge78);
+        StoryNodeLink edge7to8 = new StoryNodeLink();
+        edge7to8.setAction(new Action("north"));
+        g.addEdge(room7, room8, edge7to8);
 
-        StoryNodeLink edge87 = new StoryNodeLink();
-        edge87.setAction(new Action("south"));
-        g.addEdge(room8, room7, edge87);
+        StoryNodeLink edge8to7 = new StoryNodeLink();
+        edge8to7.setAction(new Action("south"));
+        g.addEdge(room8, room7, edge8to7);
 
-        StoryNodeLink edge79 = new StoryNodeLink();
-        edge79.setAction(new Action("west"));
-        edge79.setKey(key6);
-        g.addEdge(room7, room9, edge79);
+        StoryNodeLink edge7to9 = new StoryNodeLink();
+        edge7to9.setAction(new Action("west"));
+        edge7to9.setKey(key6);
+        g.addEdge(room7, room9, edge7to9);
 
-        StoryNodeLink edge97 = new StoryNodeLink();
-        edge97.setAction(new Action("east"));
-        g.addEdge(room9, room7, edge97);
+        StoryNodeLink edge9to7 = new StoryNodeLink();
+        edge9to7.setAction(new Action("east"));
+        g.addEdge(room9, room7, edge9to7);
 
-        StoryNodeLink edge910 = new StoryNodeLink();
-        edge910.setAction(new Action("north"));
-        g.addEdge(room9, room10, edge910);
+        StoryNodeLink edge9to10 = new StoryNodeLink();
+        edge9to10.setAction(new Action("north"));
+        g.addEdge(room9, room10, edge9to10);
 
-        StoryNodeLink test = new StoryNodeLink();
-        test.setAction(new Action("win"));
-        g.addEdge(room1, victoryNode, test);
+        StoryNodeLink edge10toWin = new StoryNodeLink();
+        edge10toWin.setKey(key7);
+        edge10toWin.setAction(new Action("win"));
+        g.addEdge(room10, victoryNode, edge10toWin);
 
         return game;
     }
