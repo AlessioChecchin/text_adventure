@@ -39,7 +39,7 @@ public class GraphSerializer extends StdSerializer<Graph>
         jsonGenerator.writeObjectFieldStart("adjacency");
         for(Object vertex : graph.vertexSet())
         {
-            jsonGenerator.writeArrayFieldStart(((Room)vertex).getID());
+            jsonGenerator.writeArrayFieldStart(((StoryNode)vertex).getID());
             for(Object edge : graph.edgesOf(vertex))
             {
                 jsonGenerator.writeString(((StoryNodeLink)edge).getID());
@@ -52,7 +52,7 @@ public class GraphSerializer extends StdSerializer<Graph>
         jsonGenerator.writeObjectFieldStart("vertexes");
         for(Object vertex : graph.vertexSet())
         {
-            jsonGenerator.writeFieldName(((Room)vertex).getID());
+            jsonGenerator.writeFieldName(((StoryNode)vertex).getID());
             jsonGenerator.writeObject(((StoryNode) vertex));
         }
         jsonGenerator.writeEndObject();
@@ -64,10 +64,10 @@ public class GraphSerializer extends StdSerializer<Graph>
             jsonGenerator.writeObjectFieldStart(((StoryNodeLink)edge).getID());
 
             jsonGenerator.writeFieldName("from");
-            jsonGenerator.writeString(((Room)graph.getEdgeSource(edge)).getID());
+            jsonGenerator.writeString(((StoryNode)graph.getEdgeSource(edge)).getID());
 
             jsonGenerator.writeFieldName("to");
-            jsonGenerator.writeString(((Room)graph.getEdgeTarget(edge)).getID());
+            jsonGenerator.writeString(((StoryNode)graph.getEdgeTarget(edge)).getID());
 
             jsonGenerator.writeFieldName("action");
             jsonGenerator.writeObject(((StoryNodeLink)edge).getAction());
@@ -78,6 +78,11 @@ public class GraphSerializer extends StdSerializer<Graph>
             jsonGenerator.writeFieldName("key");
             jsonGenerator.writeString(((StoryNodeLink)edge).getKey());
 
+            jsonGenerator.writeFieldName("ID");
+            jsonGenerator.writeString(((StoryNodeLink)edge).getID());
+
+            jsonGenerator.writeFieldName("numericID");
+            jsonGenerator.writeNumber(((StoryNodeLink)edge).getNumericID());
 
             jsonGenerator.writeEndObject();
 

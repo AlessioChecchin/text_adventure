@@ -1,14 +1,13 @@
 package com.adventure.models.nodes;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.*;
 
 import java.util.Objects;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = Room.class, name = "Room")
+        @JsonSubTypes.Type(value = Room.class, name = "Room"),
+        @JsonSubTypes.Type(value = VictoryNode.class, name = "VictoryNode")
 })
 public abstract class StoryNode
 {
@@ -39,6 +38,7 @@ public abstract class StoryNode
      * Get the String ID of the object
      * @return String ID of the object
      */
+    @JsonProperty("ID")
     public String getID()
     {
         return this.ID;

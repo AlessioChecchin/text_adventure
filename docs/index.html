@@ -245,10 +245,16 @@
             <li>
               <h5>Install Maven</h5>
               <p>
-                Maven version <code>3.9.7</code> doesn't work with this project <br>
-                Maven version <code>3.9.6, 3.8.8, 4.0.0</code> has been tested <br>
-                If not already installed, follow <a class="link-color" href="https://maven.apache.org/install.html" target="_blank">this guide</a> to install Maven.<br>
-                A useful guide to install and set environment variables <a class="link-color" href="https://phoenixnap.com/kb/install-maven-windows" tag="_blank">on Windows</a>, <a class="link-color" href="https://www.digitalocean.com/community/tutorials/install-maven-linux-ubuntu" tag="_blank">on Ubuntu</a>, <a class="link-color" href="https://www.digitalocean.com/community/tutorials/install-maven-mac-os" tag="_blank">on Mac</a><br>
+                Maven version <code>3.9.7</code> doesn't work with this project due to a known bug<br>
+                Maven version <code>3.9.6, 4.0.0</code> has been tested <br>
+              </p>
+              <ul style="list-style: none">
+                <li><a class="link-color" href="https://dlcdn.apache.org/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz">apache-maven-3.9.6-bin.tar.gz</a></li>
+                <li><a class="link-color" href="https://dlcdn.apache.org/maven/maven-4/4.0.0-beta-3/binaries/apache-maven-4.0.0-beta-3-bin.tar.gz">apache-maven-4.0.0-bin.tar.gz</a></li>
+              </ul>
+              <p>
+              If not already installed, follow <a class="link-color" href="https://maven.apache.org/install.html" target="_blank">this guide</a> to install Maven.<br>
+              A useful guide to install and set environment variables <a class="link-color" href="https://phoenixnap.com/kb/install-maven-windows" target="_blank">on Windows</a>, <a class="link-color" href="https://www.digitalocean.com/community/tutorials/install-maven-linux-ubuntu" target="_blank">on Ubuntu</a>, <a class="link-color" href="https://www.digitalocean.com/community/tutorials/install-maven-mac-os" target="_blank">on Mac</a><br>
               </p>
             </li>
             <li>
@@ -261,20 +267,16 @@
               </p>
             </li>
             <li>
-              <h4>
-                Create <code>application.config</code>
-              </h4>
+              <h5>Create <code>application.config</code></h5>
               <p>
-                In the folder <a class="file-path" style=""><code> text_adventure > src > main > resources </code></a> create a new file called <code class="code--inline" style="">application.conf</code> <br>
-                <strong>Open</strong> the file <a class="file-path" style=""><code> text_adventure > src > main > resources > copy_application.conf</code></a> <br> and <strong>copy its content</strong> inside <a class="code--inline" style=""><code>application.config</code></a> <br>
+                In the folder <span class="file-path" style=""><code> text_adventure > src > main > resources </code></span> create a new file called <code class="code--inline" style="">application.conf</code> <br>
+                <strong>Open</strong> the file <span class="file-path" style=""><code> text_adventure > src > main > resources > copy_application.conf</code></span> <br> and <strong>copy its content</strong> inside <a class="code--inline" style=""><code>application.config</code></a> <br>
               </p>
             </li>
             <li>
-              <h4>
-                Setup the bucket info
-              </h4>
+              <h5>Setup the bucket info</h5>
               <p>
-                In the file <a class="code--inline" style=""><code>application.config</code></a> complete these fields <br>
+                In the file <span class="code--inline" style=""><code>application.config</code></span> complete these fields <br>
                 <code class="code-block">storage.aws.key=</code><br>
                 <code class="code-block">storage.aws.secret=</code><br>
                 <code class="code-block">storage.aws.bucket.name=</code><br>
@@ -287,20 +289,20 @@
               </p>
             </li>
             <li>
-              <h4>Build the project</h4>
               <h5>Build the project</h5>
               <p>
-                On the terminal, move to the folder <code class="code--inline">text_adventure</code> (the repository previously cloned). Then run <br>
-                <code class="code-block">mvn package</code><br>
+                On the terminal, move to the folder <code class="code--inline">text_adventure</code> (the repository previously cloned). <br>
+                Then run <br>
+                <code class="code-block">mvn clean install</code><br>
+                then execute the command <br>
+                <code class="code-block">mvn javafx:run</code><br>
               </p>
             </li>
           </ol>
           <h4 class="section__title">IntelliJ IDEA</h4>
           <ol>
             <li>
-              <h5>
-                Install Intellij
-              </h5>
+              <h5>Install Intellij</h5>
               <p>
                 To install Intellij firstly install <strong>JetBrains Toolbox App</strong> from <a href="https://www.jetbrains.com/toolbox-app/" target="_blank" class="link-color"> this link</a>. <br>
                 Once Toolbox is installed, run it and install <strong>Intellij Community</strong> (or Intellij Ultimate if holder of a valid license)
@@ -326,30 +328,24 @@
               </p>
             </li>
             <li>
-              <h5>
-                Open the repository
-              </h5>
+              <h5>Open the repository</h5>
               <p>
                 Launch <strong>Intellij IDEA</strong> and click on "Open...". Then select the repository previously cloned. <br>
-                If somewhere in the interface appears the error message <code class="code--inline" style="color:red">JDK "20" is missing</code> then click on <a class="code--inline" style="color:red">Configure...</a> <br>
+                If somewhere in the interface appears the error message <code class="code--inline" style="color:red">JDK "20" is missing</code> then click on <span class="code--inline" style="color:red">Configure...</span> <br>
                 It should automatically detect the presence of JDK20 previously installed and it should appear on the top of the dropdown menu. If that's not the case, click on <code class="code--inline">Add JDK...</code> and select JDK20 folder previously installed
               </p>
             </li>
             <li>
-              <h5>
-                Create <code>application.config</code>
-              </h5>
+              <h5>Create <code>application.config</code></h5>
               <p>
-                In the folder <br><a class="file-path" style="margin-left: 20px"> text_adventure > src > main > resources </a><br> create a new file called <br><code class="file-path" style="margin-left: 20px">application.conf</code> <br>
-                <strong>Open</strong> the file <a class="file-path" style=""><code> text_adventure > src > main > resources > copy_application.conf</code></a> <br> and <strong>copy its content</strong> inside <a class="code--inline"><code>application.config</code></a> <br>
+                In the folder <br><span class="file-path" style="margin-left: 20px"> text_adventure > src > main > resources </span><br> create a new file called <br><code class="file-path" style="margin-left: 20px">application.conf</code> <br>
+                <strong>Open</strong> the file <span class="file-path" style=""><code> text_adventure > src > main > resources > copy_application.conf</code></span> <br> and <strong>copy its content</strong> inside <span class="code--inline"><code>application.config</code></span> <br>
               </p>
             </li>
             <li>
-              <h5>
-                Setup the bucket info
-              </h5>
+              <h5>Setup the bucket info</h5>
               <p>
-                In the file <a class="code--inline" style=""><code>application.config</code></a> complete these fields <br/>
+                In the file <span class="code--inline" style=""><code>application.config</code></span> complete these fields <br/>
                 <code class="code-block">storage.aws.key=</code><br>
                 <code class="code-block">storage.aws.secret=</code><br>
                 <code class="code-block">storage.aws.bucket.name=</code><br>
@@ -362,20 +358,16 @@
               </p>
             </li>
             <li>
-              <h5>
-                Update Maven dependencies
-              </h5>
+              <h5>Update Maven dependencies</h5>
               <p>
-                Select the file <a class="file-path">text_adventure > pom.xml</a>   and <strong>right click</strong> on it <br>
+                Select the file <span class="file-path">text_adventure > pom.xml</span>   and <strong>right click</strong> on it <br>
                 Then click con <strong>Maven > Reload Project</strong> in the dropdown menu that appears.
               </p>
             </li>
             <li>
-              <h5>
-                Run the project
-              </h5>
+              <h5>Run the project</h5>
               <p>
-                Open the file <a class="file-path">text_adventure > src > main > java > com > adventure > Main</a> and then click on the left green arrow <br>
+                Open the file <span class="file-path">text_adventure > src > main > java > com > adventure > Main</span> and then click on the left green arrow <br>
                 near the row with written <code class="code--inline">public static void main(String[] args) { launch(); }</code>
               </p>
               <p>Note:</p>
@@ -386,7 +378,14 @@
           </ol>
 
           <h4 class="section__title">Jar</h4>
-          <p>Not supported yet</p>
+          <ol>
+            <li>
+              <h5>Title</h5>
+              <p>
+                Corpo
+              </p>
+            </li>
+          </ol>
           <br/>
         </section>
         <section class="js-section">

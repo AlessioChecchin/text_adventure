@@ -1,5 +1,6 @@
 package com.adventure.models.nodes;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jgrapht.graph.DefaultEdge;
 
 import java.util.Objects;
@@ -22,11 +23,12 @@ public class StoryNodeLink extends DefaultEdge
         this.setID();
     }
 
+
     /**
      * Constructor for deserialization
      * @param id id to set when creating the edge
      */
-    public StoryNodeLink(int id)
+    public StoryNodeLink(@JsonProperty("numericID") int id)
     {
         super();
         this.action = new Action("");
@@ -44,6 +46,7 @@ public class StoryNodeLink extends DefaultEdge
      * Get String ID of the edge
      * @return String ID of the edge
      */
+    @JsonProperty("ID")
     public String getID()
     {
         return this.ID;

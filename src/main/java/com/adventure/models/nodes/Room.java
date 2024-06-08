@@ -1,16 +1,19 @@
 package com.adventure.models.nodes;
 
+import com.adventure.deserializers.RoomDeserializer;
 import com.adventure.models.Enemy;
 import com.adventure.models.Inventory;
 import com.adventure.models.Stats;
 import com.adventure.models.items.Item;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@JsonDeserialize(using = RoomDeserializer.class)
 public class Room extends StoryNode
 {
     /**
@@ -38,7 +41,7 @@ public class Room extends StoryNode
      * @param ID int ID of the class
      */
     @JsonCreator
-    public Room(@JsonProperty("name")  String name, @JsonProperty("description") String description, int ID)
+    public Room(@JsonProperty("name")  String name, @JsonProperty("description") String description,@JsonProperty("numericID") int ID)
     {
         super("views/room.fxml");
         this.name = name;

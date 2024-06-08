@@ -1,7 +1,7 @@
 package com.adventure.deserializers;
 
 import com.adventure.models.*;
-import com.adventure.models.items.Item;
+import static com.adventure.deserializers.DeserializingUtility.fromNodeToObject;
 import com.adventure.models.nodes.*;
 import com.adventure.config.ApplicationContextProvider;
 import com.fasterxml.jackson.core.JsonParser;
@@ -60,9 +60,10 @@ public class GameDeserializer extends StdDeserializer<Game>
         storyNodes  = new HashMap<>();
         Iterator<Map.Entry<String,JsonNode>> vertexIterator = vertexesNode.fields();
         while(vertexIterator.hasNext())
-            creatStoryNodeMap(vertexIterator.next());
-
-
+        {
+            Map.Entry<String,JsonNode> element = vertexIterator.next();
+            storyNodes.put(element.getKey(), fromNodeToObject(element.getValue(), StoryNode.class));
+        }
 
 
         //  Add vertexes to graph
@@ -91,9 +92,9 @@ public class GameDeserializer extends StdDeserializer<Game>
         StoryNode previous = null;
         StoryNode current = null;
         if(!node.get("previousNode").asText().equals("null"))
-            previous = storyNodes.get(node.get("previousNode").get("id").asText());
+            previous = storyNodes.get(node.get("previousNode").get("ID").asText());
         if(!node.get("currentNode").asText().equals("null"))
-            current = storyNodes.get(node.get("currentNode").get("id").asText());
+            current = storyNodes.get(node.get("currentNode").get("ID").asText());
 
         /*  Since previousNode is set only when a new currentNode is set, we set
             firstly set the currentNode as previousNode and the set the currentNode with
@@ -153,69 +154,6 @@ public class GameDeserializer extends StdDeserializer<Game>
 
         //  Populate the graph
         gameGraph.addEdge(sourceStoryNode, targetStoryNode, link);
-    }
-
-    /**
-     * Deserialize vertexes and populates storyNodes map
-     * @param element {@literal <String,JsonNode>} as {@literal <unique id, storyNode node>}
-     */
-    private void creatStoryNodeMap(Map.Entry<String,JsonNode> element) throws JsonProcessingException
-    {
-        //  Get key and value from map
-        String key = element.getKey();
-        JsonNode value = element.getValue();
-
-        //  Checks the type of the storyNode
-        if(value.get("@type").asText().equals("Room"))
-        {
-            //  Get room
-            Room room = fromNodetoRoom(value);
-
-            //  Populate map
-            storyNodes.put(key,room);
-        }
-
-    }
-
-    /**
-     * Deserialize a JsonNode in a Room object
-     * @param roomNode JsonNode to use
-     * @return Room deserialized
-     */
-    private Room fromNodetoRoom(JsonNode roomNode)  throws JsonProcessingException
-    {
-        if(roomNode.asText().equals("null"))
-            return null;
-        // * Name
-        // * Description
-        Room room = new Room(roomNode.get("name").asText(), roomNode.get("description").asText(), roomNode.get("numericID").asInt());
-        // * Completed
-        room.setCompleted(roomNode.get("completed").asBoolean());
-        // * BackgroundPath
-        room.setBackgroundPath(roomNode.get("backgroundPath").asText());
-        // * Items
-        ArrayList<Item> items = new ArrayList<>();
-        Iterator<JsonNode> iterator = roomNode.get("items").elements();
-        while(iterator.hasNext())
-            items.add(fromNodeToObject(iterator.next(),Item.class));
-        room.setItems(items);
-        // * Entities
-        room.setMonster(fromNodeToObject(roomNode.get("monster"), Enemy.class));
-
-        return room;
-    }
-
-
-    /**
-     * Given the class name the JsonNode it uses the default deserializer to deserialize the JsonNode using the given class
-     * @param objectNode JsonNode to use
-     * @param tClass Class type to use
-     * @return A deserialized object of type tClass
-     * @param <T> the type to use
-     */
-    private <T> T fromNodeToObject(JsonNode objectNode, Class<T> tClass) throws JsonProcessingException
-    {
-            return new ObjectMapper().readValue(objectNode.toString(), tClass);
     }
 
 
