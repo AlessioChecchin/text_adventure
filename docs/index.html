@@ -1,413 +1,670 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Text Adventure - Documentation</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
-    <link rel="stylesheet" href="scribbler-global.css">
-    <link rel="stylesheet" href="scribbler-doc.css">
-    <link rel="author" href="humans.txt">
-  </head>
-  <body>
-    <div class="doc__bg"></div>
-    <nav class="header">
-      <h1 class="logo">Text Adventure <span class="logo__thin">Documentation</span></h1>
-      <ul class="menu">
-        <div class="menu__item toggle"><span></span></div>
-        <li class="menu__item"><a href="https://github.com/ssiodev/text_adventure.git" class="link"><i class="fa fa-github"></i> Github</a></li>
-        <li class="menu__item"><a href="index.html" class="link"><i class="fa fa-home"></i> Home</a></li>
-      </ul>
-    </nav>
-    <div class="wrapper">
-      <aside class="doc__nav">
-        <ul>
-          <li class="js-btn selected">Introduction</li>
-          <li class="js-btn">Manual</li>
-          <li class="js-btn">Specifications</li>
-          <li class="js-btn">Design</li>
-          <li class="js-btn">Testing</li>
-          <li class="js-btn">JavaDoc</li>
-        </ul>
-      </aside>
-      <article class="doc__content">
-        <section class="js-section">
-          <h2 class="section__title">Introduction</h2>
-          <p>
-            <b>Text Adventure</b> is a text-based RPG set in a fantasy world. You will be the hero of our story,
-            are you ready for this exciting adventure?
-          </p>
-          <h3 class="section__title">Game Plot</h3>
-          <p>
-            In a distant era, in the lands of Margorgh, in the darkest depths of a shadowy forest, it is said that there exists a Castle ruled by the forces of evil, housing an unimaginable power.
-            For countless millennia, humanity has sought to wrest this power from the forces of evil; battles and wars have marked the quest for this power.<br/>
-            Over time, the traces of the Castle and the power within have been lost, vanished like leaves on trees in winter, or at least, so it was believed...
-            A mysterious scroll was discovered by a warrior with a golden heart, a scroll containing knowledge that he could not have imagined and that would lead him to an unbelievable destiny....<br/>
-          </p>
-        </section>
-        <section class="js-section">
-          <h2 class="section__title">Manual</h2>
-          <h3 class="section__title">Gameplay</h3>
-          <p>
-            The game is set in two different levels, located respectively in a forest and in a castle.<br/>
-            It is subdivided into various sections (that we will call "rooms" from now on) with at first only one is available to access<br/>
-            In these rooms, you will find contexts in which you have to defeat a monster, pick items and search for keys in order to "unlock" all of them.<br/>
-            The dynamics of these interactions is left to be discovered! (Check <a href="#how-to-play" class="link--dark">here&#8599</a>)
-          </p>
-          <p>At the first launch of the game, the program will load the main menu, where you can choose between:</p>
-          <ul>
-            <li>starting a new game</li>
-            <li>loading a pre-existing game (if existing)</li>
-            <li>deleting a pre-existing game (if existing)</li>
-            <li>seeing a list of the pre-saved games</li>
-          </ul>
-          <p>At any moment of the game you can:
-          <ul>
-            <li>use the command <code>help</code> to request the list of the available commands.</li>
-            <li>use the command <code>save</code> to save your current progress into a <code>.json</code> file which will be used to reload the game at the next access.<br/>
-            <strong>Warning!</strong><br/>The game will not automatically save the progress!<br/><u>You must set up its own bucket environment.</u></li>
-          </ul>
-          <p>
-            The main goal of the game is to complete all the rooms, reach the castle and beat the final boss!
-          </p>
-          <h3 class="section__title">Graphic Interface</h3>
-          <p>
-            For the GUI it has been used <i>JavaFX FXML</i>, with which you can implement the graphics of a desktop application.
-            The graphic interface is composed in three main parts:
-          </p>
-            <ul>
-              <li>an "artistic" section, where there is a image/video (created and rendered with the program Blender) which represents the content of that specific room</li>
-              <li>an output section, where you can see the program's response </li>
-              <li>an input section, with which you can interact with the game</li>
-            </ul>
-          <h3 class="section__title">Dependencies</h3>
-          <table>
-            <tr>
-              <th>Name</th>
-              <th>Version</th>
-              <th>Description</th>
-            </tr>
-            <tr>
-              <td>Maven</td>
-              <td>4.0.0</td>
-              <td>software for dependencies and project structure management </td>
-            </tr>
-            <tr>
-              <td>Java</td>
-              <td>20</td>
-              <td>primary programming language</td>
-            </tr>
-            <tr>
-              <td>JavaFX</td>
-              <td>22.0.1</td>
-              <td>Java-based software platform for creating desktop applications</td>
-            </tr>
-            <tr>
-              <td>Jackson</td>
-              <td>2.16.1</td>
-              <td>Open-source Java class library for serialization to JSON and viceversa.</td>
-            </tr>
-            <tr>
-              <td>JGraphT</td>
-              <td>1.5.2</td>
-              <td>Open-source Java class library for the graph structure</td>
-            </tr>
-            <tr>
-              <td>JUnit</td>
-              <td>5.11.0</td>
-              <td>Framework for automatic testing</td>
-            </tr>
-            <tr>
-              <td>AWS</td>
-              <td>2.25.58</td>
-              <td>Cloud computing platform provided by Amazon</td>
-            </tr>
-            <tr>
-            <td>log4j</td>
-            <td>2.20.0</td>
-            <td>Java-based logging utility</td>
-          </tr>
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Text Adventure - Documentation</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
+	<link rel="stylesheet" href="global.css">
+	<link rel="stylesheet" href="index.css">
+	<link rel="author" href="humans.txt">
+</head>
+<body>
+<div class="doc__bg"></div>
+<nav class="header">
+	<h1 class="logo">Text Adventure <span class="logo__thin">Documentation</span></h1>
+	<ul class="menu">
+		<div class="menu__item toggle"><span></span></div>
+		<li class="menu__item"><a href="https://github.com/ssiodev/text_adventure.git" class="link"><i
+				class="fa fa-github"></i> Github</a></li>
+		<li class="menu__item"><a href="index.html" class="link"><i class="fa fa-home"></i> Home</a></li>
+	</ul>
+</nav>
+<div class="wrapper">
+	<aside class="doc__nav">
+		<ul>
+			<li class="js-btn selected">Introduction</li>
+			<li class="js-btn">Manual</li>
+			<li class="js-btn">Design</li>
+			<li class="js-btn">Testing</li>
+			<li class="js-btn">JavaDoc</li>
+		</ul>
+	</aside>
+	<article class="doc__content">
+		<section class="js-section">
+			<h2 class="section__title">Introduction</h2>
+			<p>
+				<b>Text Adventure</b> is a text-based RPG set in a fantasy world. You will be the hero of our story,
+				are you ready for this exciting adventure? </p>
+			<h3 class="section__title">Game Plot</h3>
+			<p>
+				In a distant era, in the lands of Margorgh, in the darkest depths of a shadowy forest, it is said that
+				there exists a Castle ruled by the forces of evil, housing an unimaginable power.
+				For countless millennia, humanity has sought to wrest this power from the forces of evil; battles and
+				wars have marked the quest for this power.<br/>
+				Over time, the traces of the Castle and the power within have been lost, vanished like leaves on trees
+				in winter, or at least, so it was believed...
+				A mysterious scroll was discovered by a warrior with a golden heart, a scroll containing knowledge that
+				he could not have imagined and that would lead him to an unbelievable destiny....<br/>
+			</p>
+			<h3 class="section__title">Specifications</h3>
+			<p>To consult the project's user stories, check <a href="">here #&8599</a></p>
+		</section>
+		<section class="js-section">
+			<h2 class="section__title">Manual</h2>
+			<h3 class="section__title">Gameplay</h3>
+			<p>
+				The game is set in two different levels, located respectively in a forest and in a castle.<br/>
+				It is subdivided into various sections (that we will call "rooms" from now on) with at first only one is
+				available to access<br/>
+				In these rooms, you will find contexts in which you have to defeat a monster, pick items and search for
+				keys in order to "unlock" all of them.<br/>
+			</p>
+			<p>At the first launch of the game, the program will load the main menu, where you can choose between:</p>
+			<ul>
+				<li>starting a new game</li>
+				<li>loading a pre-existing game (if existing)</li>
+				<li>deleting a pre-existing game (if existing)</li>
+				<li>seeing a list of the pre-saved games</li>
+			</ul>
+			<p>At any moment of the game you can:
+			<ul>
+				<li>use the command <code>help</code> to request the list of the available commands.</li>
+				<li>use the command <code>save</code> to save your current progress into a <code>.json</code> file which
+					will be used to reload the game at the next access.<br/>
+					<strong>Warning!</strong><br/>The game will not automatically save the progress!<br/>
+					<u>You must set up your own bucket environment!</u></li>
+			</ul>
+			<p>
+				The main goal of the game is to complete all the rooms, reach the castle and beat the final boss! </p>
+			<h3 class="section__title">Graphic Interface</h3>
+			<p>
+				For the GUI it has been used <i>JavaFX FXML</i>, with which you can implement the graphics of a desktop
+				application.
+				The graphic interface is composed in three main parts: </p>
+			<ul>
+				<li>an "artistic" section, where there is an image/video (created and rendered with the program
+					Blender) which represents the content of that specific room
+				</li>
+				<li>an output section, where you can see the program's response</li>
+				<li>an input section, with which you can interact with the game</li>
+			</ul>
+			<h3 class="section__title" id="how-to-play">How To Play</h3>
+			<p>
+				The user interact with the display using a <b>custom command line</b>, which is located at the bottom of
+				the game window.<br/>
+				The user have to type the command followed by (if any) arguments and then press <code>Enter</code> to
+				trigger the specific in-game action.<br/>
+				Example: <br/>
+			</p>
+			<code>>>command &lt;argument&gt; </code>
+			<p>The complete list of all the possible commands is available <a href="#CommandsList" class="link--dark">here
+				&#8599</a></p>
+			<h4 class="section__title">Word completion feature</h4>
+			<p>
+				It has been implemented a personalized word-completion feature which, alongside with the command <code>help</code>,
+				it has the purpose
+				to improve the end user experience. Here are two main scenarios:</p>
+			<ul style="list-style: upper-latin">
+				<li>
+					You haven't started typing your command or argument yet.<br/>
+					<code>Tab &#8633</code>/<code>Shift+Tab</code> will visualize the list of all the possible option at
+					that moment.<br/>
+				</li>
+				<li>
+					You have already started typing the first letters of your command or argument.<br/>
+					<code>Tab &#8633</code>/<code>Shift+Tab</code> will visualize the list of the options based on what
+					you already typed.
+				</li>
+			</ul>
+			<p>
+				In both cases, keep pressing on the on <code>Tab &#8633</code> or <code>Shift+Tab</code> until you find
+				the command or the argument needed.<br/>
+				Then, press <code>Enter</code> or <code>space</code> (if you need arguments) to select it. </p>
+			<h3 id="CommandsList">Commands List</h3>
+			<table class="table-commands">
+				<tr>
+					<th>Name</th>
+					<th>Argument</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td><code>newGame</code></td>
+					<td>-</td>
+					<td>Create a new game.<br/>It can be utilized only in the menu.</td>
+				</tr>
+				<tr>
+					<td><code>loadGame</code></td>
+					<td>Name of the saved game</td>
+					<td>Command for loading a game previously saved.</td>
+				</tr>
+				<tr>
+					<td><code>deleteGame</code></td>
+					<td>Name of the save to be deleted</td>
+					<td>Command for deleting a previously saved game.<br/> Enter the name of the game to be deleted</td>
+				</tr>
+				<tr>
+					<td><code>listGames</code></td>
+					<td>-</td>
+					<td>Command that showing a list of the saved games.</td>
+				</tr>
+				<tr>
+					<td><code>save</code></td>
+					<td>(Optional) name of the save</td>
+					<td>Command for save the current game.<br/> Require a name for the game that you are saving.</td>
+				</tr>
+				<tr>
+					<td><code>move</code></td>
+					<td>Cardinal directions:<br/><code>north </code>/ <code>south </code>/ <code>east </code>/ <code>west</code>
+					</td>
+					<td>Command manage the movement in the map using cardinal directions.<br/> If possible you move in
+						the digit direction
+					</td>
+				</tr>
+				<tr>
+					<td><code>wai</code></td>
+					<td>-</td>
+					<td>Command for showing the properties (locked/unlocked) of directions that can be used with <code>move</code>
+					</td>
+				</tr>
+				<tr>
+					<td><code>show</code></td>
+					<td>(Optional) one between <code>inventory</code> / <code>stats</code></td>
+					<td>Command for showing the stats and inventory of the player.<br/><code>show inventory</code> for
+						showing only the player's inventory.<br/>
+						<code>show stats</code> the showing only the player's stats.
+					</td>
+				</tr>
+				<tr>
+					<td><code>look</code></td>
+					<td>-</td>
+					<td>Command for showing a list of the items in the room.</td>
+				</tr>
+				<tr>
+					<td><code>pick</code></td>
+					<td>Name of the item to be taken</td>
+					<td>Command for taking an item from the items present in the room<br/>
+						Return error message if the inventory has not enough space.
+					</td>
+				</tr>
+				<tr>
+					<td><code>drop</code></td>
+					<td>Name of the item to be dropped</td>
+					<td>
+						Command for dropping an item from the items present in the inventory<br/>
+					</td>
+				</tr>
+				<tr>
+					<td><code>fight</code></td>
+					<td>-</td>
+					<td>Command for starting a battle with a hostile mob (enemy).</td>
+				</tr>
+				<tr>
+					<td><code>attack</code></td>
+					<td>-</td>
+					<td>Command for attacking a monster in a fight.</td>
+				</tr>
+				<tr>
+					<td><code>dodge</code></td>
+					<td>-</td>
+					<td>Command for dodging an incoming attack from a monster.<br/>
+						It can be used 3 times per fight.
+					</td>
+				</tr>
+				<tr>
+					<td><code>run</code></td>
+					<td>-</td>
+					<td>
+						Escape from the fight and leave the monster with his current hp and damage.<br/>
+						You will be able to rejoin the fight using the command <code>fight</code>.
+					</td>
+				</tr>
+				<tr>
+					<td><code>use</code></td>
+					<td>Name of the item to be used in the inventory</td>
+					<td>Command for using an item in the player's inventory.</td>
+				</tr>
+				<tr>
+					<td><code>help</code></td>
+					<td>-</td>
+					<td>Show all the possible commands in a precise moment of the game.</td>
+				</tr>
+				<tr>
+					<td><code>clear</code></td>
+					<td>-</td>
+					<td>Command for cleaning the game terminal.</td>
+				</tr>
+			</table>
+			<h3 class="section__title">Dependencies</h3>
+			<table>
+				<tr>
+					<th>Name</th>
+					<th>Version</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td>AWS</td>
+					<td>2.25.58</td>
+					<td>Cloud computing platform provided by Amazon</td>
+				</tr>
+				<tr>
+					<td>Jackson</td>
+					<td>2.16.1</td>
+					<td>Open-source Java class library for serialization to JSON and vice versa.</td>
+				</tr>
+				<tr>
+					<td>Java</td>
+					<td>20</td>
+					<td>primary programming language</td>
+				</tr>
+				<tr>
+					<td>JavaFX</td>
+					<td>22.0.1</td>
+					<td>Java-based software platform for creating desktop applications</td>
+				</tr>
+				<tr>
+					<td>JGraphT</td>
+					<td>1.5.2</td>
+					<td>Open-source Java class library for the graph structure</td>
+				</tr>
+				<tr>
+					<td>JUnit</td>
+					<td>5.11.0</td>
+					<td>Framework for automatic testing</td>
+				</tr>
+				<tr>
+					<td>log4j</td>
+					<td>2.20.0</td>
+					<td>Java-based logging utility</td>
+				</tr>
+				<tr>
+					<td>Maven</td>
+					<td>4.0.0</td>
+					<td>software for dependencies and project structure management</td>
+				</tr>
+			</table>
+			<h3 class="section__title">How To Install</h3>
+			<h4 class="section__title">Maven</h4>
+			<ol>
+				<li>
+					<h5>
+						Clone the repository </h5>
+					<p>
+						If not installed, <strong>install GIT</strong> using <a href="https://git-scm.com/downloads"
+																				target="_blank" class="link-color">this
+						guide </a><br>
+						Once installed, from the terminal move to the folder where you want the repository to be cloned
+						and run <br><code class="code-block">git clone
+						https://github.com/ssiodev/text_adventure.git</code><br>
+					</p>
+				</li>
+				<li>
+					<h5>Install Maven</h5>
+					<p>
+						Maven version <code>3.9.7</code> doesn't work with this project <br>
+						Maven version <code>3.9.6, 3.8.8, 4.0.0</code> has been tested <br>
+						If not already installed, follow <a class="link-color"
+															href="https://maven.apache.org/install.html"
+															target="_blank">this guide</a> to install Maven.<br>
+						A useful guide to install and set environment variables <a class="link-color"
+																				   href="https://phoenixnap.com/kb/install-maven-windows"
+																				   tag="_blank">on Windows</a>, <a
+							class="link-color"
+							href="https://www.digitalocean.com/community/tutorials/install-maven-linux-ubuntu"
+							tag="_blank">on Ubuntu</a>, <a class="link-color"
+														   href="https://www.digitalocean.com/community/tutorials/install-maven-mac-os"
+														   tag="_blank">on Mac</a><br>
+					</p>
+				</li>
+				<li>
+					<h5>Install JDK20</h5>
+					<p>
+						Check if in the system is already installed JDK20 by running on the terminal <br>
+						<code class="code-block">java --version</code><br>
+						If JDK20 is not installed use <a
+							href="https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html"
+							target="_blank" class="link-color">this page</a> to download the right package or installer.
+						<br>
+						For any issue, follow <a
+							href="https://docs.oracle.com/en/java/javase/20/install/overview-jdk-installation.html"
+							target="_blank" class="link-color">this guide</a>. </p>
+				</li>
+				<li>
+					<h5>
+						Create <code>application.config</code>
+					</h5>
+					<p>
+						In the folder <a class="file-path" style=""><code> text_adventure > src > main >
+						resources </code></a> create a new file called <code class="code--inline" style="">application.conf</code>
+						<br>
+						<strong>Open</strong> the file <a class="file-path" style=""><code> text_adventure > src > main
+						> resources > copy_application.conf</code></a> <br> and <strong>copy its content</strong> inside
+						<a class="code--inline" style=""><code>application.config</code></a> <br>
+					</p>
+				</li>
+				<li>
+					<h5>
+						Bucket info setup </h5>
+					<p>
+						In the file <a class="code--inline" style=""><code>application.config</code></a> complete these
+						fields <br>
+						<code class="code-block">storage.aws.key=</code><br>
+						<code class="code-block">storage.aws.secret=</code><br>
+						<code class="code-block">storage.aws.bucket.name=</code><br>
+						<code class="code-block">storage.aws.region=</code><br>
+						with the values of <br>
+						<code class="code-block">bucket public key </code><br>
+						<code class="code-block">bucket private key </code><br>
+						<code class="code-block">bucket name </code><br>
+						<code class="code-block">bucket region</code><br>
+					</p>
+				</li>
+				<li>
+					<h5>Build the project</h5>
+					<p>
+						On the terminal, move to the folder <code class="code--inline">text_adventure</code> (the
+						repository previously cloned). Then run <br>
+						<code class="code-block">mvn package</code><br>
+					</p>
+				</li>
+			</ol>
+			<h4 class="section__title">IntelliJ IDEA</h4>
+			<ol>
+				<li>
+					<h5>
+						Install Intellij </h5>
+					<p>
+						To install Intellij firstly install <strong>JetBrains Toolbox App</strong> from <a
+							href="https://www.jetbrains.com/toolbox-app/" target="_blank" class="link-color"> this
+						link</a>. <br>
+						Once Toolbox is installed, run it and install <strong>Intellij Community</strong> (or Intellij
+						Ultimate if holder of a valid license) </p>
+				</li>
+				<li>
+					<h5>
+						Clone the repository </h5>
+					<p>
+						If not installed, <strong>install GIT</strong> using <a href="https://git-scm.com/downloads"
+																				target="_blank" class="link-color">this
+						guide </a><br>
+						Once installed, from the terminal move to the folder where you want the repository to be cloned
+						and run <br><code class="code-block">git clone
+						https://github.com/ssiodev/text_adventure.git</code><br>
+					</p>
+				</li>
+				<li>
+					<h5>
+						Install JDK20 </h5>
+					<p>
+						Check if in the system is already installed JDK20 by running on the terminal <br><code
+							class="code-block">java --version</code><br>
+						If JDK20 is not installed use <a
+							href="https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html"
+							target="_blank" class="link-color">this page</a> to download the right package or installer.
+						<br>
+						For any issue, follow <a
+							href="https://docs.oracle.com/en/java/javase/20/install/overview-jdk-installation.html"
+							target="_blank" class="link-color">this guide</a>. </p>
+				</li>
+				<li>
+					<h5>
+						Open the repository </h5>
+					<p>
+						Launch <strong>Intellij IDEA</strong> and click on "Open...". Then select the repository
+						previously cloned. <br>
+						If somewhere in the interface appears the error message <code class="code--inline"
+																					  style="color:red">JDK "20" is
+						missing</code> then click on <a class="code--inline" style="color:red">Configure...</a> <br>
+						It should automatically detect the presence of the JDK20 previously installed and it should
+						appear on
+						the top of the dropdown menu. If that's not the case, click on <code class="code--inline">Add
+						JDK...</code> and select JDK20 folder previously installed </p>
+				</li>
+				<li>
+					<h5>
+						Create <code>application.config</code>
+					</h5>
+					<p>
+						In the folder <br><a class="file-path" style="margin-left: 20px"> text_adventure > src > main >
+						resources </a><br> create a new file called <br><code class="file-path"
+																			  style="margin-left: 20px">application.conf</code>
+						<br>
+						<strong>Open</strong> the file <a class="file-path" style=""><code> text_adventure > src > main
+						> resources > copy_application.conf</code></a> <br> and <strong>copy its content</strong> inside
+						<a class="code--inline"><code>application.config</code></a> <br>
+					</p>
+				</li>
+				<li>
+					<h5>
+						Bucket info Setup </h5>
+					<p>
+						In the file <a class="code--inline" style=""><code>application.config</code></a> complete these
+						fields <br/>
+						<code class="code-block">storage.aws.key=</code><br>
+						<code class="code-block">storage.aws.secret=</code><br>
+						<code class="code-block">storage.aws.bucket.name=</code><br>
+						<code class="code-block">storage.aws.region=</code><br>
+						with the values of <br>
+						<code class="code-block">bucket public key </code><br>
+						<code class="code-block">bucket private key </code><br>
+						<code class="code-block">bucket name </code><br>
+						<code class="code-block">bucket region</code><br>
+					</p>
+				</li>
+				<li>
+					<h5>
+						Update Maven dependencies </h5>
+					<p>
+						Select the file <a class="file-path">text_adventure > pom.xml</a> and <strong>right
+						click</strong> on it <br>
+						Then click con <strong>Maven > Reload Project</strong> in the dropdown menu that appears. </p>
+				</li>
+				<li>
+					<h5>
+						Run the project. </h5>
+					<p>
+						Open the file <a class="file-path">text_adventure > src > main > java > com > adventure >
+						Main</a> and then click on the left green arrow <br>
+						near the row with written <code class="code--inline">public static void main(String[] args) {
+						launch(); }</code>
+					</p>
+					<p>Note:</p>
+					<p style="margin-left: 30px; margin-top: -15px">
+						if after running the project appears and error with written <code class="code--inline"
+																						  style="color:red">"Command
+						line too long"</code><br> just click on <code class="code--inline" style="color:red">"Shorten
+						the command line and return"</code> <br>
+					</p>
+				</li>
+			</ol>
 
-          </table>
-          <h3 class="section__title" id="how-to-play">How To Play</h3>
-          <p>
-            The user interact with the display using a <b>custom command line</b>, which is located at the bottom of the game window.<br/>
-            The user have to type the command followed by (if any) arguments and then press enter to trigger the specific in-game action.<br/>
-            Example: <br/>
-          </p>
-          <code>>>command &lt;argument&gt; </code>
-          <p>AUTOCOMPLETAMENTO, DINAMICA ROOM</p>
-          <p>The complete list of all the possible commands is available <a href="#CommandsList" class="link--dark">here &#8599</a></p>
-          <h3 id="CommandsList">Commands List</h3>
-          <table class="table-commands">
-            <tr>
-              <th>Name</th>
-              <th>Argument</th>
-              <th>Description</th>
-            </tr>
-            <tr>
-              <td><code>newGame</code></td>
-              <td>-</td>
-              <td>Create a new game.<br/>It can be utilized only in the menu.</td>
-            </tr>
-            <tr>
-              <td><code>loadGame</code></td>
-              <td>Name of the saved game</td>
-              <td>Command for loading a game previously saved.</td>
-            </tr>
-            <tr>
-              <td><code>save</code></td>
-              <td>(Optional) name of the save </td>
-              <td>Command for save the current game.<br/> Require a name for the game that you are saving.</td>
-            </tr>
-            <tr>
-              <td><code>deleteGame</code></td>
-              <td>Name of the save to be deleted</td>
-              <td>Command for deleting a previously saved game.<br/> Enter the name of the game to be deleted</td>
-            </tr>
-            <tr>
-              <td><code>listGames</code></td>
-              <td>-</td>
-              <td>Command that showing a list of the saved games.</td>
-            </tr>
-            <tr>
-              <td><code>show</code></td>
-              <td>(Optional) one between <code>inventory</code> / <code>stats</code></td>
-              <td>Command for showing the stats and inventory of the player.<br/><code>show inventory</code> for showing only the player's inventory.<br/>
-              <code>show stats</code> the showing only the player's stats.</td>
-            </tr>
-            <tr>
-              <td><code>move</code></td>
-              <td>Cardinal directions:<br/><code>north </code>/ <code>south </code>/ <code>east </code>/ <code>west</code></td>
-              <td>Command manage the movement in the map using cardinal directions.<br/> If possible you move in the digit direction</td>
-            </tr>
-            <tr>
-              <td><code>look</code></td>
-              <td>-</td>
-              <td>Command for showing a list of the items in the room.</td>
-            </tr>
-            <tr>
-              <td><code>pick</code></td>
-              <td>Name of the item to be taken</td>
-              <td>Command for taking an item from the items present in the room<br/>Return error message if the inventory has not enough space.
-              </td>
-            </tr>
-            <tr>
-              <td><code>fight</code></td>
-              <td>-</td>
-              <td>Command for starting a battle with a hostile mob (enemy).</td>
-            </tr>
-            <tr>
-              <td><code>attack</code></td>
-              <td>-</td>
-              <td>Command for attacking a monster in a fight.</td>
-            </tr>
-            <tr>
-              <td><code>dodge</code></td>
-              <td>-</td>
-              <td>Command for dodging an incoming attack from a monster.<br/>
-                It can be used 3 times per fight.</td>
-            </tr>
-            <tr>
-              <td><code>use</code></td>
-              <td>Name of the item to be used in the inventory</td>
-              <td>Command for using an item in the player's inventory.</td>
-            </tr>
-            <tr>
-              <td><code>wai</code></td>
-              <td>-</td>
-              <td>Command for showing the properties (locked/unlocked) of directions that can be used with <code>move</code></td>
-            </tr>
-            <tr>
-              <td><code>help</code></td>
-              <td>-</td>
-              <td>Show all the possible commands in a precise moment of the game.</td>
-            </tr>
-            <tr>
-              <td><code>clear</code></td>
-              <td>-</td>
-              <td>Command for cleaning the game terminal.</td>
-            </tr>
-          </table>
-          <h3 class="section__title">How To Install</h3>
-          <h4 class="section__title">Maven</h4>
-          <ol>
-            <li>
-              <h5>
-                Clone the repository
-              </h5>
-              <p>
-                If not installed, <strong>install GIT</strong> using <a href="https://git-scm.com/downloads" target="_blank" class="link-color">this guide </a><br>
-                Once installed, from the terminal move to the folder where you want the repository to be cloned and run <br><code class="code-block">git clone https://github.com/ssiodev/text_adventure.git</code><br>
-              </p>
-            </li>
-            <li>
-              <h5>Install Maven</h5>
-              <p>
-                Maven version <code>3.9.7</code> doesn't work with this project <br>
-                Maven version <code>3.9.6, 3.8.8, 4.0.0</code> has been tested <br>
-                If not already installed, follow <a class="link-color" href="https://maven.apache.org/install.html" target="_blank">this guide</a> to install Maven.<br>
-                A useful guide to install and set environment variables <a class="link-color" href="https://phoenixnap.com/kb/install-maven-windows" tag="_blank">on Windows</a>, <a class="link-color" href="https://www.digitalocean.com/community/tutorials/install-maven-linux-ubuntu" tag="_blank">on Ubuntu</a>, <a class="link-color" href="https://www.digitalocean.com/community/tutorials/install-maven-mac-os" tag="_blank">on Mac</a><br>
-              </p>
-            </li>
-            <li>
-              <h5>Install JDK20</h5>
-              <p>
-                Check if in the system is already installed JDK20 by running on the terminal <br>
-                <code class="code-block">java --version</code><br>
-                If JDK20 is not installed use <a href="https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html" target="_blank" class="link-color">this page</a> to download the right package or installer. <br>
-                For any issue, follow <a href="https://docs.oracle.com/en/java/javase/20/install/overview-jdk-installation.html" target="_blank" class="link-color">this guide</a>.
-              </p>
-            </li>
-            <li>
-              <h4>
-                Create <code>application.config</code>
-              </h4>
-              <p>
-                In the folder <a class="file-path" style=""><code> text_adventure > src > main > resources </code></a> create a new file called <code class="code--inline" style="">application.conf</code> <br>
-                <strong>Open</strong> the file <a class="file-path" style=""><code> text_adventure > src > main > resources > copy_application.conf</code></a> <br> and <strong>copy its content</strong> inside <a class="code--inline" style=""><code>application.config</code></a> <br>
-              </p>
-            </li>
-            <li>
-              <h4>
-                Setup the bucket info
-              </h4>
-              <p>
-                In the file <a class="code--inline" style=""><code>application.config</code></a> complete these fields <br>
-                <code class="code-block">storage.aws.key=</code><br>
-                <code class="code-block">storage.aws.secret=</code><br>
-                <code class="code-block">storage.aws.bucket.name=</code><br>
-                <code class="code-block">storage.aws.region=</code><br>
-                with the values of <br>
-                <code class="code-block">bucket public key </code><br>
-                <code class="code-block">bucket private key </code><br>
-                <code class="code-block">bucket name </code><br>
-                <code class="code-block">bucket region</code><br>
-              </p>
-            </li>
-            <li>
-              <h4>Build the project</h4>
-              <h5>Build the project</h5>
-              <p>
-                On the terminal, move to the folder <code class="code--inline">text_adventure</code> (the repository previously cloned). Then run <br>
-                <code class="code-block">mvn package</code><br>
-              </p>
-            </li>
-          </ol>
-          <h4 class="section__title">IntelliJ IDEA</h4>
-          <ol>
-            <li>
-              <h5>
-                Install Intellij
-              </h5>
-              <p>
-                To install Intellij firstly install <strong>JetBrains Toolbox App</strong> from <a href="https://www.jetbrains.com/toolbox-app/" target="_blank" class="link-color"> this link</a>. <br>
-                Once Toolbox is installed, run it and install <strong>Intellij Community</strong> (or Intellij Ultimate if holder of a valid license)
-              </p>
-            </li>
-            <li>
-              <h5>
-                Clone the repository
-              </h5>
-              <p>
-                If not installed, <strong>install GIT</strong> using <a href="https://git-scm.com/downloads" target="_blank" class="link-color">this guide </a><br>
-                Once installed, from the terminal move to the folder where you want the repository to be cloned and run <br><code class="code-block">git clone https://github.com/ssiodev/text_adventure.git</code><br>
-              </p>
-            </li>
-            <li>
-              <h5>
-                Install JDK20
-              </h5>
-              <p>
-                Check if in the system is already installed JDK20 by running on the terminal <br><code class="code-block">java --version</code><br>
-                If JDK20 is not installed use <a href="https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html" target="_blank" class="link-color">this page</a> to download the right package or installer. <br>
-                For any issue, follow <a href="https://docs.oracle.com/en/java/javase/20/install/overview-jdk-installation.html" target="_blank" class="link-color">this guide</a>.
-              </p>
-            </li>
-            <li>
-              <h5>
-                Open the repository
-              </h5>
-              <p>
-                Launch <strong>Intellij IDEA</strong> and click on "Open...". Then select the repository previously cloned. <br>
-                If somewhere in the interface appears the error message <code class="code--inline" style="color:red">JDK "20" is missing</code> then click on <a class="code--inline" style="color:red">Configure...</a> <br>
-                It should automatically detect the presence of JDK20 previously installed and it should appear on the top of the dropdown menu. If that's not the case, click on <code class="code--inline">Add JDK...</code> and select JDK20 folder previously installed
-              </p>
-            </li>
-            <li>
-              <h5>
-                Create <code>application.config</code>
-              </h5>
-              <p>
-                In the folder <br><a class="file-path" style="margin-left: 20px"> text_adventure > src > main > resources </a><br> create a new file called <br><code class="file-path" style="margin-left: 20px">application.conf</code> <br>
-                <strong>Open</strong> the file <a class="file-path" style=""><code> text_adventure > src > main > resources > copy_application.conf</code></a> <br> and <strong>copy its content</strong> inside <a class="code--inline"><code>application.config</code></a> <br>
-              </p>
-            </li>
-            <li>
-              <h5>
-                Setup the bucket info
-              </h5>
-              <p>
-                In the file <a class="code--inline" style=""><code>application.config</code></a> complete these fields <br/>
-                <code class="code-block">storage.aws.key=</code><br>
-                <code class="code-block">storage.aws.secret=</code><br>
-                <code class="code-block">storage.aws.bucket.name=</code><br>
-                <code class="code-block">storage.aws.region=</code><br>
-                with the values of <br>
-                <code class="code-block">bucket public key </code><br>
-                <code class="code-block">bucket private key </code><br>
-                <code class="code-block">bucket name </code><br>
-                <code class="code-block">bucket region</code><br>
-              </p>
-            </li>
-            <li>
-              <h5>
-                Update Maven dependencies
-              </h5>
-              <p>
-                Select the file <a class="file-path">text_adventure > pom.xml</a>   and <strong>right click</strong> on it <br>
-                Then click con <strong>Maven > Reload Project</strong> in the dropdown menu that appears.
-              </p>
-            </li>
-            <li>
-              <h5>
-                Run the project
-              </h5>
-              <p>
-                Open the file <a class="file-path">text_adventure > src > main > java > com > adventure > Main</a> and then click on the left green arrow <br>
-                near the row with written <code class="code--inline">public static void main(String[] args) { launch(); }</code>
-              </p>
-              <p>Note:</p>
-              <p style="margin-left: 30px; margin-top: -15px">
-                if after running the project appears and error with written <code class="code--inline" style="color:red">"Command line too long"</code><br> just click on  <code class="code--inline" style="color:red">"Shorten the command line and return"</code> <br>
-              </p>
-            </li>
-          </ol>
+			<h4 class="section__title">Jar</h4>
+			<p>Not supported yet</p><br/>
+		</section>
+		<section class="js-section">
+			<h2 class="section__title">Design</h2>
+			<h3 class="section__title">Software Design</h3>
+			<p>
+				The project was conceived and structured with the goal of achieving a modular and testable structure
+				with
+				reusable functionalities.
+				To reach this objective, various known patterns were utilized, with proper modifications. </p>
+			<h4 class="section__title">Decision Graph as Decision Support</h4>
+			<p>One of the primary goals we developers set was to create a system that ensured easy updating and
+				modifications of the map while allowing the addition of game features without significantly impacting
+				the
+				existing code. </p>
+			<p>
+				The solution we proposed uses a decision graph (hereafter referred to as the game graph) that organizes
+				the game and its state. </p>
+			<p>
+				Within the graph, we identify three fundamental components that underpin the game's operation: </p>
+			<ol>
+				<li>
+					<strong>StoryNode (graph nodes)</strong>: These identify a game node, such as a room to visit, an
+					enemy to
+					fight, or even a specific state (like the game just loaded or the victory state).
+				</li>
+				<li>
+					<strong>StoryNodeLink (graph edges)</strong>: These represent the possible connections the player
+					can
+					use to move from one graph node to another.
+				</li>
+				<li>
+					<strong>Action</strong>: These are the actions or logical states that enable the activation of a
+					graph edge,
+					allowing traversal from one node to another. This means that edges can be present but only be
+					unlocked
+					upon reaching a certain condition or game state.
+				</li>
+			</ol>
+			<p>
+				It is possible to modify the map by adding new nodes and edges without recompiling the project. This
+				allows anyone to generate their own maps, with items and enemies as desired, without needing to
+				recompile the project. </p>
+			<p>
+				If specific functionality nodes need to be added, simple implementation of the node, its graphics, and
+				its controller suffices. </p>
+			<h4 class="section__title">Architectural Patterns</h4>
+			<ol>
+				<li>
+					<h5>MVC Pattern</h5>
+					<p>JavaFX was used for managing the graphical part and direct interaction with the user, which
+						natively
+						offers integration with the MVC pattern. The game loads the graph node, which contains: </p>
+					<ul style="list-style: lower-latin">
+						<li>
+							A reference to the graphical screen to be displayed to the user (view).
+						</li>
+						<li>
+							All the models related to that node. Specifically, the screen (view) has reference to a
+							controller.
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h5>Pipe-Filter Pattern</h5>
+					<p>
+						This pattern was used for handling input/output flows of commands. When a command is typed and
+						recognized among the registered commands, the console input is redirected to a stream, which is
+						then
+						passed to the command via dependency injection. This allows the command to interact directly
+						with the
+						user as if it were executing in a standalone program. </p>
+				</li>
+				<li>
+					<h5>Reflection</h5>
+					<p>
+						We used reflection for command management and implementing auto-completion. To register a new
+						command
+						in the CommandParser, simply pass the command's class, and the command parser will generate the
+						correct instance when required. Reflection is also used to obtain auto-completion parameters,
+						which
+						are returned by an optional method of the command. </p>
+				</li>
+			</ol>
+			<h4>GRASP Principles</h4>
+			<p>
+				During the project's development, as mentioned above, we aimed to follow the nine GRASP principles to
+				achieve a result that met testability and modularity requirements.
+				Specifically, we utilized: </p>
+			<ol>
+				<li>
+					<h5>Creator</h5>
+					<p>
+						Two examples are Config and StorageProvider, but others can be found within the application.
+						Configuration parameters for the entire application are stored in Config within
+						ApplicationContextProvider, which loads them from a configuration file.
+						Similarly, Config manages the instantiation of StorageProvider, which interfaces with the
+						storage mechanism. </p>
+				</li>
+				<li>
+					<h5>Controller</h5>
+					<p>As mentioned earlier, JavaFX natively provides an MVC architecture. Controllers, as usual, link
+						the user with the models and the application's logic.</p>
+				</li>
+				<li>
+					<h5>Low Coupling</h5>
+					<p>
+						Low coupling was one of the fundamental goals of the project.
+						To achieve a satisfactory result, we used well-known and established patterns, and the objects
+						necessary for configuration were passed via dependency injection to improve separation of
+						concerns and achieve loosely coupled classes. </p>
+				</li>
+				<li>
+					<h5>Information Expert</h5>
+					<p>
+						The expert pattern is used, for example, in command management.
+						CommandParser creates and manages the available commands since it contains all the necessary
+						metadata (descriptions, object classes, etc.) to do so. </p>
+				</li>
+				<li>
+					<h5>High Cohesion</h5>
+					<p>All developed classes were designed with the goal of having specific roles and a limited set of
+						responsibilities.</p>
+				</li>
+				<li>
+					<h5>Pure Fabrication</h5>
+					<p>Classes such as CommandParser and ApplicationContextProvider use pure fabrication.</p>
+				</li>
+				<li>
+					<h5>Polymorphism</h5>
+					<p>The project extensively uses polymorphism, with examples including Command and
+						StorageService.</p>
+				</li>
+				<li>
+					<h5>Protected Fabrication</h5>
+					<p>
+						During the project's development, we paid particular attention to implementing the application
+						in a way
+						that minimizes errors when modifying elements.
+						We followed traditional design patterns and extensively used interfaces to achieve this. </p>
+				</li>
+				<li>
+					<h5>Indirection</h5>
+					<p>
+						The project uses indirection to aim for low coupling, employing dependency injection, the MVC
+						pattern, and more. </p>
+				</li>
+			</ol>
+			<h4 class="section__title">GoF (Gang of Four)</h4>
+			<ol>
+				<li>
+					<h5>Singleton</h5>
+					<p>We used the singleton pattern to implement:</p>
+					<ul>
+						<li>ApplicationContextProvider</li>
+						<li>IdManager</li>
+						<li>CommandParser</li>
+						<li>AutoCompleter</li>
+					</ul>
+				</li>
+				<li>
+					<h5>Factory Method</h5>
+					<p>
+						Loading/creating a Game is managed by the newGame and loadGame methods within StorageService,
+						which can have different implementations depending on the chosen configuration. </p>
+				</li>
+				<li>
+					<h5>Command Pattern</h5>
+					<p>Command management is implemented using this pattern.</p>
+				</li>
+			</ol>
+		</section>
+		<section class="js-section">
+			<h2 class="section__title">Testing</h2>
+		</section>
+		<section class="js-section">
+			<h2 class="section__title">JavaDoc</h2>
+		</section>
+	</article>
+</div>
 
-          <h4 class="section__title">Jar</h4>
-          <p>Not supported yet</p>
-          <br/>
-        </section>
-        <section class="js-section">
-          <h2 class="section__title">Specifications</h2>
-        </section>
-        <section class="js-section">
-          <h2 class="section__title">Design</h2>
-        </section>
-        <section class="js-section">
-          <h2 class="section__title">Testing</h2>
-        </section>
-        <section class="js-section">
-          <h2 class="section__title">JavaDoc</h2>
-        </section>
-      </article>
-    </div>
-
-    <footer class="footer">Project by Checchin Alessio, Chen Simone, Parravicini Alberto & Toniolo Jacopo.</footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="scribbler.js"></script>
-  </body>
+<footer class="footer">Project by Checchin Alessio, Chen Simone, Parravicini Alberto & Toniolo Jacopo.</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="index.js"></script>
+</body>
 </html>
