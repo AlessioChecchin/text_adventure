@@ -41,7 +41,7 @@ public class Player extends Entity
 
         //check if item is in the inventory
         if(item != null) {
-            //check if its a usable item
+            //check if it's a usable item
             if (item instanceof UsableItem usableItem) {
 
                 if (usableItem.getHp() != 0) {

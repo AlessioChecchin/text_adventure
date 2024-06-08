@@ -40,6 +40,7 @@ public class RoomController implements BaseController
         commandParser.enable("wai");
         commandParser.enable("back");
         commandParser.enable("equip");
+        commandParser.enable("drop");
 
         Room room = (Room) context.getGame().getCurrentNode();
 

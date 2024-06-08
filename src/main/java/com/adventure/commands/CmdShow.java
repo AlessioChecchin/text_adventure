@@ -35,6 +35,7 @@ public class CmdShow extends AbstractCommand
                 else if(parameter.equalsIgnoreCase("inventory"))
                 {
                     this.showInventory();
+
                 }
                 else
                 {
@@ -66,6 +67,7 @@ public class CmdShow extends AbstractCommand
         {
             this.writer.println(item);
         }
+        this.writer.println("Total weight: " + inventory.getCurrentWeight());
     }
 
     /**

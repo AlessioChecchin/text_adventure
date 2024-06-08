@@ -21,7 +21,7 @@ public class CmdUse extends AbstractCommand
     public void execute() throws InterruptedException
     {
         // Check the correct number of parameters
-        if(this.correctArgumentsNumber(1)) { return; }
+        if(!this.correctArgumentsNumber(1)) { return; }
 
         Config currentConfig = this.context.getConfig();
         Game game = this.context.getGame();
@@ -85,7 +85,6 @@ public class CmdUse extends AbstractCommand
      */
     public ArrayList<String> getPossibleArgs()
     {
-
         Player player = context.getGame().getPlayer();
         List<Item> item = player.getInventory().getItems().stream().filter(Item -> Item.getClass().equals(UsableItem.class)).toList();
         ArrayList<String> possibleItems = new ArrayList<>();

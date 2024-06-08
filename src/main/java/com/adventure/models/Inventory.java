@@ -220,11 +220,20 @@ public class Inventory
      * Drop an item and remove it from the inventory
      * @param item Item to be removed
      */
-    public void dropItem(Item item)
+    public Item dropItem(Item item)
     {
         if( !items.contains(item) ) throw new NoSuchElementException("Item not in inventory");
         items.remove(item);
         this.currentWeight -= item.getWeight();
+        return item;
+    }
+
+    public Item dropItem(String itemName)
+    {
+        Item item = this.items.stream().filter(Item -> itemName.equals(Item.getName())).findFirst().orElse(null);
+        if(item == null)
+            throw new NoSuchElementException("Item not found");
+        return dropItem(item);
     }
 
     /**

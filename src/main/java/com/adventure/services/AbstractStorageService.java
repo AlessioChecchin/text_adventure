@@ -32,6 +32,7 @@ abstract class AbstractStorageService implements StorageService
         AttackItem sword = new AttackItem("Sword");
         sword.setMultiplier(2);
         sword.setAdder(4);
+        sword.setWeight(20);
 
         Stats stats = new Stats(100,100,1,1);
 

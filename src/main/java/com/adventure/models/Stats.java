@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Player stats.
  */
-public class Stats
+public class    Stats
 {
     /**
      * Default constructor.

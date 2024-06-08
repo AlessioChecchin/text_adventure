@@ -62,6 +62,7 @@ public class Main extends Application
         commandParser.registerCommand("back", CmdBack.class, "Go back to the previous room.");
         commandParser.registerCommand("run", CmdRun.class,"Run away from a fight");
         commandParser.registerCommand("equip", CmdEquip.class,"Equip an Item" );
+        commandParser.registerCommand("drop", CmdDrop.class,"Drops the specified game.");
 
         // Generating dummy game to host the proper game loader.
         Game dummyGame = new Game(context.getConfig(), stage);
