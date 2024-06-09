@@ -103,7 +103,7 @@ public class CmdFight extends AbstractCommand {
                     this.writer.println(winOutput);
 
                 }
-                else if(!player.isFighting())
+                else if(!player.getAlive())
                 {
                     this.writer.println("Fight finished!");
                     this.writer.println("You lost!");

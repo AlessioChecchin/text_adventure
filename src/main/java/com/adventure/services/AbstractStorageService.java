@@ -83,7 +83,6 @@ abstract class AbstractStorageService implements StorageService
             UsableItem apple = new UsableItem("apple");
             apple.setAdditionalHp(5);
             room2.getItems().add(apple);
-            room2.getItems().add(new Key(key2));
         }
 
         g.addVertex(room2);
@@ -102,9 +101,10 @@ abstract class AbstractStorageService implements StorageService
             room3.getItems().add(blackSword);
             Inventory enemyInventory2 = new Inventory(100);
             Stats enemyStats2 = new Stats(40,40,8,2);
-            Enemy enemy2 = new Enemy(enemyInventory2, enemyStats2, "Gian Spider");
+            Enemy enemy2 = new Enemy(enemyInventory2, enemyStats2, "Giant Spider");
             enemy2.setDefaultDialog("Hi, human, now it's the hour of your death!");
             enemy2.getInventory().addItem(new Key(key3));
+            room3.setMonster(enemy2);
         }
 
         g.addVertex(room3);
@@ -119,6 +119,7 @@ abstract class AbstractStorageService implements StorageService
             Enemy enemy3 = new Enemy(enemyInventory3, enemyStats3, "Maglarg");
             enemy3.setDefaultDialog("It seems like there's an undesired guest here.\n I'm Maglarg, the BrainsEater, you are going to die human");
             enemy3.getInventory().addItem(new Key(key4));
+            room4.setMonster(enemy3);
         }
 
         g.addVertex(room4);
@@ -238,12 +239,12 @@ abstract class AbstractStorageService implements StorageService
         g.addEdge(room1, room2, edge12);
 
         StoryNodeLink edge23 = new StoryNodeLink();
-        edge23.setAction(new Action("north"));
+        edge23.setAction(new Action("west"));
         edge23.setKey(key2);
         g.addEdge(room2, room3, edge23);
 
         StoryNodeLink edge32 = new StoryNodeLink();
-        edge32.setAction(new Action("south"));
+        edge32.setAction(new Action("east"));
         g.addEdge(room3, room2, edge32);
 
         StoryNodeLink edge24 = new StoryNodeLink();
@@ -254,6 +255,15 @@ abstract class AbstractStorageService implements StorageService
         StoryNodeLink edge42 = new StoryNodeLink();
         edge42.setAction(new Action("west"));
         g.addEdge(room4, room2, edge42);
+
+        StoryNodeLink edge27 = new StoryNodeLink();
+        edge27.setAction(new Action("north"));
+        g.addEdge(room2, room7, edge27);
+
+        StoryNodeLink edge72 = new StoryNodeLink();
+        edge72.setAction(new Action("south"));
+        g.addEdge(room7, room2, edge72);
+
 
         StoryNodeLink edge45 = new StoryNodeLink();
         edge45.setAction(new Action("north"));
@@ -272,14 +282,6 @@ abstract class AbstractStorageService implements StorageService
         StoryNodeLink edge65 = new StoryNodeLink();
         edge65.setAction(new Action("south"));
         g.addEdge(room6, room5, edge65);
-
-        StoryNodeLink edge27 = new StoryNodeLink();
-        edge27.setAction(new Action("north"));
-        g.addEdge(room2, room7, edge27);
-
-        StoryNodeLink edge72 = new StoryNodeLink();
-        edge72.setAction(new Action("south"));
-        g.addEdge(room7, room2, edge72);
 
         StoryNodeLink edge78 = new StoryNodeLink();
         edge78.setAction(new Action("north"));
