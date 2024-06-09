@@ -102,3 +102,32 @@ window.addEventListener('load', function(){
   }
   icon.addEventListener('click', showNav);
 });
+
+
+// Get the modal
+var modal = document.getElementById('myModal');
+// Get all the images with the class "design-img"
+var images = document.querySelectorAll('.design-img');
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+const modalContent = document.querySelector('.modal-content');
+
+// Loop through each image and attach the click event
+images.forEach(function(img) {
+  img.onclick = function() {
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    modalImg.alt = this.alt;
+    captionText.innerHTML = this.alt;
+    modalContent.scrollTop = 0;
+  }
+});
+
+// When the user clicks on <span> (x), close the modal
+modal.onclick = function() {
+  img01.className += " out";
+  setTimeout(function() {
+    modal.style.display = "none";
+    img01.className = "modal-content";
+  }, 400);
+}

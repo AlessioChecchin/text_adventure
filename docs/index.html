@@ -236,54 +236,6 @@
 					<td>Command for cleaning the game terminal.</td>
 				</tr>
 			</table>
-			<h3 class="section__title">Dependencies</h3>
-			<table>
-				<tr>
-					<th>Name</th>
-					<th>Version</th>
-					<th>Description</th>
-				</tr>
-				<tr>
-					<td>AWS</td>
-					<td>2.25.58</td>
-					<td>Cloud computing platform provided by Amazon</td>
-				</tr>
-				<tr>
-					<td>Jackson</td>
-					<td>2.16.1</td>
-					<td>Open-source Java class library for serialization to JSON and vice versa.</td>
-				</tr>
-				<tr>
-					<td>Java</td>
-					<td>20</td>
-					<td>primary programming language</td>
-				</tr>
-				<tr>
-					<td>JavaFX</td>
-					<td>22.0.1</td>
-					<td>Java-based software platform for creating desktop applications</td>
-				</tr>
-				<tr>
-					<td>JGraphT</td>
-					<td>1.5.2</td>
-					<td>Open-source Java class library for the graph structure</td>
-				</tr>
-				<tr>
-					<td>JUnit</td>
-					<td>5.11.0</td>
-					<td>Framework for automatic testing</td>
-				</tr>
-				<tr>
-					<td>log4j</td>
-					<td>2.20.0</td>
-					<td>Java-based logging utility</td>
-				</tr>
-				<tr>
-					<td>Maven</td>
-					<td>4.0.0</td>
-					<td>software for dependencies and project structure management</td>
-				</tr>
-			</table>
 			<h3 class="section__title">How To Install</h3>
 			<h4 class="section__title">Maven</h4>
 			<ol>
@@ -481,6 +433,55 @@
 
 			<h4 class="section__title">Jar</h4>
 			<p>Not supported yet</p><br/>
+			<h3 class="section__title">Dependencies</h3>
+			<table>
+				<tr>
+					<th>Name</th>
+					<th>Version</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td>AWS</td>
+					<td>2.25.58</td>
+					<td>Cloud computing platform provided by Amazon</td>
+				</tr>
+				<tr>
+					<td>Jackson</td>
+					<td>2.16.1</td>
+					<td>Open-source Java class library for serialization to JSON and vice versa.</td>
+				</tr>
+				<tr>
+					<td>Java</td>
+					<td>20</td>
+					<td>primary programming language</td>
+				</tr>
+				<tr>
+					<td>JavaFX</td>
+					<td>22.0.1</td>
+					<td>Java-based software platform for creating desktop applications</td>
+				</tr>
+				<tr>
+					<td>JGraphT</td>
+					<td>1.5.2</td>
+					<td>Open-source Java class library for the graph structure</td>
+				</tr>
+				<tr>
+					<td>JUnit</td>
+					<td>5.11.0</td>
+					<td>Framework for automatic testing</td>
+				</tr>
+				<tr>
+					<td>log4j</td>
+					<td>2.20.0</td>
+					<td>Java-based logging utility</td>
+				</tr>
+				<tr>
+					<td>Maven</td>
+					<td>4.0.0</td>
+					<td>software for dependencies and project structure management</td>
+				</tr>
+			</table>
+
 		</section>
 		<section class="js-section">
 			<h2 class="section__title">Design</h2>
@@ -651,23 +652,30 @@
 					<p>Command management is implemented using this pattern.</p>
 				</li>
 			</ol>
+			<br/>
 
-			<h3 class="js-section">Domain Model</h3>
-			<img src="media/domain-model.svg" alt="Domain model" />
+			<div id="myModal" class="modal">
+				<img class="modal-content" id="img01"/>
+				<div id="caption"></div>
+			</div>
 
-			<h3 class="js-section">System Sequence Diagram</h3>
-			<img src="media/system-sequence-diagram.svg" alt="System sequence diagram" />
+			<h3 class="section__title">Domain Model</h3>
+			<img src="media/domain-model.svg" alt="Domain model" class="design-img"/>
 
-			<h3 class="js-section">Internal Sequence Diagrams</h3>
+			<h3 class="section__title">System Sequence Diagram</h3>
+			<img src="media/system-sequence-diagram.svg" alt="System sequence diagram" class="design-img"/>
+
+			<h3 class="section__title">Internal Sequence Diagrams</h3>
 
 			<h4>Command usage and creation</h4>
-			<img src="media/command-sequence-diagram.svg" alt="Command sequence diagram" />
+			<img src="media/command-sequence-diagram.svg" alt="Command sequence diagram" class="design-img"/>
 
 			<h4>Command move</h4>
-			<img src="media/command-move-sequence-diagram.svg" alt="Command move sequence diagram" />
+			<img src="media/command-move-sequence-diagram.svg" alt="Command move sequence diagram" class="design-img" />
 
 			<h4>Autocompleter sequence diagram</h4>
-			<img src="media/autocompleter-sequence-diagram.svg" alt="Auto completer sequence diagram" />
+			<img src="media/autocompleter-sequence-diagram.svg" alt="Auto completer sequence diagram"
+				 class="design-img" />
 
 		</section>
 		<section class="js-section">
