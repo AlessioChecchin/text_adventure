@@ -46,7 +46,6 @@ class StringPropertyWriterTest extends FxTest {
         // Exercise.
         char[] test = {'T', 'e', 's', 't'};
         stringPropertyWriter.write(test, 0, 4);
-        System.out.println(stringPropertyWriter.toString());
 
         // Test.
         assertEquals("TestTest\u0001Test", stringPropertyWriter.toString());

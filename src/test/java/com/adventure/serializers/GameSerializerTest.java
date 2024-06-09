@@ -83,17 +83,13 @@ class GameSerializerTest {
 
             //  Create the json string.
             String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(game);
-            System.out.println(json);
 
             //  Get json file path.
             String saveName = game.getId() + ".json";
 
             //  Create json file and write the json string into it.
             File file = new File(Resources.getAssetsPath() + "saves" + saveName);
-            if (file.createNewFile())
-                System.out.println("Saved " + saveName);
-            else
-                System.out.println(saveName + " overwritten");
+
             FileWriter write = new FileWriter(file);
             write.write(json);
             write.close();
@@ -106,7 +102,6 @@ class GameSerializerTest {
             mapper2.registerModule(module1);
             Game gameTest = mapper2.readValue(jsonOut, Game.class);
             String jOut = mapper2.writerWithDefaultPrettyPrinter().writeValueAsString(gameTest);
-            System.out.println(jOut);
 
             // Test.
             assertEquals(gameTest, game);
