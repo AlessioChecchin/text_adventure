@@ -7,16 +7,10 @@ import com.adventure.config.ApplicationContextProvider;
 import com.adventure.config.ApplicationContext;
 import com.adventure.commands.CommandParser;
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.LoggerContext;
-import org.apache.logging.log4j.core.config.Configuration;
-import org.apache.logging.log4j.core.config.LoggerConfig;
-
-import java.io.FileInputStream;
-import java.util.Properties;
 
 /**
  * Main class used to start the application.
@@ -67,6 +61,16 @@ public class Main extends Application
 
         dummyGame.setCurrentNode(new GameLoaderNode());
         dummyGame.load();
+
+        stage.setTitle("Text_Adventure");
+
+        stage.getIcons().add(new Image(Resources.class.getResourceAsStream("assets/icon16.png")));
+        stage.getIcons().add(new Image(Resources.class.getResourceAsStream("assets/icon32.png")));
+        stage.getIcons().add(new Image(Resources.class.getResourceAsStream("assets/icon64.png")));
+        stage.getIcons().add(new Image(Resources.class.getResourceAsStream("assets/icon128.png")));
+        stage.getIcons().add(new Image(Resources.class.getResourceAsStream("assets/icon256.png")));
+        stage.getIcons().add(new Image(Resources.class.getResourceAsStream("assets/icon512.png")));
+
 
         stage.setResizable(context.getConfig().isResizable());
         stage.show();
