@@ -26,8 +26,7 @@ public class FileSystemStorageService extends AbstractStorageService
         super(config);
 
         //  Create or ensure the existence of the 'saves' folder
-        //this.savePath = Resources.getAssetsPath() + "saves/";
-        this.savePath = "saves/";
+        this.savePath = config.getConfigFolder() + "saves/";
         ensureSaveFolder();
     }
 

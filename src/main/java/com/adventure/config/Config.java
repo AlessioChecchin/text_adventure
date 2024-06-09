@@ -9,6 +9,13 @@ import java.util.Properties;
  */
 public interface Config
 {
+
+    /**
+     * Default setting folder
+     * @return The path (relative to the .jar) where saves and setting are contained
+     */
+    String getConfigFolder();
+
     /**
      * Default display width.
      * @return Initial display width.
