@@ -8,11 +8,16 @@ import org.jgrapht.Graph;
 
 import java.util.ArrayList;
 
+/**
+ * Command used to go back to the previous room, if there is one.
+ */
 public class CmdBack extends AbstractCommand
 {
     @Override
     public void execute()
     {
+        if (!this.correctArgumentsNumber(0)) { return; }
+
         Game game = this.context.getGame();
         StoryNode currentNode = game.getCurrentNode();
         StoryNode previousNode = game.getPreviousNode();

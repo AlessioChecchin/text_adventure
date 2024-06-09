@@ -177,6 +177,7 @@ public class Room extends StoryNode
     /**
      * Remove an item from the room
      * @param item Item to be removed
+     * @return The removed item.
      */
     public Item removeItem(Item item)
     {

@@ -10,6 +10,9 @@ import com.adventure.models.nodes.StoryNode;
 
 import java.util.ArrayList;
 
+/**
+ * Command used to dodge an attack.
+ */
 public class CmdDodge extends AbstractCommand
 {
 

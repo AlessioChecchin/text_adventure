@@ -9,6 +9,10 @@ public class    Stats
 {
     /**
      * Default constructor.
+     * @param hp Health points.
+     * @param maxHp Max health points.
+     * @param baseAttack Basic attack. It's the attack value inflicted when no attack item is equipped.
+     * @param baseDefense Basic defence. It's the defence value when the player has no defence item equipped.
      */
     public Stats(@JsonProperty("hp") int hp,
                  @JsonProperty("maxHp") int maxHp,

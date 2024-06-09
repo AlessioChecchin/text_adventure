@@ -8,7 +8,9 @@ import com.adventure.models.nodes.Action;
 
 import java.io.IOException;
 
-
+/**
+ * Serializes the Action class.
+ */
 public class ActionSerializer extends StdSerializer<Action>
 {
     public ActionSerializer()

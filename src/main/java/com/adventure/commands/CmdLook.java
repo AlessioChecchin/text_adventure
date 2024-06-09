@@ -6,11 +6,16 @@ import com.adventure.models.nodes.StoryNode;
 
 import java.util.ArrayList;
 
+/**
+ * Command used to retrieve information about the room the user is in.
+ */
 public class CmdLook extends AbstractCommand
 {
     @Override
     public void execute() throws InterruptedException
     {
+        if (!this.correctArgumentsNumber(0)) { return; }
+
         StoryNode node = this.context.getGame().getCurrentNode();
 
         if(node instanceof Room room)

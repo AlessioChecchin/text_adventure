@@ -20,6 +20,7 @@ public abstract class AbstractCommand implements Command
 {
     /**
      * Default constructor.
+     * Binds input stream and output stream to stdin and stdout.
      */
     public AbstractCommand()
     {
@@ -34,11 +35,15 @@ public abstract class AbstractCommand implements Command
         this.shouldTerminate = false;
     }
 
-
     //
     // GETTERS.
     //
 
+    /**
+     * Gets possible args for current command.
+     * @return A list of possible arguments for the command.
+     * @throws GameStorageException If some error occur while calculating possible args.
+     */
     public abstract ArrayList<String> getPossibleArgs() throws GameStorageException;
 
     /**
@@ -226,11 +231,11 @@ public abstract class AbstractCommand implements Command
     {
         if(this.getArgs().size() < argumentsNumber)
         {
-            writer.println("Too few arguments for command this command");
+            writer.println("Too few arguments for this command");
             return false;
         }
         else if(this.getArgs().size() > argumentsNumber) {
-            writer.println("Too many arguments for command this command");
+            writer.println("Too many arguments for this command");
             return false;
         }
         return true;
@@ -272,7 +277,7 @@ public abstract class AbstractCommand implements Command
 
     /**
      * Save and disable all enabled commands
-     * @apiNote Previously enabled commands can be enabled again with reEnableSaved()
+     * @apiNote  Previously enabled commands can be enabled again with reEnableSaved()
      */
     protected void disableSaveAll()
     {

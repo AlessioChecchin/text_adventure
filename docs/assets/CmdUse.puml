@@ -1,0 +1,74 @@
+@startuml
+!theme materia-outline
+
+skinparam ArrowColor #9803fc
+skinparam BackgroundColor #FFFFFF
+skinparam ArrowColor #9803fc
+skinparam ActorBorderColor #9803fc
+skinparam ActorFontColor #9803fc
+skinparam ActorBackgroundColor #9803fc
+skinparam ParticipantFontColor #9803fc
+skinparam ParticipantBorderColor #9803fc
+skinparam ParticipantBackgroundColor #FFFFFF
+skinparam {
+ SequenceGroupBorderColor #9803fc
+}
+
+
+actor User
+participant Display
+participant CmdFight
+participant CmdUse
+participant ApplicationContext
+participant Game
+participant StoryNode
+participant RandomCollection
+participant Player
+participant Monster
+
+
+
+
+CmdFight -> CmdUse: use
+CmdUse -> ApplicationContext: get current game
+ApplicationContext --> CmdUse
+CmdUse -> Game: get current StoryNode and current Player
+Game --> CmdUse
+CmdUse -> StoryNode: get monster in current StoryNode
+StoryNode --> CmdUse
+CmdUse -> Display: get item name by prompt 
+Display --> CmdUse
+CmdUse -> Player: use item with the name inserted by the user
+break Item is not type Usable
+  Player -> User: "Item not usable"
+else Item was not found
+  player -> User: "Item not found"
+end
+
+alt currentNode instanceof Room && monster != null
+  CmdUse -> RandomCollection: get a random decision handler \n(between DODGE and ATTACK)
+  RandomCollection --> CmdUse
+  CmdUse -> CmdUse: monsterMove = next decision from the decision handler
+  alt monsterMove = DODGE
+    alt monster doens not have 'dodge' left
+      CmdUse -> CmdUse : monsterMove = ATTACK
+    end
+  end
+
+  alt monster is alive 
+    alt monster is attacking
+      CmdUse -> Player: get player attack damage
+      Player --> CmdUse
+      CmdUse -> Monster: hit monster and reduce its hp by 'player attack damage' hp
+      CmdUse -> User: "Monster hit"
+    else monster is dodging
+      CmdUse -> User: "Monster dodged"
+    end
+  end
+end
+
+
+
+
+
+@enduml

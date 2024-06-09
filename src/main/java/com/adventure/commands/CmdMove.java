@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Command used by the player to move inside the game graph.
+ */
 public class CmdMove extends AbstractCommand
 {
 

@@ -9,9 +9,7 @@ import java.util.ArrayList;
 public class DummyCmd extends AbstractCommand
 {
     @Override
-    public void execute() throws InterruptedException
-    {
-    }
+    public void execute() throws InterruptedException {}
 
     public ArrayList<String> getPossibleArgs()
     {

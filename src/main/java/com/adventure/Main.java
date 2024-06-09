@@ -15,6 +15,9 @@ import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.LoggerConfig;
 
+/**
+ * Main class used to start the application.
+ */
 public class Main extends Application
 {
 
@@ -62,7 +65,7 @@ public class Main extends Application
         commandParser.registerCommand("back", CmdBack.class, "Go back to the previous room.");
         commandParser.registerCommand("run", CmdRun.class,"Run away from a fight");
         commandParser.registerCommand("equip", CmdEquip.class,"Equip an Item" );
-        commandParser.registerCommand("drop", CmdDrop.class,"Drops the specified game.");
+        commandParser.registerCommand("drop", CmdDrop.class,"Drops the specified item.");
 
         // Generating dummy game to host the proper game loader.
         Game dummyGame = new Game(context.getConfig(), stage);
@@ -75,6 +78,10 @@ public class Main extends Application
         stage.show();
     }
 
+    /**
+     * Main function, launches the application.
+     * @param args Command line arguments.
+     */
     public static void main(String[] args)
     {
         launch();

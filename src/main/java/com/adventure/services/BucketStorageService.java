@@ -23,6 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * Class that implements storage service based on AWS S3 bucket.
+ */
 public class BucketStorageService extends AbstractStorageService
 {
     /**

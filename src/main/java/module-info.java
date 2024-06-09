@@ -1,3 +1,6 @@
+/**
+ * Module visibility.
+ */
 module com.adventure {
     requires javafx.controls;
     requires javafx.fxml;

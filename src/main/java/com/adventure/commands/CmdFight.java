@@ -8,7 +8,9 @@ import javafx.application.Platform;
 
 import java.util.ArrayList;
 
-
+/**
+ * Command used to start a fight with an enemy (if there is one).
+ */
 public class CmdFight extends AbstractCommand {
 
     private Command command;
@@ -50,13 +52,15 @@ public class CmdFight extends AbstractCommand {
                 player.resetDodge();
                 monster.resetDodge();
                 monster.heal(monster.getStats().getMaxHp());
-                battleIsActive = true;
+
+                // Player is now fighting
+                player.setFightingStatus(true);
 
                 this.writer.println("");
                 this.writer.println("The battle against " + monster.getName() + " is starting...");
 
                 // Iterate battle.
-                while (player.getAlive() && monster.getAlive() && battleIsActive)
+                while (player.getAlive() && monster.getAlive() && player.isFighting())
                 {
                     // Player have to digit a command.
                     this.writer.println("What do you want to do?");
@@ -85,11 +89,11 @@ public class CmdFight extends AbstractCommand {
                 commandParser.disable("dodge");
                 commandParser.disable("run");
 
-                if(player.getAlive() && battleIsActive)
+                if(player.getAlive() && player.isFighting())
                 {
                     this.writer.println("Fight finished!");
                     String winOutput = "You won!";
-
+                    player.setFightingStatus(false);
                     if(!monster.getInventory().getItems().isEmpty())
                     {
                         monster.drop(currentRoom);
@@ -99,14 +103,14 @@ public class CmdFight extends AbstractCommand {
                     this.writer.println(winOutput);
 
                 }
-                else if(battleIsActive)
+                else if(!player.getAlive())
                 {
                     this.writer.println("Fight finished!");
                     this.writer.println("You lost!");
                     this.writer.println("Press ENTER to start new game...");
 
-                    this.safeReadNextLine();
                     commandParser.disableAll();
+                    this.safeReadNextLine();
 
                     this.resetGame();
                 }
@@ -150,7 +154,6 @@ public class CmdFight extends AbstractCommand {
 
         Game newGame = storageService.newGame(currentGame.getPlayer().getName());
 
-
         Platform.runLater(() -> {
             this.context.setGame(newGame);
             // It means that the user had previously saved the game, and it must be overwritten.
@@ -172,7 +175,6 @@ public class CmdFight extends AbstractCommand {
         });
     }
 
-    static boolean battleIsActive;
 
     public ArrayList<String> getPossibleArgs()
     {

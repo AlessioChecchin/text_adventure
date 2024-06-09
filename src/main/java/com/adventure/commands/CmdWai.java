@@ -8,11 +8,17 @@ import org.jgrapht.Graph;
 
 import java.util.ArrayList;
 
+/**
+ * Command used to gather information about current player location.
+ * Stands for "where am I".
+ */
 public class CmdWai extends AbstractCommand
 {
     @Override
     public void execute() throws InterruptedException
     {
+        if(!this.correctArgumentsNumber(0)) {   return; }
+
         StoryNode currentNode = this.context.getGame().getCurrentNode();
 
         if(currentNode instanceof Room room)

@@ -7,9 +7,9 @@
 	<title>Text Adventure - Documentation</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
-	<link rel="stylesheet" href="global.css">
-	<link rel="stylesheet" href="index.css">
-	<link rel="author" href="humans.txt">
+	<link rel="stylesheet" href="css/global.css">
+	<link rel="stylesheet" href="css/index.css">
+	<link rel="author" href="assets/humans.txt">
 </head>
 <body>
 <div class="doc__bg"></div>
@@ -19,7 +19,7 @@
 		<div class="menu__item toggle"><span></span></div>
 		<li class="menu__item"><a href="https://github.com/ssiodev/text_adventure.git" class="link"><i
 				class="fa fa-github"></i> Github</a></li>
-		<li class="menu__item"><a href="index.html" class="link"><i class="fa fa-home"></i> Home</a></li>
+		<li class="menu__item"><a href="index.html" class="link"><i class="fa fa-home"></i> Javadoc</a></li>
 	</ul>
 </nav>
 <div class="wrapper">
@@ -50,7 +50,10 @@
 				he could not have imagined and that would lead him to an unbelievable destiny....<br/>
 			</p>
 			<h3 class="section__title">Specifications</h3>
-			<p>To consult the project's user stories, check <a href="">here #&8599</a></p>
+			<p>To consult the project's user stories, check <a href="" class="link--dark">here &#8599</a></p>
+
+			<h3 class="section__title">Javadoc</h3>
+			<p>To consult the project's javadoc, check <a href="javadoc/index.html" class="link--dark">here &#8599</a></p>
 		</section>
 		<section class="js-section">
 			<h2 class="section__title">Manual</h2>
@@ -72,10 +75,10 @@
 			<p>At any moment of the game you can:
 			<ul>
 				<li>use the command <code>help</code> to request the list of the available commands.</li>
-				<li>use the command <code>save</code> to save your current progress into a <code>.json</code> file which
-					will be used to reload the game at the next access.<br/>
-					<strong>Warning!</strong><br/>The game will not automatically save the progress!<br/>
-					<u>You must set up your own bucket environment!</u></li>
+				<li>use the command <code>save</code> to save your current progress in locale on your computer<br/>
+					<strong>Warning!</strong> The game will not automatically save the progress!<br/>
+					<u>If you want to save on cloud you must set up your own bucket environment!</u>
+				</li>
 			</ul>
 			<p>
 				The main goal of the game is to complete all the rooms, reach the castle and beat the final boss! </p>
@@ -235,54 +238,6 @@
 					<td><code>clear</code></td>
 					<td>-</td>
 					<td>Command for cleaning the game terminal.</td>
-				</tr>
-			</table>
-			<h3 class="section__title">Dependencies</h3>
-			<table>
-				<tr>
-					<th>Name</th>
-					<th>Version</th>
-					<th>Description</th>
-				</tr>
-				<tr>
-					<td>AWS</td>
-					<td>2.25.58</td>
-					<td>Cloud computing platform provided by Amazon</td>
-				</tr>
-				<tr>
-					<td>Jackson</td>
-					<td>2.16.1</td>
-					<td>Open-source Java class library for serialization to JSON and vice versa.</td>
-				</tr>
-				<tr>
-					<td>Java</td>
-					<td>20</td>
-					<td>primary programming language</td>
-				</tr>
-				<tr>
-					<td>JavaFX</td>
-					<td>22.0.1</td>
-					<td>Java-based software platform for creating desktop applications</td>
-				</tr>
-				<tr>
-					<td>JGraphT</td>
-					<td>1.5.2</td>
-					<td>Open-source Java class library for the graph structure</td>
-				</tr>
-				<tr>
-					<td>JUnit</td>
-					<td>5.11.0</td>
-					<td>Framework for automatic testing</td>
-				</tr>
-				<tr>
-					<td>log4j</td>
-					<td>2.20.0</td>
-					<td>Java-based logging utility</td>
-				</tr>
-				<tr>
-					<td>Maven</td>
-					<td>4.0.0</td>
-					<td>software for dependencies and project structure management</td>
 				</tr>
 			</table>
 			<h3 class="section__title">How To Install</h3>
@@ -482,6 +437,54 @@
 
 			<h4 class="section__title">Jar</h4>
 			<p>Not supported yet</p><br/>
+			<h3 class="section__title">Dependencies</h3>
+			<table>
+				<tr>
+					<th>Name</th>
+					<th>Version</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td>AWS</td>
+					<td>2.25.58</td>
+					<td>Cloud computing platform provided by Amazon</td>
+				</tr>
+				<tr>
+					<td>Jackson</td>
+					<td>2.16.1</td>
+					<td>Open-source Java class library for serialization to JSON and vice versa.</td>
+				</tr>
+				<tr>
+					<td>Java</td>
+					<td>20</td>
+					<td>primary programming language</td>
+				</tr>
+				<tr>
+					<td>JavaFX</td>
+					<td>22.0.1</td>
+					<td>Java-based software platform for creating desktop applications</td>
+				</tr>
+				<tr>
+					<td>JGraphT</td>
+					<td>1.5.2</td>
+					<td>Open-source Java class library for the graph structure</td>
+				</tr>
+				<tr>
+					<td>JUnit</td>
+					<td>5.11.0</td>
+					<td>Framework for automatic testing</td>
+				</tr>
+				<tr>
+					<td>log4j</td>
+					<td>2.20.0</td>
+					<td>Java-based logging utility</td>
+				</tr>
+				<tr>
+					<td>Maven</td>
+					<td>4.0.0</td>
+					<td>software for dependencies and project structure management</td>
+				</tr>
+			</table>
 		</section>
 		<section class="js-section">
 			<h2 class="section__title">Design</h2>
@@ -652,16 +655,34 @@
 					<p>Command management is implemented using this pattern.</p>
 				</li>
 			</ol>
-			<h3 class="js-section">Domain Model</h3>
-			<img src="dm.svg"  alt="domain-model"/>
-			<h3 class="js-section">System Sequence Diagram</h3>
-			<img src="ssd.svg"  alt="system-sequence-diagram"/>
+			<br/>
+
+			<div id="myModal" class="modal">
+				<div id="caption"></div>
+				<img class="modal-content" id="img01"/>
+			</div>
+
+			<h3 class="section__title">Domain Model</h3>
+			<img src="media/domain-model.svg" alt="Domain model" class="design-img"/>
+
+			<h3 class="section__title">System Sequence Diagram</h3>
+			<img src="media/system-sequence-diagram.svg" alt="System sequence diagram" class="design-img"/>
+
+			<h3 class="section__title">Internal Sequence Diagrams</h3>
+
+			<h4>Command usage and creation</h4>
+			<img src="media/command-sequence-diagram.svg" alt="Command sequence diagram" class="design-img"/>
+
+			<h4>Command move</h4>
+			<img src="media/command-move-sequence-diagram.svg" alt="Command move sequence diagram" class="design-img" />
+
+			<h4>Autocompleter sequence diagram</h4>
+			<img src="media/autocompleter-sequence-diagram.svg" alt="Auto completer sequence diagram"
+				 class="design-img" />
+
 		</section>
 		<section class="js-section">
 			<h2 class="section__title">Testing</h2>
-		</section>
-		<section class="js-section">
-			<h2 class="section__title">JavaDoc</h2>
 		</section>
 	</article>
 </div>
@@ -669,6 +690,6 @@
 <footer class="footer">Project by Checchin Alessio, Chen Simone, Parravicini Alberto & Toniolo Jacopo.</footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-<script src="index.js"></script>
+<script src="js/index.js"></script>
 </body>
 </html>

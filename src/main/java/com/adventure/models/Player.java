@@ -3,11 +3,10 @@ package com.adventure.models;
 import com.adventure.exceptions.NotUsableItemException;
 import com.adventure.models.items.Item;
 import com.adventure.models.items.UsableItem;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
-import java.util.Objects;
 
 /**
  * Player entity.
@@ -24,6 +23,7 @@ public class Player extends Entity
     public Player(@JsonProperty("name") String name, @JsonProperty("inventory") Inventory inventory, @JsonProperty("stats") Stats stats)
     {
         super(inventory, stats, name);
+        this.isFighting = false;
     }
 
     //
@@ -68,4 +68,24 @@ public class Player extends Entity
             throw new NoSuchElementException();
         }
     }
+
+    /**
+     * Checks whether the player is fighting or not
+     * @return true if the player is fighting, false otherwise
+     */
+    @JsonIgnore
+    public boolean isFighting(){ return this.isFighting; }
+
+    /**
+     * Set the fighting status of the player
+     * @param status boolean fight status
+     */
+    @JsonIgnore
+    public void setFightingStatus(boolean status) { this.isFighting = status; }
+
+    /**
+     * Entity fighting status
+     */
+    @JsonIgnore
+    private boolean isFighting;
 }

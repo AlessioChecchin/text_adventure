@@ -1,0 +1,56 @@
+@startuml
+!theme materia-outline
+
+skinparam ArrowColor #9803fc
+skinparam BackgroundColor #FFFFFF
+skinparam ArrowColor #9803fc
+skinparam ActorBorderColor #9803fc
+skinparam ActorFontColor #9803fc
+skinparam ActorBackgroundColor #9803fc
+skinparam ParticipantFontColor #9803fc
+skinparam ParticipantBorderColor #9803fc
+skinparam ParticipantBackgroundColor #FFFFFF
+skinparam {
+ SequenceGroupBorderColor #9803fc
+}
+
+participant Console
+participant Autocompleter
+participant CommandParser
+participant Command
+
+
+activate Console
+-> Console: Keyboard input event
+alt key != Key.TAB and key != Key.SHIFT+TAB and the key modifies the text
+  Console -> Autocompleter: buildPrediction()
+  activate Autocompleter
+
+  Autocompleter -> Autocompleter: Calculates number of space separated tokens.
+  alt tokens number = 1 and there is no space
+    Autocompleter -> CommandParser: getCommands()
+    activate CommandParser
+    CommandParser --> Autocompleter: Returns all enabled commands.
+    deactivate CommandParser
+  else tokens number > 1 or ends with space
+
+    Autocompleter -> Autocompleter: Find the command from the last - 1 token.
+
+    Autocompleter -> Command: Find if the command supports additional arguments using reflection.
+    activate Command
+    Command --> Autocompleter: List of additional arguments (empty if there the command does not support additional arguments)
+    deactivate Command
+
+    Autocompleter -> Autocompleter: Computes possible completions.
+    Autocompleter --> Console: Possibile choces for completion.
+
+  else key=Key.TAB or key=Key.SHIFT+TAB
+    Console -> Autocompleter: operate(input, shiftDirection)
+    Autocompleter --> Console: Returns a list with all predictions and the suggested one.
+    deactivate Autocompleter
+
+  end
+end
+deactivate Console
+
+@enduml

@@ -6,6 +6,11 @@
 .display-wrapper
 {
     -fx-background-color: black;
+    -fx-padding: 10px;
+}
+
+.text-area .scroll-pane .content{
+    -fx-background-color: black;
 }
 
 .separator
@@ -24,35 +29,34 @@
     -fx-background-color: transparent;
 }
 
-.console-output-wrapper
-{
-    -fx-padding: 10;
-}
-
 .console-output
 {
-    -fx-font-family: 'Monocraft';
     -fx-text-fill: white;
+    -fx-pref-width: 675px;
+    -fx-alignment: center;
+    -fx-font-family: 'Monocraft';
     -fx-font-size: 14;
 }
 
 .console-input-wrapper
 {
-    -fx-padding: 10;
+    -fx-font-family: 'Monocraft';
+    -fx-alignment: center-left;
+    -fx-font-size: 14;
+    -fx-text-fill: white;
+    -fx-padding: 5px;
 }
 
 .console-input-prefix
 {
-    -fx-text-fill: white;
-    -fx-font-family: 'Monocraft';
+    -fx-text-fill: inherit;
+    -fx-alignment: center;
 }
 
 .console-input
 {
+    -fx-text-fill: inherit;
     -fx-background-color: transparent;
-    -fx-text-fill: white;
-    -fx-font-family: 'Monocraft';
-    -fx-font-size: 14;
 }
 
 

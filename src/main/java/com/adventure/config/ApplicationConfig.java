@@ -9,8 +9,16 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Properties;
 
+/**
+ * Class that implements configuration object.
+ */
 public class ApplicationConfig implements Config
 {
+    /**
+     * Creates configuration object from a properties.
+     * @param properties Application properties loaded.
+     * @throws ConfigurationException If some error occur while generating the configuration object.
+     */
     public ApplicationConfig(Properties properties) throws ConfigurationException
     {
         try

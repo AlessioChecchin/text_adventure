@@ -5,6 +5,9 @@ import com.adventure.exceptions.GameStorageException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
+/**
+ * Command used to delete an existing game.
+ */
 public class CmdDeleteGame extends AbstractCommand
 {
     @Override

@@ -7,22 +7,22 @@ import com.adventure.models.items.Item;
 
 import java.util.ArrayList;
 
+/**
+ * Command used to show player stats/inventory.
+ */
 public class CmdShow extends AbstractCommand
 {
 
     @Override
     public void execute() throws InterruptedException {
-
-        // Obtaining number of parameters.
-        int size = getArgs().size();
-
         // Default 'show' shows the inventory.
-        if(size == 0)
+        if(this.correctArgumentsNumber(0))
         {
+            showStats();
             showInventory();
         }
         // Checking parameters.
-        else if(size == 1)
+        else if(this.correctArgumentsNumber(1))
         {
             String parameter = this.getArgs().get(0);
 
@@ -47,11 +47,6 @@ public class CmdShow extends AbstractCommand
                 this.writer.println("Invalid parameter value");
             }
         }
-        else
-        {
-            this.writer.println("Invalid usage of 'show'");
-        }
-
     }
 
     /**
@@ -78,11 +73,17 @@ public class CmdShow extends AbstractCommand
         Player player = this.context.getGame().getPlayer();
         Stats stats = player.getStats();
 
-        this.writer.printf("%s stats:%n", player.getName());
+        String englishPossessive = player.getName();
+        if(player.getName().toLowerCase().endsWith("s"))
+            englishPossessive += "'";
+        else
+            englishPossessive += "'s";
+
+        this.writer.printf("%s stats:%n", englishPossessive);
         this.writer.printf("Max Hp: %d%n", stats.getMaxHp());
         this.writer.printf("Hp: %d%n", stats.getHp());
         this.writer.printf("Base attack: %d%n", stats.getBaseAttack());
-        this.writer.printf("Base defence: %d%n", stats.getBaseDefense());
+        this.writer.printf("Base defence: %d%n%n", stats.getBaseDefense());
     }
 
     /**
