@@ -4,22 +4,12 @@ import com.adventure.Resources;
 import com.adventure.config.Config;
 import com.adventure.exceptions.GameStorageException;
 import com.adventure.models.Game;
-import com.adventure.models.Inventory;
-import com.adventure.models.Player;
-import com.adventure.models.Stats;
-import com.adventure.models.items.*;
-import com.adventure.models.nodes.Action;
-import com.adventure.models.nodes.Room;
-import com.adventure.models.nodes.StoryNode;
-import com.adventure.models.nodes.StoryNodeLink;
 import com.adventure.serializers.GraphSerializer;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jgrapht.Graph;
 
 import java.io.File;
@@ -28,7 +18,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Properties;
 
 public class FileSystemStorageService extends AbstractStorageService
 {
@@ -37,8 +26,9 @@ public class FileSystemStorageService extends AbstractStorageService
         super(config);
 
         //  Create or ensure the existence of the 'saves' folder
+        //this.savePath = Resources.getAssetsPath() + "saves/";
+        this.savePath = "saves/";
         ensureSaveFolder();
-        this.savePath = Resources.getAssetsPath() + "saves/";
     }
 
     @Override
@@ -131,7 +121,6 @@ public class FileSystemStorageService extends AbstractStorageService
      */
     private void ensureSaveFolder()
     {
-        String savePath = Resources.getAssetsPath() + "saves";
         if(!new File(savePath).exists())
             new File(savePath).mkdirs();
     }
