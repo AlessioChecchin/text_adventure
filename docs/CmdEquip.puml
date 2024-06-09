@@ -1,0 +1,53 @@
+@startuml
+!theme materia-outline
+
+skinparam ArrowColor #9803fc
+skinparam BackgroundColor #FFFFFF
+skinparam ArrowColor #9803fc
+skinparam ActorBorderColor #9803fc
+skinparam ActorFontColor #9803fc
+skinparam ActorBackgroundColor #9803fc
+skinparam ParticipantFontColor #9803fc
+skinparam ParticipantBorderColor #9803fc
+skinparam ParticipantBackgroundColor #FFFFFF
+skinparam {
+ SequenceGroupBorderColor #9803fc
+}
+
+
+actor User
+participant Display
+participant CmdFight
+participant CmdEquip
+participant ApplicationContext
+participant Game
+participant RandomCollection
+participant Player
+participant Inventory
+
+
+
+
+CmdFight -> CmdEquip: equip
+CmdEquip -> ApplicationContext: get current game
+ApplicationContext --> CmdEquip
+CmdEquip -> Game: get current Player
+Game --> CmdEquip
+CmdEquip -> Player: get Player Inventory
+Player --> CmdEquip
+CmdEquip -> Display: get item name by prompt 
+Display --> CmdEquip
+CmdEquip -> Inventory: get Equipable item with the name passed by the user 
+Inventory --> CmdEquip 
+alt item is not null
+  alt item instanceof Equipable
+    CmdEquip -> Inventory: equip item
+    CmdEquip -> User: "Item equiped"
+  else
+    CmdEquip -> User: "Item not equipable"
+  end
+else 
+  CmdEquip -> User: "Item not found"
+end
+
+@enduml
