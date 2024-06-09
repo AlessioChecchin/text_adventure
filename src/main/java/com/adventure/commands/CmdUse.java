@@ -42,13 +42,15 @@ public class CmdUse extends AbstractCommand
         catch (NotUsableItemException notUsable)
         {
             this.writer.println("Item is not usable!");
+            return;
         }
         catch (NoSuchElementException noElement)
         {
             this.writer.println("Item not found!");
+            return;
         }
 
-        if(node instanceof Room currentRoom && currentRoom.getMonster() != null)
+        if(node instanceof Room currentRoom && currentRoom.getMonster() != null && player.isFighting())
         {
             Enemy monster = currentRoom.getMonster();
 
