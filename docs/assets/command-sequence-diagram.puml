@@ -36,22 +36,22 @@ activate CommandParser
 
 CommandParser -> CommandParser: Tokenize command.
 
-CommandParser -> LookupTable: getCommandMetadata
+CommandParser -> LookupTable: getCommandMetadata()
 LookupTable --> CommandParser
 
 alt metadata == null
   CommandParser --> Console: Command not found.
   Console -> Console: Display that the comman is unknown
 else else
+  create Command
   CommandParser -> Command: Create correct instance using reflection\nand command metadata.
-  Command --> CommandParser
   CommandParser -> Command: setContext(this.context)
   CommandParser -> Command: setArgs(tokenizedArgs)
   CommandParser --> Console: Command instance.
   deactivate CommandParser
 
   Console -> Command: setInputStream(this.inputStream)
-  Console -> Command: setOutputStream(this.outputStream)
+  Console -> Command: setWriter(this.writer)
 
   Console -> Task: createTask(currentCommand)
   activate Task

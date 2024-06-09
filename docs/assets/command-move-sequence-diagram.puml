@@ -14,69 +14,70 @@ skinparam {
  SequenceGroupBorderColor #9803fc
 }
 
-participant CommandMove
-participant ApplicationContext
+participant CmdMove
+participant "I/O Stream"
 participant Game
 participant Player
 participant GameGraph
 participant StoryNodeLink
+participant ApplicationContext
 
--> CommandMove: execute()
-activate CommandMove
-CommandMove -> ApplicationContext: getGame()
+-> CmdMove: execute()
+activate CmdMove
+CmdMove -> ApplicationContext: getGame()
 activate ApplicationContext
-ApplicationContext --> CommandMove
+ApplicationContext --> CmdMove
 deactivate ApplicationContext
 
-CommandMove -> Game: getCurrentNode(), getGameGraph()
+CmdMove -> Game: getCurrentNode(), getGameGraph()
 activate Game
-Game --> CommandMove
+Game --> CmdMove
 deactivate Game
 
-CommandMove -> GameGraph: getOutgoingEdges(currentNode)
+CmdMove -> GameGraph: getOutgoingEdges(currentNode)
 activate GameGraph
-GameGraph --> CommandMove
+GameGraph --> CmdMove
 deactivate GameGraph
 
 
 loop foreach outgoingEdge
-  CommandMove -> Action: getAction()
+  CmdMove -> Action: getAction()
   activate Action
-  Action --> CommandMove
+  Action --> CmdMove
   deactivate Action
 
   opt action matches command argument (eg. north, south, ...)
 
-    CommandMove -> StoryNodeLink: getLocked()
+    CmdMove -> StoryNodeLink: getLocked()
     activate StoryNodeLink
-    StoryNodeLink --> CommandMove
+    StoryNodeLink --> CmdMove
     deactivate StoryNodeLink
 
     alt edge locked
-      CommandMove -> Player: getItems()
+      CmdMove -> Player: getItems()
       activate Player
-      Player --> CommandMove
+      Player --> CmdMove
       deactivate Player
 
-      CommandMove -> CommandMove: Search a key in the items that matches edge key.
+      CmdMove -> CmdMove: Search a key in the items that matches edge key.
 
       alt key found
-        CommandMove -> StoryNodeLink: unlockEdge()
-        CommandMove -> Game: setCurrentNode(targetNode)
+        CmdMove -> StoryNodeLink: unlockEdge()
+        CmdMove -> Game: setCurrentNode(targetNode)
       else else
-        CommandMove -> CommandMove: Notify that the player does not have the correct key.
+        CmdMove -> "I/O Stream": Notify that the player does not have the correct key.
       end
     else else
-      CommandMove -> Game: setCurrentNode(targetNode)
+      CmdMove -> Game: setCurrentNode(targetNode)
     end
   end
 end
 
 opt no action matched command argument
-  CommandMove -> CommandMove: Notify that the argument is not valid.
+  CmdMove -> "I/O Stream": Notify that the argument is not valid.
 end
 
-deactivate CommandMove
+deactivate CmdMove
 
 
 @enduml

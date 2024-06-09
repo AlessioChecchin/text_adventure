@@ -1,0 +1,86 @@
+@startuml
+!theme materia-outline
+
+skinparam ArrowColor #9803fc
+skinparam BackgroundColor #FFFFFF
+skinparam ArrowColor #9803fc
+skinparam ActorBorderColor #9803fc
+skinparam ActorFontColor #9803fc
+skinparam ActorBackgroundColor #9803fc
+skinparam ParticipantFontColor #9803fc
+skinparam ParticipantBorderColor #9803fc
+skinparam ParticipantBackgroundColor #FFFFFF
+skinparam {
+ SequenceGroupBorderColor #9803fc
+}
+
+
+participant CmdUse
+participant "I/O Stream"
+participant ApplicationContext
+participant Game
+participant Room
+participant Player
+participant Monster
+
+CmdUse++
+
+CmdUse -> ApplicationContext++: getGame()
+ApplicationContext --> CmdUse
+ApplicationContext--
+
+CmdUse -> Game++: getCurrentNode(), getPlayer()
+Game --> CmdUse
+Game--
+
+CmdUse -> Room++: getMonster()
+Room --> CmdUse
+Room--
+
+CmdUse -> "I/O Stream": Ask the which item to use.
+activate "I/O Stream"
+"I/O Stream" --> CmdUse
+deactivate "I/O Stream"
+
+CmdUse -> Player: Use item with the name inserted received from I/O
+
+break Item is not Usable
+    CmdUse -> "I/O Stream": Item not usable.
+else Item was not found
+    CmdUse -> "I/O Stream": Item not found.
+end
+
+CmdUse -> Player++: isFighting()
+Player --> CmdUse
+Player--
+
+opt currentNode instanceof Room and monster != null and player is not fighting
+    CmdUse -> CmdUse: Compute monsterMove with a weighted probability\nbetween DODGE and ATTACK
+
+    opt monsterMove = DODGE and monster does not have 'dodge' left
+        CmdUse -> CmdUse : monsterMove = ATTACK
+    end
+
+    opt monster is alive
+        alt monsterMove = ATTACK
+            CmdUse -> Player++: getAttackDamage()
+            Player --> CmdUse: Returns attack damage of the player.
+            Player--
+
+            CmdUse -> Monster++: hit(playerAttackDamage)
+            Monster --> CmdUse: Returns inflicted attack damage.
+            Monster--
+
+            CmdUse -> "I/O Stream": Notify that the player dodged the incoming\nattack and hit the monster.
+
+        else else
+            CmdUse -> "I/O Stream": Notify thar monster dodged.
+        end
+    end
+end
+
+
+
+
+
+@enduml

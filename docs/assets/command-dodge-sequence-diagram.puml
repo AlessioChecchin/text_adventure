@@ -1,0 +1,61 @@
+@startuml
+!theme materia-outline
+
+skinparam ArrowColor #9803fc
+skinparam BackgroundColor #FFFFFF
+skinparam ArrowColor #9803fc
+skinparam ActorBorderColor #9803fc
+skinparam ActorFontColor #9803fc
+skinparam ActorBackgroundColor #9803fc
+skinparam ParticipantFontColor #9803fc
+skinparam ParticipantBorderColor #9803fc
+skinparam ParticipantBackgroundColor #FFFFFF
+skinparam {
+ SequenceGroupBorderColor #9803fc
+}
+
+
+participant CmdDodge
+participant "I/O Stream"
+participant Game
+participant Room
+participant Player
+participant Monster
+participant ApplicationContext
+
+
+CmdDodge -> ApplicationContext++: getGame()
+ApplicationContext --> CmdDodge
+ApplicationContext--
+
+CmdDodge -> Game++: getCurrentNode(), getPlayer()
+Game --> CmdDodge
+Game--
+
+CmdDodge -> Room++: getMonster()
+Room --> CmdDodge
+Room--
+
+alt player has "dodge" left
+    CmdDodge -> CmdDodge: Compute monsterMove with a weighted probability\nbetween DODGE and ATTACK
+
+    opt monsterMove = DODGE and monster does not have 'dodge' left
+        CmdDodge -> CmdDodge : monsterMove = ATTACK
+    end
+    alt monsterMove = ATTACK
+        CmdDodge -> Player++: getAttackDamage()
+        Player --> CmdDodge: Returns attack damage of the player.
+        Player--
+
+        CmdDodge -> Monster++: hit(playerAttackDamage)
+        Monster --> CmdDodge: Returns inflicted attack damage.
+        Monster--
+
+        CmdDodge -> "I/O Stream": Notify that the player dodged the incoming\nattack and hit the monster.
+    else else
+        CmdDodge -> "I/O Stream": Notify that both monster and player dodged.
+    end
+else player does not have any "dodge" left
+    CmdDodge -> "I/O Stream": Notify the player has no dodges left.
+end
+@enduml

@@ -15,7 +15,8 @@ import java.util.ArrayList;
  */
 public class CmdEquip extends AbstractCommand{
     @Override
-    public void execute() throws InterruptedException {
+    public void execute() throws InterruptedException
+    {
 
         if (!this.correctArgumentsNumber(1)) { return; }
 
@@ -27,7 +28,8 @@ public class CmdEquip extends AbstractCommand{
 
         //check if item is in the inventory
         if(item != null) {
-            if(item instanceof Equipable equipable) {
+            if(item instanceof Equipable equipable)
+            {
                 if(equipable instanceof AttackItem){
                 player.getInventory().getEquipedAttackItem().setEquiped(false);
                 }
@@ -35,7 +37,7 @@ public class CmdEquip extends AbstractCommand{
                     player.getInventory().getEquipedDefenceItem().setEquiped(false);
                 }
                 player.getInventory().equipItem(equipable);
-                this.writer.println(player.getName() + " equiped " + key);
+                this.writer.println(player.getName() + " equipped " + key);
             }
             else {this.writer.println("Item isn't equipable");}
         }
