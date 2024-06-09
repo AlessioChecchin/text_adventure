@@ -12,17 +12,20 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Objects;
+
 /**
  * Main class used to start the application.
  */
 public class Main extends Application
 {
-
     private static final Logger logger = LogManager.getLogger();
 
     @Override
     public void start(Stage stage)
     {
+        this.loadIcons(stage);
+
         CommandParser commandParser = CommandParser.getInstance();
         ApplicationContext context = ApplicationContextProvider.getInstance();
 
@@ -62,18 +65,31 @@ public class Main extends Application
         dummyGame.setCurrentNode(new GameLoaderNode());
         dummyGame.load();
 
-        stage.setTitle("Text_Adventure");
-
-        stage.getIcons().add(new Image(Resources.class.getResourceAsStream("assets/icon16.png")));
-        stage.getIcons().add(new Image(Resources.class.getResourceAsStream("assets/icon32.png")));
-        stage.getIcons().add(new Image(Resources.class.getResourceAsStream("assets/icon64.png")));
-        stage.getIcons().add(new Image(Resources.class.getResourceAsStream("assets/icon128.png")));
-        stage.getIcons().add(new Image(Resources.class.getResourceAsStream("assets/icon256.png")));
-        stage.getIcons().add(new Image(Resources.class.getResourceAsStream("assets/icon512.png")));
-
+        stage.setTitle(context.getConfig().getAppTitle());
 
         stage.setResizable(context.getConfig().isResizable());
         stage.show();
+    }
+
+    /**
+     * Loads necessary icons for the application.
+     * @param stage Application stage.
+     */
+    public void loadIcons(Stage stage)
+    {
+        try
+        {
+            stage.getIcons().add(new Image(Objects.requireNonNull(Resources.class.getResourceAsStream("assets/icon16.png"))));
+            stage.getIcons().add(new Image(Objects.requireNonNull(Resources.class.getResourceAsStream("assets/icon32.png"))));
+            stage.getIcons().add(new Image(Objects.requireNonNull(Resources.class.getResourceAsStream("assets/icon64.png"))));
+            stage.getIcons().add(new Image(Objects.requireNonNull(Resources.class.getResourceAsStream("assets/icon128.png"))));
+            stage.getIcons().add(new Image(Objects.requireNonNull(Resources.class.getResourceAsStream("assets/icon256.png"))));
+            stage.getIcons().add(new Image(Objects.requireNonNull(Resources.class.getResourceAsStream("assets/icon512.png"))));
+        }
+        catch (NullPointerException e)
+        {
+            logger.error("Error loading icons", e);
+        }
     }
 
     /**
