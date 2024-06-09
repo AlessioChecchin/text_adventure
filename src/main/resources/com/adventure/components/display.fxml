@@ -24,13 +24,13 @@
             <VBox styleClass="separator" />
         </top>
         <center>
-            <TextArea onMouseClicked="#onPromptClick" wrapText="true" focusTraversable="false"
+            <TextArea onMouseClicked="#onPromptClick" wrapText="true" focusTraversable="false" editable="false"
                           fx:id="consoleOutput" styleClass="console-output"/>
         </center>
         <bottom>
             <HBox styleClass="console-input-wrapper">
                 <Label text=">>" styleClass="console-input-prefix"/>
-                <TextField fx:id="consolePrompt" onKeyPressed="#onKeyPressed" styleClass="console-input" />
+                <TextField HBox.hgrow="ALWAYS" fx:id="consolePrompt" onKeyPressed="#onKeyPressed" styleClass="console-input" />
             </HBox>
         </bottom>
 

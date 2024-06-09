@@ -16,6 +16,8 @@ public class CmdBack extends AbstractCommand
     @Override
     public void execute()
     {
+        if (!this.correctArgumentsNumber(0)) { return; }
+
         Game game = this.context.getGame();
         StoryNode currentNode = game.getCurrentNode();
         StoryNode previousNode = game.getPreviousNode();

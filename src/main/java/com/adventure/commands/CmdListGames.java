@@ -13,6 +13,8 @@ public class CmdListGames extends AbstractCommand
     @Override
     public void execute() throws InterruptedException
     {
+        if (!this.correctArgumentsNumber(0)) { return; }
+
         try
         {
             StorageService storageService = this.context.getConfig().getStorageService();
