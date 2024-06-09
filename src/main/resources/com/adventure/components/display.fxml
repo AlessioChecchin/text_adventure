@@ -30,7 +30,7 @@
         <bottom>
             <HBox styleClass="console-input-wrapper">
                 <Label text=">>" styleClass="console-input-prefix"/>
-                <TextField fx:id="consolePrompt" onKeyPressed="#onKeyPressed" styleClass="console-input" />
+                <TextField HBox.hgrow="ALWAYS" fx:id="consolePrompt" onKeyPressed="#onKeyPressed" styleClass="console-input" />
             </HBox>
         </bottom>
 
