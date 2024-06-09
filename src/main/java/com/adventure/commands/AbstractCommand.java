@@ -231,11 +231,11 @@ public abstract class AbstractCommand implements Command
     {
         if(this.getArgs().size() < argumentsNumber)
         {
-            writer.println("Too few arguments for command this command");
+            writer.println("Too few arguments for this command");
             return false;
         }
         else if(this.getArgs().size() > argumentsNumber) {
-            writer.println("Too many arguments for command this command");
+            writer.println("Too many arguments for this command");
             return false;
         }
         return true;
