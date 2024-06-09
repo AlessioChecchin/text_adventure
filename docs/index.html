@@ -19,6 +19,7 @@
 		<div class="menu__item toggle"><span></span></div>
 		<li class="menu__item"><a href="https://github.com/ssiodev/text_adventure.git" class="link"><i
 				class="fa fa-github"></i> Github</a></li>
+		<li class="menu__item"><a href="javadoc/index.html" target="_blank" class="link"><i class="fa fa-book"></i> Javadoc</a>
 	</ul>
 </nav>
 <div class="wrapper">
@@ -239,13 +240,13 @@
 				</tr>
 			</table>
 			<h3 class="section__title">How To Install</h3>
-			<h4 class="section__title">Maven</h4>
+			<h4 class="section__title">Maven (option 1)</h4>
 			<ol>
 				<li>
 					<h5>
 						Clone the repository </h5>
 					<p>
-						If not installed, <strong>install GIT</strong> using <a href="https://git-scm.com/downloads"
+						If not installed, <strong>install git</strong> using <a href="https://git-scm.com/downloads"
 																				target="_blank" class="link-color">this
 						guide </a><br>
 						Once installed, from the terminal move to the folder where you want the repository to be cloned
@@ -323,7 +324,7 @@
 					</p>
 				</li>
 			</ol>
-			<h4 class="section__title">IntelliJ IDEA</h4>
+			<h4 class="section__title">IntelliJ IDEA (option 2)</h4>
 			<ol>
 				<li>
 					<h5>
@@ -377,7 +378,7 @@
 				</li>
 				<li>
 					<h5>
-						Create <code>application.config</code>
+						Create <code>application.conf</code>
 					</h5>
 					<p>
 						In the folder <br><a class="file-path" style="margin-left: 20px"> text_adventure > src > main >
@@ -387,23 +388,6 @@
 						<strong>Open</strong> the file <a class="file-path" style=""><code> text_adventure > src > main
 						> resources > copy_application.conf</code></a> <br> and <strong>copy its content</strong> inside
 						<a class="code--inline"><code>application.config</code></a> <br>
-					</p>
-				</li>
-				<li>
-					<h5>
-						Bucket info Setup </h5>
-					<p>
-						In the file <a class="code--inline" style=""><code>application.config</code></a> complete these
-						fields <br/>
-						<code class="code-block">storage.aws.key=</code><br>
-						<code class="code-block">storage.aws.secret=</code><br>
-						<code class="code-block">storage.aws.bucket.name=</code><br>
-						<code class="code-block">storage.aws.region=</code><br>
-						with the values of <br>
-						<code class="code-block">bucket public key </code><br>
-						<code class="code-block">bucket private key </code><br>
-						<code class="code-block">bucket name </code><br>
-						<code class="code-block">bucket region</code><br>
 					</p>
 				</li>
 				<li>
@@ -433,8 +417,67 @@
 				</li>
 			</ol>
 
-			<h4 class="section__title">Jar</h4>
+			<h4 class="section__title">Jar (option 3)</h4>
 			<p>Not supported yet</p><br/>
+
+			<h4>Bucket info Setup</h4>
+			<ol>
+				<li>
+					Create a S3 Bucket called <code>edidstextgame</code>
+					(we used this name for demonstration purposes, you may need to choose another one,
+					just replace our name with the one that you prefer)
+				</li>
+				<li>
+					From AWS console move to IAM section (Identity and Access Management)
+				</li>
+				<li>
+					Create a new policy using this json configuration file:
+					<pre>
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ListObjectsInBucket",
+            "Effect": "Allow",
+            "Action": ["s3:ListBucket"],
+            "Resource": ["arn:aws:s3:::edidstextgame"]
+        },
+        {
+            "Sid": "AllObjectActions",
+            "Effect": "Allow",
+            "Action": "s3:*Object",
+            "Resource": ["arn:aws:s3:::edidstextgame/*"]
+        }
+    ]
+}
+							</pre>
+
+					This configuration allows the game to work with the minimal necessary privileges.
+				</li>
+				<li>
+					Create a new user group and assign to it the new created policy.
+				</li>
+				<li>
+					Create a new user and assign the user to the created group.
+				</li>
+				<li>
+					After creating the user generate a pair client-secret pair credentials.
+				</li>
+				<li>
+					<p>
+						In the file <code>application.conf</code> complete the fields: <br/>
+					</p>
+					<pre>
+storage.aws.key=
+storage.aws.secret=
+storage.aws.bucket.name=
+storage.aws.region=
+							</pre>
+				</li>
+				<li>
+					Remember to <b>never</b> share you client and secret keys!
+				</li>
+			</ol>
 			<h3 class="section__title">Dependencies</h3>
 			<table>
 				<tr>
