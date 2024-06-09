@@ -15,6 +15,9 @@ import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.LoggerConfig;
 
+import java.io.FileInputStream;
+import java.util.Properties;
+
 /**
  * Main class used to start the application.
  */
@@ -26,15 +29,6 @@ public class Main extends Application
     @Override
     public void start(Stage stage)
     {
-        // TODO: integrate in log4j config file
-        {
-            LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
-            Configuration config = ctx.getConfiguration();
-            LoggerConfig loggerConfig = config.getLoggerConfig(LogManager.ROOT_LOGGER_NAME);
-            loggerConfig.setLevel(Level.DEBUG);
-            ctx.updateLoggers();
-        }
-
         CommandParser commandParser = CommandParser.getInstance();
         ApplicationContext context = ApplicationContextProvider.getInstance();
 
