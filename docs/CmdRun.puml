@@ -1,0 +1,36 @@
+@startuml
+!theme materia-outline
+
+skinparam ArrowColor #9803fc
+skinparam BackgroundColor #FFFFFF
+skinparam ArrowColor #9803fc
+skinparam ActorBorderColor #9803fc
+skinparam ActorFontColor #9803fc
+skinparam ActorBackgroundColor #9803fc
+skinparam ParticipantFontColor #9803fc
+skinparam ParticipantBorderColor #9803fc
+skinparam ParticipantBackgroundColor #FFFFFF
+skinparam {
+ SequenceGroupBorderColor #9803fc
+}
+
+
+actor user
+participant CmdFight
+participant CmdRun
+participant ApplicationContext
+participant Game
+participant Player
+
+CmdFight -> CmdRun: run
+CmdRun -> ApplicationContext: get player fight status
+ApplicationContext -> Game: get player fight status
+Game -> Player: get player fight status
+Player --> Game : player fight status
+Game --> ApplicationContext: player fight status
+ApplicationContext --> CmdRun: player fight status
+CmdRun -> CmdRun: set player fight status to false
+CmdRun -> user: "You run away"
+
+
+@enduml
