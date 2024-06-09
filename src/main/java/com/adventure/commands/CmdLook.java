@@ -14,6 +14,8 @@ public class CmdLook extends AbstractCommand
     @Override
     public void execute() throws InterruptedException
     {
+        if (!this.correctArgumentsNumber(0)) { return; }
+
         StoryNode node = this.context.getGame().getCurrentNode();
 
         if(node instanceof Room room)

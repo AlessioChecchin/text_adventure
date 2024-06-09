@@ -14,7 +14,7 @@ public class CmdSaveGame extends AbstractCommand
     public void execute() throws InterruptedException
     {
         // User has passed no argument
-        if(this.getArgs().isEmpty())
+        if(this.correctArgumentsNumber(0))
         {
             Game currentGame = this.context.getGame();
 
@@ -37,7 +37,7 @@ public class CmdSaveGame extends AbstractCommand
             save(this.context.getConfig().getStorageService(), currentGame);
         }
         // User specifies the name of the game. If the game had another name, now it is overwritten
-        else if(this.getArgs().size() == 1)
+        else if(this.correctArgumentsNumber(1))
         {
             Game currentGame = this.context.getGame();
             currentGame.setId(this.getArgs().get(0));

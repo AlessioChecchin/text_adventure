@@ -9,6 +9,9 @@ public class CmdHelp extends AbstractCommand
 {
     @Override
     public void execute() throws InterruptedException {
+
+        if (!this.correctArgumentsNumber(0)) { return; }
+
         CommandParser commandParser = CommandParser.getInstance();
 
         int maxLength = 0;

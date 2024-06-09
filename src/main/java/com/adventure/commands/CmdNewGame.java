@@ -13,6 +13,8 @@ public class CmdNewGame extends AbstractCommand
     @Override
     public void execute() throws InterruptedException
     {
+        if (!this.correctArgumentsNumber(0)) { return; }
+
         // Obtains the number of nodes loaded in the game.
         int n = this.context.getGame().getGameGraph().vertexSet().size();
 

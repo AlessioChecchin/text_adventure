@@ -17,6 +17,8 @@ public class CmdWai extends AbstractCommand
     @Override
     public void execute() throws InterruptedException
     {
+        if(!this.correctArgumentsNumber(0)) {   return; }
+
         StoryNode currentNode = this.context.getGame().getCurrentNode();
 
         if(currentNode instanceof Room room)

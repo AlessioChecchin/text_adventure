@@ -16,7 +16,9 @@ import java.util.ArrayList;
 public class CmdEquip extends AbstractCommand{
     @Override
     public void execute() throws InterruptedException {
+
         if (!this.correctArgumentsNumber(1)) { return; }
+
         Game game = this.context.getGame();
         Player player = game.getPlayer();
         String key = this.getArgs().get(0);
