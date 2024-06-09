@@ -75,7 +75,7 @@ public class UsableItem extends Item implements Usable
     @Override
     public String toString()
     {
-        return String.format("name: %s, atk: %d, def: %d, hp: %d", name, atk, def, hp);
+        return String.format("%s, atk: %d, def: %d, hp: %d", name, atk, def, hp);
     }
 
     @Override
