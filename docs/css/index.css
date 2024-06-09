@@ -173,9 +173,11 @@ html, body {
   width: 100%;
   max-width: 700px;
   text-align: center;
+  font-weight: 500;
+  font-size: 25px;
   color: #ccc;
   padding: 10px 0;
-  height: 150px;
+  height: 100px;
 }
 
 

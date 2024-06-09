@@ -115,19 +115,21 @@ const modalContent = document.querySelector('.modal-content');
 // Loop through each image and attach the click event
 images.forEach(function(img) {
   img.onclick = function() {
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    modalImg.alt = this.alt;
-    captionText.innerHTML = this.alt;
-    modalContent.scrollTop = 0;
-  }
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  modalImg.alt = this.alt;
+  captionText.innerHTML = this.alt;
+  modal.style.top = '0';
+  modalContent.scrollTop = 0;
+}
 });
 
 // When the user clicks on <span> (x), close the modal
 modal.onclick = function() {
-  img01.className += " out";
+  modalImg.className += " out";
   setTimeout(function() {
+    modal.scrollTop = 0;
     modal.style.display = "none";
-    img01.className = "modal-content";
+    modalImg.className = "modal-content";
   }, 400);
 }
