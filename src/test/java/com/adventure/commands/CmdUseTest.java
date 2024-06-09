@@ -1,7 +1,6 @@
 package com.adventure.commands;
 
 import com.adventure.config.ApplicationContext;
-import com.adventure.config.ApplicationContextProvider;
 import com.adventure.exceptions.ConfigurationException;
 import com.adventure.models.items.UsableItem;
 import com.adventure.models.nodes.Room;
@@ -25,7 +24,7 @@ class CmdUseTest extends AbstractCommandTest
     void execute() throws InterruptedException, ConfigurationException
     {
         // Set the context.
-        ApplicationContext context = makeContext();
+        ApplicationContext context = resetContext();
 
         command.setContext(context);
 

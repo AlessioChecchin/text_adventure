@@ -1,7 +1,6 @@
 package com.adventure.commands;
 
 import com.adventure.config.ApplicationContext;
-import com.adventure.config.ApplicationContextProvider;
 import com.adventure.exceptions.ConfigurationException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -18,7 +17,7 @@ class CmdDodgeTest extends AbstractCommandTest
     void executeTest() throws InterruptedException, ConfigurationException
     {
         // Set the context.
-        ApplicationContext context = makeContext();
+        ApplicationContext context = resetContext();
 
         command.setContext(context);
 

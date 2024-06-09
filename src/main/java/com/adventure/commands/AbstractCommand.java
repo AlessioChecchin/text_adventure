@@ -1,6 +1,7 @@
 package com.adventure.commands;
 
 import com.adventure.config.ApplicationContext;
+import com.adventure.config.ApplicationContextProvider;
 import com.adventure.exceptions.GameStorageException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,6 +34,18 @@ public abstract class AbstractCommand implements Command
 
         // When spawned the command should not terminate.
         this.shouldTerminate = false;
+        this.context = ApplicationContextProvider.getInstance();
+    }
+
+    /**
+     * Default constructor.
+     * Binds input stream and output stream to stdin and stdout.
+     */
+    public AbstractCommand(ApplicationContext context)
+    {
+        super();
+        Objects.requireNonNull(context);
+        this.context = context;
     }
 
     //

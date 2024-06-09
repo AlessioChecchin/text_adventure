@@ -1,7 +1,6 @@
 package com.adventure.commands;
 
 import com.adventure.config.ApplicationContext;
-import com.adventure.config.ApplicationContextProvider;
 import com.adventure.exceptions.ConfigurationException;
 import com.adventure.models.nodes.Action;
 import com.adventure.models.nodes.Room;
@@ -11,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,7 +22,7 @@ class CmdWaiTest extends AbstractCommandTest
     void execute() throws ConfigurationException, InterruptedException
     {
         // Set the context.
-        ApplicationContext context = makeContext();
+        ApplicationContext context = resetContext();
 
         command.setContext(context);
 

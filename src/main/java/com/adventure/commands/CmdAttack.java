@@ -5,12 +5,41 @@ import com.adventure.models.*;
 import com.adventure.models.nodes.*;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Command used during a fight to attack an enemy.
  */
 public class CmdAttack extends AbstractCommand
 {
+
+    /**
+     * Default constructor.
+     */
+    public CmdAttack()
+    {
+        super();
+        this.decision = new RandomCollection<>();
+        Config currentConfig = this.context.getConfig();
+
+        // Monster set moves
+        this.decision
+                .add(currentConfig.getMonsterAttackProbability(), CmdFight.Move.ATTACK)
+                .add(currentConfig.getMonsterDodgeProbability(), CmdFight.Move.DODGE);
+    }
+
+    /**
+     * Constructor with random collection injection.
+     * @param randomCollection Random collection object.
+     */
+    public CmdAttack(RandomCollection<Object> randomCollection)
+    {
+        super();
+
+        Objects.requireNonNull(randomCollection);
+        this.decision = randomCollection;
+    }
+
 
     @Override
     public void execute() throws InterruptedException
@@ -38,11 +67,6 @@ public class CmdAttack extends AbstractCommand
             this.writer.println("There is no monster to fight here");
             return;
         }
-
-        // Monster set moves
-        RandomCollection<Object> decision = new RandomCollection<>()
-                .add(currentConfig.getMonsterAttackProbability(), CmdFight.Move.ATTACK)
-                .add(currentConfig.getMonsterDodgeProbability(), CmdFight.Move.DODGE);
 
         CmdFight.Move monsterMove = (CmdFight.Move) decision.next();
 
@@ -76,4 +100,6 @@ public class CmdAttack extends AbstractCommand
     {
         return new ArrayList<>();
     }
+
+    private final RandomCollection<Object> decision;
 }

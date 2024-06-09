@@ -1,13 +1,9 @@
 package com.adventure.commands;
 
 import com.adventure.config.ApplicationContext;
-import com.adventure.config.ApplicationContextProvider;
 import com.adventure.exceptions.ConfigurationException;
 import com.adventure.models.Player;
-import com.adventure.models.Stats;
 import com.adventure.models.items.UsableItem;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import java.io.PrintWriter;
@@ -24,7 +20,7 @@ class CmdShowTest extends AbstractCommandTest
     public void executeTest() throws InterruptedException, ConfigurationException
     {
         // Set the context.
-        ApplicationContext context = makeContext();
+        ApplicationContext context = resetContext();
 
         command.setContext(context);
 
