@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/x-icon" href="media/favicon.ico">
 	<title>Text Adventure - Documentation</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
@@ -17,9 +18,10 @@
 	<h1 class="logo">Text Adventure <span class="logo__thin">Documentation</span></h1>
 	<ul class="menu">
 		<div class="menu__item toggle"><span></span></div>
-		<li class="menu__item"><a href="https://github.com/ssiodev/text_adventure.git" class="link"><i
-				class="fa fa-github"></i> Github</a></li>
-		<li class="menu__item"><a href="javadoc/index.html" target="_blank" class="link"><i class="fa fa-book"></i> Javadoc</a>
+		<li class="menu__item"><a href="https://github.com/ssiodev/text_adventure.git" class="link"><i class="fa fa-github"></i> Github</a></li>
+		<li class="menu__item"><a href="javadoc/index.html" target="_blank" class="link"><i class="fa fa-book"></i>Javadoc</a>
+		<li class="menu__item"><a href="junit/surefire-report.html" target="_blank" class="link"><i class="fa fa-book"></i>JUnit</a>
+		<li class="menu__item"><a href="assets/system_test.pdf" target="_blank" class="link"><i class="fa fa-book"></i>System Tests</a>
 	</ul>
 </nav>
 <div class="wrapper">
@@ -28,7 +30,6 @@
 			<li class="js-btn selected">Introduction</li>
 			<li class="js-btn">Manual</li>
 			<li class="js-btn">Design</li>
-			<li class="js-btn">Testing</li>
 		</ul>
 	</aside>
 	<article class="doc__content">
@@ -49,7 +50,7 @@
 				he could not have imagined and that would lead him to an unbelievable destiny....<br/>
 			</p>
 			<h3 >Specifications</h3>
-			<p>To consult the project's user stories, check <a href="" target="_blank" class="link--dark">here &#8599</a></p>
+			<p>To consult the project's user stories, check <a href="https://team-scrum-unipd.atlassian.net/jira/software/projects/SCRUM/boards/1?atlOrigin=eyJpIjoiNDQ1ZGNmNzk5NDFiNDg1YWI1YzM0Yjg2NzJhMjJjOGYiLCJwIjoiaiJ9" target="_blank" class="link--dark">here &#8599</a></p>
 
 			<h3 >Javadoc</h3>
 			<p>To consult the project's javadoc, check <a href="javadoc/index.html" target="_blank" class="link--dark">here
@@ -113,7 +114,7 @@
 						>> command &lt;argument&gt;
 					</code>
             	</pre>
-				<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
+				<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
 			</div>
 			<p>
 				The complete list of all the possible commands with a precise illustration of the arguments and the
@@ -258,6 +259,14 @@
 				</tr>
 			</table>
 
+			<h3 id="GameMap">Game map</h3>
+
+			<p>
+				We recommend discovering the map by playing, but if you really want to see how the default map is implemented, check the following image!
+			</p>
+
+			<img src="media/map.drawio.svg" alt="Game map" class="design-img" />
+
 			<h3 >How To Install</h3>
 			<h4 >Maven (option 1)</h4>
 			<ol>
@@ -276,7 +285,7 @@
                					git clone https://github.com/ssiodev/text_adventure.git
 							</code>
             			</pre>
-						<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy"></i> Copy</button>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy"></i> Copy</button>
 					</div>
 				</li>
 				<li>
@@ -302,7 +311,7 @@
 								java --version
 							</code>
 						</pre>
-						<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
 					</div>
 					<p>
 						If JDK20 is not installed use <a href="https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html" target="_blank" class="link--dark">this page &#8599</a> to download the right package or installer.<br/>
@@ -329,7 +338,22 @@
 								mvn package
 							</code>
 						</pre>
-						<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
+					</div>
+				</li>
+
+				<li>
+					<h5>Run the project</h5>
+					<p>
+						On the same directory run:
+					</p>
+					<div class="code code__block">
+						<pre class="code--block">
+							<code>
+								mvn javafx:run
+							</code>
+						</pre>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
 					</div>
 				</li>
 			</ol>
@@ -350,7 +374,7 @@
 								git clone https://github.com/ssiodev/text_adventure.git
 							</code>
 						</pre>
-						<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
 					</div>
 				</li>
 				<li>
@@ -375,7 +399,7 @@
 								java --version
 							</code>
 						</pre>
-						<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
 					</div>
 					<p>
 						If JDK20 is not installed use <a	href="https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html"
@@ -433,7 +457,7 @@
 								public static void main(String[] args) { launch(); }
 							</code>
             			</pre>
-						<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
 					</div>
 
 					<p>Note:</p>
@@ -453,7 +477,7 @@
 						Download
 					</h5>
 					<p>
-						Download the correct Jar version based on your operative system and place it somewhere.
+						Download the correct Jar version based on your operating system and place it somewhere.
 					</p>
 					<ul>
 						<li>Windows</li>
@@ -476,7 +500,7 @@
 								java -jar adventure.jar -s
 							</code>
 						</pre>
-						<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
 					</div>
 					<p>or</p>
 					<div class="code code__block">
@@ -485,13 +509,14 @@
 								java -jar adventure.jar --setup
 							</code>
 						</pre>
-						<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
 					</div>
 					<p>
 						The command will create the necessary folders to play the game.<br/>
 						By default, the game works locally and saves all files in the folder <code class="code file-path">text_adventure > saves</code>.<br/>
 						It is possible to play by saving to the cloud using personal AWS credentials.<br/>
-						For this, you need to open the file in <code class="code file-path">text_adventure > key.conf</code>
+						For this, you need to open the file in <code class="code file-path">text_adventure > key.conf</code><br/>
+						For more information follow <a href="#aws-setup" class="link--dark">AWS setup &#8599</a>.
 					</p>
 				</li>
 				<li>
@@ -505,7 +530,7 @@
 								java -jar adventure.jar
 							</code>
 						</pre>
-						<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
 					</div>
 					<p>or double-click on the application icon.</p>
 				</li>
@@ -554,7 +579,7 @@
 								}
 							</code>
 						</pre>
-						<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
 					</div>
 					<p>
 						This configuration allows the game to work with the minimal necessary privileges.
@@ -567,11 +592,11 @@
 					Create a new user and assign the user to the created group.
 				</li>
 				<li>
-					After creating the user generate a client-secret pair credentials.
+					After creating the user, generate a client-secret pair credentials.
 				</li>
 				<li>
 					<p>
-						In the file <code>application.properties</code> complete the fields: <br/>
+						In the file <code class="code file-path">text_adventure > key.conf</code> complete the fields: <br/>
 					</p>
 					<div class="code code__block">
 						<pre class="code--block">
@@ -579,9 +604,8 @@
 								storage.aws.key=
 								storage.aws.secret=
 								storage.aws.bucket.name=
-								storage.aws.region=
-							</code>
-						<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy" onclick="copyContent()" style="color: #000000;"></i> Copy</button>
+								storage.aws.region=</code>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
 						</pre>
 					</div>
 				</li>
@@ -851,9 +875,26 @@
 			<h4>Command use</h4>
 			<img src="media/command-use-sequence-diagram.svg" alt="Command use sequence diagram" class="design-img" />
 
-		</section>
-		<section class="js-section">
-			<h2 >Testing</h2>
+			<h3>Design class model</h3>
+
+			<h4>Commands</h4>
+			<img src="media/uml/commands.png" alt="Commands UML" class="design-img" />
+
+			<h4>Serializers/Deserializers</h4>
+			<img src="media/uml/serializers_deserializers.png" alt="Serializers/Deserializers UML" class="design-img" />
+
+			<h4>Inventory</h4>
+			<img src="media/uml/inventory.png" alt="Inventory UML" class="design-img" />
+
+			<h4>Nodes</h4>
+			<img src="media/uml/nodes.png" alt="Nodes UML" class="design-img" />
+
+			<h4>Player</h4>
+			<img src="media/uml/player.png" alt="Player UML" class="design-img" />
+
+			<h4>Services</h4>
+			<img src="media/uml/services.png" alt="Services UML" class="design-img" />
+
 		</section>
 	</article>
 </div>

@@ -67,12 +67,21 @@ const modalContent = get('.modal-content', document);
 // Loop through each image and attach the click event
 images.forEach(function(img) {
   img.onclick = function() {
-  modal.style.display = "block";
-  modalImg.src = this.src;
-  modalImg.alt = this.alt;
-  captionText.innerHTML = this.alt;
-  modal.style.top = '0';
-  modalContent.scrollTop = 0;
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    modalImg.alt = this.alt;
+    
+    const src = img.src;
+    const a = document.createElement('a');
+    a.href = src;
+    a.target = "_blank";
+    a.className = "link--dark";
+    a.innerText = this.alt;
+    captionText.innerHTML = '';
+    captionText.append(a);
+
+    modal.style.top = '0';
+    modalContent.scrollTop = 0;
 }
 });
 
@@ -92,3 +101,40 @@ document.addEventListener('DOMContentLoaded', () => {
   const trimmedLines = lines.map(line => line.startsWith('\t') ? line.substring(8) : line);
   preElement.textContent = trimmedLines.join('\n');
 });
+
+function trim(str, ch) {
+  let start = 0,
+      end = str.length;
+
+  while(start < end && str[start] === ch)
+    ++start;
+
+  while(end > start && str[end - 1] === ch)
+    --end;
+
+  return (start > 0 || end < str.length) ? str.substring(start, end) : str;
+}
+
+
+async function copyContent(caller)
+{
+  try
+  {
+    let target = caller.parentNode.querySelector('code');
+    if(!target)
+    {
+      target = caller.parentNode.querySelector('pre');
+    }
+    
+    let result = trim(target.innerText, '\n');
+    
+    await navigator.clipboard.writeText(result);
+    const ogText = caller.innerText;
+    caller.innerText = 'Copied';
+    setTimeout(() => caller.innerText = ogText, 1000);
+  }
+  catch (error)
+  {
+    console.error(error.message);
+  }
+}
