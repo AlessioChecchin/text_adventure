@@ -59,6 +59,12 @@ public interface Config
     double getMonsterDodgeProbability();
 
     /**
+     * App title getter;
+     * @return Default app title.
+     */
+    String getAppTitle();
+
+    /**
      * Properties getter.
      * @return Current properties.
      */

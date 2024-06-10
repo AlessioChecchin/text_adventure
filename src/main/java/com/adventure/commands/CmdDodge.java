@@ -9,6 +9,7 @@ import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Command used to dodge an attack.
@@ -20,7 +21,11 @@ public class CmdDodge extends AbstractCommand
     public void execute() throws InterruptedException
     {
         // Check the correct number of parameters
-        if (!this.correctArgumentsNumber(0)) { return; }
+        if (!this.correctArgumentsNumber(0))
+        {
+            this.writer.println("Incorrect number of arguments. Usage: dodge");
+            return;
+        }
 
         Config currentConfig = this.context.getConfig();
         Game game = this.context.getGame();
@@ -85,7 +90,7 @@ public class CmdDodge extends AbstractCommand
         }
     }
 
-    public ArrayList<String> getPossibleArgs()
+    public List<String> getPossibleArgs()
     {
         return new ArrayList<>();
     }

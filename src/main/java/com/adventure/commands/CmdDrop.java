@@ -21,7 +21,11 @@ public class CmdDrop extends AbstractCommand
     @Override
     public void execute() throws InterruptedException
     {
-        if(!this.correctArgumentsNumber(1)) { return; }
+        if(!this.correctArgumentsNumber(1))
+        {
+            this.writer.println("Invalid number of arguments! Usage: drop <item name>");
+            return;
+        }
 
         Game game = this.context.getGame();
         Player player = game.getPlayer();
@@ -51,7 +55,7 @@ public class CmdDrop extends AbstractCommand
     }
 
     @Override
-    public ArrayList<String> getPossibleArgs() throws GameStorageException
+    public List<String> getPossibleArgs() throws GameStorageException
     {
         Player player = context.getGame().getPlayer();
         List<Item> item = player.getInventory().getItems();

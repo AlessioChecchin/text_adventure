@@ -122,8 +122,8 @@ public class AttackItem extends Item implements Equipable
     @Override
     public String toString()
     {
-        String result = String.format("%s (atk: %d, %f)", this.getName(), this.getAdder(), this.getMultiplier());
-        if(this.isEquiped) return result + " [Equiped]";
+        String result = String.format("%s (atk: %d, mul: %.2f)", this.getName(), this.getAdder(), this.getMultiplier());
+        if(this.isEquiped) return result + " [Equipped]";
         return result;
     }
 

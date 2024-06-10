@@ -42,10 +42,6 @@ public class GameLoaderController implements BaseController
         parser.enable("help");
         parser.enable("clear");
         parser.enable("delete");
-
-        Label instructions = new Label();
-        instructions.setText("Type help to view possible actions");
-
     }
 
     private void loadScreen()
@@ -71,12 +67,15 @@ public class GameLoaderController implements BaseController
                     this.player.setMute(true);
                     this.player.setAutoPlay(true);
 
+                    // Used to loop the video.
                     player.setOnEndOfMedia(() -> {
                         player.seek(Duration.ZERO);
                         player.play();
                     });
 
                     this.player.play();
+
+                    this.display.setStdOut("Welcome to Text Adventure!\nType 'help' to view possible actions!");
                 });
 
                 // We noticed that on some windows versions loading the video results in an unknown error.

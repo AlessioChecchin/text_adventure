@@ -46,3 +46,8 @@ The user will inherit group permissions.
 ## Generate credentials
 
 Generate credentials and copy secret id and value in application.conf
+
+
+# Building tests
+
+mvn surefire-report:report

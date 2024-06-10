@@ -90,11 +90,17 @@ public class Display extends GridPane implements BaseController
 
         //  TAB pressed --> FORWARD prediction
         if(event.getCode() == KeyCode.TAB && !keyShiftTab.match(event))
-            autoCompl.operate(this.consoleOutput, this.consolePrompt, AutoCompleter.direction.FORWARD);
+        {
+            autoCompl.operate(this.consoleOutput.textProperty(), this.consolePrompt.textProperty(), AutoCompleter.direction.FORWARD);
+            this.consolePrompt.end();
+        }
 
         //  TAB + SHIFT pressed --> BACKWARD prediction
         if(keyShiftTab.match(event))
-            autoCompl.operate(this.consoleOutput, this.consolePrompt, AutoCompleter.direction.BACKWARD);
+        {
+            autoCompl.operate(this.consoleOutput.textProperty(), this.consolePrompt.textProperty(), AutoCompleter.direction.BACKWARD);
+            this.consolePrompt.end();
+        }
 
         // Checks if the command is complete.
         if( event.getCode() == KeyCode.ENTER )

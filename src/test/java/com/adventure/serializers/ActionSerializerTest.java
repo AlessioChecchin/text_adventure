@@ -33,14 +33,12 @@ class ActionSerializerTest {
 
         //  Create the json string.
         String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(action);
-        System.out.println(json);
 
         ObjectMapper mapper2 = new ObjectMapper();
         ObjectNode rootNode = mapper2.createObjectNode();
         rootNode.put("name", "test");
 
         String jsonString = mapper2.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
-        System.out.println(jsonString);
 
         // Test.
         assertEquals(json,jsonString);

@@ -24,7 +24,7 @@ public interface Command
      * @return ArrayList with all the possible arguments
      * @throws GameStorageException If errors occur while fetching game data from the storage.
      */
-    ArrayList<String> getPossibleArgs() throws GameStorageException;
+    List<String> getPossibleArgs() throws GameStorageException;
 
     /**
      * Sets command arguments.

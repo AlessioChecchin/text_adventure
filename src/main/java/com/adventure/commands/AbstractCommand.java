@@ -1,6 +1,7 @@
 package com.adventure.commands;
 
 import com.adventure.config.ApplicationContext;
+import com.adventure.config.ApplicationContextProvider;
 import com.adventure.exceptions.GameStorageException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,6 +34,18 @@ public abstract class AbstractCommand implements Command
 
         // When spawned the command should not terminate.
         this.shouldTerminate = false;
+        this.context = ApplicationContextProvider.getInstance();
+    }
+
+    /**
+     * Default constructor.
+     * Binds input stream and output stream to stdin and stdout.
+     */
+    public AbstractCommand(ApplicationContext context)
+    {
+        super();
+        Objects.requireNonNull(context);
+        this.context = context;
     }
 
     //
@@ -44,7 +57,7 @@ public abstract class AbstractCommand implements Command
      * @return A list of possible arguments for the command.
      * @throws GameStorageException If some error occur while calculating possible args.
      */
-    public abstract ArrayList<String> getPossibleArgs() throws GameStorageException;
+    public abstract List<String> getPossibleArgs() throws GameStorageException;
 
     /**
      * Writer getter.
@@ -229,16 +242,7 @@ public abstract class AbstractCommand implements Command
      */
     protected boolean correctArgumentsNumber(int argumentsNumber)
     {
-        if(this.getArgs().size() < argumentsNumber)
-        {
-            writer.println("Too few arguments for this command");
-            return false;
-        }
-        else if(this.getArgs().size() > argumentsNumber) {
-            writer.println("Too many arguments for this command");
-            return false;
-        }
-        return true;
+        return this.getArgs().size() == argumentsNumber;
     }
 
     /**
@@ -249,8 +253,7 @@ public abstract class AbstractCommand implements Command
     {
         CommandParser parser = CommandParser.getInstance();
         //  Save currently enabled commands and disable them
-        prevEnabledCommands = parser.getCommands();
-        parser.disableAll();
+        prevEnabledCommands = parser.disableAll();
         //  Register and enable dummy commands
         for(String cmd : commandNames)
         {
@@ -282,8 +285,7 @@ public abstract class AbstractCommand implements Command
     protected void disableSaveAll()
     {
         CommandParser parser = CommandParser.getInstance();
-        prevEnabledCommands = parser.getCommands();
-        parser.disableAll();
+        prevEnabledCommands = parser.disableAll();
     }
 
     /**

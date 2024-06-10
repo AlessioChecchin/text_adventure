@@ -31,6 +31,7 @@ public class ApplicationConfig implements Config
             this.displayHeight = Integer.parseInt(properties.getProperty("display.height"));
             this.resizable = Boolean.parseBoolean(properties.getProperty("resizable"));
             this.configFolder = properties.getProperty("config.folder");
+            this.appTitle = properties.getProperty("app.title");
 
             // Ensure existence of the config folder
             if(!new File(configFolder).exists())
@@ -118,6 +119,11 @@ public class ApplicationConfig implements Config
     }
 
     @Override
+    public String getAppTitle() {
+        return this.appTitle;
+    }
+
+    @Override
     public Properties getProperties()
     {
         return this.properties;
@@ -136,6 +142,8 @@ public class ApplicationConfig implements Config
     private final Properties properties;
 
     private final String configFolder;
+
+    private final String appTitle;
 
     private static final Logger logger = LogManager.getLogger();
 }

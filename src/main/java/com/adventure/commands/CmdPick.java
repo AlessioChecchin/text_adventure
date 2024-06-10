@@ -19,6 +19,7 @@ public class CmdPick extends AbstractCommand
     {
         if(!this.correctArgumentsNumber(1))
         {
+            this.writer.println("Invalid number of arguments! Usage: pick <item name>");
             return;
         }
 
@@ -61,7 +62,7 @@ public class CmdPick extends AbstractCommand
     /**
      * @return all possible items the player can pick
      */
-    public ArrayList<String> getPossibleArgs()
+    public List<String> getPossibleArgs()
     {
         ArrayList<String> result = new ArrayList<>();
         StoryNode node = context.getGame().getCurrentNode();
