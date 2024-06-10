@@ -6,10 +6,7 @@ import com.adventure.models.items.AttackItem;
 import com.adventure.models.items.DefenceItem;
 import com.adventure.models.items.Key;
 import com.adventure.models.items.UsableItem;
-import com.adventure.models.nodes.Action;
-import com.adventure.models.nodes.Room;
-import com.adventure.models.nodes.StoryNode;
-import com.adventure.models.nodes.StoryNodeLink;
+import com.adventure.models.nodes.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jgrapht.Graph;
@@ -89,6 +86,7 @@ abstract class AbstractStorageService implements StorageService
 
         // Room 3.
         Room room3 = new Room("Left forest", "Oh no, it's a trap, a big Spider appears in front of you");
+
         //TODO set che correct background path
         room3.setBackgroundPath("assets/castle.png");
 
@@ -254,10 +252,8 @@ abstract class AbstractStorageService implements StorageService
         g.addVertex(room11);
 
         // Room 12.
-        Room room12 = new Room("Victory", "After the Sword of Light had pierced Mucksnarl's heart, a blinding light emerged right from the pierced heart. The castle guardian, who had protected the legendary relic for many years, began to crumble like a rock eroded by the sea, until nothing but dust remained...\n" +
-                "Our hero, wounded but triumphant, emerged from the castle. A clear sky welcomed him; he felt different, weary but aware of having accomplished a feat that would be carried and told by the wind so that everyone would know who " + playerName + " was, the one who, with the help of the Sword of Light, brought peace back to the lands of Margorgh.");
+        VictoryNode room12 = new VictoryNode();
         g.addVertex(room12);
-
 
         // Edges
         StoryNodeLink edge12 = new StoryNodeLink();
@@ -343,6 +339,7 @@ abstract class AbstractStorageService implements StorageService
         StoryNodeLink edge1112 = new StoryNodeLink();
         edge1112.setAction(new Action("north"));
         edge1112.setKey(victoryKey);
+        g.addEdge(room11, room12, edge1112);
 
         return game;
     }
