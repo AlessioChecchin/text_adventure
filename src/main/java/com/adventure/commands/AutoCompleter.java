@@ -4,6 +4,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Singleton that predicts text when pressing tab
@@ -71,7 +72,7 @@ public class AutoCompleter
                 partialArgument = allWords[allWords.length - 1];
 
             String prevCommand = getPreviousCommand();
-            ArrayList<String> arguments = parser.argsFromCommand(prevCommand);
+            List<String> arguments = parser.argsFromCommand(prevCommand);
             for(String arg : arguments)
                 if(arg.startsWith(partialArgument))
                     prediction.add(arg);

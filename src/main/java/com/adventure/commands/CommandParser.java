@@ -115,7 +115,7 @@ public class CommandParser
      * @param key String name of the command
      * @return ArrayList of Strings with all the possible arguments for this command
      */
-    public ArrayList<String> argsFromCommand(String key)
+    public List<String> argsFromCommand(String key)
     {
         CommandMetadata metadata = this.lookupTable.get(key);
         if(metadata != null)
@@ -165,11 +165,25 @@ public class CommandParser
     }
 
     /**
-     * Disables all commands.
+     * Enables all commands in the list.
      */
-    public void disableAll()
+    public void enableAll(List<String> commands)
     {
+        for(String command : commands)
+        {
+            this.enable(command);
+        }
+    }
+
+    /**
+     * Disables all commands.
+     * @return The commands that were enabled.
+     */
+    public List<String> disableAll()
+    {
+        List<String> previouslyEnabled = this.getCommands();
         this.enabledCommands.clear();
+        return previouslyEnabled;
     }
 
     /**

@@ -13,7 +13,11 @@ public class CmdListGames extends AbstractCommand
     @Override
     public void execute() throws InterruptedException
     {
-        if (!this.correctArgumentsNumber(0)) { return; }
+        if (!this.correctArgumentsNumber(0))
+        {
+            this.writer.println("Incorrect number of arguments! Usage: listGames");
+            return;
+        }
 
         try
         {
@@ -35,7 +39,7 @@ public class CmdListGames extends AbstractCommand
 
     }
 
-    public ArrayList<String> getPossibleArgs()
+    public List<String> getPossibleArgs()
     {
         return new ArrayList<>();
     }

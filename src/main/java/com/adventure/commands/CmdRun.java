@@ -8,7 +8,11 @@ public class CmdRun extends CmdFight
     @Override
     public void execute() throws InterruptedException {
 
-        if (!this.correctArgumentsNumber(0)) { return; }
+        if (!this.correctArgumentsNumber(0))
+        {
+            this.writer.println("Invalid number of arguments! Usage: run");
+            return;
+        }
 
         this.context.getGame().getPlayer().setFightingStatus(false);
         this.writer.println("You run away from the battle");

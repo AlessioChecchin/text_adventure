@@ -24,7 +24,11 @@ public class CmdUse extends AbstractCommand
     public void execute() throws InterruptedException
     {
         // Check the correct number of parameters
-        if(!this.correctArgumentsNumber(1)) { return; }
+        if(!this.correctArgumentsNumber(1))
+        {
+            this.writer.println("Invalid number of arguments! Usage: use <usable item name>");
+            return;
+        }
 
         Config currentConfig = this.context.getConfig();
         Game game = this.context.getGame();
@@ -88,7 +92,7 @@ public class CmdUse extends AbstractCommand
     /**
      * @return all possible items the player can use
      */
-    public ArrayList<String> getPossibleArgs()
+    public List<String> getPossibleArgs()
     {
         Player player = context.getGame().getPlayer();
         List<Item> item = player.getInventory().getItems().stream().filter(Item -> Item.getClass().equals(UsableItem.class)).toList();
@@ -98,4 +102,5 @@ public class CmdUse extends AbstractCommand
         return possibleItems;
     }
 
+    private RandomCollection<Object> decision;
 }

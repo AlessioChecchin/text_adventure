@@ -239,6 +239,10 @@ abstract class AbstractStorageService implements StorageService
         edge12.setAction(new Action("north"));
         g.addEdge(room1, room2, edge12);
 
+        StoryNodeLink edge21 = new StoryNodeLink();
+        edge21.setAction(new Action("south"));
+        g.addEdge(room2, room1, edge21);
+
         StoryNodeLink edge23 = new StoryNodeLink();
         edge23.setAction(new Action("west"));
         edge23.setKey(key2);

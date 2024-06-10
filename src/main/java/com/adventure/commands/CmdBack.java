@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import org.jgrapht.Graph;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Command used to go back to the previous room, if there is one.
@@ -16,7 +17,11 @@ public class CmdBack extends AbstractCommand
     @Override
     public void execute()
     {
-        if (!this.correctArgumentsNumber(0)) { return; }
+        if (!this.correctArgumentsNumber(0))
+        {
+            this.writer.println("Invalid number of arguments! Usage: back");
+            return;
+        }
 
         Game game = this.context.getGame();
         StoryNode currentNode = game.getCurrentNode();
@@ -67,7 +72,7 @@ public class CmdBack extends AbstractCommand
         return null;
     }
 
-    public ArrayList<String> getPossibleArgs()
+    public List<String> getPossibleArgs()
     {
         return new ArrayList<>();
     }

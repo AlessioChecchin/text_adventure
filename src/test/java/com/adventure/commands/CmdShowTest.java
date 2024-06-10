@@ -17,7 +17,7 @@ class CmdShowTest extends AbstractCommandTest
     static void setup() { command = new CmdShow(); }
 
     @Test
-    public void executeTest() throws InterruptedException, ConfigurationException
+    public void checkOutput() throws InterruptedException, ConfigurationException
     {
         // Set the context.
         ApplicationContext context = resetContext();
@@ -31,7 +31,7 @@ class CmdShowTest extends AbstractCommandTest
         Player player = context.getGame().getPlayer();
         String playerName = player.getName();
 
-        String value = String.format("%s's stats:%nMax Hp: 20%nHp: 20%nBase attack: 1%nBase defence: 0%n%nInventory content: %napple, atk: 0, def: 0, hp: 0%nTotal weight: 0%n", playerName);
+        String value = String.format("%s's stats:%nMax Hp: 20%nHp: 20%nBase attack: 1%nBase defence: 0%n%nInventory content: %napple (atk: 0, def: 0, hp: 0)%nTotal weight: 0%n", playerName);
         command.setWriter(writer);
 
         // Add an item for test.

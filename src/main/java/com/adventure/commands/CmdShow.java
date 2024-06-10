@@ -6,6 +6,7 @@ import com.adventure.models.Stats;
 import com.adventure.models.items.Item;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Command used to show player stats/inventory.
@@ -14,7 +15,8 @@ public class CmdShow extends AbstractCommand
 {
 
     @Override
-    public void execute() throws InterruptedException {
+    public void execute() throws InterruptedException
+    {
         // Default 'show' shows the inventory.
         if(this.correctArgumentsNumber(0))
         {
@@ -35,7 +37,6 @@ public class CmdShow extends AbstractCommand
                 else if(parameter.equalsIgnoreCase("inventory"))
                 {
                     this.showInventory();
-
                 }
                 else
                 {
@@ -89,7 +90,7 @@ public class CmdShow extends AbstractCommand
     /**
      * @return 'stats' or 'inventory'
      */
-    public ArrayList<String> getPossibleArgs()
+    public List<String> getPossibleArgs()
     {
         ArrayList<String> result = new ArrayList<>();
         result.add("stats");

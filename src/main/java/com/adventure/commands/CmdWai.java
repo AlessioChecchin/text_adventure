@@ -7,6 +7,7 @@ import com.adventure.models.nodes.StoryNodeLink;
 import org.jgrapht.Graph;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Command used to gather information about current player location.
@@ -17,7 +18,11 @@ public class CmdWai extends AbstractCommand
     @Override
     public void execute() throws InterruptedException
     {
-        if(!this.correctArgumentsNumber(0)) {   return; }
+        if(!this.correctArgumentsNumber(0))
+        {
+            this.writer.println("Incorrect number of arguments! Usage: wai");
+            return;
+        }
 
         StoryNode currentNode = this.context.getGame().getCurrentNode();
 
@@ -42,7 +47,7 @@ public class CmdWai extends AbstractCommand
         }
     }
 
-    public ArrayList<String> getPossibleArgs()
+    public List<String> getPossibleArgs()
     {
         return new ArrayList<>();
     }

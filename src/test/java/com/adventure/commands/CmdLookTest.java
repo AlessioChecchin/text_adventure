@@ -31,7 +31,7 @@ class CmdLookTest extends AbstractCommandTest
 
         command.setWriter(writer);
 
-        String value = String.format("In the current room you can see: %n* apple, atk: 0, def: 0, hp: 0%n");
+        String value = String.format("In the current room you can see: %n* apple (atk: 0, def: 0, hp: 0)%n");
 
         // Add an item for the test.
         UsableItem apple = new UsableItem("apple");

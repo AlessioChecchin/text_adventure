@@ -48,14 +48,14 @@ public class Main extends Application
         commandParser.registerCommand("use", CmdUse.class, "Use an Item");
         commandParser.registerCommand("loadGame", CmdLoadGame.class, "Loads a game.");
         commandParser.registerCommand("delete", CmdDeleteGame.class, "Remove the specified game.");
-        commandParser.registerCommand("show", CmdShow.class, "Shows inventory or stats, usage: show [inventory/stats]");
+        commandParser.registerCommand("show", CmdShow.class, "Shows inventory or stats, usage.");
         commandParser.registerCommand("look", CmdLook.class, "Inspects the current room.");
         commandParser.registerCommand("move", CmdMove.class, "Moves in the map.");
         commandParser.registerCommand("pick", CmdPick.class, "Picks a specific item.");
         commandParser.registerCommand("wai", CmdWai.class, "Gives information about valid paths.");
         commandParser.registerCommand("back", CmdBack.class, "Go back to the previous room.");
         commandParser.registerCommand("run", CmdRun.class,"Run away from a fight");
-        commandParser.registerCommand("equip", CmdEquip.class,"Equip an Item" );
+        commandParser.registerCommand("equip", CmdEquip.class,"Equip an Item." );
         commandParser.registerCommand("drop", CmdDrop.class,"Drops the specified item.");
 
         // Generating dummy game to host the proper game loader.

@@ -8,9 +8,17 @@ import java.util.ArrayList;
  */
 public class DummyCmd extends AbstractCommand
 {
+    /**
+     * Dummy execution method.
+     * @throws InterruptedException Never thrown.
+     */
     @Override
     public void execute() throws InterruptedException {}
 
+    /**
+     * Dummy arguments.
+     * @return Empty list.
+     */
     public ArrayList<String> getPossibleArgs()
     {
         return new ArrayList<>();
