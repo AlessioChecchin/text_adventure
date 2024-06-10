@@ -58,7 +58,11 @@ public class RoomController implements BaseController
             logger.warn("{} not found.", room.getBackgroundPath());
         }
 
-        this.display.setStdOut(room.getDescription());
+        // If the is no monster or the monster is still alive we show the room introduction.
+        if(room.getMonster() == null || room.getMonster().getAlive())
+        {
+            this.display.setStdOut(room.getDescription());
+        }
     }
 
 

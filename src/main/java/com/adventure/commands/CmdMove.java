@@ -79,12 +79,11 @@ public class CmdMove extends AbstractCommand
                     this.moveToTarget(outgoingEdge);
                 }
             }
+        }
 
-            if(!validDirection)
-            {
-                this.writer.println("Direction not valid!");
-            }
-
+        if(!validDirection)
+        {
+            this.writer.println("Direction not valid!");
         }
     }
 
