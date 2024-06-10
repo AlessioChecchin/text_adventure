@@ -65,7 +65,7 @@ public class Player extends Entity
                     this.getStats().setBaseDefense(newDefence);
                 }
 
-                this.getInventory().getItems().remove(item);
+                this.getInventory().dropItem(item);
             }
             else{
                 throw new NotUsableItemException();

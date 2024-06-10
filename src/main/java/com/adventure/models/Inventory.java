@@ -124,6 +124,9 @@ public class Inventory
     {
         Objects.requireNonNull(items, "items cannot be null");
 
+        this.attackItem = defaultAtkItem;
+        this.defenceItem = defaultDefItem;
+
         this.items = new ArrayList<>();
 
         for(Item itm: items)
@@ -180,9 +183,23 @@ public class Inventory
     public void unequipItem(EquipType type)
     {
         if(type == EquipType.ATTACK)
+        {
+            if(this.attackItem != null)
+            {
+                this.attackItem.setEquiped(false);
+            }
             this.attackItem = this.defaultAtkItem;
+
+        }
+
         if(type == EquipType.DEFENSE)
+        {
+            if(this.defenceItem != null)
+            {
+                this.defenceItem.setEquiped(false);
+            }
             this.defenceItem = this.defaultDefItem;
+        }
     }
 
     /**
@@ -222,8 +239,31 @@ public class Inventory
      */
     public Item dropItem(Item item)
     {
+        Objects.requireNonNull(item, "item cannot be null");
+
         if( !items.contains(item) ) throw new NoSuchElementException("Item not in inventory");
         items.remove(item);
+
+        if(item instanceof AttackItem atk)
+        {
+            atk.setEquiped(false);
+        }
+
+        if(item instanceof DefenceItem def)
+        {
+            def.setEquiped(false);
+        }
+
+        if(item == this.attackItem)
+        {
+            this.attackItem = this.defaultAtkItem;
+        }
+
+        if(item == this.defenceItem)
+        {
+            this.defenceItem = this.defaultDefItem;
+        }
+
         this.currentWeight -= item.getWeight();
         return item;
     }
