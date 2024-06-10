@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="adventure:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/adventure_jar</output-path>
+  <artifact type="jar" build-on-make="true" name="text_adventure:jar">
+    <output-path>$PROJECT_DIR$/target</output-path>
     <root id="archive" name="adventure.jar">
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
