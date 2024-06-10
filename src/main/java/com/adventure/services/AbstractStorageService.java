@@ -33,6 +33,7 @@ abstract class AbstractStorageService implements StorageService
         AttackItem sword = new AttackItem("Sword");
         sword.setMultiplier(2);
         sword.setAdder(4);
+        sword.setWeight(5);
 
         Stats stats = new Stats(100,100,1,0);
 
@@ -40,6 +41,7 @@ abstract class AbstractStorageService implements StorageService
 
         UsableItem healthPotion = new UsableItem("healthPotion");
         healthPotion.setAdditionalHp(10);
+        healthPotion.setWeight(5);
 
         String key1 = "level 1";
         String key2 = "Level 2";
@@ -78,6 +80,7 @@ abstract class AbstractStorageService implements StorageService
 
             UsableItem apple2 = new UsableItem("apple");
             apple2.setAdditionalHp(5);
+            apple2.setWeight(3);
             enemy2.getInventory().addItem(apple2);
             room2.setMonster(enemy2);
         }
@@ -94,10 +97,14 @@ abstract class AbstractStorageService implements StorageService
             UsableItem spiderEye = new UsableItem("spiderEye");
             spiderEye.setAdditionalHp(5);
             spiderEye.setAdditionalAttack(2);
+            spiderEye.setWeight(2);
             DefenceItem spiderHelmet = new DefenceItem("spiderHelmet", 1, 5);
+            spiderHelmet.setWeight(3);
             AttackItem blackSword = new AttackItem("blackSword", 2, 10);
+            blackSword.setWeight(5);
             UsableItem strengthPotion = new UsableItem("strengthPotion");
             strengthPotion.setAdditionalAttack(3);
+            strengthPotion.setWeight(5);
 
             Inventory enemyInventory2 = new Inventory(100);
             Stats enemyStats2 = new Stats(40,40,4,0);
@@ -128,6 +135,7 @@ abstract class AbstractStorageService implements StorageService
             room4.setMonster(enemy3);
             UsableItem nectarOfGods = new UsableItem("nectarOfGods");
             nectarOfGods.setAdditionalHp(20);
+            nectarOfGods.setWeight(8);
             room4.getItems().add(nectarOfGods);
         }
 
@@ -138,10 +146,13 @@ abstract class AbstractStorageService implements StorageService
         room5.setBackgroundPath("assets/castle.png");
         {
             DefenceItem woodArmor = new DefenceItem("woodArmor", 1, 8);
+            woodArmor.setWeight(7);
             UsableItem gingerRoot = new UsableItem("gingerRoot");
             gingerRoot.setAdditionalHp(15);
             gingerRoot.setAdditionalDefence(4);
+            gingerRoot.setWeight(3);
             AttackItem rogueDagger = new AttackItem("rogueDagger", 3, 5);
+            rogueDagger.setWeight(5);
             room5.getItems().add(woodArmor);
             room5.getItems().add(gingerRoot);
             room5.getItems().add(rogueDagger);
@@ -157,6 +168,7 @@ abstract class AbstractStorageService implements StorageService
             Inventory enemyInventory6 = new Inventory(100);
             Stats enemyStats6= new Stats(100,100,15,5);
             UsableItem bigPotion = new UsableItem("bigPotion");
+            bigPotion.setWeight(10);
             bigPotion.setAdditionalAttack(5);
             bigPotion.setAdditionalHp(100);
             bigPotion.setAdditionalDefence(5);
@@ -199,10 +211,13 @@ abstract class AbstractStorageService implements StorageService
         room9.setBackgroundPath("assets/castle.png");
         {
             DefenceItem darkArmor = new DefenceItem("darkArmor", 0, 25);
+            darkArmor.setWeight(12);
             UsableItem healingPotion = new UsableItem("healingPotion");
             healingPotion.setAdditionalHp(50);
             healingPotion.setAdditionalDefence(5);
+            healingPotion.setWeight(6);
             AttackItem bigHammer = new AttackItem("bigHammer", 2, 15);
+            bigHammer.setWeight(20);
             room5.getItems().add(darkArmor);
             room5.getItems().add(healingPotion);
             room5.getItems().add(bigHammer);
@@ -220,6 +235,7 @@ abstract class AbstractStorageService implements StorageService
         {
             Inventory enemyInventory6 = new Inventory(100);
             AttackItem shadowsSword = new AttackItem("shadowSword", 2, 30);
+            shadowsSword.setWeight(15);
             enemyInventory6.addItem(shadowsSword);
             enemyInventory6.addItem(new Key(key6));
             Stats enemyStats6 = new Stats(150, 150, 20, 10);
@@ -228,6 +244,7 @@ abstract class AbstractStorageService implements StorageService
             UsableItem bigPotion = new UsableItem("bigPotion");
             bigPotion.setAdditionalHp(100);
             bigPotion.setAdditionalDefence(10);
+            bigPotion.setWeight(10);
             enemyInventory6.addItem(bigPotion);
             room10.setMonster(enemy6);
         }
