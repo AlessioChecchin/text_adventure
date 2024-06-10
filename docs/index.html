@@ -49,7 +49,7 @@
 				A mysterious scroll was discovered by a warrior with a golden heart, a scroll containing knowledge that
 				he could not have imagined and that would lead him to an unbelievable destiny....<br/>
 			</p>
-			<h3 >Specifications</h3>
+			<h3 >User stories</h3>
 			<p>To consult the project's user stories, check <a href="https://team-scrum-unipd.atlassian.net/jira/software/projects/SCRUM/boards/1?atlOrigin=eyJpIjoiNDQ1ZGNmNzk5NDFiNDg1YWI1YzM0Yjg2NzJhMjJjOGYiLCJwIjoiaiJ9" target="_blank" class="link--dark">here &#8599</a></p>
 
 			<h3 >Javadoc</h3>
@@ -64,7 +64,7 @@
 				It is subdivided into various sections (that we will call "rooms" from now on) with at first only one is
 				available to access.<br/>
 				In these rooms, you will find contexts in which you have to defeat a monster, pick items and search for
-				keys in order to "unlock" them. These three dynamics ... <br/>
+				keys in order to "unlock" them.<br/>
 			</p>
 			<p>The program presents as first thing the main menu, where you can choose between:</p>
 			<ul>
@@ -95,11 +95,6 @@
 				<li>an output section, where you can see the program's response</li>
 				<li>an input section, with which you can interact with the game</li>
 			</ul>
-			<p>
-				More specifically it has been used a GridPane as the main layout component, which groups a VBox for
-				the first section and a BorderPane that contains a TextArea to visualize the output section and a
-				TextField for the input one.
-			</p>
 			<h3  id="how-to-play">How To Play</h3>
 			<p>
 				The user interact with the display using a <b>custom command line</b>, which is located at the bottom of
@@ -159,17 +154,22 @@
 				<tr>
 					<td><code>loadGame</code></td>
 					<td>Name of the saved game</td>
-					<td>Command for loading a game previously saved.</td>
+					<td>Command for loading a game previously saved.<br/>
+						It can be utilized only in the menu.
+					</td>
 				</tr>
 				<tr>
 					<td><code>deleteGame</code></td>
 					<td>Name of the save to be deleted</td>
-					<td>Command for deleting a previously saved game.<br/> Enter the name of the game to be deleted</td>
+					<td>Command for deleting a previously saved game.<br/>
+						Enter the name of the game to be deleted.
+						It can be utilized only in the menu.</td>
 				</tr>
 				<tr>
 					<td><code>listGames</code></td>
 					<td>-</td>
-					<td>Command that showing a list of the saved games.</td>
+					<td>Command that showing a list of the saved games.<br/>
+						It can be utilized only in the menu.</td>
 				</tr>
 				<tr>
 					<td><code>save</code></td>
@@ -181,13 +181,13 @@
 					<td>Cardinal directions:<br/><code>north </code>/ <code>south </code>/ <code>east </code>/ <code>west</code>
 					</td>
 					<td>Command manage the movement in the map using cardinal directions.<br/> If possible you move in
-						the digit direction
+						the digit direction.
 					</td>
 				</tr>
 				<tr>
 					<td><code>wai</code></td>
 					<td>-</td>
-					<td>Command for showing the properties (locked/unlocked) of directions that can be used with <code>move</code>
+					<td>Command for showing the properties (locked/unlocked) of directions that can be used with <code>move</code>.
 					</td>
 				</tr>
 				<tr>
@@ -206,7 +206,7 @@
 				<tr>
 					<td><code>pick</code></td>
 					<td>Name of the item to be taken</td>
-					<td>Command for taking an item from the items present in the room<br/>
+					<td>Command for taking an item from the items present in the room.<br/>
 						Return error message if the inventory has not enough space.
 					</td>
 				</tr>
@@ -214,7 +214,7 @@
 					<td><code>drop</code></td>
 					<td>Name of the item to be dropped</td>
 					<td>
-						Command for dropping an item from the items present in the inventory<br/>
+						Command for dropping an item from the items present in the inventory.<br/>
 					</td>
 				</tr>
 				<tr>
@@ -415,12 +415,9 @@
 					</h5>
 					<p>
 						Launch <strong>Intellij IDEA</strong> and click on
-						<code class="code code--inline">Open...</code><br/>
-						and select the repository previously cloned. <br/>
+						<code class="code code--inline">Open...</code> and select the repository previously cloned. <br/>
 						If somewhere in the interface appears the error message
-						<code class="code code--inline" style="color:red">JDK "20" is missing</code><br/>
-						click on
-						<a class=" code code--inline" style="color:red">Configure...</a><br/>
+						<code class="code code--inline" style="color:red">JDK "20" is missing</code>, click on <a class=" code code--inline" style="color:red">Configure...</a><br/>
 						It should automatically detect the presence of the JDK20 previously installed and it should
 						appear on the top of the dropdown menu. <br/>
 						If that's not the case, click on <code class="code code--inline">Add
