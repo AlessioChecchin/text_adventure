@@ -50,7 +50,6 @@ abstract class AbstractStorageService implements StorageService
         String key4 = "Level 4";
         String key5 = "Level 5";
         String key6 = "Level 6";
-        String key7 = "Final boss";
         String victoryKey = "victory";
 
         // Room 1.
@@ -225,7 +224,7 @@ abstract class AbstractStorageService implements StorageService
             AttackItem shadowsSword = new AttackItem("shadowSword", 2, 30);
             enemyInventory6.addItem(shadowsSword);
             enemyInventory6.addItem(new Key(key6));
-            Stats enemyStats6 = new Stats(150, 150, 30, 10);
+            Stats enemyStats6 = new Stats(150, 150, 20, 10);
             Enemy enemy6 = new Enemy(enemyInventory6, enemyStats6, "Kalist");
             enemy6.setDefaultDialog("Groarrrrrrr!!");
             UsableItem bigPotion = new UsableItem("bigPotion");
@@ -245,8 +244,8 @@ abstract class AbstractStorageService implements StorageService
                 " Mucksnarl took a vial with a bluish liquid and drank it all in one gulp. His body began to mutate; his muscles developed, and his height grew frightfully. The small, elderly goblin who had welcomed our hero had now become a terrifying monster almost 5 meters tall. \"Prepare yourself; your time has come!\"");
         {
             Inventory enemyInventory7 = new Inventory(100);
-            enemyInventory7.addItem(new Key(key7));
-            Stats enemyStats7 = new Stats(200, 200, 30, 10);
+            enemyInventory7.addItem(new Key(victoryKey));
+            Stats enemyStats7 = new Stats(200, 200, 25, 10);
             Enemy enemy7 = new Enemy(enemyInventory7, enemyStats7, "Mucksnarl");
             enemy7.setDefaultDialog("It's the time for the last dance");
             room11.setMonster(enemy7);
@@ -338,7 +337,7 @@ abstract class AbstractStorageService implements StorageService
 
         StoryNodeLink edge1011 = new StoryNodeLink();
         edge1011.setAction(new Action("north"));
-        edge1011.setKey(key7);
+        edge1011.setKey(key6);
         g.addEdge(room10, room11, edge1011);
 
         StoryNodeLink edge1112 = new StoryNodeLink();
