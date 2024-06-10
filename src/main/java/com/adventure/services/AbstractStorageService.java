@@ -159,6 +159,11 @@ abstract class AbstractStorageService implements StorageService
         {
             Inventory enemyInventory6 = new Inventory(100);
             Stats enemyStats6= new Stats(100,100,15,5);
+            UsableItem bigPotion = new UsableItem("bigPotion");
+            bigPotion.setAdditionalAttack(5);
+            bigPotion.setAdditionalHp(100);
+            bigPotion.setAdditionalDefence(5);
+            enemyInventory6.addItem(bigPotion);
             enemyInventory6.addItem(new Key(key6));
             Enemy enemy6 = new Enemy(enemyInventory6, enemyStats6, "Dragon");
             enemy6.setDefaultDialog("You will never take the castle's keys muhahahh.\nI'll kill u.");
@@ -198,7 +203,8 @@ abstract class AbstractStorageService implements StorageService
         {
             DefenceItem darkArmor = new DefenceItem("darkArmor", 0, 25);
             UsableItem healingPotion = new UsableItem("healingPotion");
-            healingPotion.setAdditionalHp(30);
+            healingPotion.setAdditionalHp(50);
+            healingPotion.setAdditionalDefence(5);
             AttackItem bigHammer = new AttackItem("bigHammer", 2, 15);
             room5.getItems().add(darkArmor);
             room5.getItems().add(healingPotion);
@@ -218,11 +224,15 @@ abstract class AbstractStorageService implements StorageService
             Inventory enemyInventory6 = new Inventory(100);
             AttackItem shadowsSword = new AttackItem("shadowSword", 2, 30);
             enemyInventory6.addItem(shadowsSword);
-            Stats enemyStats6 = new Stats(200, 200, 30, 10);
+            enemyInventory6.addItem(new Key(key6));
+            Stats enemyStats6 = new Stats(150, 150, 30, 10);
             Enemy enemy6 = new Enemy(enemyInventory6, enemyStats6, "Kalist");
             enemy6.setDefaultDialog("Groarrrrrrr!!");
+            UsableItem bigPotion = new UsableItem("bigPotion");
+            bigPotion.setAdditionalHp(100);
+            bigPotion.setAdditionalDefence(10);
+            enemyInventory6.addItem(bigPotion);
             room10.setMonster(enemy6);
-
         }
         g.addVertex(room10);
 
@@ -236,7 +246,7 @@ abstract class AbstractStorageService implements StorageService
         {
             Inventory enemyInventory7 = new Inventory(100);
             enemyInventory7.addItem(new Key(key7));
-            Stats enemyStats7 = new Stats(300, 300, 40, 20);
+            Stats enemyStats7 = new Stats(200, 200, 30, 10);
             Enemy enemy7 = new Enemy(enemyInventory7, enemyStats7, "Mucksnarl");
             enemy7.setDefaultDialog("It's the time for the last dance");
             room11.setMonster(enemy7);
