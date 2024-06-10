@@ -1,8 +1,10 @@
 package com.adventure.models;
 
+import com.adventure.models.items.Item;
 import com.adventure.models.nodes.Room;
 import com.adventure.models.nodes.StoryNode;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -61,13 +63,16 @@ public abstract class NPC extends Entity
      * Drop the inventory after death
      * @param node actual monster node
      */
-    public void drop(StoryNode node){
-        if((node instanceof Room room) && (!this.getAlive())){
-            int i = 0;
-            while(!this.inventory.getItems().isEmpty()){
-                room.getItems().add(this.inventory.getItems().remove(i));
-                i++;
+    public void drop(StoryNode node)
+    {
+        if((node instanceof Room room) && (!this.getAlive()))
+        {
+            for(Item itm: this.inventory.getItems())
+            {
+                room.getItems().add(itm);
             }
+
+            this.inventory.setItems(new ArrayList<>());
         }
     }
 
