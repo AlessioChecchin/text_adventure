@@ -12,26 +12,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CmdAttackTest extends AbstractCommandTest
 {
-    @BeforeAll
-    static void setup(){  }
-
     @Test
     void testReceiveDamage() throws InterruptedException, ConfigurationException
     {
-        ApplicationContext context = resetContext();
-
         CmdAttack command = new CmdAttack();
 
         AttackItem sword = new AttackItem("sword", 2, 1);
-        Room test = (Room) context.getGame().getCurrentNode();
-
-        Player player = context.getGame().getPlayer();
-        Enemy monster = test.getMonster();
 
         // Giving sword to monster.
         monster.getInventory().addItem(sword);
         monster.getInventory().equipItem(sword);
-        context.getGame().setCurrentNode(test);
 
         int damagePrediction = monster.getAttackDamage();
         int playerHealth = player.getStats().getHp();
@@ -48,28 +38,18 @@ class CmdAttackTest extends AbstractCommandTest
     @Test
     void testBothAttack() throws InterruptedException, ConfigurationException
     {
-        ApplicationContext context = resetContext();
-
-
         // The monster will always attack
         RandomCollection<Object> collection = new RandomCollection<>().add(100, CmdFight.Move.ATTACK);
         Command command = new CmdAttack(collection);
         command.setContext(context);
 
-        Room test = (Room) context.getGame().getCurrentNode();
-        test.setMonster(new Enemy(new Inventory(10),new Stats(40,40,5,0), "monster"));
-
         AttackItem monsterSword = new AttackItem("monsterSword", 2, 5);
-        Enemy monster = test.getMonster();
         monster.getInventory().addItem(monsterSword);
         monster.getInventory().equipItem(monsterSword);
 
-        Player player =  context.getGame().getPlayer();
         AttackItem playerSword = new AttackItem("playerSword", 2, 5);
         player.getInventory().addItem(playerSword);
         player.getInventory().equipItem(playerSword);
-
-        context.getGame().setCurrentNode(test);
 
         Stats playerStats = player.getStats();
         Stats monsterStats = monster.getStats();
@@ -96,28 +76,18 @@ class CmdAttackTest extends AbstractCommandTest
     @Test
     void testMonsterDodge() throws InterruptedException, ConfigurationException
     {
-        ApplicationContext context = resetContext();
-
-
         // The monster will always attack
         RandomCollection<Object> collection = new RandomCollection<>().add(100, CmdFight.Move.DODGE);
         Command command = new CmdAttack(collection);
         command.setContext(context);
 
-        Room test = (Room) context.getGame().getCurrentNode();
-        test.setMonster(new Enemy(new Inventory(10),new Stats(40,40,5,0), "monster"));
-
         AttackItem monsterSword = new AttackItem("monsterSword", 2, 5);
-        Enemy monster = test.getMonster();
         monster.getInventory().addItem(monsterSword);
         monster.getInventory().equipItem(monsterSword);
 
-        Player player =  context.getGame().getPlayer();
         AttackItem playerSword = new AttackItem("playerSword", 2, 5);
         player.getInventory().addItem(playerSword);
         player.getInventory().equipItem(playerSword);
-
-        context.getGame().setCurrentNode(test);
 
         Stats playerStats = player.getStats();
         Stats monsterStats = monster.getStats();
@@ -146,19 +116,12 @@ class CmdAttackTest extends AbstractCommandTest
     @Test
     void testMonsterFinishDodge() throws InterruptedException, ConfigurationException
     {
-        ApplicationContext context = resetContext();
-
-
         // The monster will always attack
         RandomCollection<Object> collection = new RandomCollection<>().add(100, CmdFight.Move.DODGE);
         Command command = new CmdAttack(collection);
         command.setContext(context);
 
-        Room test = (Room) context.getGame().getCurrentNode();
-        test.setMonster(new Enemy(new Inventory(10),new Stats(40,40,5,0), "monster"));
-
         AttackItem monsterSword = new AttackItem("monsterSword", 2, 5);
-        Enemy monster = test.getMonster();
 
         // Consume all dodges.
         while(monster.useDodge());
@@ -166,13 +129,10 @@ class CmdAttackTest extends AbstractCommandTest
         monster.getInventory().addItem(monsterSword);
         monster.getInventory().equipItem(monsterSword);
 
-        Player player =  context.getGame().getPlayer();
         AttackItem playerSword = new AttackItem("playerSword", 4, 5);
         player.getInventory().addItem(playerSword);
         player.getInventory().equipItem(playerSword);
-
-        context.getGame().setCurrentNode(test);
-
+        
         Stats playerStats = player.getStats();
         Stats monsterStats = monster.getStats();
 

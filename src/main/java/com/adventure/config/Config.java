@@ -1,5 +1,6 @@
 package com.adventure.config;
 
+import com.adventure.models.Stats;
 import com.adventure.services.StorageService;
 
 import java.util.Properties;
@@ -63,6 +64,18 @@ public interface Config
      * @return Default app title.
      */
     String getAppTitle();
+
+    /**
+     * Default player stats getter.
+     * @return Default player stats.
+     */
+    Stats getPlayerStats();
+
+    /**
+     * Max dodges for the player.
+     * @return Max dodges for the player.
+     */
+    int getPlayerMaxDodges();
 
     /**
      * Properties getter.

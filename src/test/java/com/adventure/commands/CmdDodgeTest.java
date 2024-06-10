@@ -3,6 +3,7 @@ package com.adventure.commands;
 import com.adventure.config.ApplicationContext;
 import com.adventure.exceptions.ConfigurationException;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,14 +11,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class CmdDodgeTest extends AbstractCommandTest
 {
 
-    @BeforeAll
-    static void setup() { command = new CmdDodge(); }
-
     @Test
     void executeTest() throws InterruptedException, ConfigurationException
     {
-        // Set the context.
-        ApplicationContext context = resetContext();
+        Command command = new CmdDodge();
 
         command.setContext(context);
 

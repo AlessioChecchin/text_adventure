@@ -14,18 +14,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CmdUseTest extends AbstractCommandTest
 {
-    @BeforeAll
-    static void setUp()
-    {
-        command = new CmdUse();
-    }
-
     @Test
     void execute() throws InterruptedException, ConfigurationException
     {
-        // Set the context.
-        ApplicationContext context = resetContext();
-
+        Command command = new CmdUse();
         command.setContext(context);
 
         // Set the args and output.

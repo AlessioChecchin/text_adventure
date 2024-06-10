@@ -13,16 +13,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CmdShowTest extends AbstractCommandTest
 {
-    @BeforeAll
-    static void setup() { command = new CmdShow(); }
-
     @Test
-    public void checkOutput() throws InterruptedException, ConfigurationException
+    public void show() throws InterruptedException, ConfigurationException
     {
-        // Set the context.
-        ApplicationContext context = resetContext();
-
-        command.setContext(context);
+        Command command = new CmdShow();
 
         // Set the output of the command.
         StringWriter out    = new StringWriter();

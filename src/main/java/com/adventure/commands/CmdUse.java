@@ -18,8 +18,18 @@ import java.util.NoSuchElementException;
 /**
  * Command used to consume an item.
  */
-public class CmdUse extends AbstractCommand
+public class CmdUse extends AbstractRandomDecisionCommand
 {
+    public CmdUse()
+    {
+        super();
+    }
+
+    public CmdUse(RandomCollection<Object> randomCollection)
+    {
+        super(randomCollection);
+    }
+
     @Override
     public void execute() throws InterruptedException
     {
@@ -58,12 +68,7 @@ public class CmdUse extends AbstractCommand
         {
             Enemy monster = currentRoom.getMonster();
 
-            // Monster set moves.
-            RandomCollection<Object> decision = new RandomCollection<>()
-                    .add(currentConfig.getMonsterAttackProbability(), CmdFight.Move.ATTACK)
-                    .add(currentConfig.getMonsterDodgeProbability(), CmdFight.Move.DODGE);
-
-            CmdFight.Move monsterChoice = (CmdFight.Move) decision.next();
+            CmdFight.Move monsterChoice = (CmdFight.Move) this.decision.next();
 
             // Monster dodges check.
             if (monsterChoice == CmdFight.Move.DODGE)
@@ -101,6 +106,4 @@ public class CmdUse extends AbstractCommand
             possibleItems.add(i.getName());
         return possibleItems;
     }
-
-    private RandomCollection<Object> decision;
 }

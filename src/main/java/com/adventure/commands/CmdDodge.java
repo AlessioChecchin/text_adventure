@@ -14,8 +14,19 @@ import java.util.List;
 /**
  * Command used to dodge an attack.
  */
-public class CmdDodge extends AbstractCommand
+public class CmdDodge extends AbstractRandomDecisionCommand
 {
+
+    public CmdDodge()
+    {
+        super();
+    }
+
+    public CmdDodge(RandomCollection<Object> randomCollection)
+    {
+        super(randomCollection);
+    }
+
 
     @Override
     public void execute() throws InterruptedException
@@ -51,11 +62,6 @@ public class CmdDodge extends AbstractCommand
                 this.writer.println("There is no monster to fight here");
                 return;
             }
-
-            // Monster set moves
-            RandomCollection<Object> decision = new RandomCollection<>()
-                    .add(currentConfig.getMonsterAttackProbability(), CmdFight.Move.ATTACK)
-                    .add(currentConfig.getMonsterDodgeProbability(), CmdFight.Move.DODGE);
 
             CmdFight.Move monsterMove = (CmdFight.Move) decision.next();
 

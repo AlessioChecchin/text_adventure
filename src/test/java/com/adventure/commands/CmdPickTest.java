@@ -14,14 +14,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CmdPickTest extends AbstractCommandTest
 {
-    @BeforeAll
-    static void setup(){ command = new CmdPick(); }
-
     @Test
     void execute() throws ConfigurationException, InterruptedException
     {
-        // Set the context.
-        ApplicationContext context = resetContext();
+        Command command = new CmdPick();
 
         command.setContext(context);
 
