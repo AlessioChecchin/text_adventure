@@ -107,12 +107,13 @@
 				trigger the specific in-game action.<br/>
 				Example: <br/>
 			</p>
-			<div class="code">
+			<div class="code code__block">
 				<pre class="code--block">
 					<code>
 						>> command &lt;argument&gt;
 					</code>
             	</pre>
+				<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
 			</div>
 			<p>
 				The complete list of all the possible commands with a precise illustration of the arguments and the
@@ -269,12 +270,13 @@
 						Once installed, from the terminal move to the folder where you want the repository to be cloned
 						and run: <br/>
 					</p>
-					<div class="code">
+					<div class="code code__block" >
             			<pre class="code--block">
               				<code>
                					git clone https://github.com/ssiodev/text_adventure.git
 							</code>
             			</pre>
+						<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy"></i> Copy</button>
 					</div>
 				</li>
 				<li>
@@ -294,12 +296,13 @@
 					<p>
 						Check if in the system is already installed JDK20 by running on the terminal:
 					</p>
-					<div class="code">
+					<div class="code code__block">
             			<pre class="code--block">
 							<code>
 								java --version
 							</code>
 						</pre>
+						<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
 					</div>
 					<p>
 						If JDK20 is not installed use <a href="https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html" target="_blank" class="link--dark">this page &#8599</a> to download the right package or installer.<br/>
@@ -320,12 +323,13 @@
 						On the terminal, move to the folder <code class="code file-path">text_adventure</code> (the
 						repository previously cloned) and run:<br/>
 					</p>
-					<div class="code">
-            			<pre class="code--block">
+					<div class="code code__block">
+						<pre class="code--block">
 							<code>
 								mvn package
 							</code>
 						</pre>
+						<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
 					</div>
 				</li>
 			</ol>
@@ -340,12 +344,13 @@
 						guide &#8599</a>.<br/>
 						Once installed, in the terminal move to the folder where you want the repository to be cloned
 						and run:<br/>
-					<div class="code">
-            			<pre class="code--block">
+					<div class="code code__block">
+						<pre class="code--block">
 							<code>
 								git clone https://github.com/ssiodev/text_adventure.git
 							</code>
 						</pre>
+						<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
 					</div>
 				</li>
 				<li>
@@ -364,12 +369,13 @@
 					<p>
 						Check if in the system is already installed JDK20 by running on the terminal:
 					</p>
-					<div class="code">
-            			<pre class="code--block">
+					<div class="code code__block">
+						<pre class="code--block">
 							<code>
 								java --version
 							</code>
 						</pre>
+						<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
 					</div>
 					<p>
 						If JDK20 is not installed use <a	href="https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html"
@@ -421,12 +427,13 @@
 						Main</code> and then click on the <strong>left green arrow</strong><br/>
 						near the row with written<br/>
 					</p>
-					<div class="code">
-            			<pre class="code--block">
+					<div class="code code__block">
+						<pre class="code--block">
 							<code>
 								public static void main(String[] args) { launch(); }
 							</code>
             			</pre>
+						<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
 					</div>
 
 					<p>Note:</p>
@@ -463,20 +470,22 @@
 					<p>
 						To create the setup, run the following command in the folder where the file is located:
 					</p>
-					<div class="code">
-            			<pre class="code--block">
+					<div class="code code__block">
+						<pre class="code--block">
 							<code>
 								java -jar adventure.jar -s
 							</code>
 						</pre>
+						<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
 					</div>
 					<p>or</p>
-					<div class="code">
-            			<pre class="code--block">
+					<div class="code code__block">
+						<pre class="code--block">
 							<code>
 								java -jar adventure.jar --setup
 							</code>
 						</pre>
+						<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
 					</div>
 					<p>
 						The command will create the necessary folders to play the game.<br/>
@@ -490,12 +499,13 @@
 					<p>
 						To start the game, simply run the command:<br/>
 					</p>
-					<div class="code">
-            			<pre class="code--block">
+					<div class="code code__block">
+						<pre class="code--block">
 							<code>
 								java -jar adventure.jar
 							</code>
 						</pre>
+						<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
 					</div>
 					<p>or double-click on the application icon.</p>
 				</li>
@@ -522,28 +532,29 @@
 					<p>
 						Create a new policy using this json configuration file:
 					</p>
-					<div class="code">
-            					<pre class="bucket-code" id="bucket-code">
-									<code>
+					<div class="code code__block">
+						<pre class="bucket-code" id="bucket-code">
+							<code>
+								{
+									"Version": "2012-10-17",
+									"Statement": [
 										{
-											"Version": "2012-10-17",
-											"Statement": [
-												{
-													"Sid": "ListObjectsInBucket",
-													"Effect": "Allow",
-													"Action": ["s3:ListBucket"],
-													"Resource": ["arn:aws:s3:::edidstextgame"]
-												},
-												{
-													"Sid": "AllObjectActions",
-													"Effect": "Allow",
-													"Action": "s3:*Object",
-													"Resource": ["arn:aws:s3:::edidstextgame/*"]
-												}
-											]
+											"Sid": "ListObjectsInBucket",
+											"Effect": "Allow",
+											"Action": ["s3:ListBucket"],
+											"Resource": ["arn:aws:s3:::edidstextgame"]
+										},
+										{
+											"Sid": "AllObjectActions",
+											"Effect": "Allow",
+											"Action": "s3:*Object",
+											"Resource": ["arn:aws:s3:::edidstextgame/*"]
 										}
-									</code>
-            					</pre>
+									]
+								}
+							</code>
+						</pre>
+						<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
 					</div>
 					<p>
 						This configuration allows the game to work with the minimal necessary privileges.
@@ -562,14 +573,15 @@
 					<p>
 						In the file <code>application.properties</code> complete the fields: <br/>
 					</p>
-					<div class="code">
-            			<pre class="code--block">
+					<div class="code code__block">
+						<pre class="code--block">
 							<code>
 								storage.aws.key=
 								storage.aws.secret=
 								storage.aws.bucket.name=
 								storage.aws.region=
 							</code>
+						<button class="copy-button" onclick="copyContent()"><i class="fa fa-copy" onclick="copyContent()" style="color: #000000;"></i> Copy</button>
 						</pre>
 					</div>
 				</li>

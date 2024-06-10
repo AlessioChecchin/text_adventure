@@ -115,6 +115,57 @@ html, body {
   color: #34723e;
 }
 
+.code {
+  border-radius: 3px;
+  font-family: Space Mono, SFMono-Regular, Menlo,Monaco, Consolas, Liberation Mono, Courier New, monospace;
+  background: var(--bg-color);
+  border: 1px solid var(--code-bg-color);
+  color: var(--dark-gray-color);
+  overflow: auto;
+}
+
+.code--block {
+  white-space: pre-line;
+  text-align: initial;
+  padding: 0 1.5rem;
+  border: 0;
+  margin: 0;
+}
+
+#bucket-code {
+  white-space: pre;
+  text-align: initial;
+  tab-size: 4;
+  font-size: initial;
+  font-family: inherit;
+  padding: 0 1.5rem;
+  border: 0;
+  margin: 0;
+}
+
+.code__block {
+  position: relative;
+}
+
+.copy-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: var(--primary-color-light);
+  color: black;
+  border: none;
+  border-radius: 3px;
+  z-index: 1;
+}
+
+.copy-button:hover {
+  background-color: var(--primary-color-light-darker);
+}
+
+
 @media (max-width: 900px) {
   .wrapper {
     flex-direction: column;

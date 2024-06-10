@@ -2,6 +2,7 @@
 :root {
   --primary-color: navy;
   --primary-color-light: rgba(78, 81, 241, 0.3);
+  --primary-color-light-darker: rgba(57, 60, 205, 0.3);
   --accent-color: #0018ff;
   --accent-color-light: #FFE4E4;
   --accent-color-dark: #020255;
@@ -9,6 +10,7 @@
   --white-color: #FAFBFC;
   --light-gray-color: #C6CBD1;
   --medium-gray-color: #959DA5;
+  --med-dark-gray-color: #7c848c;
   --dark-gray-color: #485460;
   --bg-color: #F8F8FA;
   --code-bg-color: #F0E8E8;
@@ -127,33 +129,6 @@ li {
 
 .tab__pane.active {
   display: block;
-}
-
-/* code */
-.code {
-  border-radius: 3px;
-  font-family: Space Mono, SFMono-Regular, Menlo,Monaco, Consolas, Liberation Mono, Courier New, monospace;
-  background: var(--bg-color);
-  border: 1px solid var(--code-bg-color);
-  color: var(--dark-gray-color);
-}
-
-.code--block {
-  white-space: pre-line;
-  text-align: initial;
-  padding: 0 1.5rem;
-  border: 0;
-  margin: 0;
-  overflow: auto;
-}
-
-#bucket-code {
-  tab-size: 4;
-  font-size: initial;
-  font-family: inherit;
-  white-space: pre;
-  padding: 0 1.5rem;
-  overflow: auto;
 }
 
 .code--inline {

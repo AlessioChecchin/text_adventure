@@ -89,6 +89,6 @@ modal.onclick = function() {
 document.addEventListener('DOMContentLoaded', () => {
   const preElement = document.getElementById('bucket-code');
   const lines = preElement.textContent.split('\n');
-  const trimmedLines = lines.map(line => line.startsWith('\t') ? line.substring(10) : line);
+  const trimmedLines = lines.map(line => line.startsWith('\t') ? line.substring(8) : line);
   preElement.textContent = trimmedLines.join('\n');
 });
