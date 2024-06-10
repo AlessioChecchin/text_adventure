@@ -125,19 +125,8 @@
         <configuration>
           <plist>
             <JVMMainClassName>com.adventure.Launcher</JVMMainClassName>
-            <CFBundleIconFile>src/main/resources/com/adventure/assets/icon512.ico</CFBundleIconFile>
+            <CFBundleIconFile>src/main/resources/com/adventure/assets/icon.icns</CFBundleIconFile>
           </plist>
-          <!--<app>
-            <additionalResources>
-              <resource>
-                <directory></directory>
-                <outputDirectory>Text_adventure</outputDirectory>
-                <includes>
-                  <include>**</include>
-                </includes>
-              </resource>
-            </additionalResources>
-          </app>-->
         </configuration>
         <executions>
           <execution>

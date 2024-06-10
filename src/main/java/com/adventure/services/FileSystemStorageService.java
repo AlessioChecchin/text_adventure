@@ -1,6 +1,5 @@
 package com.adventure.services;
 
-import com.adventure.Resources;
 import com.adventure.config.Config;
 import com.adventure.exceptions.GameStorageException;
 import com.adventure.models.Game;
@@ -105,7 +104,7 @@ public class FileSystemStorageService extends AbstractStorageService
     @Override
     public void deleteGame(String gameId)
     {
-        File game = new File(Resources.getAssetsPath() + "saves/" + gameId + ".json");
+        File game = new File(this.savePath + gameId + ".json");
 
         if(game.delete())
             logger.debug("Deleted {}", game.getName().replace(".json", ""));
