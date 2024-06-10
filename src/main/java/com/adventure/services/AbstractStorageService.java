@@ -37,12 +37,12 @@ abstract class AbstractStorageService implements StorageService
         sword.setMultiplier(2);
         sword.setAdder(4);
 
-        Stats stats = new Stats(100,100,1,1);
+        Stats stats = new Stats(100,100,1,0);
 
         game.setPlayer(new Player(playerName, playerInventory, stats));
 
-        UsableItem potion = new UsableItem("Potion");
-        potion.setAdditionalHp(10);
+        UsableItem healthPotion = new UsableItem("healthPotion");
+        healthPotion.setAdditionalHp(10);
 
         String key1 = "level 1";
         String key2 = "Level 2";
@@ -61,7 +61,7 @@ abstract class AbstractStorageService implements StorageService
                 "It seems that there are some items in this part of the forest, try to 'look' for finding something!");
         room1.setBackgroundPath("assets/castle.png");
         room1.getItems().add(sword);
-        room1.getItems().add(potion);
+        room1.getItems().add(healthPotion);
         room1.getItems().add(new Key(key1));
         g.addVertex(room1);
 
@@ -79,10 +79,10 @@ abstract class AbstractStorageService implements StorageService
             Enemy enemy2 = new Enemy(enemyInventory2, enemyStats2, "Glorck");
             enemy2.setDefaultDialog("I'm Glorck the invincible Goblin, if you want to reach the castle you have to kill me!");
 
+            UsableItem apple2 = new UsableItem("apple");
+            apple2.setAdditionalHp(5);
+            enemy2.getInventory().addItem(apple2);
             room2.setMonster(enemy2);
-            UsableItem apple = new UsableItem("apple");
-            apple.setAdditionalHp(5);
-            room2.getItems().add(apple);
         }
 
         g.addVertex(room2);
@@ -94,14 +94,17 @@ abstract class AbstractStorageService implements StorageService
 
         {
             UsableItem spiderEye = new UsableItem("spiderEye");
-            DefenceItem goblinHelmet = new DefenceItem("goblinHelmet", 0, 5);
+            DefenceItem spiderHelmet = new DefenceItem("spiderHelmet", 0, 5);
             AttackItem blackSword = new AttackItem("blackSword", 1, 10);
-            room3.getItems().add(spiderEye);
-            room3.getItems().add(goblinHelmet);
-            room3.getItems().add(blackSword);
+
             Inventory enemyInventory2 = new Inventory(100);
             Stats enemyStats2 = new Stats(40,40,8,2);
             Enemy enemy2 = new Enemy(enemyInventory2, enemyStats2, "Giant Spider");
+
+            enemy2.getInventory().addItem(spiderEye);
+            enemy2.getInventory().addItem(spiderHelmet);
+            enemy2.getInventory().addItem(blackSword);
+
             enemy2.setDefaultDialog("Hi, human, now it's the hour of your death!");
             enemy2.getInventory().addItem(new Key(key3));
             room3.setMonster(enemy2);
@@ -128,7 +131,7 @@ abstract class AbstractStorageService implements StorageService
         Room room5 = new Room("Looting Room", "This part of the forest has a lot of items!");
         room5.setBackgroundPath("assets/castle.png");
         {
-            DefenceItem woodArmor = new DefenceItem("woodArmor", 0, 8);
+            DefenceItem woodArmor = new DefenceItem("woodArmor", 1, 8);
             UsableItem gingerRoot = new UsableItem("gingerRoot");
             gingerRoot.setAdditionalHp(3);
             gingerRoot.setAdditionalDefence(2);

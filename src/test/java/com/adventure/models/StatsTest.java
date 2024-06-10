@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class StatsTest {
 
     Stats stats;
+
     @BeforeEach
     void setUp() {
         stats = new Stats(10,10,10,10);
@@ -26,6 +27,23 @@ class StatsTest {
         assertEquals(10, stats.getBaseAttack(), "Problems with Attack of the player");
         assertEquals(10, stats.getBaseDefense(), "Problems with Defense of the player");
         assertEquals(10, stats.getMaxHp(), "Problems with MaxHp of the player");
+    }
+
+    @Test
+    void setInvalidStats()
+    {
+        stats.setMaxHp(0);
+        stats.setHp(100);
+
+        assertEquals(stats.getHp(), 0);
+
+        stats.setMaxHp(100);
+        stats.setHp(1000);
+        assertEquals(stats.getHp(), stats.getMaxHp());
+
+        // Ignored if negative number provided.
+        stats.setMaxHp(-10);
+        assertEquals(stats.getHp(), stats.getMaxHp());
     }
 
     @Test

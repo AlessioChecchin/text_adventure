@@ -12,14 +12,15 @@ class CmdDodgeTest extends AbstractCommandTest
 {
 
     @Test
-    void executeTest() throws InterruptedException, ConfigurationException
+    void consumeDodgeTest() throws InterruptedException, ConfigurationException
     {
         Command command = new CmdDodge();
 
         command.setContext(context);
 
-        // Execute and test the command.
+        int dodges = player.getAvailableDodges();
         command.execute();
-        assertEquals(2, context.getGame().getPlayer().getAvailableDodges(), "Problems with dodge command");
+        assertEquals(dodges - 1, player.getAvailableDodges(), "Problems with dodge command");
+
     }
 }

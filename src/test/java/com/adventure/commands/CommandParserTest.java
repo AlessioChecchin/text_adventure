@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CommandParserTest
 {
-    static CommandParser parser;
+    CommandParser parser;
 
     @BeforeEach
     void resetParser() throws NoSuchFieldException, IllegalAccessException

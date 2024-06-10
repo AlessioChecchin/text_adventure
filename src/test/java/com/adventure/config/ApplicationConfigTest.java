@@ -1,40 +1,25 @@
 package com.adventure.config;
 
+import com.adventure.Resources;
 import com.adventure.exceptions.ConfigurationException;
+import com.adventure.models.Stats;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ApplicationConfigTest
 {
-    static Config config;
+    Config config;
 
     @BeforeEach
     void newConfig() throws ConfigurationException {
         Properties props = new Properties();
-        /**
-         * app.title=Text adventure
-         *
-         * display.width=850
-         * display.height=750
-         * display.resizable=false
-         *
-         * config.folder=text_adventure/
-         *
-         * game.player.default.hp=100
-         * game.player.default.max.hp=100
-         * game.player.default.base.attack=1
-         * game.player.default.base.defence=1
-         * game.entity.default.max.dodges=3
-         *
-         * game.monster.default.dodgeProbability=30
-         * game.monster.default.attackProbability=70
-         */
 
         props.setProperty("app.title", "Test app title");
         props.setProperty("display.width", "500");
@@ -60,7 +45,20 @@ public class ApplicationConfigTest
         assertEquals(config.getDisplayHeight(), 800);
         assertFalse(config.isResizable());
         assertEquals(config.getConfigFolder(), "text_adventure/");
-        //assertEquals(config.get);
+        assertEquals(config.getPlayerStats(), new Stats(200, 500, 1, 3));
+        assertEquals(config.getPlayerMaxDodges(), 5);
+        assertEquals(config.getMonsterDodgeProbability(), 20);
+        assertEquals(config.getMonsterAttackProbability(), 80);
+    }
 
+    @Test
+    void testValidConfiguration() throws ConfigurationException, IOException {
+        Properties props = new Properties();
+
+        assertDoesNotThrow(() -> {
+            InputStream fis = Resources.class.getClassLoader().getResourceAsStream("application.properties");
+            props.load(fis);
+            config = new ApplicationConfig(props);
+        });
     }
 }
