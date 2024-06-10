@@ -1,5 +1,6 @@
 package com.adventure.commands;
 
+import com.adventure.exceptions.TooMuchWeightException;
 import com.adventure.models.Inventory;
 import com.adventure.models.items.Item;
 import com.adventure.models.nodes.Room;
@@ -38,8 +39,21 @@ public class CmdPick extends AbstractCommand
             {
                 if(itemName.equals(items.get(i).getName()))
                 {
-                    Item removed = items.remove(i);
-                    playerInventory.addItem(removed);
+                    Item target = items.get(i);
+                    try
+                    {
+                        playerInventory.addItem(target);
+
+                        // If it was successfully removed, then we remove it from the room.
+                        Item removed = items.remove(i);
+                    }
+                    catch(TooMuchWeightException e)
+                    {
+                        logger.debug("Too much weight thrown");
+                        this.writer.println("Too much weight, drop something");
+                        return;
+                    }
+
                     found = true;
                 }
             }
