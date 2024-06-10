@@ -21,7 +21,8 @@ html, body {
 .logo {
   font-weight: 900;
   color: navy;
-  font-size: 1.6em;
+  font-size: 1.4em;
+  /*font-size: 1.6em;*/
   grid-column: 2;
   text-align: initial;
 }
@@ -49,6 +50,9 @@ html, body {
   width: 28%;
   background-color: var(--bg-color);
   z-index: -1;
+
+  padding-top: 20px;
+  padding-bottom: 15px;
 }
 
 .doc__nav {
@@ -56,7 +60,7 @@ html, body {
   font-weight: 200;
 }
 
-.doc__nav ul {
+.doc__nav > ul {
   list-style: none;
   padding-left: 0;
   line-height: 1.8;
@@ -106,7 +110,12 @@ html, body {
   font-size: 18px;
 }
 
-@media (max-width: 750px) {
+.file-path {
+  font-family: monospace;
+  color: #34723e;
+}
+
+@media (max-width: 900px) {
   .wrapper {
     flex-direction: column;
   }
@@ -141,7 +150,9 @@ html, body {
   object-fit: contain;
 }
 
-.design-img:hover {opacity: 0.4;}
+.design-img:hover {
+  opacity: 0.4;
+}
 
 /* The Modal (background) */
 .modal {
