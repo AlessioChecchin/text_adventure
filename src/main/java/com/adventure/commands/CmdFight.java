@@ -70,6 +70,7 @@ public class CmdFight extends AbstractCommand {
                 while (player.getAlive() && monster.getAlive() && player.isFighting())
                 {
                     // Player have to digit a command.
+                    this.writer.println("Monster has " + monster.getStats().getHp() + " hp.");
                     this.writer.println("What do you want to do?");
 
                     String s = this.safeReadNextLine();
@@ -86,7 +87,7 @@ public class CmdFight extends AbstractCommand {
                     }
                     else
                     {
-                        this.writer.println("Unknown command, try with attack, dodge or use");
+                        this.writer.println("Unknown command, type help for possible choices");
                     }
                 }
 
