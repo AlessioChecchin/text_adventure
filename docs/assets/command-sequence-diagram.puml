@@ -53,6 +53,7 @@ else else
   Console -> Command: setInputStream(this.inputStream)
   Console -> Command: setWriter(this.writer)
 
+  create Task
   Console -> Task: createTask(currentCommand)
   activate Task
 
