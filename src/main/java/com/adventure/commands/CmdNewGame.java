@@ -29,7 +29,7 @@ public class CmdNewGame extends AbstractCommand
         //
         // n != 0:
         //      A valid game is loaded, confirmation required.
-        if(n != 0)
+        if(n != 0 && n != 1)
         {
             this.writer.println("Do you really want to create a new game? Current unsaved progress will be lost! [yes/no]");
 

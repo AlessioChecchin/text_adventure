@@ -6,6 +6,7 @@ import com.adventure.models.nodes.GameLoaderNode;
 import com.adventure.config.ApplicationContextProvider;
 import com.adventure.config.ApplicationContext;
 import com.adventure.commands.CommandParser;
+import com.adventure.models.nodes.StoryNode;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -60,9 +61,11 @@ public class Main extends Application
 
         // Generating dummy game to host the proper game loader.
         Game dummyGame = new Game(context.getConfig(), stage);
+        StoryNode dummyNode = new GameLoaderNode();
+        dummyGame.getGameGraph().addVertex(dummyNode);
         context.setGame(dummyGame);
 
-        dummyGame.setCurrentNode(new GameLoaderNode());
+        dummyGame.setCurrentNode(dummyNode);
         dummyGame.load();
 
         stage.setTitle(context.getConfig().getAppTitle());
