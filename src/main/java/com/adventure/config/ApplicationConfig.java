@@ -1,6 +1,7 @@
 package com.adventure.config;
 
 import com.adventure.exceptions.ConfigurationException;
+import com.adventure.models.Stats;
 import com.adventure.services.BucketStorageService;
 import com.adventure.services.FileSystemStorageService;
 import com.adventure.services.StorageService;
@@ -32,6 +33,17 @@ public class ApplicationConfig implements Config
             this.resizable = Boolean.parseBoolean(properties.getProperty("resizable"));
             this.configFolder = properties.getProperty("config.folder");
             this.appTitle = properties.getProperty("app.title");
+            this.monsterAttackProbability = Double.parseDouble(properties.getProperty("game.monster.default.attackProbability"));
+            this.monsterDodgeProbability = Double.parseDouble(properties.getProperty("game.monster.default.dodgeProbability"));
+
+            this.defaultPlayerStats = new Stats(
+                    Integer.parseInt(properties.getProperty("game.player.default.hp")),
+                    Integer.parseInt(properties.getProperty("game.player.default.max.hp")),
+                    Integer.parseInt(properties.getProperty("game.player.default.base.attack")),
+                    Integer.parseInt(properties.getProperty("game.player.default.base.defence"))
+            );
+
+            this.playerMaxDodges = Integer.parseInt(properties.getProperty("game.entity.default.max.dodges"));
 
             // Ensure existence of the config folder
             if(!new File(configFolder).exists())
@@ -109,18 +121,36 @@ public class ApplicationConfig implements Config
     @Override
     public double getMonsterAttackProbability()
     {
-        return 85;
+        return this.monsterAttackProbability;
     }
 
     @Override
     public double getMonsterDodgeProbability()
     {
-        return 30;
+        return this.monsterDodgeProbability;
     }
 
     @Override
-    public String getAppTitle() {
+    public String getAppTitle()
+    {
         return this.appTitle;
+    }
+
+    @Override
+    public Stats getPlayerStats()
+    {
+        return new Stats(
+                this.defaultPlayerStats.getHp(),
+                this.defaultPlayerStats.getMaxHp(),
+                this.defaultPlayerStats.getBaseAttack(),
+                this.defaultPlayerStats.getBaseDefense()
+        );
+    }
+
+    @Override
+    public int getPlayerMaxDodges()
+    {
+        return this.playerMaxDodges;
     }
 
     @Override
@@ -144,6 +174,14 @@ public class ApplicationConfig implements Config
     private final String configFolder;
 
     private final String appTitle;
+
+    private final double monsterAttackProbability;
+
+    private final Stats defaultPlayerStats;
+
+    private final int playerMaxDodges;
+
+    private final double monsterDodgeProbability;
 
     private static final Logger logger = LogManager.getLogger();
 }

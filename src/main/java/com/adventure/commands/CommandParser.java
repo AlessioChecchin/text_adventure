@@ -144,6 +144,7 @@ public class CommandParser
     {
         CommandMetadata metadata = this.lookupTable.remove(key);
         if(metadata == null) return null;
+        this.enabledCommands.remove(key);
         return metadata.getCommandClass();
     }
 

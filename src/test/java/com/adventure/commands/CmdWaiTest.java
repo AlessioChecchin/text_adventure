@@ -15,15 +15,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CmdWaiTest extends AbstractCommandTest
 {
-    @BeforeAll
-    static void setup() {command = new CmdWai();}
-
     @Test
     void execute() throws ConfigurationException, InterruptedException
     {
-        // Set the context.
-        ApplicationContext context = resetContext();
-
+        Command command = new CmdWai();
         command.setContext(context);
 
         // Set the output of the command.
