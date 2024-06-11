@@ -18,13 +18,27 @@ import java.util.NoSuchElementException;
 /**
  * Command used to consume an item.
  */
-public class CmdUse extends AbstractCommand
+public class CmdUse extends AbstractRandomDecisionCommand
 {
+    public CmdUse()
+    {
+        super();
+    }
+
+    public CmdUse(RandomCollection<Object> randomCollection)
+    {
+        super(randomCollection);
+    }
+
     @Override
     public void execute() throws InterruptedException
     {
         // Check the correct number of parameters
-        if(!this.correctArgumentsNumber(1)) { return; }
+        if(!this.correctArgumentsNumber(1))
+        {
+            this.writer.println("Invalid number of arguments! Usage: use <usable item name>");
+            return;
+        }
 
         Config currentConfig = this.context.getConfig();
         Game game = this.context.getGame();
@@ -42,22 +56,19 @@ public class CmdUse extends AbstractCommand
         catch (NotUsableItemException notUsable)
         {
             this.writer.println("Item is not usable!");
+            return;
         }
         catch (NoSuchElementException noElement)
         {
             this.writer.println("Item not found!");
+            return;
         }
 
-        if(node instanceof Room currentRoom && currentRoom.getMonster() != null)
+        if(node instanceof Room currentRoom && currentRoom.getMonster() != null && player.isFighting())
         {
             Enemy monster = currentRoom.getMonster();
 
-            // Monster set moves.
-            RandomCollection<Object> decision = new RandomCollection<>()
-                    .add(currentConfig.getMonsterAttackProbability(), CmdFight.Move.ATTACK)
-                    .add(currentConfig.getMonsterDodgeProbability(), CmdFight.Move.DODGE);
-
-            CmdFight.Move monsterChoice = (CmdFight.Move) decision.next();
+            CmdFight.Move monsterChoice = (CmdFight.Move) this.decision.next();
 
             // Monster dodges check.
             if (monsterChoice == CmdFight.Move.DODGE)
@@ -86,7 +97,7 @@ public class CmdUse extends AbstractCommand
     /**
      * @return all possible items the player can use
      */
-    public ArrayList<String> getPossibleArgs()
+    public List<String> getPossibleArgs()
     {
         Player player = context.getGame().getPlayer();
         List<Item> item = player.getInventory().getItems().stream().filter(Item -> Item.getClass().equals(UsableItem.class)).toList();
@@ -95,5 +106,4 @@ public class CmdUse extends AbstractCommand
             possibleItems.add(i.getName());
         return possibleItems;
     }
-
 }

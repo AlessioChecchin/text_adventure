@@ -1,55 +1,160 @@
 package com.adventure.commands;
 
-import com.adventure.config.ApplicationConfig;
+import com.adventure.config.ApplicationContext;
 import com.adventure.exceptions.ConfigurationException;
 import com.adventure.models.*;
 import com.adventure.models.items.AttackItem;
-import com.adventure.models.items.UsableItem;
 import com.adventure.models.nodes.Room;
-import com.adventure.config.ApplicationContextProvider;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CmdAttackTest {
-    static Command command;
-
-    @BeforeAll
-    static void setup(){
-        command = new CmdAttack();
-    }
+class CmdAttackTest extends AbstractCommandTest
+{
     @Test
-    void executeTest() throws InterruptedException, ConfigurationException {
-        // Set context-
-        ApplicationContextProvider applicationContextProvider = ApplicationContextProvider.getInstance();
-        this.setTestContext(applicationContextProvider);
-        command.setContext(applicationContextProvider);
+    void testReceiveDamage() throws InterruptedException, ConfigurationException
+    {
+        CmdAttack command = new CmdAttack();
+
         AttackItem sword = new AttackItem("sword", 2, 1);
-        Room test = (Room) applicationContextProvider.getGame().getCurrentNode();
-        test.getMonster().getInventory().addItem(sword);
-        test.getMonster().getInventory().equipItem(sword);
-        applicationContextProvider.getGame().setCurrentNode(test);
+
+        // Giving sword to monster.
+        monster.getInventory().addItem(sword);
+        monster.getInventory().equipItem(sword);
+
+        int damagePrediction = monster.getAttackDamage();
+        int playerHealth = player.getStats().getHp();
 
         // Execute and test.
         command.execute();
 
-        assertEquals(applicationContextProvider.getGame().getPlayer().getStats().getHp(), 9, "Problems with the attack command");
+        int newHp = playerHealth - damagePrediction;
+        if(newHp < 0) newHp = 0;
+
+        assertEquals(newHp, context.getGame().getPlayer().getStats().getHp(), "Problems with the attack command");
     }
 
-    // Method for initialize a Context for the command testing.
-    public void setTestContext(ApplicationContextProvider applicationContextProvider) throws ConfigurationException {
-        Game game = new Game(applicationContextProvider.getConfig());
-        game.setId("test");
-        Room room = new Room("test", "test");
-        Enemy monster = new Enemy(new Inventory(10),new Stats(5,5,5,5), "monster");
-        room.setMonster(monster);
-        game.setCurrentNode(room);
-        game.setPlayer(new Player("player", new Inventory(10), new Stats(20,20,1,0)));
-        applicationContextProvider.setGame(game);
+    @Test
+    void testBothAttack() throws InterruptedException, ConfigurationException
+    {
+        // The monster will always attack
+        RandomCollection<Object> collection = new RandomCollection<>().add(100, CmdFight.Move.ATTACK);
+        Command command = new CmdAttack(collection);
+        command.setContext(context);
+
+        AttackItem monsterSword = new AttackItem("monsterSword", 2, 5);
+        monster.getInventory().addItem(monsterSword);
+        monster.getInventory().equipItem(monsterSword);
+
+        AttackItem playerSword = new AttackItem("playerSword", 2, 5);
+        player.getInventory().addItem(playerSword);
+        player.getInventory().equipItem(playerSword);
+
+        Stats playerStats = player.getStats();
+        Stats monsterStats = monster.getStats();
+
+        int monsterAttackDamage = monster.getAttackDamage();
+        int playerAttackDamage = player.getAttackDamage();
+        int playerHealth = playerStats.getHp();
+        int monsterHealth = monsterStats.getHp();
+
+        // Execute and test.
+        command.execute();
+
+        int newPlayerHealth = playerHealth - monsterAttackDamage;
+        int newMonsterHealth = monsterHealth - playerAttackDamage;
+
+        if(newMonsterHealth < 0) newMonsterHealth = 0;
+        if(newPlayerHealth < 0) newPlayerHealth = 0;
+
+        assertEquals(newPlayerHealth, playerStats.getHp(), "Problems with the attack command");
+        assertEquals(newMonsterHealth, monsterStats.getHp(), "Problems with the attack command");
     }
+
+
+    @Test
+    void testMonsterDodge() throws InterruptedException, ConfigurationException
+    {
+        // The monster will always attack
+        RandomCollection<Object> collection = new RandomCollection<>().add(100, CmdFight.Move.DODGE);
+        Command command = new CmdAttack(collection);
+        command.setContext(context);
+
+        AttackItem monsterSword = new AttackItem("monsterSword", 2, 5);
+        monster.getInventory().addItem(monsterSword);
+        monster.getInventory().equipItem(monsterSword);
+
+        AttackItem playerSword = new AttackItem("playerSword", 2, 5);
+        player.getInventory().addItem(playerSword);
+        player.getInventory().equipItem(playerSword);
+
+        Stats playerStats = player.getStats();
+        Stats monsterStats = monster.getStats();
+
+        int monsterAttackDamage = monster.getAttackDamage();
+        int playerAttackDamage = player.getAttackDamage();
+        int playerHealth = playerStats.getHp();
+        int monsterHealth = monsterStats.getHp();
+
+        // Execute and test.
+        command.execute();
+
+        int newPlayerHealth = playerHealth - monsterAttackDamage;
+        int newMonsterHealth = monsterHealth;
+
+        if(newMonsterHealth < 0) newMonsterHealth = 0;
+        if(newPlayerHealth < 0) newPlayerHealth = 0;
+
+        // We expect only the player to receive damage.
+        assertEquals(newPlayerHealth, playerStats.getHp(), "Problems with the attack command");
+        assertEquals(newMonsterHealth, monsterStats.getHp(), "Problems with the attack command");
+    }
+
+
+
+    @Test
+    void testMonsterFinishDodge() throws InterruptedException, ConfigurationException
+    {
+        // The monster will always attack
+        RandomCollection<Object> collection = new RandomCollection<>().add(100, CmdFight.Move.DODGE);
+        Command command = new CmdAttack(collection);
+        command.setContext(context);
+
+        AttackItem monsterSword = new AttackItem("monsterSword", 2, 5);
+
+        // Consume all dodges.
+        while(monster.useDodge());
+
+        monster.getInventory().addItem(monsterSword);
+        monster.getInventory().equipItem(monsterSword);
+
+        AttackItem playerSword = new AttackItem("playerSword", 4, 5);
+        player.getInventory().addItem(playerSword);
+        player.getInventory().equipItem(playerSword);
+        
+        Stats playerStats = player.getStats();
+        Stats monsterStats = monster.getStats();
+
+        int monsterAttackDamage = monster.getAttackDamage();
+        int playerAttackDamage = player.getAttackDamage();
+        int playerHealth = playerStats.getHp();
+        int monsterHealth = monsterStats.getHp();
+
+        // Execute and test.
+        command.execute();
+
+        int newPlayerHealth = playerHealth - monsterAttackDamage;
+        int newMonsterHealth = monsterHealth - playerAttackDamage;
+
+        if(newMonsterHealth < 0) newMonsterHealth = 0;
+        if(newPlayerHealth < 0) newPlayerHealth = 0;
+
+        // We expect only the player to receive damage.
+        assertEquals(newPlayerHealth, playerStats.getHp(), "Problems with the attack command");
+        assertEquals(newMonsterHealth, monsterStats.getHp(), "Problems with the attack command");
+    }
+
+
 }
 

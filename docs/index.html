@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/x-icon" href="media/favicon.ico">
 	<title>Text Adventure - Documentation</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
@@ -14,12 +15,15 @@
 <body>
 <div class="doc__bg"></div>
 <nav class="header">
-	<h1 class="logo">Text Adventure <span class="logo__thin">Documentation</span></h1>
+	<img class="icon" src="media/icon512.png" alt="logo"/>
+	<h1 class="logo">Text Adventure <span class="logo__thin">Documentation</span>
+	</h1>
 	<ul class="menu">
 		<div class="menu__item toggle"><span></span></div>
-		<li class="menu__item"><a href="https://github.com/ssiodev/text_adventure.git" target="_blank" class="link">
-			<i class="fa fa-github"></i> Github</a></li>
-		<li class="menu__item"><a href="javadoc/index.html" target="_blank" class="link"><i class="fa fa-book"></i> Javadoc</a></li>
+		<li class="menu__item"><a href="https://github.com/ssiodev/text_adventure.git" class="link"><i class="fa fa-github"></i> Github</a></li>
+		<li class="menu__item"><a href="javadoc/index.html" target="_blank" class="link"><i class="fa fa-book"></i> Javadoc</a>
+		<li class="menu__item"><a href="junit/surefire-report.html" target="_blank" class="link"><i class="fa fa-file-text-o"></i> JUnit</a>
+		<li class="menu__item"><a href="assets/system_test.pdf" target="_blank" class="link"><i class="fa fa-file-pdf-o"></i> System Tests</a>
 	</ul>
 </nav>
 <div class="wrapper">
@@ -28,16 +32,15 @@
 			<li class="js-btn selected">Introduction</li>
 			<li class="js-btn">Manual</li>
 			<li class="js-btn">Design</li>
-			<li class="js-btn">Testing</li>
 		</ul>
 	</aside>
 	<article class="doc__content">
 		<section class="js-section">
-			<h2 class="section__title">Introduction</h2>
+			<h2 >Introduction</h2>
 			<p>
 				<b>Text Adventure</b> is a text-based RPG set in a fantasy world. You will be the hero of our story,
 				are you ready for this exciting adventure? </p>
-			<h3 class="section__title">Game Plot</h3>
+			<h3 >Game Plot</h3>
 			<p>
 				In a distant era, in the lands of Margorgh, in the darkest depths of a shadowy forest, it is said that
 				there exists a Castle ruled by the forces of evil, housing an unimaginable power.
@@ -48,23 +51,24 @@
 				A mysterious scroll was discovered by a warrior with a golden heart, a scroll containing knowledge that
 				he could not have imagined and that would lead him to an unbelievable destiny....<br/>
 			</p>
-			<h3 class="section__title">Specifications</h3>
-			<p>To consult the project's user stories, check <a href="" class="link--dark">here &#8599</a></p>
+			<h3 >User stories</h3>
+			<p>To consult the project's user stories, check <a href="https://team-scrum-unipd.atlassian.net/jira/software/projects/SCRUM/boards/1?atlOrigin=eyJpIjoiNDQ1ZGNmNzk5NDFiNDg1YWI1YzM0Yjg2NzJhMjJjOGYiLCJwIjoiaiJ9" target="_blank" class="link--dark">here &#8599</a></p>
 
-			<h3 class="section__title">Javadoc</h3>
-			<p>To consult the project's javadoc, check <a href="javadoc/index.html" class="link--dark">here &#8599</a></p>
+			<h3 >Javadoc</h3>
+			<p>To consult the project's javadoc, check <a href="javadoc/index.html" target="_blank" class="link--dark">here
+				&#8599</a></p>
 		</section>
 		<section class="js-section">
-			<h2 class="section__title">Manual</h2>
-			<h3 class="section__title">Gameplay</h3>
+			<h2 >Manual</h2>
+			<h3 >Gameplay</h3>
 			<p>
 				The game is set in two different levels, located respectively in a forest and in a castle.<br/>
 				It is subdivided into various sections (that we will call "rooms" from now on) with at first only one is
-				available to access<br/>
+				available to access.<br/>
 				In these rooms, you will find contexts in which you have to defeat a monster, pick items and search for
-				keys in order to "unlock" all of them.<br/>
+				keys in order to "unlock" them.<br/>
 			</p>
-			<p>At the first launch of the game, the program will load the main menu, where you can choose between:</p>
+			<p>The program presents as first thing the main menu, where you can choose between:</p>
 			<ul>
 				<li>starting a new game</li>
 				<li>loading a pre-existing game (if existing)</li>
@@ -73,18 +77,18 @@
 			</ul>
 			<p>At any moment of the game you can:
 			<ul>
-				<li>use the command <code>help</code> to request the list of the available commands.</li>
-				<li>use the command <code>save</code> to save your current progress in locale on your computer<br/>
+				<li>use the command <code class="code code--inline">help</code> to request the list of the available commands.</li>
+				<li>use the command <code class="code code--inline">save</code> to save your current progress in locale on your computer.<br/>
 					<strong>Warning!</strong> The game will not automatically save the progress!<br/>
 					<u>If you want to save on cloud you must set up your own bucket environment!</u>
 				</li>
 			</ul>
 			<p>
 				The main goal of the game is to complete all the rooms, reach the castle and beat the final boss! </p>
-			<h3 class="section__title">Graphic Interface</h3>
+			<h3 >Graphic Interface</h3>
 			<p>
 				For the GUI it has been used <i>JavaFX FXML</i>, with which you can implement the graphics of a desktop
-				application.
+				application.<br/>
 				The graphic interface is composed in three main parts: </p>
 			<ul>
 				<li>an "artistic" section, where there is an image/video (created and rendered with the program
@@ -93,39 +97,51 @@
 				<li>an output section, where you can see the program's response</li>
 				<li>an input section, with which you can interact with the game</li>
 			</ul>
-			<h3 class="section__title" id="how-to-play">How To Play</h3>
+			<h3  id="how-to-play">How To Play</h3>
 			<p>
 				The user interact with the display using a <b>custom command line</b>, which is located at the bottom of
 				the game window.<br/>
-				The user have to type the command followed by (if any) arguments and then press <code>Enter</code> to
+				The user have to type the command followed by (if any) arguments and then press <code class="code code--inline">Enter</code> to
 				trigger the specific in-game action.<br/>
 				Example: <br/>
 			</p>
-			<code>>>command &lt;argument&gt; </code>
-			<p>The complete list of all the possible commands is available <a href="#CommandsList" class="link--dark">here
-				&#8599</a></p>
-			<h4 class="section__title">Word completion feature</h4>
+			<div class="code code__block">
+				<pre class="code--block">
+					<code>
+						>> command &lt;argument&gt;
+					</code>
+            	</pre>
+				<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
+			</div>
 			<p>
-				It has been implemented a personalized word-completion feature which, alongside with the command <code>help</code>,
-				it has the purpose
-				to improve the end user experience. Here are two main scenarios:</p>
+				The complete list of all the possible commands with a precise illustration of the arguments and the
+				description is available <a href="#CommandsList" class="link--dark">here &#8599</a>.<br/>
+			</p>
+			<h4 >Word completion feature</h4>
+			<p>
+				It has been implemented a personalized word-completion feature which, alongside with the command <code class="code code--inline">help</code>,
+				it has the purpose of improving the end user experience. Here are two main scenarios:</p>
 			<ul style="list-style: upper-latin">
 				<li>
 					You haven't started typing your command or argument yet.<br/>
-					<code>Tab &#8633</code>/<code>Shift+Tab</code> will visualize the list of all the possible option at
+					<code class="code code--inline">Tab &#8633</code>/<code class="code code--inline">Shift+Tab</code> will visualize the list of all the possible option at
 					that moment.<br/>
 				</li>
 				<li>
 					You have already started typing the first letters of your command or argument.<br/>
-					<code>Tab &#8633</code>/<code>Shift+Tab</code> will visualize the list of the options based on what
+					<code class="code code--inline">Tab &#8633</code>/<code class="code code--inline">Shift+Tab</code> will visualize the list of the options based on what
 					you already typed.
 				</li>
 			</ul>
 			<p>
-				In both cases, keep pressing on the on <code>Tab &#8633</code> or <code>Shift+Tab</code> until you find
-				the command or the argument needed.<br/>
-				Then, press <code>Enter</code> or <code>space</code> (if you need arguments) to select it. </p>
+				In both cases, keep pressing on the combinations until you find the command or the argument needed.<br/>
+				Then, press <code class="code code--inline">Enter</code> or <code class="code code--inline">Space</code> (if you need arguments) to select it. </p>
 			<h3 id="CommandsList">Commands List</h3>
+			<p>
+				<strong>Warning!</strong> Keep in mind that the arguments indicated are <em>
+				mandatory</em>. Not following this can create some discomforts during the gameplay, such as the
+				appearing of error messages.
+			</p>
 			<table class="table-commands">
 				<tr>
 					<th>Name</th>
@@ -140,17 +156,22 @@
 				<tr>
 					<td><code>loadGame</code></td>
 					<td>Name of the saved game</td>
-					<td>Command for loading a game previously saved.</td>
+					<td>Command for loading a game previously saved.<br/>
+						It can be utilized only in the menu.
+					</td>
 				</tr>
 				<tr>
 					<td><code>deleteGame</code></td>
 					<td>Name of the save to be deleted</td>
-					<td>Command for deleting a previously saved game.<br/> Enter the name of the game to be deleted</td>
+					<td>Command for deleting a previously saved game.<br/>
+						Enter the name of the game to be deleted.
+						It can be utilized only in the menu.</td>
 				</tr>
 				<tr>
 					<td><code>listGames</code></td>
 					<td>-</td>
-					<td>Command that showing a list of the saved games.</td>
+					<td>Command that showing a list of the saved games.<br/>
+						It can be utilized only in the menu.</td>
 				</tr>
 				<tr>
 					<td><code>save</code></td>
@@ -162,13 +183,13 @@
 					<td>Cardinal directions:<br/><code>north </code>/ <code>south </code>/ <code>east </code>/ <code>west</code>
 					</td>
 					<td>Command manage the movement in the map using cardinal directions.<br/> If possible you move in
-						the digit direction
+						the digit direction.
 					</td>
 				</tr>
 				<tr>
 					<td><code>wai</code></td>
 					<td>-</td>
-					<td>Command for showing the properties (locked/unlocked) of directions that can be used with <code>move</code>
+					<td>Command for showing the properties (locked/unlocked) of directions that can be used with <code>move</code>.
 					</td>
 				</tr>
 				<tr>
@@ -187,7 +208,7 @@
 				<tr>
 					<td><code>pick</code></td>
 					<td>Name of the item to be taken</td>
-					<td>Command for taking an item from the items present in the room<br/>
+					<td>Command for taking an item from the items present in the room.<br/>
 						Return error message if the inventory has not enough space.
 					</td>
 				</tr>
@@ -195,7 +216,7 @@
 					<td><code>drop</code></td>
 					<td>Name of the item to be dropped</td>
 					<td>
-						Command for dropping an item from the items present in the inventory<br/>
+						Command for dropping an item from the items present in the inventory.<br/>
 					</td>
 				</tr>
 				<tr>
@@ -239,204 +260,361 @@
 					<td>Command for cleaning the game terminal.</td>
 				</tr>
 			</table>
-			<h3 class="section__title">How To Install</h3>
-			<h4 class="section__title">Maven</h4>
+
+			<h3 id="GameMap">Game map</h3>
+
+			<p>
+				We recommend discovering the map by playing, but if you really want to see how the default map is implemented, check the following image!
+			</p>
+
+			<img src="media/map.drawio.svg" alt="Game map" class="design-img" />
+
+			<h3 >How To Install</h3>
+			<h4 >Maven (option 1)</h4>
 			<ol>
 				<li>
 					<h5>
-						Clone the repository </h5>
+						Clone the repository
+					</h5>
 					<p>
-						If not installed, <strong>install GIT</strong> using <a href="https://git-scm.com/downloads"
-																				target="_blank" class="link-color">this
-						guide </a><br>
+						If not installed, <strong>install git</strong> using <a href="https://git-scm.com/downloads" target="_blank" class="link--dark">this guide &#8599</a>.<br/>
 						Once installed, from the terminal move to the folder where you want the repository to be cloned
-						and run <br><code class="code-block">git clone
-						https://github.com/ssiodev/text_adventure.git</code><br>
+						and run: <br/>
 					</p>
+					<div class="code code__block" >
+            			<pre class="code--block">
+              				<code>
+               					git clone https://github.com/ssiodev/text_adventure.git
+							</code>
+            			</pre>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy"></i> Copy</button>
+					</div>
 				</li>
 				<li>
 					<h5>Install Maven</h5>
 					<p>
-						Maven version <code>3.9.7</code> doesn't work with this project <br>
-						Maven version <code>3.9.6, 3.8.8, 4.0.0</code> has been tested <br>
-						If not already installed, follow <a class="link-color"
-															href="https://maven.apache.org/install.html"
-															target="_blank">this guide</a> to install Maven.<br>
-						A useful guide to install and set environment variables <a class="link-color"
-																				   href="https://phoenixnap.com/kb/install-maven-windows"
-																				   tag="_blank">on Windows</a>, <a
-							class="link-color"
-							href="https://www.digitalocean.com/community/tutorials/install-maven-linux-ubuntu"
-							tag="_blank">on Ubuntu</a>, <a class="link-color"
-														   href="https://www.digitalocean.com/community/tutorials/install-maven-mac-os"
-														   tag="_blank">on Mac</a><br>
-					</p>
-				</li>
-				<li>
-					<h5>Install JDK20</h5>
-					<p>
-						Check if in the system is already installed JDK20 by running on the terminal <br>
-						<code class="code-block">java --version</code><br>
-						If JDK20 is not installed use <a
-							href="https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html"
-							target="_blank" class="link-color">this page</a> to download the right package or installer.
-						<br>
-						For any issue, follow <a
-							href="https://docs.oracle.com/en/java/javase/20/install/overview-jdk-installation.html"
-							target="_blank" class="link-color">this guide</a>. </p>
-				</li>
-				<li>
-					<h5>
-						Create <code>application.config</code>
-					</h5>
-					<p>
-						In the folder <a class="file-path" style=""><code> text_adventure > src > main >
-						resources </code></a> create a new file called <code class="code--inline" style="">application.conf</code>
-						<br>
-						<strong>Open</strong> the file <a class="file-path" style=""><code> text_adventure > src > main
-						> resources > copy_application.conf</code></a> <br> and <strong>copy its content</strong> inside
-						<a class="code--inline" style=""><code>application.config</code></a> <br>
-					</p>
-				</li>
-				<li>
-					<h5>
-						Bucket info setup </h5>
-					<p>
-						In the file <a class="code--inline" style=""><code>application.config</code></a> complete these
-						fields <br>
-						<code class="code-block">storage.aws.key=</code><br>
-						<code class="code-block">storage.aws.secret=</code><br>
-						<code class="code-block">storage.aws.bucket.name=</code><br>
-						<code class="code-block">storage.aws.region=</code><br>
-						with the values of <br>
-						<code class="code-block">bucket public key </code><br>
-						<code class="code-block">bucket private key </code><br>
-						<code class="code-block">bucket name </code><br>
-						<code class="code-block">bucket region</code><br>
-					</p>
-				</li>
-				<li>
-					<h5>Build the project</h5>
-					<p>
-						On the terminal, move to the folder <code class="code--inline">text_adventure</code> (the
-						repository previously cloned). Then run <br>
-						<code class="code-block">mvn package</code><br>
-					</p>
-				</li>
-			</ol>
-			<h4 class="section__title">IntelliJ IDEA</h4>
-			<ol>
-				<li>
-					<h5>
-						Install Intellij </h5>
-					<p>
-						To install Intellij firstly install <strong>JetBrains Toolbox App</strong> from <a
-							href="https://www.jetbrains.com/toolbox-app/" target="_blank" class="link-color"> this
-						link</a>. <br>
-						Once Toolbox is installed, run it and install <strong>Intellij Community</strong> (or Intellij
-						Ultimate if holder of a valid license) </p>
-				</li>
-				<li>
-					<h5>
-						Clone the repository </h5>
-					<p>
-						If not installed, <strong>install GIT</strong> using <a href="https://git-scm.com/downloads"
-																				target="_blank" class="link-color">this
-						guide </a><br>
-						Once installed, from the terminal move to the folder where you want the repository to be cloned
-						and run <br><code class="code-block">git clone
-						https://github.com/ssiodev/text_adventure.git</code><br>
+						Maven version <code>3.9.7</code> doesn't work with this project.<br/>
+						Maven versions <code>3.9.6, 3.8.8, 4.0.0</code> have been tested.<br/>
+						If not already installed, follow <a class="link--dark" href="https://maven.apache.org/install.html" target="_blank">this guide &#8599</a> to install Maven.<br/>
+						A useful guide to install and set environment variables <a class="link--dark" href="https://phoenixnap.com/kb/install-maven-windows" target="_blank">on Windows &#8599</a>,
+						<a class="link--dark" href="https://www.digitalocean.com/community/tutorials/install-maven-linux-ubuntu" target="_blank">on Ubuntu &#8599</a>,
+						<a class="link--dark" href="https://www.digitalocean.com/community/tutorials/install-maven-mac-os" target="_blank">on Mac &#8599</a><br/>
 					</p>
 				</li>
 				<li>
 					<h5>
 						Install JDK20 </h5>
 					<p>
-						Check if in the system is already installed JDK20 by running on the terminal <br><code
-							class="code-block">java --version</code><br>
-						If JDK20 is not installed use <a
-							href="https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html"
-							target="_blank" class="link-color">this page</a> to download the right package or installer.
-						<br>
-						For any issue, follow <a
-							href="https://docs.oracle.com/en/java/javase/20/install/overview-jdk-installation.html"
-							target="_blank" class="link-color">this guide</a>. </p>
-				</li>
-				<li>
-					<h5>
-						Open the repository </h5>
+						Check if in the system is already installed JDK20 by running on the terminal:
+					</p>
+					<div class="code code__block">
+            			<pre class="code--block">
+							<code>
+								java --version
+							</code>
+						</pre>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
+					</div>
 					<p>
-						Launch <strong>Intellij IDEA</strong> and click on "Open...". Then select the repository
-						previously cloned. <br>
-						If somewhere in the interface appears the error message <code class="code--inline"
-																					  style="color:red">JDK "20" is
-						missing</code> then click on <a class="code--inline" style="color:red">Configure...</a> <br>
-						It should automatically detect the presence of the JDK20 previously installed and it should
-						appear on
-						the top of the dropdown menu. If that's not the case, click on <code class="code--inline">Add
-						JDK...</code> and select JDK20 folder previously installed </p>
+						If JDK20 is not installed use <a href="https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html" target="_blank" class="link--dark">this page &#8599</a> to download the right package or installer.<br/>
+						For any issue, follow <a href="https://docs.oracle.com/en/java/javase/20/install/overview-jdk-installation.html" target="_blank" class="link--dark">this guide &#8599</a>.
+					</p>
 				</li>
 				<li>
 					<h5>
-						Create <code>application.config</code>
+						AWS Setup (optional)
 					</h5>
 					<p>
-						In the folder <br><a class="file-path" style="margin-left: 20px"> text_adventure > src > main >
-						resources </a><br> create a new file called <br><code class="file-path"
-																			  style="margin-left: 20px">application.conf</code>
-						<br>
-						<strong>Open</strong> the file <a class="file-path" style=""><code> text_adventure > src > main
-						> resources > copy_application.conf</code></a> <br> and <strong>copy its content</strong> inside
-						<a class="code--inline"><code>application.config</code></a> <br>
+						Check <a href="#aws-setup" class="link--dark">here &#8599</a>.
+					</p>
+				</li>
+				<li>
+					<h5>Build the project</h5>
+					<p>
+						On the terminal, move to the folder <code class="code file-path">text_adventure</code> (the
+						repository previously cloned) and run:<br/>
+					</p>
+					<div class="code code__block">
+						<pre class="code--block">
+							<code>
+								mvn package
+							</code>
+						</pre>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
+					</div>
+				</li>
+
+				<li>
+					<h5>Run the project</h5>
+					<p>
+						On the same directory run:
+					</p>
+					<div class="code code__block">
+						<pre class="code--block">
+							<code>
+								mvn javafx:run
+							</code>
+						</pre>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
+					</div>
+				</li>
+			</ol>
+			<h4 >IntelliJ IDEA (option 2)</h4>
+			<ol>
+				<li>
+					<h5>
+						Clone the repository
+					</h5>
+					<p>
+						If not installed, <strong>install git</strong> using <a href="https://git-scm.com/downloads" target="_blank" class="link--dark">this
+						guide &#8599</a>.<br/>
+						Once installed, in the terminal move to the folder where you want the repository to be cloned
+						and run:<br/>
+					<div class="code code__block">
+						<pre class="code--block">
+							<code>
+								git clone https://github.com/ssiodev/text_adventure.git
+							</code>
+						</pre>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
+					</div>
+				</li>
+				<li>
+					<h5>
+						Install Intellij </h5>
+					<p>
+						First, install <strong>JetBrains Toolbox App</strong> from <a
+							href="https://www.jetbrains.com/toolbox-app/" target="_blank" class="link--dark"> this
+						link &#8599</a>.<br/>
+						Once Toolbox is installed, run it and install <strong>Intellij Community</strong> (or Intellij
+						Ultimate if holder of a valid license). </p>
+				</li>
+				<li>
+					<h5>
+						Install JDK20 </h5>
+					<p>
+						Check if in the system is already installed JDK20 by running on the terminal:
+					</p>
+					<div class="code code__block">
+						<pre class="code--block">
+							<code>
+								java --version
+							</code>
+						</pre>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
+					</div>
+					<p>
+						If JDK20 is not installed use <a	href="https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html"
+															target="_blank" class="link--dark">this page &#8599</a> to download the right package or installer.<br/>
+						For any issue, follow <a
+							href="https://docs.oracle.com/en/java/javase/20/install/overview-jdk-installation.html"
+							target="_blank" class="link--dark">this guide &#8599</a>.
 					</p>
 				</li>
 				<li>
 					<h5>
-						Bucket info Setup </h5>
+						Open the repository
+					</h5>
 					<p>
-						In the file <a class="code--inline" style=""><code>application.config</code></a> complete these
-						fields <br/>
-						<code class="code-block">storage.aws.key=</code><br>
-						<code class="code-block">storage.aws.secret=</code><br>
-						<code class="code-block">storage.aws.bucket.name=</code><br>
-						<code class="code-block">storage.aws.region=</code><br>
-						with the values of <br>
-						<code class="code-block">bucket public key </code><br>
-						<code class="code-block">bucket private key </code><br>
-						<code class="code-block">bucket name </code><br>
-						<code class="code-block">bucket region</code><br>
-					</p>
+						Launch <strong>Intellij IDEA</strong> and click on
+						<code class="code code--inline">Open...</code> and select the repository previously cloned. <br/>
+						If somewhere in the interface appears the error message
+						<code class="code code--inline" style="color:red">JDK "20" is missing</code>, click on <a class=" code code--inline" style="color:red">Configure...</a><br/>
+						It should automatically detect the presence of the JDK20 previously installed and it should
+						appear on the top of the dropdown menu. <br/>
+						If that's not the case, click on <code class="code code--inline">Add
+						JDK...</code> and select JDK20 folder previously installed.</p>
 				</li>
 				<li>
 					<h5>
 						Update Maven dependencies </h5>
 					<p>
-						Select the file <a class="file-path">text_adventure > pom.xml</a> and <strong>right
-						click</strong> on it <br>
+						Select the file <code class="code file-path">text_adventure > pom.xml</code> and <strong>right
+						click</strong> on it.<br/>
 						Then click con <strong>Maven > Reload Project</strong> in the dropdown menu that appears. </p>
 				</li>
 				<li>
 					<h5>
-						Run the project. </h5>
+						AWS Setup (optional)
+					</h5>
 					<p>
-						Open the file <a class="file-path">text_adventure > src > main > java > com > adventure >
-						Main</a> and then click on the left green arrow <br>
-						near the row with written <code class="code--inline">public static void main(String[] args) {
-						launch(); }</code>
+						Check <a href="#aws-setup" class="link--dark">here &#8599</a>
 					</p>
+				</li>
+				<li>
+					<h5>
+						Run the project
+					</h5>
+					<p>
+						Open the file <code class="code file-path">text_adventure > src > main > java > com > adventure >
+						Main</code> and then click on the <strong>left green arrow</strong><br/>
+						near the row with written<br/>
+					</p>
+					<div class="code code__block">
+						<pre class="code--block">
+							<code>
+								public static void main(String[] args) { launch(); }
+							</code>
+            			</pre>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
+					</div>
+
 					<p>Note:</p>
 					<p style="margin-left: 30px; margin-top: -15px">
 						if after running the project appears and error with written <code class="code--inline"
 																						  style="color:red">"Command
-						line too long"</code><br> just click on <code class="code--inline" style="color:red">"Shorten
-						the command line and return"</code> <br>
+						line too long"</code><br/> just click on <code class="code--inline" style="color:red">"Shorten
+						the command line and return"</code> <br/>
 					</p>
 				</li>
 			</ol>
 
-			<h4 class="section__title">Jar</h4>
-			<p>Not supported yet</p><br/>
-			<h3 class="section__title">Dependencies</h3>
+			<h4>Jar (option 3)</h4>
+			<ol>
+				<li>
+					<h5>
+						Download
+					</h5>
+					<p>
+						From the "Releases" section, download the correct Jar version based on your operating system and place it somewhere. <br>
+						Available versions include
+					</p>
+					<ul>
+						<li>Windows</li>
+						<li>Linux Aarch64</li>
+						<li>Linux (non-Aarch64)</li>
+						<li>Mac Aarch64</li>
+					</ul>
+				</li>
+				<li>
+					<h5>
+						Setup
+					</h5>
+					<p>
+						To create the setup, run the following command in the folder where the file is located:
+					</p>
+					<div class="code code__block">
+						<pre class="code--block">
+							<code>
+								java -jar adventure.jar -s
+							</code>
+						</pre>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
+					</div>
+					<p>or</p>
+					<div class="code code__block">
+						<pre class="code--block">
+							<code>
+								java -jar adventure.jar --setup
+							</code>
+						</pre>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
+					</div>
+					<p>
+						The command will create the necessary folders to play the game.<br/>
+						By default, the game works locally and saves all files in the folder <code class="code file-path">text_adventure > saves</code>.<br/>
+						It is possible to play by saving to the cloud using personal AWS credentials.<br/>
+						For this, you need to open the file in <code class="code file-path">text_adventure > key.conf</code><br/>
+						For more information follow <a href="#aws-setup" class="link--dark">AWS setup &#8599</a>.
+					</p>
+				</li>
+				<li>
+					<h5>Run</h5>
+					<p>
+						To start the game, simply run the command:<br/>
+					</p>
+					<div class="code code__block">
+						<pre class="code--block">
+							<code>
+								java -jar adventure.jar
+							</code>
+						</pre>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
+					</div>
+					<p>or double-click on the application icon.</p>
+				</li>
+			</ol>
+			<h4 >Mac-only bundle version (option 4)</h4>
+			<p>For Mac users, a bundle version <code class="code code--inline">Test_adventure.app</code> has been produced for more compact management.</p>
+			<p>
+				Simply download the <code class="code code--inline">Test_adventure.app</code> and then double-click to run it.<br/>
+				To set the credentials, you need to <strong>right-click on the app > Show Package Contents</strong><br/>
+				In the Finder window that opens, go to <code class="code file-path">text_adventure > key.conf</code> and enter the credentials.
+			</p>
+
+			<h4 >Optional Setups</h4>
+			<h5 id="aws-setup">AWS Setup</h5>
+			<ol>
+				<li>
+					Create a S3 Bucket called <code class="code">edidstextgame</code>.
+					(we used this name for demonstration purposes, you may need to choose another one, just replace our name with the one that you prefer).
+				</li>
+				<li>
+					From AWS console move to IAM section (Identity and Access Management).
+				</li>
+				<li>
+					<p>
+						Create a new policy using this json configuration file:
+					</p>
+					<div class="code code__block">
+						<pre class="bucket-code" id="bucket-code">
+							<code>
+								{
+									"Version": "2012-10-17",
+									"Statement": [
+										{
+											"Sid": "ListObjectsInBucket",
+											"Effect": "Allow",
+											"Action": ["s3:ListBucket"],
+											"Resource": ["arn:aws:s3:::edidstextgame"]
+										},
+										{
+											"Sid": "AllObjectActions",
+											"Effect": "Allow",
+											"Action": "s3:*Object",
+											"Resource": ["arn:aws:s3:::edidstextgame/*"]
+										}
+									]
+								}
+							</code>
+						</pre>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
+					</div>
+					<p>
+						This configuration allows the game to work with the minimal necessary privileges.
+					</p>
+				</li>
+				<li>
+					Create a new user group and assign to it the new created policy.
+				</li>
+				<li>
+					Create a new user and assign the user to the created group.
+				</li>
+				<li>
+					After creating the user, generate a client-secret pair credentials.
+				</li>
+				<li>
+					<p>
+						In the file <code class="code file-path">text_adventure > key.conf</code> complete the fields: <br/>
+					</p>
+					<div class="code code__block">
+						<pre class="code--block">
+							<code>
+								storage.aws.key=
+								storage.aws.secret=
+								storage.aws.bucket.name=
+								storage.aws.region=</code>
+						<button class="copy-button" onclick="copyContent(this)"><i class="fa fa-copy" style="color: #000000;"></i> Copy</button>
+						</pre>
+					</div>
+				</li>
+				<li>
+					Remember to <b>never</b> share you client and secret keys!
+				</li>
+			</ol>
+
+
+			<h3 >Dependencies</h3>
 			<table>
 				<tr>
 					<th>Name</th>
@@ -486,14 +664,14 @@
 			</table>
 		</section>
 		<section class="js-section">
-			<h2 class="section__title">Design</h2>
-			<h3 class="section__title">Software Design</h3>
+			<h2 >Design</h2>
+			<h3 >Software Design</h3>
 			<p>
 				The project was conceived and structured with the goal of achieving a modular and testable structure
 				with
 				reusable functionalities.
 				To reach this objective, various known patterns were utilized, with proper modifications. </p>
-			<h4 class="section__title">Decision Graph as Decision Support</h4>
+			<h4 >Decision Graph as Decision Support</h4>
 			<p>One of the primary goals we developers set was to create a system that ensured easy updating and
 				modifications of the map while allowing the addition of game features without significantly impacting
 				the
@@ -529,7 +707,7 @@
 			<p>
 				If specific functionality nodes need to be added, simple implementation of the node, its graphics, and
 				its controller suffices. </p>
-			<h4 class="section__title">Architectural Patterns</h4>
+			<h4 >Architectural Patterns</h4>
 			<ol>
 				<li>
 					<h5>MVC Pattern</h5>
@@ -631,7 +809,7 @@
 						pattern, and more. </p>
 				</li>
 			</ol>
-			<h4 class="section__title">GoF (Gang of Four)</h4>
+			<h4 >GoF (Gang of Four)</h4>
 			<ol>
 				<li>
 					<h5>Singleton</h5>
@@ -658,30 +836,64 @@
 
 			<div id="myModal" class="modal">
 				<div id="caption"></div>
-				<img class="modal-content" id="img01"/>
+				<img class="modal-content" id="img01" alt="modal-image-zoom"/>
 			</div>
 
-			<h3 class="section__title">Domain Model</h3>
+			<h3 >Domain Model</h3>
 			<img src="media/domain-model.svg" alt="Domain model" class="design-img"/>
 
-			<h3 class="section__title">System Sequence Diagram</h3>
+			<h3 >System Sequence Diagram</h3>
 			<img src="media/system-sequence-diagram.svg" alt="System sequence diagram" class="design-img"/>
 
-			<h3 class="section__title">Internal Sequence Diagrams</h3>
+			<h3 >Internal Sequence Diagrams</h3>
 
 			<h4>Command usage and creation</h4>
 			<img src="media/command-sequence-diagram.svg" alt="Command sequence diagram" class="design-img"/>
 
+			<h4>Autocompleter</h4>
+			<img src="media/autocompleter-sequence-diagram.svg" alt="Auto completer sequence diagram" class="design-img" />
+
 			<h4>Command move</h4>
 			<img src="media/command-move-sequence-diagram.svg" alt="Command move sequence diagram" class="design-img" />
 
-			<h4>Autocompleter sequence diagram</h4>
-			<img src="media/autocompleter-sequence-diagram.svg" alt="Auto completer sequence diagram"
-				 class="design-img" />
+			<h4>Command attack</h4>
+			<img src="media/command-attack-sequence-diagram.svg" alt="Command attack sequence diagram" class="design-img" />
 
-		</section>
-		<section class="js-section">
-			<h2 class="section__title">Testing</h2>
+			<h4>Command dodge</h4>
+			<img src="media/command-dodge-sequence-diagram.svg" alt="Command dodge sequence diagram" class="design-img" />
+
+			<h4>Command equip</h4>
+			<img src="media/command-equip-sequence-diagram.svg" alt="Command equip sequence diagram" class="design-img" />
+
+			<h4>Command fight</h4>
+			<img src="media/command-fight-sequence-diagram.svg" alt="Command fight sequence diagram" class="design-img" />
+
+			<h4>Command run</h4>
+			<img src="media/command-run-sequence-diagram.svg" alt="Command run sequence diagram" class="design-img" />
+
+			<h4>Command use</h4>
+			<img src="media/command-use-sequence-diagram.svg" alt="Command use sequence diagram" class="design-img" />
+
+			<h3>Design class model</h3>
+
+			<h4>Commands</h4>
+			<img src="media/uml/commands.png" alt="Commands UML" class="design-img" />
+
+			<h4>Serializers/Deserializers</h4>
+			<img src="media/uml/serializers_deserializers.png" alt="Serializers/Deserializers UML" class="design-img" />
+
+			<h4>Inventory</h4>
+			<img src="media/uml/inventory.png" alt="Inventory UML" class="design-img" />
+
+			<h4>Nodes</h4>
+			<img src="media/uml/nodes.png" alt="Nodes UML" class="design-img" />
+
+			<h4>Player</h4>
+			<img src="media/uml/player.png" alt="Player UML" class="design-img" />
+
+			<h4>Services</h4>
+			<img src="media/uml/services.png" alt="Services UML" class="design-img" />
+
 		</section>
 	</article>
 </div>

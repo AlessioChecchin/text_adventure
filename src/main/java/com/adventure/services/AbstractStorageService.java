@@ -6,10 +6,7 @@ import com.adventure.models.items.AttackItem;
 import com.adventure.models.items.DefenceItem;
 import com.adventure.models.items.Key;
 import com.adventure.models.items.UsableItem;
-import com.adventure.models.nodes.Action;
-import com.adventure.models.nodes.Room;
-import com.adventure.models.nodes.StoryNode;
-import com.adventure.models.nodes.StoryNodeLink;
+import com.adventure.models.nodes.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jgrapht.Graph;
@@ -36,13 +33,15 @@ abstract class AbstractStorageService implements StorageService
         AttackItem sword = new AttackItem("Sword");
         sword.setMultiplier(2);
         sword.setAdder(4);
+        sword.setWeight(5);
 
-        Stats stats = new Stats(100,100,1,1);
+        Stats stats = new Stats(100,100,1,0);
 
         game.setPlayer(new Player(playerName, playerInventory, stats));
 
-        UsableItem potion = new UsableItem("Potion");
-        potion.setAdditionalHp(10);
+        UsableItem healthPotion = new UsableItem("healthPotion");
+        healthPotion.setAdditionalHp(10);
+        healthPotion.setWeight(5);
 
         String key1 = "level 1";
         String key2 = "Level 2";
@@ -50,7 +49,7 @@ abstract class AbstractStorageService implements StorageService
         String key4 = "Level 4";
         String key5 = "Level 5";
         String key6 = "Level 6";
-        String key7 = "Victory";
+        String victoryKey = "victory";
 
         // Room 1.
         Room room1 = new Room("Introduction room", "In a distant era, in the lands of Margorgh, in the darkest depths of a shadowy forest, it is said that there exists a Castle ruled by evil, housing an unimaginable power. For millennia, humanity has sought to wrest this power from the forces of evil, with battles and wars marking the quest for this power. Over time, the traces of the Castle and the power it held within were lost, vanished like leaves on the trees in winter, or so it was believed...\n" +
@@ -59,9 +58,9 @@ abstract class AbstractStorageService implements StorageService
                 "\n" +
                 "The scroll led him through abandoned and devastated lands where the scent of death and torment still lingered. Our Hero arrived at the edge of a forest with a spectral aura, but driven by curiosity, he did not hesitate to venture into the dark woods...\n" + "Welcome, it is time to embark on this adventure as " + playerName + ". The forest that lies before your eyes is a dense network of dark canopies, creating a natural barrier to the sight of the horizon. Inside, all is silent, and not even the leaves stir in this gloomy and mysterious atmosphere. However, your determined warrior spirit urges you to venture into the forest, something calls to you. Explore the forest following the scroll, good luck Hero!\n" +
                 "It seems that there are some items in this part of the forest, try to 'look' for finding something!");
-        room1.setBackgroundPath("assets/castle.png");
+        room1.setBackgroundPath("assets/wood.png");
         room1.getItems().add(sword);
-        room1.getItems().add(potion);
+        room1.getItems().add(healthPotion);
         room1.getItems().add(new Key(key1));
         g.addVertex(room1);
 
@@ -70,7 +69,7 @@ abstract class AbstractStorageService implements StorageService
 
         // Room 2.
         Room room2 = new Room("K2 fight room", "Oh no, a goblin appears in front of you! Fight him and take the loot that drops");
-        room2.setBackgroundPath("assets/castle.png");
+        room2.setBackgroundPath("assets/wood_goblin.png");
 
         {
             Inventory enemyInventory2 = new Inventory(100);
@@ -79,29 +78,43 @@ abstract class AbstractStorageService implements StorageService
             Enemy enemy2 = new Enemy(enemyInventory2, enemyStats2, "Glorck");
             enemy2.setDefaultDialog("I'm Glorck the invincible Goblin, if you want to reach the castle you have to kill me!");
 
+            UsableItem apple2 = new UsableItem("apple");
+            apple2.setAdditionalHp(5);
+            apple2.setWeight(3);
+            enemy2.getInventory().addItem(apple2);
             room2.setMonster(enemy2);
-            UsableItem apple = new UsableItem("apple");
-            apple.setAdditionalHp(5);
-            room2.getItems().add(apple);
         }
 
         g.addVertex(room2);
 
         // Room 3.
         Room room3 = new Room("Left forest", "Oh no, it's a trap, a big Spider appears in front of you");
+
         //TODO set che correct background path
-        room3.setBackgroundPath("assets/castle.png");
+        room3.setBackgroundPath("assets/wood_spider.png");
 
         {
             UsableItem spiderEye = new UsableItem("spiderEye");
-            DefenceItem goblinHelmet = new DefenceItem("goblinHelmet", 0, 5);
-            AttackItem blackSword = new AttackItem("blackSword", 1, 10);
-            room3.getItems().add(spiderEye);
-            room3.getItems().add(goblinHelmet);
-            room3.getItems().add(blackSword);
+            spiderEye.setAdditionalHp(5);
+            spiderEye.setAdditionalAttack(2);
+            spiderEye.setWeight(2);
+            DefenceItem spiderHelmet = new DefenceItem("spiderHelmet", 1, 5);
+            spiderHelmet.setWeight(3);
+            AttackItem blackSword = new AttackItem("blackSword", 2, 10);
+            blackSword.setWeight(5);
+            UsableItem strengthPotion = new UsableItem("strengthPotion");
+            strengthPotion.setAdditionalAttack(3);
+            strengthPotion.setWeight(5);
+
             Inventory enemyInventory2 = new Inventory(100);
-            Stats enemyStats2 = new Stats(40,40,8,2);
+            Stats enemyStats2 = new Stats(40,40,4,0);
             Enemy enemy2 = new Enemy(enemyInventory2, enemyStats2, "Giant Spider");
+
+            enemy2.getInventory().addItem(spiderEye);
+            enemy2.getInventory().addItem(spiderHelmet);
+            enemy2.getInventory().addItem(blackSword);
+            enemy2.getInventory().addItem(strengthPotion);
+
             enemy2.setDefaultDialog("Hi, human, now it's the hour of your death!");
             enemy2.getInventory().addItem(new Key(key3));
             room3.setMonster(enemy2);
@@ -111,7 +124,7 @@ abstract class AbstractStorageService implements StorageService
 
         // Room 4.
         Room room4 = new Room("right part forest", "You enter deeply in the forest, the darkness become stronger, in front of you there's a terrible creature");
-        room4.setBackgroundPath("assets/castle.png");
+        room4.setBackgroundPath("assets/wood_redMonster.png");
 
         {
             Inventory enemyInventory3 = new Inventory(100);
@@ -120,33 +133,46 @@ abstract class AbstractStorageService implements StorageService
             enemy3.setDefaultDialog("It seems like there's an undesired guest here.\n I'm Maglarg, the BrainsEater, you are going to die human");
             enemy3.getInventory().addItem(new Key(key4));
             room4.setMonster(enemy3);
+            UsableItem nectarOfGods = new UsableItem("nectarOfGods");
+            nectarOfGods.setAdditionalHp(20);
+            nectarOfGods.setWeight(8);
+            room4.getItems().add(nectarOfGods);
         }
 
         g.addVertex(room4);
 
         // Room 5.
         Room room5 = new Room("Looting Room", "This part of the forest has a lot of items!");
-        room5.setBackgroundPath("assets/castle.png");
+        room5.setBackgroundPath("assets/wood.png");
         {
-            DefenceItem woodArmor = new DefenceItem("woodArmor", 0, 8);
+            DefenceItem woodArmor = new DefenceItem("woodArmor", 1, 8);
+            woodArmor.setWeight(7);
             UsableItem gingerRoot = new UsableItem("gingerRoot");
-            gingerRoot.setAdditionalHp(3);
-            gingerRoot.setAdditionalDefence(2);
-            AttackItem woodSword = new AttackItem("woodSword", 1, 7);
+            gingerRoot.setAdditionalHp(15);
+            gingerRoot.setAdditionalDefence(4);
+            gingerRoot.setWeight(3);
+            AttackItem rogueDagger = new AttackItem("rogueDagger", 3, 5);
+            rogueDagger.setWeight(5);
             room5.getItems().add(woodArmor);
             room5.getItems().add(gingerRoot);
-            room5.getItems().add(woodSword);
+            room5.getItems().add(rogueDagger);
         }
 
         g.addVertex(room5);
 
         // Room 6.
         Room room6 = new Room("K6 fight room", "Oh no, a dragon! Fight the dragon and take the loot that drops");
-        room6.setBackgroundPath("assets/castle.png");
+        room6.setBackgroundPath("assets/wood_dragon.png");
 
         {
             Inventory enemyInventory6 = new Inventory(100);
             Stats enemyStats6= new Stats(100,100,15,5);
+            UsableItem bigPotion = new UsableItem("bigPotion");
+            bigPotion.setWeight(10);
+            bigPotion.setAdditionalAttack(5);
+            bigPotion.setAdditionalHp(100);
+            bigPotion.setAdditionalDefence(5);
+            enemyInventory6.addItem(bigPotion);
             enemyInventory6.addItem(new Key(key6));
             Enemy enemy6 = new Enemy(enemyInventory6, enemyStats6, "Dragon");
             enemy6.setDefaultDialog("You will never take the castle's keys muhahahh.\nI'll kill u.");
@@ -158,12 +184,12 @@ abstract class AbstractStorageService implements StorageService
 
         // Room 7.
         Room room7 = new Room("Loot room", "No enemies here :)");
-        room7.setBackgroundPath("assets/castle.png");
+        room7.setBackgroundPath("assets/wood.png");
         g.addVertex(room7);
 
         // Room 8.
         Room room8 = new Room("K5 fight room", "Oh no, a monster is attacking you!");
-        room8.setBackgroundPath("assets/castle.png");
+        room8.setBackgroundPath("assets/wood_goblin2.png");
 
         {
             Inventory enemyInventory5 = new Inventory(100);
@@ -185,9 +211,13 @@ abstract class AbstractStorageService implements StorageService
         room9.setBackgroundPath("assets/castle.png");
         {
             DefenceItem darkArmor = new DefenceItem("darkArmor", 0, 25);
+            darkArmor.setWeight(12);
             UsableItem healingPotion = new UsableItem("healingPotion");
-            healingPotion.setAdditionalHp(30);
+            healingPotion.setAdditionalHp(50);
+            healingPotion.setAdditionalDefence(5);
+            healingPotion.setWeight(6);
             AttackItem bigHammer = new AttackItem("bigHammer", 2, 15);
+            bigHammer.setWeight(20);
             room5.getItems().add(darkArmor);
             room5.getItems().add(healingPotion);
             room5.getItems().add(bigHammer);
@@ -196,35 +226,42 @@ abstract class AbstractStorageService implements StorageService
 
         // Room 10.
         Room room10 = new Room("First boss Room", "The gold-adorned door swings open, allowing you to enter the throne room. Indeed, an imposing dark stone throne stands at the end of the hall. However, you notice a mysterious being sitting on the throne.\n " +
-                "You take a step forward and hear a voice coming from the throne: “I have been expecting you, young human.” Along the walls of the hall, an infinite number of torches light up, revealing the hall in its entirety. Sitting on the throne, a small goblin with a long beard and withered face watches you.\n “After millennia, finally someone from outside comes to visit me. You must be here to try to take the legendary Sword of Shadows.” The goblin stands and points to a sword embedded in a rock.\n" +
-                " “You must be very strong to have managed to defeat the castle's protectors. It's a pity that now you will meet your end. You should know that this sword was so powerful that even the forces of evil could not use it.\n " +
-                "However, they decided to keep it away from humans to prevent this tremendous power from falling into their hands. No one has ever managed to pull it from that rock, maybe you could be the one to do it, who knows, but it’s a shame we will never find out.”\n" +
+                "You take a step forward and hear a voice coming from the throne: \"I have been expecting you, young human.\" Along the walls of the hall, an infinite number of torches light up, revealing the hall in its entirety. Sitting on the throne, a small goblin with a long beard and withered face watches you.\n \"After millennia, finally someone from outside comes to visit me. You must be here to try to take the legendary Sword of Shadows.\" The goblin stands and points to a sword embedded in a rock.\n" +
+                " \"You must be very strong to have managed to defeat the castle's protectors. It's a pity that now you will meet your end. You should know that this sword was so powerful that even the forces of evil could not use it.\n " +
+                "However, they decided to keep it away from humans to prevent this tremendous power from falling into their hands. No one has ever managed to pull it from that rock, maybe you could be the one to do it, who knows, but it’s a shame we will never find out.\"\n" +
                 " The goblin took a key from the bunch on his belt, opened a gate hidden behind the throne, and escaped toward a staircase leading to the tiers of the throne room. From the just-opened gate, a stormy roar was heard, and a three-headed beast leapt into the hall, shaking the entire room.\n" +
                 " Three pairs of bloodthirsty eyes watch you. It's time to prove your worth in the hardest battle you've faced so far: you must defeat Kalist, the guardian of the Sword of Shadows....");
-        room10.setBackgroundPath("assets/castle.png");
+        room10.setBackgroundPath("assets/castle_cerbero.png");
         {
             Inventory enemyInventory6 = new Inventory(100);
             AttackItem shadowsSword = new AttackItem("shadowSword", 2, 30);
+            shadowsSword.setWeight(15);
             enemyInventory6.addItem(shadowsSword);
-            Stats enemyStats6 = new Stats(200, 200, 30, 10);
+            enemyInventory6.addItem(new Key(key6));
+            Stats enemyStats6 = new Stats(150, 150, 20, 10);
             Enemy enemy6 = new Enemy(enemyInventory6, enemyStats6, "Kalist");
             enemy6.setDefaultDialog("Groarrrrrrr!!");
+            UsableItem bigPotion = new UsableItem("bigPotion");
+            bigPotion.setAdditionalHp(100);
+            bigPotion.setAdditionalDefence(10);
+            bigPotion.setWeight(10);
+            enemyInventory6.addItem(bigPotion);
             room10.setMonster(enemy6);
-
         }
         g.addVertex(room10);
 
         // Room 11.
-        Room room11 = new Room("First boss Room","Kalist collapses to the ground, exhaling his last breath. You head towards the sword and try to pull it out. With minimal force, the sword slides out of the rock and you brandish it.\n" +
+        Room room11 = new Room("Final boss Room","Kalist collapses to the ground, exhaling his last breath. You head towards the sword and try to pull it out. With minimal force, the sword slides out of the rock and you brandish it.\n" +
                 " A dark aura begins to emanate from the sword, and the hall starts to tremble as if shaken by a violent earthquake. However, the shadow surrounding the sword starts to be overwhelmed by a light coming from your heart, and now the sword also shines with this light.\n" +
                 " The fear that had tormented evil for millennia was real: the Sword of Shadows has been overcome by the light of hope from a young man, transforming it into the Sword of Light.\n" +
-                "“This is not possible; this should never have happened!” screams the Goblin as he rushes down the stairs toward the now lifeless body of Kalist.\n" +
-                " “I never thought this could happen. I will have to play my trump card. Sorry for you, boy, even if you defeated Kalist, you will never beat me. I am Mucksnarl, the true protector of the castle, the one who will end your life once and for all.”\n" +
-                " Mucksnarl took a vial with a bluish liquid and drank it all in one gulp. His body began to mutate; his muscles developed, and his height grew frightfully. The small, elderly goblin who had welcomed our hero had now become a terrifying monster almost 5 meters tall. “Prepare yourself; your time has come!”");
+                "\"This is not possible; this should never have happened!\" screams the Goblin as he rushes down the stairs toward the now lifeless body of Kalist.\n" +
+                " \"I never thought this could happen. I will have to play my trump card. Sorry for you, boy, even if you defeated Kalist, you will never beat me. I am Mucksnarl, the true protector of the castle, the one who will end your life once and for all.\"\n" +
+                " Mucksnarl took a vial with a bluish liquid and drank it all in one gulp. His body began to mutate; his muscles developed, and his height grew frightfully. The small, elderly goblin who had welcomed our hero had now become a terrifying monster almost 5 meters tall. \"Prepare yourself; your time has come!\"");
+        room11.setBackgroundPath("assets/castle_goblin.png");
         {
             Inventory enemyInventory7 = new Inventory(100);
-            enemyInventory7.addItem(new Key(key7));
-            Stats enemyStats7 = new Stats(300, 300, 40, 20);
+            enemyInventory7.addItem(new Key(victoryKey));
+            Stats enemyStats7 = new Stats(200, 200, 25, 10);
             Enemy enemy7 = new Enemy(enemyInventory7, enemyStats7, "Mucksnarl");
             enemy7.setDefaultDialog("It's the time for the last dance");
             room11.setMonster(enemy7);
@@ -232,11 +269,19 @@ abstract class AbstractStorageService implements StorageService
 
         g.addVertex(room11);
 
+        // Room 12.
+        VictoryNode room12 = new VictoryNode();
+        g.addVertex(room12);
 
         // Edges
         StoryNodeLink edge12 = new StoryNodeLink();
+        edge12.setKey(key1);
         edge12.setAction(new Action("north"));
         g.addEdge(room1, room2, edge12);
+
+        StoryNodeLink edge21 = new StoryNodeLink();
+        edge21.setAction(new Action("south"));
+        g.addEdge(room2, room1, edge21);
 
         StoryNodeLink edge23 = new StoryNodeLink();
         edge23.setAction(new Action("west"));
@@ -306,8 +351,13 @@ abstract class AbstractStorageService implements StorageService
 
         StoryNodeLink edge1011 = new StoryNodeLink();
         edge1011.setAction(new Action("north"));
-        edge1011.setKey(key7);
+        edge1011.setKey(key6);
         g.addEdge(room10, room11, edge1011);
+
+        StoryNodeLink edge1112 = new StoryNodeLink();
+        edge1112.setAction(new Action("north"));
+        edge1112.setKey(victoryKey);
+        g.addEdge(room11, room12, edge1112);
 
         return game;
     }

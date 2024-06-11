@@ -4,6 +4,7 @@ import com.adventure.models.Game;
 import com.adventure.services.StorageService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Command used to save the current game.
@@ -43,6 +44,10 @@ public class CmdSaveGame extends AbstractCommand
             currentGame.setId(this.getArgs().get(0));
             save(this.context.getConfig().getStorageService(), this.context.getGame());
         }
+        else
+        {
+            this.writer.println("Invalid number of arguments! Usage: show <opt: inventory, opt: stats>");
+        }
     }
 
     /**
@@ -64,7 +69,7 @@ public class CmdSaveGame extends AbstractCommand
         }
     }
 
-    public ArrayList<String> getPossibleArgs()
+    public List<String> getPossibleArgs()
     {
         return new ArrayList<>();
     }

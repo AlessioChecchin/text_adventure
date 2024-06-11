@@ -182,10 +182,12 @@ abstract public class Entity
         // Check if it's a mortal hit
         if(damage > this.stats.getHp() + this.stats.getBaseDefense())
         {
-            inflictedDamage = this.stats.getHp() + this.stats.getBaseDefense();
+            // Inflicted damage is all entity hp
+            inflictedDamage = this.stats.getHp();
             this.setAlive(false);
         }
-        // Check if incoming damage is more than the shield
+        // Check if incoming damage is more than the shield.
+        // If it's not, then the hit results in no damage.
         else if (damage > this.stats.getBaseDefense())
         {
             inflictedDamage = damage - this.stats.getBaseDefense();

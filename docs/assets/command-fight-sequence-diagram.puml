@@ -1,0 +1,113 @@
+@startuml
+!theme materia-outline
+
+skinparam ArrowColor #9803fc
+skinparam BackgroundColor #FFFFFF
+skinparam ArrowColor #9803fc
+skinparam ActorBorderColor #9803fc
+skinparam ActorFontColor #9803fc
+skinparam ActorBackgroundColor #9803fc
+skinparam ParticipantFontColor #9803fc
+skinparam ParticipantBorderColor #9803fc
+skinparam ParticipantBackgroundColor #FFFFFF
+skinparam {
+ SequenceGroupBorderColor #9803fc
+}
+
+participant CmdFight
+participant CommandParser
+participant "I/O Stream"
+participant ApplicationContext
+participant Player
+participant Monster
+participant Game
+participant Command
+participant StorageService
+
+CmdFight++
+CmdFight -> ApplicationContext++: getGame()
+ApplicationContext --> CmdFight
+ApplicationContext--
+
+CmdFight -> Game++: getPlayer(), getCurrentNode(), getMonster()
+Game --> CmdFight
+Game--
+
+alt currentNode instanceof Room and monster != null
+
+    CmdFight -> Monster++: isAlive()
+    Monster --> CmdFight
+    Monster--
+
+    alt monster is alive
+        CmdFight -> CommandParser: Enable fight commands and \ndisable all other commands.
+        CmdFight -> Game: setFightStatus(true) of the player
+        CmdFight -> CmdFight: Reset player dodge,\nreset monster dodge,\nreset monster hp.
+
+        CmdFight -> Player++: isAlive()
+        Player --> CmdFight
+        Player--
+
+        loop player is alive and monster is alive and player is fighting
+
+
+            CmdFight -> "I/O Stream": Gets command from from I/O Stream.
+            activate "I/O Stream"
+            "I/O Stream" --> CmdFight
+            deactivate "I/O Stream"
+
+            CmdFight -> CommandParser++: parseCommand(cmd)
+            create Command
+            CommandParser -> Command++: create()
+            Command --> CommandParser
+            Command--
+            CommandParser --> CmdFight
+            CommandParser--
+
+            alt command = one of the enabled commands
+                CmdFight -> Command: setInputStream(this.inputStream)
+                CmdFight -> Command: setWriter(this.writer)
+
+                CmdFight -> Command++: execute()
+                Command --> CmdFight
+                Command--
+            else else
+                CmdFight -> "I/O Stream": Notify that the command is unknown.
+            end
+
+            destroy Command
+        end
+        CmdFight -> CommandParser:  Enable all commands and disable fight commands.
+
+        alt Player.isAlive and Player.isFighting
+            CmdFight -> "I/O Stream": Notify that the player won.
+            CmdFight -> Player: setFightStatus(false)
+            opt inventory of the monster is not empty
+                CmdFight -> Monster++: Remove items from monster inventory.
+                Monster --> CmdFight: Removed items.
+                Monster--
+                CmdFight -> Game: Set removed items in currentNode.
+            end
+        else else
+            CmdFight -> "I/O Stream": Wait for Enter key.
+            activate "I/O Stream"
+            "I/O Stream" --> CmdFight
+            deactivate "I/O Stream"
+
+            CmdFight -> ApplicationContext++: getStorageService()
+            ApplicationContext --> CmdFight
+            ApplicationContext--
+
+            CmdFight -> StorageService++: newGame() with same playerName.
+            StorageService --> CmdFight
+            StorageService--
+            CmdFight -> ApplicationContext: setGame(newGame)
+        end
+    else else
+        CmdFight -> "I/O Stream": No monster to fight.
+    end
+else
+    CmdFight -> "I/O Stream": Can't fight in this room.
+end
+
+@enduml

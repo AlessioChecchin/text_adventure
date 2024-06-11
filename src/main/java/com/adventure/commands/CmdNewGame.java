@@ -4,6 +4,7 @@ import com.adventure.models.Game;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Command used to create a new game.
@@ -13,7 +14,11 @@ public class CmdNewGame extends AbstractCommand
     @Override
     public void execute() throws InterruptedException
     {
-        if (!this.correctArgumentsNumber(0)) { return; }
+        if (!this.correctArgumentsNumber(0))
+        {
+            this.writer.println("Invalid number of arguments! Usage: newGame");
+            return;
+        }
 
         // Obtains the number of nodes loaded in the game.
         int n = this.context.getGame().getGameGraph().vertexSet().size();
@@ -24,7 +29,7 @@ public class CmdNewGame extends AbstractCommand
         //
         // n != 0:
         //      A valid game is loaded, confirmation required.
-        if(n != 0)
+        if(n != 0 && n != 1)
         {
             this.writer.println("Do you really want to create a new game? Current unsaved progress will be lost! [yes/no]");
 
@@ -59,7 +64,7 @@ public class CmdNewGame extends AbstractCommand
 
     }
 
-    public ArrayList<String> getPossibleArgs()
+    public List<String> getPossibleArgs()
     {
         return new ArrayList<>();
     }

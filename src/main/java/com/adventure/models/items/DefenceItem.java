@@ -122,7 +122,7 @@ public class DefenceItem extends Item implements Equipable
     public String toString()
     {
         String result = String.format("%s (def: %d, %f)", this.getName(), this.getAdder(), this.getMultiplier());
-        if(this.isEquiped) return result + " [Equiped]";
+        if(this.isEquiped) return result + " [Equipped]";
         return result;
     }
 

@@ -1,6 +1,6 @@
 package com.adventure.commands;
 
-import com.adventure.config.ApplicationContextProvider;
+import com.adventure.config.ApplicationContext;
 import com.adventure.exceptions.ConfigurationException;
 import com.adventure.models.items.UsableItem;
 import com.adventure.models.nodes.Room;
@@ -12,19 +12,14 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CmdPickTest extends CmdAttackTest {
-
-    static Command command;
-
-    @BeforeAll
-    static void setup(){ command = new CmdPick();}
-
+class CmdPickTest extends AbstractCommandTest
+{
     @Test
-    void execute() throws ConfigurationException, InterruptedException {
-        // Set the context.
-        ApplicationContextProvider applicationContextProvider = ApplicationContextProvider.getInstance();
-        this.setTestContext(applicationContextProvider);
-        command.setContext(applicationContextProvider);
+    void execute() throws ConfigurationException, InterruptedException
+    {
+        Command command = new CmdPick();
+
+        command.setContext(context);
 
         // Set the args
         ArrayList<String> args = new ArrayList<>(1);
@@ -35,11 +30,11 @@ class CmdPickTest extends CmdAttackTest {
         // Adding an Item fot testing.
         UsableItem apple = new UsableItem("apple");
         apple.setAdditionalHp(10);
-        Room room = (Room) applicationContextProvider.getGame().getCurrentNode();
+        Room room = (Room) context.getGame().getCurrentNode();
         room.getItems().add(apple);
 
         // Execute and test.
         command.execute();
-        assertTrue(applicationContextProvider.getGame().getPlayer().getInventory().getItems().contains(apple));
+        assertTrue(context.getGame().getPlayer().getInventory().getItems().contains(apple));
     }
 }

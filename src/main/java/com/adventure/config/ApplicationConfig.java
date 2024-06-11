@@ -1,12 +1,16 @@
 package com.adventure.config;
 
 import com.adventure.exceptions.ConfigurationException;
+import com.adventure.models.Stats;
 import com.adventure.services.BucketStorageService;
 import com.adventure.services.FileSystemStorageService;
 import com.adventure.services.StorageService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Properties;
 
 /**
@@ -27,17 +31,47 @@ public class ApplicationConfig implements Config
             this.displayWidth = Integer.parseInt(properties.getProperty("display.width"));
             this.displayHeight = Integer.parseInt(properties.getProperty("display.height"));
             this.resizable = Boolean.parseBoolean(properties.getProperty("resizable"));
+            this.configFolder = properties.getProperty("config.folder");
+            this.appTitle = properties.getProperty("app.title");
+            this.monsterAttackProbability = Double.parseDouble(properties.getProperty("game.monster.default.attackProbability"));
+            this.monsterDodgeProbability = Double.parseDouble(properties.getProperty("game.monster.default.dodgeProbability"));
+
+            this.defaultPlayerStats = new Stats(
+                    Integer.parseInt(properties.getProperty("game.player.default.hp")),
+                    Integer.parseInt(properties.getProperty("game.player.default.max.hp")),
+                    Integer.parseInt(properties.getProperty("game.player.default.base.attack")),
+                    Integer.parseInt(properties.getProperty("game.player.default.base.defence"))
+            );
+
+            this.playerMaxDodges = Integer.parseInt(properties.getProperty("game.entity.default.max.dodges"));
+
+            // Ensure existence of the config folder
+            if(!new File(configFolder).exists())
+                new File(configFolder).mkdirs();
 
             // Default storage provider is filesystem.
-            String storageProvider = properties.getProperty("storage.provider", "filesystem");
+            String storageProvider = "filesystem";
 
+            // Try to obtain keys from key.conf
+            try  (InputStream keys = new FileInputStream(new File(properties.getProperty("config.folder") + "key.conf")))
+            {
+                Properties keyProps = new Properties();
+                keyProps.load(keys);
+                properties.setProperty("storage.aws.key",keyProps.getProperty("storage.aws.key"));
+                properties.setProperty("storage.aws.secret",keyProps.getProperty("storage.aws.secret"));
+                properties.setProperty("storage.aws.bucket.name",keyProps.getProperty("storage.aws.bucket.name"));
+                properties.setProperty("storage.aws.region",keyProps.getProperty("storage.aws.region"));
+                storageProvider = "aws";
+            } catch (Exception ex) { /*No aws key file, just local game*/ }
+
+            // If key.conf exists and has keys, BucketStorage is used
             if(storageProvider.equals(SupportedStorage.AWS.name().toLowerCase()))
             {
                 this.storageService = new BucketStorageService(this);
             }
             else
             {
-                // Fallback storage service.
+                // Fallback to FileSystemStorage
                 logger.debug("Preferred storage provider set to filesystem...");
                 this.storageService = new FileSystemStorageService(this);
             }
@@ -52,6 +86,12 @@ public class ApplicationConfig implements Config
     public int getDisplayWidth()
     {
         return this.displayWidth;
+    }
+
+    @Override
+    public String getConfigFolder()
+    {
+        return this.configFolder;
     }
 
     @Override
@@ -81,13 +121,36 @@ public class ApplicationConfig implements Config
     @Override
     public double getMonsterAttackProbability()
     {
-        return 85;
+        return this.monsterAttackProbability;
     }
 
     @Override
     public double getMonsterDodgeProbability()
     {
-        return 30;
+        return this.monsterDodgeProbability;
+    }
+
+    @Override
+    public String getAppTitle()
+    {
+        return this.appTitle;
+    }
+
+    @Override
+    public Stats getPlayerStats()
+    {
+        return new Stats(
+                this.defaultPlayerStats.getHp(),
+                this.defaultPlayerStats.getMaxHp(),
+                this.defaultPlayerStats.getBaseAttack(),
+                this.defaultPlayerStats.getBaseDefense()
+        );
+    }
+
+    @Override
+    public int getPlayerMaxDodges()
+    {
+        return this.playerMaxDodges;
     }
 
     @Override
@@ -107,6 +170,18 @@ public class ApplicationConfig implements Config
     private final StorageService storageService;
 
     private final Properties properties;
+
+    private final String configFolder;
+
+    private final String appTitle;
+
+    private final double monsterAttackProbability;
+
+    private final Stats defaultPlayerStats;
+
+    private final int playerMaxDodges;
+
+    private final double monsterDodgeProbability;
 
     private static final Logger logger = LogManager.getLogger();
 }

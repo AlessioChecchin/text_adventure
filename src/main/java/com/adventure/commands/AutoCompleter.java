@@ -1,9 +1,9 @@
 package com.adventure.commands;
 
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.beans.property.StringProperty;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Singleton that predicts text when pressing tab
@@ -71,7 +71,7 @@ public class AutoCompleter
                 partialArgument = allWords[allWords.length - 1];
 
             String prevCommand = getPreviousCommand();
-            ArrayList<String> arguments = parser.argsFromCommand(prevCommand);
+            List<String> arguments = parser.argsFromCommand(prevCommand);
             for(String arg : arguments)
                 if(arg.startsWith(partialArgument))
                     prediction.add(arg);
@@ -134,14 +134,11 @@ public class AutoCompleter
      * @param input TextFiled for the input prompt
      * @param dir Direction to follow when selecting the next prediction
      */
-    public void operate(TextArea output, TextField input, direction dir)
+    public void operate(StringProperty output, StringProperty input, direction dir)
     {
         if(!this.allCommandsString.isEmpty())
-            output.setText(this.allCommandsString);
-        input.setText(buildInputText(dir));
-
-        //  Put selection bar ( | ) to the end of the text
-        input.end();
+            output.setValue(this.allCommandsString);
+        input.setValue(buildInputText(dir));
     }
 
     /**

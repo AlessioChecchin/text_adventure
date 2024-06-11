@@ -36,29 +36,36 @@ public class Player extends Entity
      */
     public void use(String itemName) throws NoSuchElementException, NotUsableItemException
     {
-        //search item in the inventory
+        // Search item in the inventory
         Item item = this.getInventory().getItems().stream().filter(Item -> itemName.equals(Item.getName())).findFirst().orElse(null);
 
-        //check if item is in the inventory
-        if(item != null) {
-            //check if it's a usable item
-            if (item instanceof UsableItem usableItem) {
-
-                if (usableItem.getHp() != 0) {
+        // Check if item is in the inventory
+        if(item != null)
+        {
+            // Check if it's a usable item
+            if (item instanceof UsableItem usableItem)
+            {
+                // Healing the player.
+                if (usableItem.getHp() != 0)
+                {
                     this.heal(usableItem.getHp());
                 }
 
-                if (usableItem.getAttack() != 0) {
+                // Improving attack stats.
+                if (usableItem.getAttack() != 0)
+                {
                     int newAttack = usableItem.getAttack() + this.getStats().getBaseAttack();
                     this.getStats().setBaseAttack(newAttack);
                 }
 
-                if (usableItem.getDefence() != 0) {
+                // Improving defence.
+                if (usableItem.getDefence() != 0)
+                {
                     int newDefence = usableItem.getDefence() + this.getStats().getBaseDefense();
                     this.getStats().setBaseDefense(newDefence);
                 }
 
-                this.getInventory().getItems().remove(item);
+                this.getInventory().dropItem(item);
             }
             else{
                 throw new NotUsableItemException();

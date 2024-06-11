@@ -15,22 +15,27 @@ skinparam {
 }
 
 
-actor user
 participant CmdFight
 participant CmdRun
+participant "I/O Stream"
 participant ApplicationContext
 participant Game
 participant Player
 
-CmdFight -> CmdRun: run
-CmdRun -> ApplicationContext: get player fight status
-ApplicationContext -> Game: get player fight status
-Game -> Player: get player fight status
-Player --> Game : player fight status
-Game --> ApplicationContext: player fight status
-ApplicationContext --> CmdRun: player fight status
-CmdRun -> CmdRun: set player fight status to false
-CmdRun -> user: "You run away"
+CmdFight++
+CmdFight -> CmdRun++: run
+
+CmdRun -> ApplicationContext++: getGame()
+ApplicationContext --> CmdRun
+ApplicationContext--
+
+CmdRun -> Game++: getPlayer()
+Game --> CmdRun
+Game--
+
+CmdRun -> Player: setFightingStatus()
+
+CmdRun -> "I/O Stream": Notify that the player ran away from the fight.
 
 
 @enduml

@@ -1,26 +1,26 @@
 package com.adventure.commands;
 
-import com.adventure.config.ApplicationContextProvider;
+import com.adventure.config.ApplicationContext;
 import com.adventure.exceptions.ConfigurationException;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CmdDodgeTest extends CmdAttackTest {
+class CmdDodgeTest extends AbstractCommandTest
+{
 
-    static Command command;
-    @BeforeAll
-    static void setup() {command = new CmdDodge();}
     @Test
-    void executeTest() throws InterruptedException, ConfigurationException {
-        // Set the context.
-        ApplicationContextProvider applicationContextProvider = ApplicationContextProvider.getInstance();
-        this.setTestContext(applicationContextProvider);
-        command.setContext(applicationContextProvider);
+    void consumeDodgeTest() throws InterruptedException, ConfigurationException
+    {
+        Command command = new CmdDodge();
 
-        // Execute and test the command.
+        command.setContext(context);
+
+        int dodges = player.getAvailableDodges();
         command.execute();
-        assertEquals(2, applicationContextProvider.getGame().getPlayer().getAvailableDodges(), "Problems with dodge command");
+        assertEquals(dodges - 1, player.getAvailableDodges(), "Problems with dodge command");
+
     }
 }

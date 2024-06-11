@@ -19,7 +19,7 @@ Player "1" *-- "1" Inventory: Has
 Inventory "1" *-- "*" Item: Has
 Player "1" --> "*" Enemy: Fights
 Player "1" --> "1" Game: Plays
-Player "1" --* "*" Section: Is in
+Player "1" --* "*" Section: Visits
 Enemy "1" *-- "1" Section: Is in
 Item "*" --* "1" Section: Is in
 Player "1" *-- "*" Item: Uses

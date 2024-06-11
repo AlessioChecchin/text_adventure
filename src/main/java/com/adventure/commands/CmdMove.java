@@ -22,7 +22,11 @@ public class CmdMove extends AbstractCommand
     @Override
     public void execute() throws InterruptedException
     {
-        if(!this.correctArgumentsNumber(1)) { return; }
+        if(!this.correctArgumentsNumber(1))
+        {
+            this.writer.println("Invalid number of arguments! Usage: move <direction>");
+            return;
+        }
 
         String edgeName = this.getArgs().get(0);
         Game game = this.context.getGame();
@@ -30,12 +34,15 @@ public class CmdMove extends AbstractCommand
         Graph<StoryNode, StoryNodeLink> g = game.getGameGraph();
         Set<StoryNodeLink> outgoingEdges = g.outgoingEdgesOf(game.getCurrentNode());
 
+        boolean validDirection = false;
         // Checking outgoing edges to see if the direction is allowed.
         for(StoryNodeLink outgoingEdge: outgoingEdges)
         {
             String targetName = outgoingEdge.getAction().getActionName();
             if(edgeName.equals(targetName))
             {
+                validDirection = true;
+
                 // If the passage is locked then we search if the user has the correct key.
                 if(outgoingEdge.getLocked())
                 {
@@ -72,7 +79,11 @@ public class CmdMove extends AbstractCommand
                     this.moveToTarget(outgoingEdge);
                 }
             }
+        }
 
+        if(!validDirection)
+        {
+            this.writer.println("Direction not valid!");
         }
     }
 
@@ -95,7 +106,7 @@ public class CmdMove extends AbstractCommand
     /**
      * @return all possible directions for the player
      */
-    public ArrayList<String> getPossibleArgs()
+    public List<String> getPossibleArgs()
     {
         ArrayList<String> result = new ArrayList<>();
         StoryNode currentNode = context.getGame().getCurrentNode();

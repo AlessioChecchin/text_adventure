@@ -1,5 +1,6 @@
 package com.adventure.config;
 
+import com.adventure.models.Stats;
 import com.adventure.services.StorageService;
 
 import java.util.Properties;
@@ -9,6 +10,13 @@ import java.util.Properties;
  */
 public interface Config
 {
+
+    /**
+     * Default setting folder
+     * @return The path (relative to the .jar) where saves and setting are contained
+     */
+    String getConfigFolder();
+
     /**
      * Default display width.
      * @return Initial display width.
@@ -50,6 +58,24 @@ public interface Config
      * @return Monster dodges during a fight.
      */
     double getMonsterDodgeProbability();
+
+    /**
+     * App title getter;
+     * @return Default app title.
+     */
+    String getAppTitle();
+
+    /**
+     * Default player stats getter.
+     * @return Default player stats.
+     */
+    Stats getPlayerStats();
+
+    /**
+     * Max dodges for the player.
+     * @return Max dodges for the player.
+     */
+    int getPlayerMaxDodges();
 
     /**
      * Properties getter.

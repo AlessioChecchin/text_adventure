@@ -1,0 +1,58 @@
+@startuml
+!theme materia-outline
+
+skinparam ArrowColor #9803fc
+skinparam BackgroundColor #FFFFFF
+skinparam ArrowColor #9803fc
+skinparam ActorBorderColor #9803fc
+skinparam ActorFontColor #9803fc
+skinparam ActorBackgroundColor #9803fc
+skinparam ParticipantFontColor #9803fc
+skinparam ParticipantBorderColor #9803fc
+skinparam ParticipantBackgroundColor #FFFFFF
+skinparam {
+ SequenceGroupBorderColor #9803fc
+}
+
+
+participant CmdEquip
+participant "I/O Stream"
+
+participant ApplicationContext
+participant Game
+participant Player
+participant Inventory
+
+CmdEquip++
+CmdEquip -> ApplicationContext++: getGame()
+ApplicationContext --> CmdEquip
+ApplicationContext--
+
+CmdEquip -> Game++: getPlayer()
+Game --> CmdEquip
+Game--
+
+CmdEquip -> Player++: getInventory()
+Player --> CmdEquip
+Player--
+
+CmdEquip -> "I/O Stream" ++: Get item name.
+"I/O Stream" --> CmdEquip
+deactivate "I/O Stream"
+
+CmdEquip -> Inventory++: Get item with the name read.
+Inventory --> CmdEquip
+Inventory--
+
+alt item != null
+  alt item is Equipable
+    CmdEquip -> Inventory: equipItem(item)
+    CmdEquip -> "I/O Stream": Notify that the item was equipped.
+  else else
+    CmdEquip -> "I/O Stream": Notify that item is not equipable.
+  end
+else else
+  CmdEquip -> "I/O Stream": Notify that the item wasn't found.
+end
+
+@enduml

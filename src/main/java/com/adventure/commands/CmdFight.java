@@ -7,6 +7,7 @@ import com.adventure.services.StorageService;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Command used to start a fight with an enemy (if there is one).
@@ -19,7 +20,11 @@ public class CmdFight extends AbstractCommand {
     public void execute() throws InterruptedException
     {
         // Check the correct number of parameters for this command
-        if(!this.correctArgumentsNumber(0)) { return; }
+        if(!this.correctArgumentsNumber(0))
+        {
+            this.writer.println("Incorrect number of arguments! Usage: fight");
+            return;
+        }
 
         // Set player and monster.
         Game game = this.context.getGame();
@@ -35,7 +40,9 @@ public class CmdFight extends AbstractCommand {
             {
                 // Enabling commands during the fight.
                 CommandParser commandParser = CommandParser.getInstance();
-                commandParser.disableAll();
+
+                // Disables all commands and saves previous enabled commands.
+                List<String> enabledCommands = commandParser.disableAll();
 
                 commandParser.enable("attack");
                 commandParser.enable("dodge");
@@ -63,6 +70,7 @@ public class CmdFight extends AbstractCommand {
                 while (player.getAlive() && monster.getAlive() && player.isFighting())
                 {
                     // Player have to digit a command.
+                    this.writer.println("Monster has " + monster.getStats().getHp() + " hp.");
                     this.writer.println("What do you want to do?");
 
                     String s = this.safeReadNextLine();
@@ -79,15 +87,13 @@ public class CmdFight extends AbstractCommand {
                     }
                     else
                     {
-                        this.writer.println("Unknown command, try with attack, dodge or use");
+                        this.writer.println("Unknown command, type help for possible choices");
                     }
                 }
 
-                // Enable all other commands and disable command after finish the fight
-                commandParser.enableAll();
-                commandParser.disable("attack");
-                commandParser.disable("dodge");
-                commandParser.disable("run");
+                // Restores previous enabled commands.
+                commandParser.disableAll();
+                commandParser.enableAll(enabledCommands);
 
                 if(player.getAlive() && player.isFighting())
                 {
@@ -176,7 +182,7 @@ public class CmdFight extends AbstractCommand {
     }
 
 
-    public ArrayList<String> getPossibleArgs()
+    public List<String> getPossibleArgs()
     {
         return new ArrayList<>();
     }

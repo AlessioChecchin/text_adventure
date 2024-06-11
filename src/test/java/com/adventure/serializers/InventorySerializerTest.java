@@ -42,7 +42,6 @@ class InventorySerializerTest {
 
         //  Create the json string.
         String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(inventory);
-        System.out.println(json);
 
         ObjectMapper mapper2 = new ObjectMapper();
         SimpleModule module1 = new SimpleModule();

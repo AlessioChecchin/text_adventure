@@ -37,3 +37,5 @@ build/
 ### Mac OS ###
 .DS_Store
 /saves/
+/text_adventure/
+/out/artifacts/adventure_jar/adventure.jar

@@ -1,0 +1,81 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="text_adventure:jar">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="adventure.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="adventure" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jgrapht/jgrapht-core/1.5.2/jgrapht-core-1.5.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/logging/log4j/log4j-api/2.20.0/log4j-api-2.20.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jheaps/jheaps/0.14/jheaps-0.14.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/22.0.1/javafx-graphics-22.0.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/22.0.1/javafx-fxml-22.0.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-media/22.0.1/javafx-media-22.0.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/sdk-core/2.5.6/sdk-core-2.5.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/22.0.1/javafx-graphics-22.0.1-mac-aarch64.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/protocol-core/2.5.6/protocol-core-2.5.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/22.0.1/javafx-base-22.0.1-mac-aarch64.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/url-connection-client/2.5.6/url-connection-client-2.5.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apfloat/apfloat/1.10.1/apfloat-1.10.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/flow/1.7/flow-1.7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-media/22.0.1/javafx-media-22.0.1-mac-aarch64.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/auth/2.5.6/auth-2.5.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/regions/2.5.6/regions-2.5.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/utils/2.5.6/utils-2.5.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/22.0.1/javafx-fxml-22.0.1-mac-aarch64.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/s3/2.5.6/s3-2.5.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/aws-query-protocol/2.5.6/aws-query-protocol-2.5.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/22.0.1/javafx-controls-22.0.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/reactivestreams/reactive-streams/1.0.2/reactive-streams-1.0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.16.1/jackson-databind-2.16.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/annotations/2.5.6/annotations-2.5.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/logging/log4j/log4j-slf4j2-impl/2.20.0/log4j-slf4j2-impl-2.20.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/2.0.6/slf4j-api-2.0.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/profiles/2.5.6/profiles-2.5.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/aws-xml-protocol/2.5.6/aws-xml-protocol-2.5.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/22.0.1/javafx-base-22.0.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/logging/log4j/log4j-core/2.20.0/log4j-core-2.20.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/http-client-spi/2.5.6/http-client-spi-2.5.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/aws-core/2.5.6/aws-core-2.5.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/22.0.1/javafx-controls-22.0.1-mac-aarch64.jar" path-in-jar="/" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:mac-aarch64:22.0.1" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-media:22.0.1" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:22.0.1" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:mac-aarch64:22.0.1" />
+      <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:2.0.6" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:22.0.1" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:22.0.1" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:mac-aarch64:22.0.1" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:22.0.1" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:mac-aarch64:22.0.1" />
+      <element id="library" level="project" name="Maven: org.jheaps:jheaps:0.14" />
+      <element id="library" level="project" name="Maven: org.jgrapht:jgrapht-core:1.5.2" />
+      <element id="library" level="project" name="Maven: org.apfloat:apfloat:1.10.1" />
+      <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.20.0" />
+      <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.20.0" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.16.1" />
+      <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-slf4j2-impl:2.20.0" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.16.1" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-media:mac-aarch64:22.0.1" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:annotations:2.5.6" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.16.1" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:auth:2.5.6" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:aws-query-protocol:2.5.6" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:aws-xml-protocol:2.5.6" />
+      <element id="library" level="project" name="Maven: org.reactivestreams:reactive-streams:1.0.2" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:http-client-spi:2.5.6" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:aws-core:2.5.6" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:protocol-core:2.5.6" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:profiles:2.5.6" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:url-connection-client:2.5.6" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:sdk-core:2.5.6" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:s3:2.5.6" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:utils:2.5.6" />
+      <element id="library" level="project" name="Maven: software.amazon:flow:1.7" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:regions:2.5.6" />
+    </root>
+  </artifact>
+</component>

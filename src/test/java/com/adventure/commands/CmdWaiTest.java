@@ -1,6 +1,6 @@
 package com.adventure.commands;
 
-import com.adventure.config.ApplicationContextProvider;
+import com.adventure.config.ApplicationContext;
 import com.adventure.exceptions.ConfigurationException;
 import com.adventure.models.nodes.Action;
 import com.adventure.models.nodes.Room;
@@ -10,23 +10,16 @@ import org.junit.jupiter.api.Test;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CmdWaiTest extends CmdAttackTest {
-
-    static Command command;
-
-    @BeforeAll
-    static void setup() {command = new CmdWai();}
-
+class CmdWaiTest extends AbstractCommandTest
+{
     @Test
-    void execute() throws ConfigurationException, InterruptedException {
-        // Set the context.
-        ApplicationContextProvider applicationContextProvider = ApplicationContextProvider.getInstance();
-        this.setTestContext(applicationContextProvider);
-        command.setContext(applicationContextProvider);
+    void execute() throws ConfigurationException, InterruptedException
+    {
+        Command command = new CmdWai();
+        command.setContext(context);
 
         // Set the output of the command.
         StringWriter stringWriter    = new StringWriter();
@@ -36,13 +29,13 @@ class CmdWaiTest extends CmdAttackTest {
         // Add path for the graph.
         Room room = new Room("test", "test");
         Room room1 = new Room("test", "test");
-        applicationContextProvider.getGame().getGameGraph().addVertex(room);
-        applicationContextProvider.getGame().getGameGraph().addVertex(room1);
+        context.getGame().getGameGraph().addVertex(room);
+        context.getGame().getGameGraph().addVertex(room1);
         StoryNodeLink link = new StoryNodeLink();
         link.setAction(new Action("north"));
         link.setLocked(false);
-        applicationContextProvider.getGame().getGameGraph().addEdge(room, room1, link);
-        applicationContextProvider.getGame().setCurrentNode(room);
+        context.getGame().getGameGraph().addEdge(room, room1, link);
+        context.getGame().setCurrentNode(room);
 
         // Execute and test output.
         command.execute();

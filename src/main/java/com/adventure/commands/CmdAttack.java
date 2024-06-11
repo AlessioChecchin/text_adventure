@@ -5,18 +5,32 @@ import com.adventure.models.*;
 import com.adventure.models.nodes.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Command used during a fight to attack an enemy.
  */
-public class CmdAttack extends AbstractCommand
+public class CmdAttack extends AbstractRandomDecisionCommand
 {
+    public CmdAttack()
+    {
+        super();
+    }
+
+    public CmdAttack(RandomCollection<Object> collection)
+    {
+        super(collection);
+    }
 
     @Override
     public void execute() throws InterruptedException
     {
         // Check the correct number of parameters
-        if (!this.correctArgumentsNumber(0)) { return; }
+        if (!this.correctArgumentsNumber(0))
+        {
+            this.writer.println("Invalid number of arguments! Usage: attack");
+            return;
+        }
 
         Config currentConfig = this.context.getConfig();
         Game game = this.context.getGame();
@@ -24,13 +38,12 @@ public class CmdAttack extends AbstractCommand
 
         StoryNode currentNode = game.getCurrentNode();
 
-        if(!(currentNode instanceof Room))
+        if(!(currentNode instanceof Room currentRoom))
         {
             this.writer.println("You can't perform this action here");
             return;
         }
 
-        Room currentRoom = (Room) currentNode;
         Enemy monster = currentRoom.getMonster();
 
         if(monster == null)
@@ -38,11 +51,6 @@ public class CmdAttack extends AbstractCommand
             this.writer.println("There is no monster to fight here");
             return;
         }
-
-        // Monster set moves
-        RandomCollection<Object> decision = new RandomCollection<>()
-                .add(currentConfig.getMonsterAttackProbability(), CmdFight.Move.ATTACK)
-                .add(currentConfig.getMonsterDodgeProbability(), CmdFight.Move.DODGE);
 
         CmdFight.Move monsterMove = (CmdFight.Move) decision.next();
 
@@ -72,7 +80,7 @@ public class CmdAttack extends AbstractCommand
 
         this.writer.println(monster.getName() + " hits " + player.getName() + " and damage is " + inflectedDamage + " hp");
     }
-    public ArrayList<String> getPossibleArgs()
+    public List<String> getPossibleArgs()
     {
         return new ArrayList<>();
     }

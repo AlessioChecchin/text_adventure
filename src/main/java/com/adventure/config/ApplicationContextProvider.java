@@ -28,7 +28,7 @@ public class ApplicationContextProvider implements ApplicationContext
     {
         Properties props = new Properties();
 
-        try (InputStream fis = Resources.class.getClassLoader().getResourceAsStream("application.conf"))
+        try (InputStream fis = Resources.class.getClassLoader().getResourceAsStream("application.properties"))
         {
             props.load(fis);
 
@@ -36,7 +36,7 @@ public class ApplicationContextProvider implements ApplicationContext
         }
         catch (Exception e)
         {
-            logger.fatal("Error loading application.conf", e);
+            logger.fatal("Error loading application.properties", e);
             throw new ConfigurationException(e.getMessage());
         }
     }

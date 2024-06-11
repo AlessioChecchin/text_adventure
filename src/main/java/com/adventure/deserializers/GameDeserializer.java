@@ -2,6 +2,11 @@ package com.adventure.deserializers;
 
 import com.adventure.models.*;
 import static com.adventure.deserializers.DeserializingUtility.fromNodeToObject;
+
+import com.adventure.models.items.AttackItem;
+import com.adventure.models.items.DefenceItem;
+import com.adventure.models.items.Equipable;
+import com.adventure.models.items.Item;
 import com.adventure.models.nodes.*;
 import com.adventure.config.ApplicationContextProvider;
 import com.fasterxml.jackson.core.JsonParser;
@@ -126,6 +131,43 @@ public class GameDeserializer extends StdDeserializer<Game>
         //
 
         Player player = fromNodeToObject(node.get("player"), Player.class);
+
+        // Fix bug for which when you loaded a saved game where you had an item equipped,
+        // the instance saved in "equippedItem" and the instance saved in the Inventory were different.
+        // This implies that when you drop that item, the item is removed from the inventory but not from
+        // the "equippedItem" variable, thus leaving the atk/def stats untouched
+
+        // If the player has an attackItem equipped
+        if(player.getInventory().getEquipedAttackItem() != null)
+        {
+            // Get the name of the equipped item
+            AttackItem equipped = player.getInventory().getEquipedAttackItem();
+            String equippedName = equipped.getName();
+            // Try to find it in the inventory
+            ArrayList<Item> realItem = player.getInventory().itemsByName(equippedName);
+            // If it's found, equip the item contained in the inventory
+            if(realItem != null && realItem.size() == 1 && realItem.get(0) instanceof Equipable)
+                player.getInventory().equipItem((Equipable) realItem.get(0));
+            // Else unequip all
+            else
+                player.getInventory().unequipItem(Inventory.EquipType.ATTACK);
+        }
+        // If the player has a defenceItem equipped
+        if(player.getInventory().getEquipedDefenceItem() != null)
+        {
+            // Get the name of the equipped item
+            DefenceItem equipped = player.getInventory().getEquipedDefenceItem();
+            String equippedName = equipped.getName();
+            // Try to find it in the inventory
+            ArrayList<Item> realItem = player.getInventory().itemsByName(equippedName);
+            // If it's found, equip the item contained in the inventory
+            if(realItem != null && realItem.size() == 1 && realItem.get(0) instanceof Equipable)
+                // Else unequip all
+                player.getInventory().equipItem((Equipable) realItem.get(0));
+            else
+                player.getInventory().unequipItem(Inventory.EquipType.DEFENSE);
+        }
+
         game.setPlayer(player);
 
         return game;

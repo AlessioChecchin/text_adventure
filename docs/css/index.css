@@ -8,7 +8,7 @@ html, body {
 /* layout */
 .header {
   border-bottom: 1px solid var(--code-bg-color);
-  grid-template-columns: 1fr 150px 60% 1fr;
+  grid-template-columns: 1fr 70px 150px 60% 1fr;
   background-color: var(--primary-color-light)
 }
 
@@ -17,12 +17,18 @@ html, body {
   flex-grow: 1;
 }
 
+.icon {
+  grid-column: 2;
+  width: 50px;
+  padding: 1.5rem 0;
+  border: 1.5rem;
+}
 /* logo */
 .logo {
   font-weight: 900;
   color: navy;
-  font-size: 1.6em;
-  grid-column: 2;
+  font-size: 1.4em;
+  grid-column: 3;
   text-align: initial;
 }
 
@@ -49,6 +55,9 @@ html, body {
   width: 28%;
   background-color: var(--bg-color);
   z-index: -1;
+
+  padding-top: 20px;
+  padding-bottom: 15px;
 }
 
 .doc__nav {
@@ -56,7 +65,7 @@ html, body {
   font-weight: 200;
 }
 
-.doc__nav ul {
+.doc__nav > ul {
   list-style: none;
   padding-left: 0;
   line-height: 1.8;
@@ -106,7 +115,63 @@ html, body {
   font-size: 18px;
 }
 
-@media (max-width: 750px) {
+.file-path {
+  font-family: monospace;
+  color: #34723e;
+}
+
+.code {
+  border-radius: 3px;
+  font-family: Space Mono, SFMono-Regular, Menlo,Monaco, Consolas, Liberation Mono, Courier New, monospace;
+  background: var(--bg-color);
+  border: 1px solid var(--code-bg-color);
+  color: var(--dark-gray-color);
+  overflow: auto;
+}
+
+.code--block {
+  white-space: pre-line;
+  text-align: initial;
+  padding: 0 1.5rem;
+  border: 0;
+  margin: 0;
+}
+
+#bucket-code {
+  white-space: pre;
+  text-align: initial;
+  tab-size: 4;
+  font-size: initial;
+  font-family: inherit;
+  padding: 0 1.5rem;
+  border: 0;
+  margin: 0;
+}
+
+.code__block {
+  position: relative;
+}
+
+.copy-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: var(--primary-color-light);
+  color: black;
+  border: none;
+  border-radius: 3px;
+  z-index: 1;
+}
+
+.copy-button:hover {
+  background-color: var(--primary-color-light-darker);
+}
+
+
+@media (max-width: 1000px) {
   .wrapper {
     flex-direction: column;
   }
@@ -141,7 +206,9 @@ html, body {
   object-fit: contain;
 }
 
-.design-img:hover {opacity: 0.4;}
+.design-img:hover {
+  opacity: 0.4;
+}
 
 /* The Modal (background) */
 .modal {

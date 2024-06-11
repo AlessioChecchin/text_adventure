@@ -1,6 +1,7 @@
 package com.adventure.commands;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Command used to display possible command with descriptions.
@@ -10,7 +11,11 @@ public class CmdHelp extends AbstractCommand
     @Override
     public void execute() throws InterruptedException {
 
-        if (!this.correctArgumentsNumber(0)) { return; }
+        if (!this.correctArgumentsNumber(0))
+        {
+            this.writer.println("Incorrect number of arguments! Usage: help");
+            return;
+        }
 
         CommandParser commandParser = CommandParser.getInstance();
 
@@ -32,7 +37,7 @@ public class CmdHelp extends AbstractCommand
         }
     }
 
-    public ArrayList<String> getPossibleArgs()
+    public List<String> getPossibleArgs()
     {
         return new ArrayList<>();
     }
