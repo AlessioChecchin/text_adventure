@@ -58,7 +58,7 @@ abstract class AbstractStorageService implements StorageService
                 "\n" +
                 "The scroll led him through abandoned and devastated lands where the scent of death and torment still lingered. Our Hero arrived at the edge of a forest with a spectral aura, but driven by curiosity, he did not hesitate to venture into the dark woods...\n" + "Welcome, it is time to embark on this adventure as " + playerName + ". The forest that lies before your eyes is a dense network of dark canopies, creating a natural barrier to the sight of the horizon. Inside, all is silent, and not even the leaves stir in this gloomy and mysterious atmosphere. However, your determined warrior spirit urges you to venture into the forest, something calls to you. Explore the forest following the scroll, good luck Hero!\n" +
                 "It seems that there are some items in this part of the forest, try to 'look' for finding something!");
-        room1.setBackgroundPath("assets/castle.png");
+        room1.setBackgroundPath("assets/wood.png");
         room1.getItems().add(sword);
         room1.getItems().add(healthPotion);
         room1.getItems().add(new Key(key1));
@@ -69,7 +69,7 @@ abstract class AbstractStorageService implements StorageService
 
         // Room 2.
         Room room2 = new Room("K2 fight room", "Oh no, a goblin appears in front of you! Fight him and take the loot that drops");
-        room2.setBackgroundPath("assets/castle.png");
+        room2.setBackgroundPath("assets/wood_goblin.png");
 
         {
             Inventory enemyInventory2 = new Inventory(100);
@@ -91,7 +91,7 @@ abstract class AbstractStorageService implements StorageService
         Room room3 = new Room("Left forest", "Oh no, it's a trap, a big Spider appears in front of you");
 
         //TODO set che correct background path
-        room3.setBackgroundPath("assets/castle.png");
+        room3.setBackgroundPath("assets/wood_spider.png");
 
         {
             UsableItem spiderEye = new UsableItem("spiderEye");
@@ -124,7 +124,7 @@ abstract class AbstractStorageService implements StorageService
 
         // Room 4.
         Room room4 = new Room("right part forest", "You enter deeply in the forest, the darkness become stronger, in front of you there's a terrible creature");
-        room4.setBackgroundPath("assets/castle.png");
+        room4.setBackgroundPath("assets/wood_redMonster.png");
 
         {
             Inventory enemyInventory3 = new Inventory(100);
@@ -143,7 +143,7 @@ abstract class AbstractStorageService implements StorageService
 
         // Room 5.
         Room room5 = new Room("Looting Room", "This part of the forest has a lot of items!");
-        room5.setBackgroundPath("assets/castle.png");
+        room5.setBackgroundPath("assets/wood.png");
         {
             DefenceItem woodArmor = new DefenceItem("woodArmor", 1, 8);
             woodArmor.setWeight(7);
@@ -162,7 +162,7 @@ abstract class AbstractStorageService implements StorageService
 
         // Room 6.
         Room room6 = new Room("K6 fight room", "Oh no, a dragon! Fight the dragon and take the loot that drops");
-        room6.setBackgroundPath("assets/castle.png");
+        room6.setBackgroundPath("assets/wood_dragon.png");
 
         {
             Inventory enemyInventory6 = new Inventory(100);
@@ -184,12 +184,12 @@ abstract class AbstractStorageService implements StorageService
 
         // Room 7.
         Room room7 = new Room("Loot room", "No enemies here :)");
-        room7.setBackgroundPath("assets/castle.png");
+        room7.setBackgroundPath("assets/wood.png");
         g.addVertex(room7);
 
         // Room 8.
         Room room8 = new Room("K5 fight room", "Oh no, a monster is attacking you!");
-        room8.setBackgroundPath("assets/castle.png");
+        room8.setBackgroundPath("assets/wood_goblin2.png");
 
         {
             Inventory enemyInventory5 = new Inventory(100);
@@ -231,7 +231,7 @@ abstract class AbstractStorageService implements StorageService
                 "However, they decided to keep it away from humans to prevent this tremendous power from falling into their hands. No one has ever managed to pull it from that rock, maybe you could be the one to do it, who knows, but it’s a shame we will never find out.\"\n" +
                 " The goblin took a key from the bunch on his belt, opened a gate hidden behind the throne, and escaped toward a staircase leading to the tiers of the throne room. From the just-opened gate, a stormy roar was heard, and a three-headed beast leapt into the hall, shaking the entire room.\n" +
                 " Three pairs of bloodthirsty eyes watch you. It's time to prove your worth in the hardest battle you've faced so far: you must defeat Kalist, the guardian of the Sword of Shadows....");
-        room10.setBackgroundPath("assets/castle.png");
+        room10.setBackgroundPath("assets/castle_cerbero.png");
         {
             Inventory enemyInventory6 = new Inventory(100);
             AttackItem shadowsSword = new AttackItem("shadowSword", 2, 30);
@@ -257,6 +257,7 @@ abstract class AbstractStorageService implements StorageService
                 "\"This is not possible; this should never have happened!\" screams the Goblin as he rushes down the stairs toward the now lifeless body of Kalist.\n" +
                 " \"I never thought this could happen. I will have to play my trump card. Sorry for you, boy, even if you defeated Kalist, you will never beat me. I am Mucksnarl, the true protector of the castle, the one who will end your life once and for all.\"\n" +
                 " Mucksnarl took a vial with a bluish liquid and drank it all in one gulp. His body began to mutate; his muscles developed, and his height grew frightfully. The small, elderly goblin who had welcomed our hero had now become a terrifying monster almost 5 meters tall. \"Prepare yourself; your time has come!\"");
+        room11.setBackgroundPath("assets/castle_goblin.png");
         {
             Inventory enemyInventory7 = new Inventory(100);
             enemyInventory7.addItem(new Key(victoryKey));
