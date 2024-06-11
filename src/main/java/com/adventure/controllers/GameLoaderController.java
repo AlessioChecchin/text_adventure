@@ -64,7 +64,7 @@ public class GameLoaderController implements BaseController
                     this.display.getGraphics().setAlignment(Pos.CENTER);
                     this.display.getGraphics().getChildren().add(mediaView);
 
-                    this.player.setMute(true);
+                    //this.player.setMute(true);
                     this.player.setAutoPlay(true);
 
                     // Used to loop the video.
