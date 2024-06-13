@@ -70,11 +70,10 @@ images.forEach(function(img) {
     modal.style.display = "block";
     modalImg.src = this.src;
     modalImg.alt = this.alt;
-    
     const src = img.src;
     const a = document.createElement('a');
     a.href = src;
-    a.target = "_blank";
+    a.target = "_blank"
     a.className = "link--dark";
     a.innerText = this.alt;
     captionText.innerHTML = '';
@@ -82,7 +81,9 @@ images.forEach(function(img) {
 
     modal.style.top = '0';
     modalContent.scrollTop = 0;
-}
+
+    document.body.style.overflow = 'hidden';
+  }
 });
 
 // When the user clicks on <span> (x), close the modal
@@ -93,6 +94,7 @@ modal.onclick = function() {
     modal.style.display = "none";
     modalImg.className = "modal-content";
   }, 400);
+  document.body.style.overflow = '';
 }
 
 document.addEventListener('DOMContentLoaded', () => {

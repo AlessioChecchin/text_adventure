@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="doc__bg"></div>
-<nav class="header">
+<nav id="header">
 	<img class="icon" src="media/icon512.png" alt="logo"/>
 	<h1 class="logo">Text Adventure <span class="logo__thin">Documentation</span>
 	</h1>
@@ -26,8 +26,12 @@
 		<li class="menu__item"><a href="assets/system_test.pdf" target="_blank" class="link"><i class="fa fa-file-pdf-o"></i> System Tests</a>
 	</ul>
 </nav>
+<div id="myModal" class="modal">
+	<div id="caption"></div>
+	<img class="modal-content" id="img01" alt="modal-image-zoom"/>
+</div>
 <div class="wrapper">
-	<aside class="doc__nav">
+	<aside class="doc__nav" id="doc-nav">
 		<ul>
 			<li class="js-btn selected">Introduction</li>
 			<li class="js-btn">Manual</li>
@@ -267,7 +271,7 @@
 				We recommend discovering the map by playing, but if you really want to see how the default map is implemented, check the following image!
 			</p>
 
-			<img src="media/map.drawio.svg" alt="Game map" class="design-img" />
+			<img src="media/map.drawio.svg" alt="Game map" class="design-img" id="map" />
 
 			<h3 >How To Install</h3>
 			<h4 >Maven (option 1)</h4>
@@ -833,11 +837,6 @@
 				</li>
 			</ol>
 			<br/>
-
-			<div id="myModal" class="modal">
-				<div id="caption"></div>
-				<img class="modal-content" id="img01" alt="modal-image-zoom"/>
-			</div>
 
 			<h3 >Domain Model</h3>
 			<img src="media/domain-model.svg" alt="Domain model" class="design-img"/>

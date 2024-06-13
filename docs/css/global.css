@@ -81,8 +81,9 @@ ul {
 }
 
 li {
-  margin-top: 7px;
-  margin-bottom: 7px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  line-height: 24px;
 }
 
 * {
@@ -214,6 +215,7 @@ nav {
   list-style: none;
 }
 
+
 .toggle {
   display: none;
   position: relative;
@@ -330,7 +332,7 @@ table td:nth-child(2) {
 /* layout */
 .wrapper {
   margin: 0 auto;
-  width: 70%;
+  width: 75%;
 }
 
 .footer {

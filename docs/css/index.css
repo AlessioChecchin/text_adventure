@@ -6,9 +6,9 @@ html, body {
 }
 
 /* layout */
-.header {
+#header {
   border-bottom: 1px solid var(--code-bg-color);
-  grid-template-columns: 1fr 70px 150px 60% 1fr;
+  grid-template-columns: 1fr 60px 200px 60% 1fr;
   background-color: var(--primary-color-light)
 }
 
@@ -38,7 +38,8 @@ html, body {
 
 /* menu */
 .menu {
-  grid-template-columns: 1fr 180px 60% 1fr;
+  grid-column: 4;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .menu__item {
@@ -61,8 +62,15 @@ html, body {
 }
 
 .doc__nav {
+  padding-top: 15px;
+  padding-left: 5px;
   flex-basis: 20%;
   font-weight: 200;
+  position: sticky;
+  top: 5%;
+  z-index: 5;
+  height: fit-content;
+  font-size: 18px;
 }
 
 .doc__nav > ul {
@@ -98,7 +106,7 @@ html, body {
 }
 
 .doc__content {
-  flex-basis: 80%;
+  flex-basis: 85%;
   padding: 0 0 5rem 1rem;
 }
 
@@ -107,7 +115,7 @@ html, body {
 }
 
 .table-commands td:first-child {
-  width: 25%
+  width: 25%;
 }
 
 .table-commands td:first-child code {
@@ -171,19 +179,22 @@ html, body {
 }
 
 
-@media (max-width: 1000px) {
+@media (max-width: 850px) {
   .wrapper {
     flex-direction: column;
   }
   .doc__content {
     padding-left: 0;
   }
+  .doc__nav {
+    position: static;
+  }
   .doc__nav ul {
     border-bottom: 1px solid var(--code-bg-color);
     padding-bottom: 0.5rem;
   }
   .doc__nav ul.fixed {
-    /* nutralized the fixed menu for mobile*/
+    /* neutralize the fixed menu for mobile*/
     position: relative;
     top: 0;
   }
@@ -210,19 +221,21 @@ html, body {
   opacity: 0.4;
 }
 
+body.modal-open {
+  overflow: hidden;
+}
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 99; /* Sit on top */
+  z-index: 10; /* Sit on top */
   padding-top: 100px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+  background-color: rgba(0,0,0); /* Black */
 }
 
 /* Modal Content (image) */
@@ -232,6 +245,7 @@ html, body {
   width: 75%;
   /*max-width: 75%;*/
 }
+
 
 /* Caption of Modal Image */
 #caption {
